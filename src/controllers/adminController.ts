@@ -1,0 +1,547 @@
+import { Request, Response } from 'express';
+import Vocabulary from '../models/Vocabulary';
+import Topic from '../models/Topic';
+import Level from '../models/Level';
+import Test from '../models/Test';
+import ProficiencyTest from '../models/ProficiencyTest';
+import Report from '../models/Report';
+import User from '../models/User';
+import { validationResult } from 'express-validator';
+
+// Vocabulary Management
+export const createVocabulary = async (req: any, res: Response) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      word,
+      pronunciation,
+      meaning,
+      audioUrl,
+      level,
+      topics,
+      partOfSpeech,
+      synonyms,
+      antonyms,
+      examples,
+      questions
+    } = req.body;
+
+    const vocabulary = new Vocabulary({
+      word,
+      pronunciation,
+      meaning,
+      audioUrl,
+      level,
+      topics,
+      partOfSpeech,
+      synonyms: synonyms || [],
+      antonyms: antonyms || [],
+      examples: examples || [],
+      questions: questions || []
+    });
+
+    await vocabulary.save();
+    res.status(201).json({
+      message: 'Vocabulary created successfully',
+      vocabulary
+    });
+  } catch (error) {
+    console.error('Create vocabulary error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateVocabulary = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const vocabulary = await Vocabulary.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!vocabulary) {
+      return res.status(404).json({ message: 'Vocabulary not found' });
+    }
+
+    res.json({
+      message: 'Vocabulary updated successfully',
+      vocabulary
+    });
+  } catch (error) {
+    console.error('Update vocabulary error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteVocabulary = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const vocabulary = await Vocabulary.findByIdAndDelete(id);
+
+    if (!vocabulary) {
+      return res.status(404).json({ message: 'Vocabulary not found' });
+    }
+
+    res.json({ message: 'Vocabulary deleted successfully' });
+  } catch (error) {
+    console.error('Delete vocabulary error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Topic Management
+export const createTopic = async (req: any, res: Response) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, description, color } = req.body;
+
+    const topic = new Topic({
+      name,
+      description,
+      color
+    });
+
+    await topic.save();
+    res.status(201).json({
+      message: 'Topic created successfully',
+      topic
+    });
+  } catch (error) {
+    console.error('Create topic error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateTopic = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const topic = await Topic.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!topic) {
+      return res.status(404).json({ message: 'Topic not found' });
+    }
+
+    res.json({
+      message: 'Topic updated successfully',
+      topic
+    });
+  } catch (error) {
+    console.error('Update topic error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteTopic = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const topic = await Topic.findByIdAndDelete(id);
+
+    if (!topic) {
+      return res.status(404).json({ message: 'Topic not found' });
+    }
+
+    res.json({ message: 'Topic deleted successfully' });
+  } catch (error) {
+    console.error('Delete topic error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Level Management
+export const createLevel = async (req: any, res: Response) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, number, description, requiredExperience, color } = req.body;
+
+    const level = new Level({
+      name,
+      number,
+      description,
+      requiredExperience,
+      color
+    });
+
+    await level.save();
+    res.status(201).json({
+      message: 'Level created successfully',
+      level
+    });
+  } catch (error) {
+    console.error('Create level error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateLevel = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const level = await Level.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!level) {
+      return res.status(404).json({ message: 'Level not found' });
+    }
+
+    res.json({
+      message: 'Level updated successfully',
+      level
+    });
+  } catch (error) {
+    console.error('Update level error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteLevel = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const level = await Level.findByIdAndDelete(id);
+
+    if (!level) {
+      return res.status(404).json({ message: 'Level not found' });
+    }
+
+    res.json({ message: 'Level deleted successfully' });
+  } catch (error) {
+    console.error('Delete level error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Test Management
+export const createTest = async (req: any, res: Response) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      title,
+      description,
+      level,
+      questions,
+      timeLimit,
+      requiredCoins,
+      rewardExperience,
+      rewardCoins
+    } = req.body;
+
+    const test = new Test({
+      title,
+      description,
+      level,
+      questions,
+      timeLimit,
+      requiredCoins,
+      rewardExperience,
+      rewardCoins
+    });
+
+    await test.save();
+    res.status(201).json({
+      message: 'Test created successfully',
+      test
+    });
+  } catch (error) {
+    console.error('Create test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateTest = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const test = await Test.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found' });
+    }
+
+    res.json({
+      message: 'Test updated successfully',
+      test
+    });
+  } catch (error) {
+    console.error('Update test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteTest = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const test = await Test.findByIdAndDelete(id);
+
+    if (!test) {
+      return res.status(404).json({ message: 'Test not found' });
+    }
+
+    res.json({ message: 'Test deleted successfully' });
+  } catch (error) {
+    console.error('Delete test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Proficiency Test Management
+export const createProficiencyTest = async (req: any, res: Response) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      level,
+      questions,
+      timeLimit,
+      requiredCoins,
+      rewardExperience,
+      rewardCoins
+    } = req.body;
+
+    const proficiencyTest = new ProficiencyTest({
+      level,
+      questions,
+      timeLimit,
+      requiredCoins,
+      rewardExperience,
+      rewardCoins
+    });
+
+    await proficiencyTest.save();
+    res.status(201).json({
+      message: 'Proficiency test created successfully',
+      proficiencyTest
+    });
+  } catch (error) {
+    console.error('Create proficiency test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateProficiencyTest = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const proficiencyTest = await ProficiencyTest.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!proficiencyTest) {
+      return res.status(404).json({ message: 'Proficiency test not found' });
+    }
+
+    res.json({
+      message: 'Proficiency test updated successfully',
+      proficiencyTest
+    });
+  } catch (error) {
+    console.error('Update proficiency test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteProficiencyTest = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const proficiencyTest = await ProficiencyTest.findByIdAndDelete(id);
+
+    if (!proficiencyTest) {
+      return res.status(404).json({ message: 'Proficiency test not found' });
+    }
+
+    res.json({ message: 'Proficiency test deleted successfully' });
+  } catch (error) {
+    console.error('Delete proficiency test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Admin Dashboard Stats
+export const getAdminStats = async (req: any, res: Response) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalVocabulary = await Vocabulary.countDocuments();
+    const totalTopics = await Topic.countDocuments();
+    const totalTests = await Test.countDocuments();
+    const totalProficiencyTests = await ProficiencyTest.countDocuments();
+    const pendingReports = await Report.countDocuments({ status: 'pending' });
+
+    const recentUsers = await User.find()
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .select('name email level experience coins createdAt');
+
+    const recentReports = await Report.find()
+      .populate('userId', 'name email')
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    res.json({
+      stats: {
+        totalUsers,
+        totalVocabulary,
+        totalTopics,
+        totalTests,
+        totalProficiencyTests,
+        pendingReports
+      },
+      recentUsers,
+      recentReports
+    });
+  } catch (error) {
+    console.error('Get admin stats error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Recent activities (mocked for now)
+export const getAdminActivities = async (_req: any, res: Response) => {
+  try {
+    const activities = [
+      { id: '1', type: 'user_registered', description: 'Người dùng mới đăng ký', timestamp: new Date().toISOString() },
+      { id: '2', type: 'vocabulary_created', description: 'Thêm từ vựng mới', timestamp: new Date(Date.now() - 3600_000).toISOString() },
+      { id: '3', type: 'test_completed', description: 'Một bài test vừa được hoàn thành', timestamp: new Date(Date.now() - 7200_000).toISOString() },
+      { id: '4', type: 'report_submitted', description: 'Có báo cáo mới cần duyệt', timestamp: new Date(Date.now() - 10800_000).toISOString() },
+    ];
+    res.json({ activities });
+  } catch (error) {
+    console.error('Get admin activities error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Get all data for admin management
+export const getAllVocabularies = async (req: any, res: Response) => {
+  try {
+    const { page = 1, limit = 10, search, level, topic } = req.query;
+    
+    let query: any = {};
+    if (search) {
+      query.$or = [
+        { word: { $regex: search, $options: 'i' } },
+        { meaning: { $regex: search, $options: 'i' } }
+      ];
+    }
+    if (level) query.level = level;
+    if (topic) query.topics = topic;
+
+    const vocabularies = await Vocabulary.find(query)
+      .populate('topics', 'name color')
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .sort({ createdAt: -1 });
+
+    const total = await Vocabulary.countDocuments(query);
+
+    res.json({
+      vocabularies,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page,
+      total
+    });
+  } catch (error) {
+    console.error('Get all vocabularies error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getAllTopics = async (req: any, res: Response) => {
+  try {
+    const topics = await Topic.find().sort({ name: 1 });
+    res.json(topics);
+  } catch (error) {
+    console.error('Get all topics error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getAllLevels = async (req: any, res: Response) => {
+  try {
+    const levels = await Level.find().sort({ number: 1 });
+    res.json(levels);
+  } catch (error) {
+    console.error('Get all levels error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getAllTests = async (req: any, res: Response) => {
+  try {
+    const { page = 1, limit = 10, level } = req.query;
+    
+    let query: any = {};
+    if (level) query.level = level;
+
+    const tests = await Test.find(query)
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .sort({ createdAt: -1 });
+
+    const total = await Test.countDocuments(query);
+
+    res.json({
+      tests,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page,
+      total
+    });
+  } catch (error) {
+    console.error('Get all tests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getAllProficiencyTests = async (req: any, res: Response) => {
+  try {
+    const { level } = req.query;
+    
+    let query: any = {};
+    if (level) query.level = level;
+
+    const proficiencyTests = await ProficiencyTest.find(query).sort({ level: 1 });
+    res.json(proficiencyTests);
+  } catch (error) {
+    console.error('Get all proficiency tests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
