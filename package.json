@@ -8,6 +8,13 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "seed:admin": "ts-node src/scripts/seedAdmin.ts",
+    "seed:data": "ts-node src/scripts/seedData.ts",
+    "seed:advanced": "ts-node src/scripts/seedAdvanced.ts",
+    "seed:complete": "ts-node src/scripts/seedComplete.ts",
+    "seed:question-types": "ts-node src/scripts/seedQuestionTypes.ts",
+    "seed:master": "ts-node src/scripts/seedMaster.ts",
+    "seed:all": "npm run seed:data && npm run seed:advanced && npm run seed:admin",
+    "seed:full": "npm run seed:data && npm run seed:advanced",
     "test": "jest"
   },
   "dependencies": {

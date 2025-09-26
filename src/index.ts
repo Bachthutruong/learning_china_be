@@ -12,6 +12,8 @@ import reportRoutes from './routes/report';
 import userRoutes from './routes/user';
 import adminRoutes from './routes/admin';
 import competitionRoutes from './routes/competition';
+import smartVocabularyRoutes from './routes/smartVocabulary';
+import advancedTestRoutes from './routes/advancedTest';
 
 // Load environment variables
 dotenv.config();
@@ -25,7 +27,14 @@ app.use(helmet());
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Timeout middleware
+app.use((req, res, next) => {
+  req.setTimeout(30000); // 30 seconds timeout
+  res.setTimeout(30000);
+  next();
+});
 
 // Permissive CORS headers without external middleware
 app.use((req, res, next) => {
@@ -47,6 +56,8 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/competitions', competitionRoutes);
+app.use('/api/smart-vocabulary', smartVocabularyRoutes);
+app.use('/api/advanced-tests', advancedTestRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

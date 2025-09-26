@@ -6,8 +6,8 @@ dotenv.config();
 
 async function run() {
   const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/chinese-learning';
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@gmail.com';
-  const adminPassword = process.env.ADMIN_PASSWORD || '123456789';
+  const adminEmail = 'admin@gmail.com';
+  const adminPassword = '123456789';
   const adminName = process.env.ADMIN_NAME || 'Administrator';
 
   try {

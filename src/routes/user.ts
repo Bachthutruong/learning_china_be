@@ -5,7 +5,10 @@ import {
   getUserStats, 
   purchaseCoins, 
   getPaymentHistory,
-  getLeaderboard
+  getLeaderboard,
+  getAllUsers,
+  getUserAchievements,
+  getUserLearningStats
 } from '../controllers/userController';
 import { authenticate } from '../middleware/auth';
 
@@ -23,5 +26,8 @@ router.get('/stats', authenticate, getUserStats);
 router.post('/purchase', authenticate, purchaseValidation, purchaseCoins);
 router.get('/payments', authenticate, getPaymentHistory);
 router.get('/leaderboard', authenticate, getLeaderboard);
+router.get('/', authenticate, getAllUsers);
+router.get('/achievements', authenticate, getUserAchievements);
+router.get('/learning-stats', authenticate, getUserLearningStats);
 
 export default router;

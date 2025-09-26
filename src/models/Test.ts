@@ -2,9 +2,23 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IQuestion {
   question: string;
-  options: string[];
-  correctAnswer: number;
+  questionType: 'multiple-choice' | 'fill-blank' | 'reading-comprehension' | 'sentence-order' | 'matching' | 'true-false';
+  options?: string[];
+  correctAnswer: number | string | number[]; // Support multiple answer types
   explanation?: string;
+  // For reading comprehension
+  passage?: string;
+  // For fill-blank questions
+  blanks?: { position: number; correctAnswer: string }[];
+  // For sentence ordering
+  sentences?: string[];
+  correctOrder?: number[];
+  // For matching questions
+  leftItems?: string[];
+  rightItems?: string[];
+  correctMatches?: { left: number; right: number }[];
+  // For true-false questions
+  isTrue?: boolean;
 }
 
 export interface ITest extends Document {
@@ -24,15 +38,33 @@ const QuestionSchema = new Schema<IQuestion>({
     type: String,
     required: true
   },
-  options: [{
+  questionType: {
     type: String,
-    required: true
-  }],
-  correctAnswer: {
-    type: Number,
-    required: true
+    required: true,
+    enum: ['multiple-choice', 'fill-blank', 'reading-comprehension', 'sentence-order', 'matching', 'true-false']
   },
-  explanation: String
+  options: [String],
+  correctAnswer: Schema.Types.Mixed, // Support multiple answer types
+  explanation: String,
+  // For reading comprehension
+  passage: String,
+  // For fill-blank questions
+  blanks: [{
+    position: Number,
+    correctAnswer: String
+  }],
+  // For sentence ordering
+  sentences: [String],
+  correctOrder: [Number],
+  // For matching questions
+  leftItems: [String],
+  rightItems: [String],
+  correctMatches: [{
+    left: Number,
+    right: Number
+  }],
+  // For true-false questions
+  isTrue: Boolean
 });
 
 const TestSchema = new Schema<ITest>({

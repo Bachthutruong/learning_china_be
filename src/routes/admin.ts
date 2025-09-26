@@ -1,5 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
+import multer from 'multer';
+import cloudinaryUpload from '../middleware/upload';
 import {
   createVocabulary,
   updateVocabulary,
@@ -28,13 +30,79 @@ import { authenticate, authorize } from '../middleware/auth';
 
 const router = express.Router();
 
+// Configure multer for handling multipart/form-data
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  }
+});
+
 // Validation rules
 const vocabularyValidation = [
   body('word').trim().isLength({ min: 1 }),
   body('pronunciation').trim().isLength({ min: 1 }),
   body('meaning').trim().isLength({ min: 1 }),
   body('level').isInt({ min: 1, max: 6 }),
-  body('topics').isArray(),
+  body('topics').custom((value) => {
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed);
+      } catch {
+        return false;
+      }
+    }
+    return Array.isArray(value);
+  }),
+  body('examples').optional().custom((value) => {
+    if (!value) return true;
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed);
+      } catch {
+        return false;
+      }
+    }
+    return Array.isArray(value);
+  }),
+  body('synonyms').optional().custom((value) => {
+    if (!value) return true;
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed);
+      } catch {
+        return false;
+      }
+    }
+    return Array.isArray(value);
+  }),
+  body('antonyms').optional().custom((value) => {
+    if (!value) return true;
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed);
+      } catch {
+        return false;
+      }
+    }
+    return Array.isArray(value);
+  }),
+  body('questions').optional().custom((value) => {
+    if (!value) return true;
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed);
+      } catch {
+        return false;
+      }
+    }
+    return Array.isArray(value);
+  }),
   body('partOfSpeech').trim().isLength({ min: 1 })
 ];
 
@@ -81,8 +149,21 @@ router.get('/activities', getAdminActivities);
 
 // Vocabulary management
 router.get('/vocabularies', getAllVocabularies);
-router.post('/vocabularies', vocabularyValidation, createVocabulary);
-router.put('/vocabularies/:id', vocabularyValidation, updateVocabulary);
+router.post('/vocabularies', cloudinaryUpload.single('audio'), (err, req, res, next) => {
+  if (err) {
+    console.error('Upload error:', err);
+    return res.status(400).json({ message: 'File upload failed', error: err.message });
+  }
+  next();
+}, vocabularyValidation, createVocabulary);
+
+router.put('/vocabularies/:id', cloudinaryUpload.single('audio'), (err, req, res, next) => {
+  if (err) {
+    console.error('Upload error:', err);
+    return res.status(400).json({ message: 'File upload failed', error: err.message });
+  }
+  next();
+}, vocabularyValidation, updateVocabulary);
 router.delete('/vocabularies/:id', deleteVocabulary);
 
 // Topic management

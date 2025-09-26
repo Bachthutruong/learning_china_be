@@ -231,3 +231,117 @@ export const getLeaderboard = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const { page = 1, limit = 10, search } = req.query;
+    
+    const pageNum = parseInt(page as string, 10) || 1;
+    const limitNum = parseInt(limit as string, 10) || 10;
+    
+    let query: any = {};
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const users = await User.find(query)
+      .select('name email level experience coins role streak createdAt')
+      .sort({ createdAt: -1 })
+      .limit(limitNum)
+      .skip((pageNum - 1) * limitNum);
+
+    const total = await User.countDocuments(query);
+
+    res.json({
+      users,
+      totalPages: Math.ceil(total / limitNum),
+      currentPage: pageNum,
+      total
+    });
+  } catch (error) {
+    console.error('Get all users error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getUserAchievements = async (req: any, res: Response) => {
+  try {
+    const user = await User.findById(req.user._id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Mock achievements based on user stats
+    const achievements = [
+      {
+        id: 'first_login',
+        name: 'First Steps',
+        description: 'Welcome to the platform!',
+        icon: '🎉',
+        unlocked: true,
+        unlockedAt: (user as any).createdAt || new Date()
+      },
+      {
+        id: 'level_2',
+        name: 'Rising Star',
+        description: 'Reach level 2',
+        icon: '⭐',
+        unlocked: user.level >= 2,
+        unlockedAt: user.level >= 2 ? new Date() : null
+      },
+      {
+        id: 'streak_7',
+        name: 'Week Warrior',
+        description: '7-day check-in streak',
+        icon: '🔥',
+        unlocked: user.streak >= 7,
+        unlockedAt: user.streak >= 7 ? new Date() : null
+      },
+      {
+        id: 'coins_100',
+        name: 'Coin Collector',
+        description: 'Earn 100 coins',
+        icon: '💰',
+        unlocked: user.coins >= 100,
+        unlockedAt: user.coins >= 100 ? new Date() : null
+      }
+    ];
+
+    res.json({ achievements });
+  } catch (error) {
+    console.error('Get user achievements error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getUserLearningStats = async (req: any, res: Response) => {
+  try {
+    const user = await User.findById(req.user._id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Mock learning stats
+    const stats = {
+      totalStudyTime: Math.floor(Math.random() * 1000) + 100, // minutes
+      vocabularyLearned: user.learnedVocabulary?.length || 0,
+      testsCompleted: Math.floor(Math.random() * 50) + 10,
+      currentStreak: user.streak,
+      longestStreak: Math.max(user.streak, Math.floor(Math.random() * 30) + 5),
+      weeklyGoal: 7,
+      weeklyProgress: Math.min(user.streak, 7),
+      favoriteTopic: 'Gia đình',
+      improvementRate: Math.floor(Math.random() * 20) + 5 // percentage
+    };
+
+    res.json({ stats });
+  } catch (error) {
+    console.error('Get user learning stats error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
