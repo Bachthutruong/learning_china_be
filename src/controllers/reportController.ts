@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Report from '../models/Report';
 import User from '../models/User';
 import { validationResult } from 'express-validator';
+import { checkAndUpdateUserLevel } from '../utils/levelUtils';
 
 export const createReport = async (req: any, res: Response) => {
   try {
@@ -126,16 +127,21 @@ export const updateReportStatus = async (req: any, res: Response) => {
     if (status === 'approved' && (rewardExperience || rewardCoins)) {
       const user = await User.findById(report.userId);
       if (user) {
+        console.log(`Giving rewards to user ${user.name}: +${rewardExperience} XP, +${rewardCoins} coins`);
+        console.log(`User current stats: Level ${user.level}, ${user.experience} XP, ${user.coins} coins`);
+        
         if (rewardExperience) user.experience += rewardExperience;
         if (rewardCoins) user.coins += rewardCoins;
         
-        // Check for level up
-        const levels = [0, 100, 300, 600, 1000, 1500, 2100];
-        if (user.experience >= levels[user.level] && user.level < 6) {
-          user.level += 1;
-        }
-        
         await user.save();
+        
+        console.log(`User updated stats: Level ${user.level}, ${user.experience} XP, ${user.coins} coins`);
+        
+        // Check for level up using dynamic level requirements
+        const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
+        if (levelResult.leveledUp) {
+          console.log(`User ${user.name} leveled up to level ${levelResult.newLevel}!`);
+        }
       }
     }
 

@@ -8,7 +8,10 @@ import {
   getLeaderboard,
   getAllUsers,
   getUserAchievements,
-  getUserLearningStats
+  getUserLearningStats,
+  getProfile,
+  recalculateLevel,
+  forceRecalculateAllLevels
 } from '../controllers/userController';
 import { authenticate } from '../middleware/auth';
 
@@ -29,5 +32,8 @@ router.get('/leaderboard', authenticate, getLeaderboard);
 router.get('/', authenticate, getAllUsers);
 router.get('/achievements', authenticate, getUserAchievements);
 router.get('/learning-stats', authenticate, getUserLearningStats);
+router.get('/profile', authenticate, getProfile);
+router.post('/recalculate-level', authenticate, recalculateLevel);
+router.post('/force-recalculate-all-levels', authenticate, forceRecalculateAllLevels);
 
 export default router;

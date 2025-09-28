@@ -1,69 +1,32 @@
 import { Request, Response } from 'express';
 import Test from '../models/Test';
 import User from '../models/User';
+import Question from '../models/Question';
 import { validationResult } from 'express-validator';
+import { checkAndUpdateUserLevel } from '../utils/levelUtils';
 
 export const getTests = async (req: any, res: Response) => {
   try {
-    const { level, page = 1, limit = 10 } = req.query;
     const user = await User.findById(req.user._id);
     
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
     
-    let query: any = {};
-    
-    // Level progression logic:
-    // - User starts with level 1 tests only
-    // - To unlock higher levels, they must either:
-    //   1. Complete all level 1 tests, OR
-    //   2. Pass a proficiency test
-    let accessibleLevel = 1;
-    
-    if (user.level > 1) {
-      // User has unlocked higher levels through proficiency test
-      accessibleLevel = user.level;
-    } else {
-      // Check if user has completed all level 1 tests
-      const completedLevel1Tests = await Test.countDocuments({ 
-        level: 1, 
-        completedBy: user._id 
-      });
-      const totalLevel1Tests = await Test.countDocuments({ level: 1 });
-      
-      if (completedLevel1Tests >= totalLevel1Tests && totalLevel1Tests > 0) {
-        accessibleLevel = 2; // Unlock level 2
-      }
-    }
-    
-    // Filter by accessible level
-    if (level) {
-      const requestedLevel = parseInt(level as string);
-      if (requestedLevel > accessibleLevel) {
-        return res.status(403).json({ 
-          message: `You need to complete level ${requestedLevel - 1} tests first or pass a proficiency test to unlock level ${requestedLevel}` 
-        });
-      }
-      query.level = requestedLevel;
-    } else {
-      query.level = { $lte: accessibleLevel };
-    }
-
-    const tests = await Test.find(query)
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .sort({ createdAt: -1 });
-
-    const total = await Test.countDocuments(query);
-
+    // Return test information for the new system
     res.json({
-      tests,
-      totalPages: Math.ceil(total / limit),
-      currentPage: page,
-      total,
-      accessibleLevel,
-      userLevel: user.level
+      message: 'Test system information',
+      testCost: 10000,
+      rewardPerCorrect: {
+        coins: 100,
+        experience: 100
+      },
+      user: {
+        coins: user.coins,
+        experience: user.experience,
+        level: user.level
+      },
+      insufficientCoins: user.coins < 10000
     });
   } catch (error) {
     console.error('Get tests error:', error);
@@ -150,88 +113,193 @@ export const deleteTest = async (req: Request, res: Response) => {
   }
 };
 
-export const submitTest = async (req: any, res: Response) => {
+// Start a new test session - deduct 10,000 coins
+export const startTest = async (req: any, res: Response) => {
   try {
-    const { testId, answers, timeSpent } = req.body;
     const user = await User.findById(req.user._id);
     
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
     
+    const TEST_COST = 10000;
+    
     // Check if user has enough coins
-    const test = await Test.findById(testId);
-    if (!test) {
-      return res.status(404).json({ message: 'Test not found' });
+    if (user.coins < TEST_COST) {
+      return res.status(400).json({ 
+        message: 'Không đủ xu để làm bài test. Hãy học thêm từ vựng để nhận xu miễn phí!',
+        requiredCoins: TEST_COST,
+        userCoins: user.coins,
+        insufficientCoins: true
+      });
     }
     
-    if (user.coins < test.requiredCoins) {
-      return res.status(400).json({ message: 'Not enough coins' });
+    // Deduct coins
+    user.coins -= TEST_COST;
+    await user.save();
+    
+    res.json({
+      message: 'Đã trừ 10,000 xu. Bắt đầu làm bài test!',
+      userCoins: user.coins,
+      testSession: {
+        startedAt: new Date(),
+        cost: TEST_COST
+      }
+    });
+  } catch (error) {
+    console.error('Start test error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Get random questions by level
+export const getRandomQuestions = async (req: any, res: Response) => {
+  try {
+    const { level } = req.query;
+    const user = await User.findById(req.user._id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
     
-    // Calculate score
-    let correctAnswers = 0;
-    const detailedResults = test.questions.map((question, index) => {
-      const isCorrect = answers[index] === question.correctAnswer;
-      if (isCorrect) correctAnswers++;
-      return {
-        question: question.question,
-        userAnswer: answers[index],
-        correctAnswer: question.correctAnswer,
-        isCorrect,
-        explanation: question.explanation
-      };
+    const questionLevel = level ? parseInt(level as string) : user.level;
+    
+    // Get all questions from the question bank for this level
+    const questions = await Question.find({ level: questionLevel });
+    
+    if (questions.length === 0) {
+      return res.status(404).json({ 
+        message: `Không có câu hỏi nào ở cấp độ ${questionLevel}` 
+      });
+    }
+    
+    res.json({
+      questions,
+      level: questionLevel,
+      totalQuestions: questions.length
+    });
+  } catch (error) {
+    console.error('Get random questions error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Submit test answers and get detailed report
+export const submitTest = async (req: any, res: Response) => {
+  try {
+    const { answers, questionIds } = req.body;
+    const user = await User.findById(req.user._id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    // Get questions with correct answers
+    const questions = await Question.find({ _id: { $in: questionIds } });
+    
+    let correctCount = 0;
+    let totalQuestions = answers.length;
+    const correctQuestions: any[] = [];
+    const wrongQuestions: any[] = [];
+    
+    // Check each answer
+    answers.forEach((userAnswer: any, index: number) => {
+      const question = questions.find((q: any) => q._id.toString() === questionIds[index]);
+      if (!question) return;
+      
+      const isCorrect = checkAnswer(question, userAnswer);
+      
+      if (isCorrect) {
+        correctCount++;
+        correctQuestions.push({
+          questionId: question._id,
+          question: question.question,
+          userAnswer,
+          correctAnswer: question.correctAnswer,
+          explanation: question.explanation
+        });
+      } else {
+        wrongQuestions.push({
+          questionId: question._id,
+          question: question.question,
+          userAnswer,
+          correctAnswer: question.correctAnswer,
+          explanation: question.explanation
+        });
+      }
     });
     
-    const score = (correctAnswers / test.questions.length) * 100;
-    const passed = score >= 70; // 70% to pass
+    // Calculate rewards: 100 coins + 100 exp per correct answer
+    const totalCoinsReward = correctCount * 100;
+    const totalExpReward = correctCount * 100;
     
-    // Only give rewards if passed
-    if (passed) {
-      user.coins -= test.requiredCoins;
-      user.experience += test.rewardExperience;
-      user.coins += test.rewardCoins;
-      
-      // Check for level up
-      const levels = [0, 100, 300, 600, 1000, 1500, 2100];
-      if (user.experience >= levels[user.level] && user.level < 6) {
-        user.level += 1;
-      }
-      
-      // Add user to completedBy list if not already there
-      if (!test.completedBy.includes(user._id as any)) {
-        test.completedBy.push(user._id as any);
-        await test.save();
-      }
-      
-      await user.save();
-    }
-
+    // Update user stats
+    user.coins += totalCoinsReward;
+    user.experience += totalExpReward;
+    await user.save();
+    
+    // Check for level up
+    const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
+    
     res.json({
-      message: passed ? 'Test passed successfully!' : 'Test failed. Try again!',
-      result: {
-        score,
-        correctAnswers,
-        totalQuestions: test.questions.length,
-        timeSpent,
-        passed,
-        detailedResults,
-        rewards: passed ? {
-          experience: test.rewardExperience,
-          coins: test.rewardCoins
-        } : null
+      message: 'Test hoàn thành!',
+      report: {
+        totalQuestions,
+        correctCount,
+        wrongCount: totalQuestions - correctCount,
+        correctQuestions,
+        wrongQuestions,
+        score: Math.round((correctCount / totalQuestions) * 100),
+        rewards: {
+          coins: totalCoinsReward,
+          experience: totalExpReward
+        }
       },
       user: {
-        level: user.level,
+        coins: user.coins,
         experience: user.experience,
-        coins: user.coins
-      }
+        level: user.level
+      },
+      levelResult
     });
   } catch (error) {
     console.error('Submit test error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+// Helper function to check if answer is correct
+function checkAnswer(question: any, userAnswer: any): boolean {
+  if (question.questionType === 'multiple-choice') {
+    if (Array.isArray(question.correctAnswer)) {
+      // Multiple correct answers
+      if (Array.isArray(userAnswer)) {
+        return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
+      }
+      return false;
+    } else {
+      // Single correct answer
+      return userAnswer === question.correctAnswer;
+    }
+  } else if (question.questionType === 'fill-blank') {
+    return userAnswer?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim();
+  } else if (question.questionType === 'reading-comprehension') {
+    if (Array.isArray(question.correctAnswer)) {
+      // Multiple correct answers
+      if (Array.isArray(userAnswer)) {
+        return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
+      }
+      return false;
+    } else {
+      // Single correct answer
+      return userAnswer === question.correctAnswer;
+    }
+  } else if (question.questionType === 'sentence-order') {
+    return JSON.stringify(userAnswer) === JSON.stringify(question.correctAnswer);
+  }
+  
+  return false;
+}
 
 export const getTestByLevel = async (req: any, res: Response) => {
   try {

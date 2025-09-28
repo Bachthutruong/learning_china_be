@@ -21,9 +21,9 @@ const joinCompetitionValidation = [
 
 // Public routes
 router.get('/', getCompetitions);
-router.get('/:id', getCompetitionById);
 router.get('/leaderboard', getGlobalLeaderboard);
 router.get('/:competitionId/leaderboard', getCompetitionLeaderboard);
+router.get('/:id', getCompetitionById);
 
 // Protected routes
 router.post('/join', authenticate, joinCompetitionValidation, joinCompetition);

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import User from '../models/User';
 import Report from '../models/Report';
 import Payment from '../models/Payment';
+import { checkAndUpdateUserLevel, getNextLevelRequirements } from '../utils/levelUtils';
 
 export const checkIn = async (req: any, res: Response) => {
   try {
@@ -52,13 +53,10 @@ export const checkIn = async (req: any, res: Response) => {
     user.coins += finalCoins;
     user.lastCheckIn = today;
     
-    // Check for level up
-    const levels = [0, 100, 300, 600, 1000, 1500, 2100];
-    if (user.experience >= levels[user.level] && user.level < 6) {
-      user.level += 1;
-    }
-    
     await user.save();
+    
+    // Check for level up using dynamic level requirements
+    const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
 
     res.json({
       message: 'Check-in successful',
@@ -69,11 +67,13 @@ export const checkIn = async (req: any, res: Response) => {
         milestoneBonus: milestoneBonus > 0 ? milestoneBonus : undefined
       },
       user: {
-        level: user.level,
+        level: levelResult.level,
         experience: user.experience,
         coins: user.coins,
         streak: user.streak
-      }
+      },
+      leveledUp: levelResult.leveledUp,
+      newLevel: levelResult.newLevel
     });
   } catch (error) {
     console.error('Check-in error:', error);
@@ -342,6 +342,95 @@ export const getUserLearningStats = async (req: any, res: Response) => {
     res.json({ stats });
   } catch (error) {
     console.error('Get user learning stats error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getProfile = async (req: any, res: Response) => {
+  try {
+    const user = await User.findById(req.user._id).select('-password');
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Get next level requirements
+    const levelInfo = await getNextLevelRequirements((user._id as any).toString());
+
+    res.json({ 
+      user: {
+        ...user.toObject(),
+        levelInfo
+      }
+    });
+  } catch (error) {
+    console.error('Get profile error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const forceRecalculateAllLevels = async (req: any, res: Response) => {
+  try {
+    const users = await User.find({});
+    let updatedCount = 0;
+    
+    for (const user of users) {
+      const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
+      if (levelResult.leveledUp) {
+        updatedCount++;
+      }
+    }
+    
+    res.json({
+      message: `Recalculated levels for ${users.length} users`,
+      updatedCount
+    });
+  } catch (error) {
+    console.error('Force recalculate all levels error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const recalculateLevel = async (req: any, res: Response) => {
+  try {
+    const user = await User.findById(req.user._id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Get all levels for debugging
+    const Level = require('../models/Level').default;
+    const allLevels = await Level.find({}).sort({ number: 1 });
+    
+    console.log('User experience:', user.experience);
+    console.log('Current user level:', user.level);
+    console.log('Available levels:', allLevels.map((l: any) => ({ number: l.number, requiredExperience: l.requiredExperience, name: l.name })));
+
+    // Recalculate level based on current experience
+    const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
+    const levelInfo = await getNextLevelRequirements((user._id as any).toString());
+
+    console.log('Level result:', levelResult);
+
+    res.json({
+      message: 'Level recalculated successfully',
+      user: {
+        level: levelResult.level,
+        experience: user.experience,
+        coins: user.coins
+      },
+      leveledUp: levelResult.leveledUp,
+      newLevel: levelResult.newLevel,
+      levelInfo,
+      debug: {
+        allLevels: allLevels.map((l: any) => ({ number: l.number, requiredExperience: l.requiredExperience, name: l.name })),
+        userExperience: user.experience,
+        previousLevel: user.level
+      }
+    });
+  } catch (error) {
+    console.error('Recalculate level error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

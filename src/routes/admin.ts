@@ -2,7 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 import multer from 'multer';
 import cloudinaryUpload from '../middleware/upload';
-import {
+import { 
   createVocabulary,
   updateVocabulary,
   deleteVocabulary,
@@ -18,6 +18,15 @@ import {
   createProficiencyTest,
   updateProficiencyTest,
   deleteProficiencyTest,
+  getProficiencyConfigs,
+  createProficiencyConfig,
+  updateProficiencyConfig,
+  deleteProficiencyConfig,
+  activateProficiencyConfig,
+  getAllCompetitions,
+  createCompetition,
+  updateCompetition,
+  deleteCompetition,
   getAdminStats,
   getAllVocabularies,
   getAllTopics,
@@ -108,16 +117,18 @@ const vocabularyValidation = [
 
 const topicValidation = [
   body('name').trim().isLength({ min: 1 }),
-  body('description').trim().isLength({ min: 1 }),
+  body('description').optional().isString(),
   body('color').trim().isLength({ min: 1 })
 ];
 
 const levelValidation = [
   body('name').trim().isLength({ min: 1 }),
-  body('number').isInt({ min: 1, max: 6 }),
-  body('description').trim().isLength({ min: 1 }),
-  body('requiredExperience').isInt({ min: 0 }),
-  body('color').trim().isLength({ min: 1 })
+  body('number').optional().isNumeric(),
+  body('level').optional().isNumeric(),
+  body('description').optional().isString(),
+  body('requiredExperience').isNumeric(),
+  body('color').trim().isLength({ min: 1 }),
+  body('icon').optional().isString()
 ];
 
 const testValidation = [
@@ -139,6 +150,7 @@ const proficiencyTestValidation = [
   body('rewardExperience').isInt({ min: 0 }),
   body('rewardCoins').isInt({ min: 0 })
 ];
+
 
 // All admin routes require authentication and admin authorization
 router.use(authenticate, authorize('admin'));
@@ -189,6 +201,36 @@ router.get('/proficiency-tests', getAllProficiencyTests);
 router.post('/proficiency-tests', proficiencyTestValidation, createProficiencyTest);
 router.put('/proficiency-tests/:id', proficiencyTestValidation, updateProficiencyTest);
 router.delete('/proficiency-tests/:id', deleteProficiencyTest);
+
+// Proficiency config management
+router.get('/proficiency-configs', getProficiencyConfigs);
+router.post('/proficiency-configs', createProficiencyConfig);
+router.put('/proficiency-configs/:id', updateProficiencyConfig);
+router.delete('/proficiency-configs/:id', deleteProficiencyConfig);
+router.post('/proficiency-configs/:id/activate', activateProficiencyConfig);
+
+// Competition management
+router.get('/competitions', getAllCompetitions);
+router.post('/competitions', createCompetition);
+router.put('/competitions/:id', updateCompetition);
+router.delete('/competitions/:id', deleteCompetition);
+
+// Users management - Placeholder routes
+router.get('/users', (req, res) => {
+  res.json({ users: [], message: 'User management not implemented yet' });
+});
+
+router.post('/users', (req, res) => {
+  res.status(501).json({ message: 'User creation not implemented yet' });
+});
+
+router.put('/users/:id', (req, res) => {
+  res.status(501).json({ message: 'User update not implemented yet' });
+});
+
+router.delete('/users/:id', (req, res) => {
+  res.status(501).json({ message: 'User deletion not implemented yet' });
+});
 
 export default router;
 

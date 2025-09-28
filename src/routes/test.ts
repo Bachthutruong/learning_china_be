@@ -8,7 +8,9 @@ import {
   deleteTest,
   submitTest,
   getTestByLevel,
-  getTestStats
+  getTestStats,
+  startTest,
+  getRandomQuestions
 } from '../controllers/testController';
 import { authenticate, authorize } from '../middleware/auth';
 
@@ -27,9 +29,8 @@ const testValidation = [
 ];
 
 const submitTestValidation = [
-  body('testId').isMongoId(),
   body('answers').isArray(),
-  body('timeSpent').isInt({ min: 0 })
+  body('questionIds').isArray()
 ];
 
 // Protected routes
@@ -37,6 +38,8 @@ router.get('/', authenticate, getTests);
 router.get('/stats', authenticate, getTestStats);
 router.get('/level/:level', authenticate, getTestByLevel);
 router.get('/:id', authenticate, getTestById);
+router.post('/start', authenticate, startTest);
+router.get('/questions/random', authenticate, getRandomQuestions);
 router.post('/submit', authenticate, submitTestValidation, submitTest);
 
 // Admin routes

@@ -10,7 +10,7 @@ import Competition from '../models/Competition';
 import Report from '../models/Report';
 import CompetitionResult from '../models/CompetitionResult';
 import Payment from '../models/Payment';
-import UserVocabulary from '../models/UserVocabulary';
+import { UserVocabulary } from '../models/UserVocabulary';
 import QuestionType from '../models/QuestionType';
 
 dotenv.config();

@@ -62,7 +62,7 @@ export const joinCompetition = async (req: any, res: Response) => {
     }
 
     // Check if competition is still open
-    if (competition.status !== 'active' && competition.status !== 'upcoming') {
+    if (!competition.isActive) {
       return res.status(400).json({ message: 'Competition is not available for joining' });
     }
 
@@ -121,7 +121,7 @@ export const getCompetitionQuestions = async (req: any, res: Response) => {
     }
 
     // Check if competition is active
-    if (competition.status !== 'active') {
+    if (!competition.isActive) {
       return res.status(400).json({ message: 'Competition is not currently active' });
     }
 
@@ -187,7 +187,7 @@ export const submitCompetition = async (req: any, res: Response) => {
     }
 
     // Check if competition is still active
-    if (competition.status !== 'active') {
+    if (!competition.isActive) {
       return res.status(400).json({ message: 'Competition is no longer active' });
     }
 

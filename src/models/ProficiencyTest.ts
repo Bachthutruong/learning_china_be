@@ -3,7 +3,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface IQuestion {
   question: string;
   options: string[];
-  correctAnswer: number;
+  correctAnswer: number | number[]; // support single or multiple correct indexes
+  questionType?: 'single' | 'multiple';
   explanation?: string;
 }
 
@@ -21,14 +22,9 @@ const QuestionSchema = new Schema<IQuestion>({
     type: String,
     required: true
   },
-  options: [{
-    type: String,
-    required: true
-  }],
-  correctAnswer: {
-    type: Number,
-    required: true
-  },
+  options: [{ type: String, required: true }],
+  correctAnswer: { type: Schema.Types.Mixed, required: true },
+  questionType: { type: String, enum: ['single', 'multiple'], default: 'single' },
   explanation: String
 });
 
@@ -41,7 +37,7 @@ const ProficiencyTestSchema = new Schema<IProficiencyTest>({
   questions: [QuestionSchema],
   timeLimit: {
     type: Number,
-    required: [true, 'Time limit is required'],
+    default: 30,
     min: 1
   },
   requiredCoins: {

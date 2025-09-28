@@ -3,9 +3,10 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface ILevel extends Document {
   name: string;
   number: number;
-  description: string;
+  description?: string;
   requiredExperience: number;
   color: string;
+  icon?: string;
 }
 
 const LevelSchema = new Schema<ILevel>({
@@ -18,14 +19,13 @@ const LevelSchema = new Schema<ILevel>({
   number: {
     type: Number,
     required: [true, 'Level number is required'],
-    unique: true,
-    min: 1,
-    max: 6
+    unique: true
   },
   description: {
     type: String,
-    required: [true, 'Level description is required'],
-    trim: true
+    required: false,
+    trim: true,
+    default: ''
   },
   requiredExperience: {
     type: Number,
@@ -36,6 +36,12 @@ const LevelSchema = new Schema<ILevel>({
     type: String,
     required: [true, 'Level color is required'],
     trim: true
+  },
+  icon: {
+    type: String,
+    required: false,
+    trim: true,
+    default: 'star'
   }
 }, {
   timestamps: true

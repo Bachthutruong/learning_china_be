@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITopic extends Document {
   name: string;
-  description: string;
+  description?: string;
   color: string;
 }
 
@@ -15,8 +15,9 @@ const TopicSchema = new Schema<ITopic>({
   },
   description: {
     type: String,
-    required: [true, 'Topic description is required'],
-    trim: true
+    required: false,
+    trim: true,
+    default: ''
   },
   color: {
     type: String,

@@ -4,6 +4,8 @@ import Topic from '../models/Topic';
 import Level from '../models/Level';
 import Test from '../models/Test';
 import ProficiencyTest from '../models/ProficiencyTest';
+import ProficiencyConfig from '../models/ProficiencyConfig';
+import Competition from '../models/Competition';
 import Report from '../models/Report';
 import User from '../models/User';
 import { validationResult } from 'express-validator';
@@ -659,6 +661,229 @@ export const getAllProficiencyTests = async (req: any, res: Response) => {
     res.json(proficiencyTests);
   } catch (error) {
     console.error('Get all proficiency tests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Proficiency Config Management
+export const getProficiencyConfigs = async (req: any, res: Response) => {
+  try {
+    const configs = await ProficiencyConfig.find().sort({ createdAt: -1 });
+    res.json({ configs });
+  } catch (error) {
+    console.error('Get proficiency configs error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const createProficiencyConfig = async (req: any, res: Response) => {
+  try {
+    const { name, description, cost, initialQuestions, branches } = req.body;
+    
+    // Deactivate all existing configs
+    await ProficiencyConfig.updateMany({}, { isActive: false });
+    
+    const config = new ProficiencyConfig({
+      name,
+      description,
+      cost,
+      initialQuestions,
+      branches,
+      isActive: true
+    });
+    
+    await config.save();
+    
+    res.status(201).json({
+      message: 'Proficiency config created successfully',
+      config
+    });
+  } catch (error) {
+    console.error('Create proficiency config error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateProficiencyConfig = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, description, cost, initialQuestions, branches } = req.body;
+    
+    const config = await ProficiencyConfig.findByIdAndUpdate(
+      id,
+      { name, description, cost, initialQuestions, branches },
+      { new: true }
+    );
+    
+    if (!config) {
+      return res.status(404).json({ message: 'Proficiency config not found' });
+    }
+    
+    res.json({
+      message: 'Proficiency config updated successfully',
+      config
+    });
+  } catch (error) {
+    console.error('Update proficiency config error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteProficiencyConfig = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    
+    const config = await ProficiencyConfig.findByIdAndDelete(id);
+    
+    if (!config) {
+      return res.status(404).json({ message: 'Proficiency config not found' });
+    }
+    
+    res.json({ message: 'Proficiency config deleted successfully' });
+  } catch (error) {
+    console.error('Delete proficiency config error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const activateProficiencyConfig = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    
+    // Deactivate all configs first
+    await ProficiencyConfig.updateMany({}, { isActive: false });
+    
+    // Activate the selected config
+    const config = await ProficiencyConfig.findByIdAndUpdate(
+      id,
+      { isActive: true },
+      { new: true }
+    );
+    
+    if (!config) {
+      return res.status(404).json({ message: 'Proficiency config not found' });
+    }
+    
+    res.json({
+      message: 'Proficiency config activated successfully',
+      config
+    });
+  } catch (error) {
+    console.error('Activate proficiency config error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Competition Management
+export const getAllCompetitions = async (req: any, res: Response) => {
+  try {
+    const competitions = await Competition.find().sort({ createdAt: -1 });
+    res.json({ competitions });
+  } catch (error) {
+    console.error('Get competitions error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const createCompetition = async (req: any, res: Response) => {
+  try {
+    const {
+      title,
+      description,
+      level,
+      startDate,
+      endDate,
+      cost,
+      reward,
+      prizes,
+      questions
+    } = req.body;
+
+    // Validate required fields
+    if (!title || !description || !level || !startDate || !endDate || !cost || !reward || !prizes || !questions) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Validate dates
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    if (start >= end) {
+      return res.status(400).json({ message: 'End date must be after start date' });
+    }
+
+    const competition = new Competition({
+      title,
+      description,
+      level,
+      startDate: start,
+      endDate: end,
+      cost,
+      reward,
+      prizes,
+      questions,
+      participants: [],
+      isActive: true
+    });
+
+    await competition.save();
+
+    res.status(201).json({
+      message: 'Competition created successfully',
+      competition
+    });
+  } catch (error) {
+    console.error('Create competition error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateCompetition = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    // Validate dates if provided
+    if (updateData.startDate && updateData.endDate) {
+      const start = new Date(updateData.startDate);
+      const end = new Date(updateData.endDate);
+      if (start >= end) {
+        return res.status(400).json({ message: 'End date must be after start date' });
+      }
+    }
+
+    const competition = await Competition.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    );
+
+    if (!competition) {
+      return res.status(404).json({ message: 'Competition not found' });
+    }
+
+    res.json({
+      message: 'Competition updated successfully',
+      competition
+    });
+  } catch (error) {
+    console.error('Update competition error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteCompetition = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const competition = await Competition.findByIdAndDelete(id);
+
+    if (!competition) {
+      return res.status(404).json({ message: 'Competition not found' });
+    }
+
+    res.json({ message: 'Competition deleted successfully' });
+  } catch (error) {
+    console.error('Delete competition error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

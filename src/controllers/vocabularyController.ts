@@ -6,7 +6,7 @@ import { validationResult } from 'express-validator';
 
 export const getVocabularies = async (req: any, res: Response) => {
   try {
-    const { level, topic, page = 1, limit = 10 } = req.query;
+    const { level, topic, page = 1, limit = 10, search } = req.query;
     const user = await User.findById(req.user._id);
     
     if (!user) {
@@ -25,6 +25,15 @@ export const getVocabularies = async (req: any, res: Response) => {
     // Filter by topic
     if (topic) {
       query.topics = topic;
+    }
+
+    // Add search functionality
+    if (search) {
+      query.$or = [
+        { word: { $regex: search, $options: 'i' } },
+        { meaning: { $regex: search, $options: 'i' } },
+        { pronunciation: { $regex: search, $options: 'i' } }
+      ];
     }
 
     const vocabularies = await Vocabulary.find(query)
@@ -209,9 +218,18 @@ export const completeVocabulary = async (req: any, res: Response) => {
     }
 
     if (quizPassed) {
-      // Add experience and coins
-      user.experience += 0.5;
-      user.coins += 0.5;
+      // Check if vocabulary was already learned before
+      const wasAlreadyLearned = user.learnedVocabulary && user.learnedVocabulary.includes(vocabularyId);
+      
+      if (wasAlreadyLearned) {
+        // Already learned vocabulary: 1 XP, 1 coin
+        user.experience += 1;
+        user.coins += 1;
+      } else {
+        // New vocabulary: 10 XP, 10 coins
+        user.experience += 10;
+        user.coins += 10;
+      }
       
       // Check for level up
       const levels = [0, 100, 300, 600, 1000, 1500, 2100];

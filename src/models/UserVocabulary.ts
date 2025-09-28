@@ -1,55 +1,47 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose'
 
 export interface IUserVocabulary extends Document {
-  userId: mongoose.Types.ObjectId;
-  vocabularyId: mongoose.Types.ObjectId;
-  status: 'learning' | 'known' | 'needs-study' | 'skipped';
-  addedAt: Date;
-  learnedAt?: Date;
-  studyCount: number;
-  lastStudied?: Date;
-  customTopic?: string;
-  isCustom: boolean;
+  userId: string
+  vocabularyId: string
+  status: 'learned' | 'studying' | 'skipped'
+  personalTopicId?: string
+  learnedAt?: Date
+  createdAt: Date
+  updatedAt: Date
 }
 
 const UserVocabularySchema = new Schema<IUserVocabulary>({
   userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    type: String,
+    required: true,
+    ref: 'User'
   },
   vocabularyId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Vocabulary',
-    required: true
+    type: String,
+    required: true,
+    ref: 'Vocabulary'
   },
   status: {
     type: String,
-    enum: ['learning', 'known', 'needs-study', 'skipped'],
-    default: 'learning'
+    enum: ['learned', 'studying', 'skipped'],
+    required: true
   },
-  addedAt: {
-    type: Date,
-    default: Date.now
+  personalTopicId: {
+    type: String,
+    ref: 'PersonalTopic'
   },
-  learnedAt: Date,
-  studyCount: {
-    type: Number,
-    default: 0
-  },
-  lastStudied: Date,
-  customTopic: String,
-  isCustom: {
-    type: Boolean,
-    default: false
+  learnedAt: {
+    type: Date
   }
 }, {
   timestamps: true
-});
+})
 
 // Index for efficient queries
-UserVocabularySchema.index({ userId: 1, status: 1 });
-UserVocabularySchema.index({ userId: 1, vocabularyId: 1 }, { unique: true });
+UserVocabularySchema.index({ userId: 1 })
+UserVocabularySchema.index({ vocabularyId: 1 })
+UserVocabularySchema.index({ status: 1 })
+UserVocabularySchema.index({ personalTopicId: 1 })
+UserVocabularySchema.index({ userId: 1, vocabularyId: 1 }, { unique: true })
 
-export default mongoose.model<IUserVocabulary>('UserVocabulary', UserVocabularySchema);
-
+export const UserVocabulary = mongoose.model<IUserVocabulary>('UserVocabulary', UserVocabularySchema)

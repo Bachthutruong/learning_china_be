@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import UserVocabulary from '../models/UserVocabulary';
+import { UserVocabulary } from '../models/UserVocabulary';
 import Vocabulary from '../models/Vocabulary';
 import Topic from '../models/Topic';
 import User from '../models/User';
@@ -16,10 +16,9 @@ export const getUserVocabularyProgress = async (req: any, res: Response) => {
 
     const stats = {
       total: userVocabularies.length,
-      learning: userVocabularies.filter(uv => uv.status === 'learning').length,
-      known: userVocabularies.filter(uv => uv.status === 'known').length,
-      needsStudy: userVocabularies.filter(uv => uv.status === 'needs-study').length,
-      skipped: userVocabularies.filter(uv => uv.status === 'skipped').length
+      learned: userVocabularies.filter((uv: any) => uv.status === 'learned').length,
+      studying: userVocabularies.filter((uv: any) => uv.status === 'studying').length,
+      skipped: userVocabularies.filter((uv: any) => uv.status === 'skipped').length
     };
 
     res.json({
@@ -63,7 +62,7 @@ export const getVocabularySuggestions = async (req: any, res: Response) => {
 
     // Get vocabularies that user hasn't added yet
     const userVocabularyIds = await UserVocabulary.find({ userId }).select('vocabularyId');
-    const existingIds = userVocabularyIds.map(uv => uv.vocabularyId);
+    const existingIds = userVocabularyIds.map((uv: any) => uv.vocabularyId);
     
     if (existingIds.length > 0) {
       query._id = { $nin: existingIds };
@@ -164,10 +163,8 @@ export const updateVocabularyStatus = async (req: any, res: Response) => {
     }
 
     userVocabulary.status = status;
-    userVocabulary.studyCount += 1;
-    userVocabulary.lastStudied = new Date();
 
-    if (status === 'known') {
+    if (status === 'learned') {
       userVocabulary.learnedAt = new Date();
     }
 
@@ -277,22 +274,30 @@ export const completeVocabularyLearning = async (req: any, res: Response) => {
     const passed = score >= 70; // 70% to pass
 
     if (passed) {
-      userVocabulary.status = 'known';
+      userVocabulary.status = 'learned';
       userVocabulary.learnedAt = new Date();
       
       // Add experience and coins
       const user = await User.findById(userId);
       if (user) {
-        user.experience += 5;
-        user.coins += 2;
+        // Check if vocabulary was already learned before
+        const wasAlreadyLearned = userVocabulary.status === 'learned' && userVocabulary.learnedAt;
+        
+        if (wasAlreadyLearned) {
+          // Already learned vocabulary: 1 XP, 1 coin
+          user.experience += 1;
+          user.coins += 1;
+        } else {
+          // New vocabulary: 10 XP, 10 coins
+          user.experience += 10;
+          user.coins += 10;
+        }
         await user.save();
       }
     } else {
-      userVocabulary.status = 'needs-study';
+      userVocabulary.status = 'studying';
     }
 
-    userVocabulary.studyCount += 1;
-    userVocabulary.lastStudied = new Date();
     await userVocabulary.save();
 
     const user = await User.findById(userId);
