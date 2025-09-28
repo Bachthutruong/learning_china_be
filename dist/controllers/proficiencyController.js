@@ -1,0 +1,230 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getProficiencyHistory = exports.submitProficiencyTest = exports.startProficiencyTest = exports.getProficiencyConfig = void 0;
+const User_1 = __importDefault(require("../models/User"));
+const Question_1 = __importDefault(require("../models/Question"));
+const ProficiencyConfig_1 = __importDefault(require("../models/ProficiencyConfig"));
+// Get active proficiency test configuration
+const getProficiencyConfig = async (req, res) => {
+    try {
+        const config = await ProficiencyConfig_1.default.findOne({ isActive: true });
+        if (!config) {
+            return res.status(404).json({ message: 'No active proficiency test configuration found' });
+        }
+        res.json({
+            config: {
+                id: config._id,
+                name: config.name,
+                description: config.description,
+                cost: config.cost,
+                initialQuestions: config.initialQuestions,
+                branches: config.branches
+            }
+        });
+    }
+    catch (error) {
+        console.error('Get proficiency config error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.getProficiencyConfig = getProficiencyConfig;
+// Start proficiency test
+const startProficiencyTest = async (req, res) => {
+    try {
+        const user = await User_1.default.findById(req.user._id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const config = await ProficiencyConfig_1.default.findOne({ isActive: true });
+        if (!config) {
+            return res.status(404).json({ message: 'No active proficiency test configuration found' });
+        }
+        // Check if user has enough coins
+        if (user.coins < config.cost) {
+            return res.status(400).json({
+                message: 'Không đủ xu để làm test năng lực',
+                requiredCoins: config.cost,
+                userCoins: user.coins,
+                insufficientCoins: true
+            });
+        }
+        // Deduct coins
+        user.coins -= config.cost;
+        await user.save();
+        // Get initial questions based on configuration
+        const initialQuestions = [];
+        for (const initialConfig of config.initialQuestions) {
+            const questions = await Question_1.default.find({ level: initialConfig.level })
+                .limit(initialConfig.count)
+                .sort({ createdAt: -1 });
+            initialQuestions.push(...questions.map(q => ({
+                ...q.toObject(),
+                proficiencyLevel: initialConfig.level
+            })));
+        }
+        res.json({
+            questions: initialQuestions,
+            totalQuestions: initialQuestions.length,
+            timeLimit: 30, // minutes
+            description: config.description,
+            configId: config._id,
+            phase: 'initial',
+            userCoins: user.coins
+        });
+    }
+    catch (error) {
+        console.error('Start proficiency test error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.startProficiencyTest = startProficiencyTest;
+// Submit proficiency test answers
+const submitProficiencyTest = async (req, res) => {
+    try {
+        const { answers, questionIds, phase, configId } = req.body;
+        const user = await User_1.default.findById(req.user._id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const config = await ProficiencyConfig_1.default.findById(configId);
+        if (!config) {
+            return res.status(404).json({ message: 'Proficiency test configuration not found' });
+        }
+        // Get questions with correct answers
+        const questions = await Question_1.default.find({ _id: { $in: questionIds } });
+        // Count correct answers
+        let correctCount = 0;
+        const questionResults = [];
+        answers.forEach((userAnswer, index) => {
+            const question = questions.find((q) => q._id.toString() === questionIds[index]);
+            if (!question)
+                return;
+            const isCorrect = checkAnswer(question, userAnswer);
+            if (isCorrect)
+                correctCount++;
+            questionResults.push({
+                questionId: question._id,
+                question: question.question,
+                userAnswer,
+                correctAnswer: question.correctAnswer,
+                isCorrect,
+                level: question.level
+            });
+        });
+        // Find matching branch based on current phase and correct count
+        const matchingBranch = config.branches.find(branch => branch.condition.fromPhase === phase &&
+            correctCount >= branch.condition.correctRange[0] &&
+            correctCount <= branch.condition.correctRange[1]);
+        if (!matchingBranch) {
+            return res.status(400).json({ message: 'No matching branch found for current results' });
+        }
+        // If this branch leads to a final result
+        if (matchingBranch.resultLevel !== undefined) {
+            // Calculate final level based on result
+            const finalLevel = matchingBranch.resultLevel;
+            // Update user level if needed
+            if (finalLevel > user.level) {
+                user.level = finalLevel;
+                await user.save();
+            }
+            // Calculate rewards
+            const experienceReward = correctCount * 50; // 50 XP per correct answer
+            const coinsReward = correctCount * 20; // 20 coins per correct answer
+            user.experience += experienceReward;
+            user.coins += coinsReward;
+            await user.save();
+            return res.json({
+                completed: true,
+                result: {
+                    level: finalLevel,
+                    correctCount,
+                    totalQuestions: answers.length,
+                    score: Math.round((correctCount / answers.length) * 100),
+                    rewards: {
+                        experience: experienceReward,
+                        coins: coinsReward
+                    }
+                },
+                questionResults,
+                user: {
+                    level: user.level,
+                    experience: user.experience,
+                    coins: user.coins
+                }
+            });
+        }
+        // If this branch leads to next phase, get next questions
+        if (matchingBranch.nextPhase) {
+            const nextQuestions = [];
+            for (const nextConfig of matchingBranch.nextQuestions) {
+                const questions = await Question_1.default.find({ level: nextConfig.level })
+                    .limit(nextConfig.count)
+                    .sort({ createdAt: -1 });
+                nextQuestions.push(...questions.map(q => ({
+                    ...q.toObject(),
+                    proficiencyLevel: nextConfig.level
+                })));
+            }
+            return res.json({
+                nextPhase: true,
+                phase: matchingBranch.nextPhase,
+                questions: nextQuestions,
+                totalQuestions: nextQuestions.length,
+                timeLimit: matchingBranch.nextPhase === 'final' ? 25 : 15,
+                branchName: matchingBranch.name,
+                previousResults: {
+                    correctCount,
+                    totalQuestions: answers.length,
+                    questionResults
+                }
+            });
+        }
+        res.status(400).json({ message: 'Invalid branch configuration' });
+    }
+    catch (error) {
+        console.error('Submit proficiency test error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.submitProficiencyTest = submitProficiencyTest;
+// Helper function to check if answer is correct
+function checkAnswer(question, userAnswer) {
+    if (question.questionType === 'multiple-choice' || question.questionType === 'reading-comprehension') {
+        if (Array.isArray(question.correctAnswer)) {
+            if (Array.isArray(userAnswer)) {
+                return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
+            }
+            return false;
+        }
+        else {
+            return userAnswer === question.correctAnswer;
+        }
+    }
+    else if (question.questionType === 'fill-blank') {
+        return userAnswer?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim();
+    }
+    else if (question.questionType === 'sentence-order') {
+        return JSON.stringify(userAnswer) === JSON.stringify(question.correctAnswer);
+    }
+    return false;
+}
+// Get proficiency test history for user
+const getProficiencyHistory = async (req, res) => {
+    try {
+        // This would need a separate ProficiencyTestResult model to store test results
+        // For now, return empty array
+        res.json({
+            history: [],
+            message: 'Proficiency test history feature coming soon'
+        });
+    }
+    catch (error) {
+        console.error('Get proficiency history error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.getProficiencyHistory = getProficiencyHistory;
+//# sourceMappingURL=proficiencyController.js.map

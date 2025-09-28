@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "npm run build && node dist/index.js",
+    "postinstall": "npm run build",
     "seed:admin": "ts-node src/scripts/seedAdmin.ts",
     "seed:data": "ts-node src/scripts/seedData.ts",
     "seed:advanced": "ts-node src/scripts/seedAdvanced.ts",
