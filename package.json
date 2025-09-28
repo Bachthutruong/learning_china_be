@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "tsc",
-    "start": "npm run build && node dist/index.js",
+    "build": "tsc --incremental",
+    "start": "npm run build && node --max-old-space-size=512 dist/index.js",
     "postinstall": "npm run build",
     "seed:admin": "ts-node src/scripts/seedAdmin.ts",
     "seed:data": "ts-node src/scripts/seedData.ts",
