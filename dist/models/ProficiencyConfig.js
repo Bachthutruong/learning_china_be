@@ -102,7 +102,51 @@ const ProficiencyConfigSchema = new mongoose_1.Schema({
                 type: String,
                 enum: ['followup', 'final'],
                 required: false
-            }
+            },
+            subBranches: [{
+                    name: {
+                        type: String,
+                        required: true
+                    },
+                    condition: {
+                        correctRange: {
+                            type: [Number],
+                            required: true,
+                            validate: {
+                                validator: function (v) {
+                                    return v.length === 2 && v[0] <= v[1];
+                                },
+                                message: 'correctRange must be [min, max] where min <= max'
+                            }
+                        },
+                        fromPhase: {
+                            type: String,
+                            enum: ['initial', 'followup', 'final'],
+                            required: true
+                        }
+                    },
+                    nextQuestions: [{
+                            level: {
+                                type: Number,
+                                required: true
+                            },
+                            count: {
+                                type: Number,
+                                required: true,
+                                min: 1
+                            }
+                        }],
+                    resultLevel: {
+                        type: Number,
+                        required: false
+                    },
+                    nextPhase: {
+                        type: String,
+                        enum: ['followup', 'final'],
+                        required: false
+                    },
+                    subBranches: [] // Recursive definition - will be populated after schema creation
+                }]
         }],
     isActive: {
         type: Boolean,
@@ -113,5 +157,58 @@ const ProficiencyConfigSchema = new mongoose_1.Schema({
 });
 // Index for active configs
 ProficiencyConfigSchema.index({ isActive: 1 });
+// Add recursive subBranches after schema creation
+const SubBranchSchema = new mongoose_1.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    condition: {
+        correctRange: {
+            type: [Number],
+            required: true,
+            validate: {
+                validator: function (v) {
+                    return v.length === 2 && v[0] <= v[1];
+                },
+                message: 'correctRange must be [min, max] where min <= max'
+            }
+        },
+        fromPhase: {
+            type: String,
+            enum: ['initial', 'followup', 'final'],
+            required: true
+        }
+    },
+    nextQuestions: [{
+            level: {
+                type: Number,
+                required: true
+            },
+            count: {
+                type: Number,
+                required: true,
+                min: 1
+            }
+        }],
+    resultLevel: {
+        type: Number,
+        required: false
+    },
+    nextPhase: {
+        type: String,
+        enum: ['followup', 'final'],
+        required: false
+    },
+    subBranches: [] // Recursive definition
+});
+// Add recursive subBranches to SubBranchSchema
+SubBranchSchema.add({ subBranches: [SubBranchSchema] });
+// Update the main schema to use the recursive SubBranchSchema
+const branchesSchema = ProficiencyConfigSchema.path('branches');
+if (branchesSchema && branchesSchema.schema) {
+    branchesSchema.schema.add({
+        subBranches: [SubBranchSchema]
+    });
+}
 exports.default = mongoose_1.default.model('ProficiencyConfig', ProficiencyConfigSchema);
-//# sourceMappingURL=ProficiencyConfig.js.map

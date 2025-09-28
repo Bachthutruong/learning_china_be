@@ -17,6 +17,8 @@ import advancedTestRoutes from './routes/advancedTest';
 import questionRoutes from './routes/question';
 import vocabularyLearningRoutes from './routes/vocabularyLearning';
 import coinPurchaseRoutes from './routes/coinPurchase';
+import paymentConfigRoutes from './routes/paymentConfig';
+import uploadRoutes from './routes/upload';
 
 // Load environment variables
 dotenv.config();
@@ -64,6 +66,8 @@ app.use('/api/advanced-tests', advancedTestRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/vocabulary-learning', vocabularyLearningRoutes);
 app.use('/api/coin-purchases', coinPurchaseRoutes);
+app.use('/api/payment-config', paymentConfigRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

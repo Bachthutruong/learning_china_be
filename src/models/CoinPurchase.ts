@@ -2,14 +2,16 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ICoinPurchase extends Document {
   userId: mongoose.Types.ObjectId;
-  amount: number; // Amount in VND
+  amount: number; // Amount in TWD
+  currency: string; // Currency (TWD)
   coins: number; // Coins to be added
   paymentMethod: string;
   bankAccount?: string;
   transactionId?: string;
-  status: 'pending' | 'approved' | 'rejected';
+  status: 'pending' | 'approved' | 'rejected' | 'cancelled';
   adminNotes?: string;
-  proofOfPayment?: string; // URL to uploaded proof image
+  receiptImage?: string; // URL to uploaded receipt image
+  canEdit: boolean; // Whether user can edit this purchase
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,7 +25,13 @@ const CoinPurchaseSchema = new Schema<ICoinPurchase>({
   amount: {
     type: Number,
     required: true,
-    min: 10000 // Minimum 10,000 VND
+    min: 1 // Minimum 1 TWD
+  },
+  currency: {
+    type: String,
+    required: true,
+    default: 'TWD',
+    enum: ['TWD']
   },
   coins: {
     type: Number,
@@ -33,7 +41,8 @@ const CoinPurchaseSchema = new Schema<ICoinPurchase>({
   paymentMethod: {
     type: String,
     required: true,
-    enum: ['bank_transfer', 'momo', 'zalopay', 'vnpay']
+    enum: ['bank_transfer'],
+    default: 'bank_transfer'
   },
   bankAccount: {
     type: String,
@@ -45,16 +54,20 @@ const CoinPurchaseSchema = new Schema<ICoinPurchase>({
   },
   status: {
     type: String,
-    enum: ['pending', 'approved', 'rejected'],
+    enum: ['pending', 'approved', 'rejected', 'cancelled'],
     default: 'pending'
   },
   adminNotes: {
     type: String,
     trim: true
   },
-  proofOfPayment: {
+  receiptImage: {
     type: String,
     trim: true
+  },
+  canEdit: {
+    type: Boolean,
+    default: true
   }
 }, {
   timestamps: true

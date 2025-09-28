@@ -24,4 +24,3 @@ router.post('/login', loginValidation, authController_1.login);
 router.get('/profile', auth_1.authenticate, authController_1.getProfile);
 router.put('/profile', auth_1.authenticate, authController_1.updateProfile);
 exports.default = router;
-//# sourceMappingURL=auth.js.map

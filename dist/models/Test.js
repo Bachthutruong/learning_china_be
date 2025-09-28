@@ -113,4 +113,3 @@ const TestSchema = new mongoose_1.Schema({
     timestamps: true
 });
 exports.default = mongoose_1.default.model('Test', TestSchema);
-//# sourceMappingURL=Test.js.map

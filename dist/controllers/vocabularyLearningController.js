@@ -297,4 +297,3 @@ exports.completeLearningValidation = [
     (0, express_validator_1.body)('quizScore').isNumeric().withMessage('Điểm khảo bài phải là số'),
     (0, express_validator_1.body)('personalTopicId').optional().isMongoId().withMessage('ID chủ đề cá nhân không hợp lệ')
 ];
-//# sourceMappingURL=vocabularyLearningController.js.map

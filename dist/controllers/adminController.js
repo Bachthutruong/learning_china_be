@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCompetition = exports.updateCompetition = exports.createCompetition = exports.getAllCompetitions = exports.activateProficiencyConfig = exports.deleteProficiencyConfig = exports.updateProficiencyConfig = exports.createProficiencyConfig = exports.getProficiencyConfigs = exports.getAllProficiencyTests = exports.getAllTests = exports.getAllLevels = exports.getAllTopics = exports.getAllVocabularies = exports.getAdminActivities = exports.getAdminStats = exports.deleteProficiencyTest = exports.updateProficiencyTest = exports.createProficiencyTest = exports.deleteTest = exports.updateTest = exports.createTest = exports.deleteLevel = exports.updateLevel = exports.createLevel = exports.deleteTopic = exports.updateTopic = exports.createTopic = exports.deleteVocabulary = exports.updateVocabulary = exports.createVocabulary = void 0;
+exports.deleteCompetition = exports.updateCompetition = exports.createCompetition = exports.getAllCompetitions = exports.activateProficiencyConfig = exports.deleteProficiencyConfig = exports.updateProficiencyConfig = exports.createProficiencyConfig = exports.getProficiencyConfig = exports.getProficiencyConfigs = exports.getAllProficiencyTests = exports.getAllTests = exports.getAllLevels = exports.getAllTopics = exports.getAllVocabularies = exports.getAdminActivities = exports.getAdminStats = exports.deleteProficiencyTest = exports.updateProficiencyTest = exports.createProficiencyTest = exports.deleteTest = exports.updateTest = exports.createTest = exports.deleteLevel = exports.updateLevel = exports.createLevel = exports.deleteTopic = exports.updateTopic = exports.createTopic = exports.deleteVocabulary = exports.updateVocabulary = exports.createVocabulary = void 0;
 const Vocabulary_1 = __importDefault(require("../models/Vocabulary"));
 const Topic_1 = __importDefault(require("../models/Topic"));
 const Level_1 = __importDefault(require("../models/Level"));
@@ -596,6 +596,21 @@ const getProficiencyConfigs = async (req, res) => {
     }
 };
 exports.getProficiencyConfigs = getProficiencyConfigs;
+const getProficiencyConfig = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const config = await ProficiencyConfig_1.default.findById(id);
+        if (!config) {
+            return res.status(404).json({ message: 'Cấu hình không tồn tại' });
+        }
+        res.json({ config });
+    }
+    catch (error) {
+        console.error('Get proficiency config error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.getProficiencyConfig = getProficiencyConfig;
 const createProficiencyConfig = async (req, res) => {
     try {
         const { name, description, cost, initialQuestions, branches } = req.body;
@@ -768,4 +783,3 @@ const deleteCompetition = async (req, res) => {
     }
 };
 exports.deleteCompetition = deleteCompetition;
-//# sourceMappingURL=adminController.js.map

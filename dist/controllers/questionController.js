@@ -164,4 +164,3 @@ const deleteQuestion = async (req, res) => {
     }
 };
 exports.deleteQuestion = deleteQuestion;
-//# sourceMappingURL=questionController.js.map

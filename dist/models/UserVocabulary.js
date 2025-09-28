@@ -68,4 +68,3 @@ UserVocabularySchema.index({ status: 1 });
 UserVocabularySchema.index({ personalTopicId: 1 });
 UserVocabularySchema.index({ userId: 1, vocabularyId: 1 }, { unique: true });
 exports.UserVocabulary = mongoose_1.default.model('UserVocabulary', UserVocabularySchema);
-//# sourceMappingURL=UserVocabulary.js.map

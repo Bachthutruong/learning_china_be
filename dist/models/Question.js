@@ -55,4 +55,3 @@ const QuestionBankSchema = new mongoose_1.Schema({
 });
 QuestionBankSchema.index({ level: 1 });
 exports.default = mongoose_1.default.model('Question', QuestionBankSchema);
-//# sourceMappingURL=Question.js.map

@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const express_validator_1 = require("express-validator");
 const multer_1 = __importDefault(require("multer"));
 const upload_1 = __importDefault(require("../middleware/upload"));
+const proficiencyQuestions_1 = __importDefault(require("./proficiencyQuestions"));
 const adminController_1 = require("../controllers/adminController");
 const auth_1 = require("../middleware/auth");
 const router = express_1.default.Router();
@@ -162,13 +163,15 @@ router.get('/tests', adminController_1.getAllTests);
 router.post('/tests', testValidation, adminController_1.createTest);
 router.put('/tests/:id', testValidation, adminController_1.updateTest);
 router.delete('/tests/:id', adminController_1.deleteTest);
-// Proficiency test management
+// Proficiency questions management
+router.use('/proficiency-questions', proficiencyQuestions_1.default);
 router.get('/proficiency-tests', adminController_1.getAllProficiencyTests);
 router.post('/proficiency-tests', proficiencyTestValidation, adminController_1.createProficiencyTest);
 router.put('/proficiency-tests/:id', proficiencyTestValidation, adminController_1.updateProficiencyTest);
 router.delete('/proficiency-tests/:id', adminController_1.deleteProficiencyTest);
 // Proficiency config management
 router.get('/proficiency-configs', adminController_1.getProficiencyConfigs);
+router.get('/proficiency-configs/:id', adminController_1.getProficiencyConfig);
 router.post('/proficiency-configs', adminController_1.createProficiencyConfig);
 router.put('/proficiency-configs/:id', adminController_1.updateProficiencyConfig);
 router.delete('/proficiency-configs/:id', adminController_1.deleteProficiencyConfig);
@@ -178,18 +181,13 @@ router.get('/competitions', adminController_1.getAllCompetitions);
 router.post('/competitions', adminController_1.createCompetition);
 router.put('/competitions/:id', adminController_1.updateCompetition);
 router.delete('/competitions/:id', adminController_1.deleteCompetition);
-// Users management - Placeholder routes
-router.get('/users', (req, res) => {
-    res.json({ users: [], message: 'User management not implemented yet' });
-});
-router.post('/users', (req, res) => {
-    res.status(501).json({ message: 'User creation not implemented yet' });
-});
-router.put('/users/:id', (req, res) => {
-    res.status(501).json({ message: 'User update not implemented yet' });
-});
-router.delete('/users/:id', (req, res) => {
-    res.status(501).json({ message: 'User deletion not implemented yet' });
-});
+// Users management
+const userController_1 = require("../controllers/userController");
+router.get('/users', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.getAllUsers);
+router.post('/users', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.createUser);
+router.put('/users/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.updateUser);
+router.delete('/users/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.deleteUser);
+// Payment configuration management
+const paymentConfigController_1 = require("../controllers/paymentConfigController");
+router.get('/payment-configs', auth_1.authenticate, (0, auth_1.authorize)('admin'), paymentConfigController_1.getAllPaymentConfigs);
 exports.default = router;
-//# sourceMappingURL=admin.js.map

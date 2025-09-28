@@ -36,4 +36,3 @@ router.post('/', auth_1.authenticate, (0, auth_1.authorize)('admin'), testValida
 router.put('/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), testValidation, testController_1.updateTest);
 router.delete('/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), testController_1.deleteTest);
 exports.default = router;
-//# sourceMappingURL=test.js.map

@@ -30,4 +30,3 @@ router.get('/generate', auth_1.authenticate, advancedTestController_1.generateQu
 router.post('/create', auth_1.authenticate, (0, auth_1.authorize)('admin'), createTestValidation, advancedTestController_1.createAdvancedTest);
 router.post('/submit', auth_1.authenticate, submitTestValidation, advancedTestController_1.submitAdvancedTest);
 exports.default = router;
-//# sourceMappingURL=advancedTest.js.map

@@ -26,4 +26,3 @@ router.get('/profile', auth_1.authenticate, userController_1.getProfile);
 router.post('/recalculate-level', auth_1.authenticate, userController_1.recalculateLevel);
 router.post('/force-recalculate-all-levels', auth_1.authenticate, userController_1.forceRecalculateAllLevels);
 exports.default = router;
-//# sourceMappingURL=user.js.map

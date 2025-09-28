@@ -676,6 +676,22 @@ export const getProficiencyConfigs = async (req: any, res: Response) => {
   }
 };
 
+export const getProficiencyConfig = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const config = await ProficiencyConfig.findById(id);
+    
+    if (!config) {
+      return res.status(404).json({ message: 'Cấu hình không tồn tại' });
+    }
+    
+    res.json({ config });
+  } catch (error) {
+    console.error('Get proficiency config error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 export const createProficiencyConfig = async (req: any, res: Response) => {
   try {
     const { name, description, cost, initialQuestions, branches } = req.body;

@@ -18,4 +18,3 @@ router.post('/user/vocabularies', auth_1.authenticate, vocabularyLearningControl
 router.post('/user/vocabularies/complete', auth_1.authenticate, vocabularyLearningController_1.completeLearningValidation, vocabularyLearningController_1.completeVocabularyLearning);
 router.get('/user/vocabularies/suggestions', auth_1.authenticate, vocabularyLearningController_1.getVocabularySuggestions);
 exports.default = router;
-//# sourceMappingURL=vocabularyLearning.js.map

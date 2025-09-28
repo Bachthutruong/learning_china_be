@@ -378,4 +378,3 @@ async function seedData() {
 }
 // Run the seed function
 seedData();
-//# sourceMappingURL=seedData.js.map

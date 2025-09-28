@@ -92,7 +92,7 @@ export const getUserStats = async (req: any, res: Response) => {
     // Get user's reports
     const reports = await Report.find({ userId: req.user._id });
     const pendingReports = reports.filter(r => r.status === 'pending').length;
-    const approvedReports = reports.filter(r => r.status === 'approved').length;
+    const approvedReports = reports.filter(r => r.status === 'resolved').length;
     
     res.json({
       user: {
@@ -431,6 +431,99 @@ export const recalculateLevel = async (req: any, res: Response) => {
     });
   } catch (error) {
     console.error('Recalculate level error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Admin functions for user management
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password, level = 1, coins = 0, role = 'user' } = req.body;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    // Create new user
+    const user = new User({
+      name,
+      email,
+      password,
+      level: parseInt(level),
+      coins: parseInt(coins),
+      role,
+      experience: 0,
+      streak: 0
+    });
+
+    await user.save();
+
+    res.status(201).json({
+      message: 'User created successfully',
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        level: user.level,
+        coins: user.coins,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    console.error('Create user error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, email, level, coins, role, password } = req.body;
+
+    const updateData: any = {};
+    if (name) updateData.name = name;
+    if (email) updateData.email = email;
+    if (level !== undefined) updateData.level = parseInt(level);
+    if (coins !== undefined) updateData.coins = parseInt(coins);
+    if (role) updateData.role = role;
+    if (password) updateData.password = password;
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    ).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      message: 'User updated successfully',
+      user
+    });
+  } catch (error) {
+    console.error('Update user error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByIdAndDelete(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      message: 'User deleted successfully'
+    });
+  } catch (error) {
+    console.error('Delete user error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

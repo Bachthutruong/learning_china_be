@@ -21,6 +21,8 @@ const advancedTest_1 = __importDefault(require("./routes/advancedTest"));
 const question_1 = __importDefault(require("./routes/question"));
 const vocabularyLearning_1 = __importDefault(require("./routes/vocabularyLearning"));
 const coinPurchase_1 = __importDefault(require("./routes/coinPurchase"));
+const paymentConfig_1 = __importDefault(require("./routes/paymentConfig"));
+const upload_1 = __importDefault(require("./routes/upload"));
 // Load environment variables
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -60,6 +62,8 @@ app.use('/api/advanced-tests', advancedTest_1.default);
 app.use('/api/questions', question_1.default);
 app.use('/api/vocabulary-learning', vocabularyLearning_1.default);
 app.use('/api/coin-purchases', coinPurchase_1.default);
+app.use('/api/payment-config', paymentConfig_1.default);
+app.use('/api/upload', upload_1.default);
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ message: 'Server is running' });
@@ -85,4 +89,3 @@ const PORT = process.env.PORT || 5005;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-//# sourceMappingURL=index.js.map

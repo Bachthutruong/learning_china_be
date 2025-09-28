@@ -78,4 +78,3 @@ async function seedQuestionTypes() {
 }
 // Run the seed function
 seedQuestionTypes();
-//# sourceMappingURL=seedQuestionTypes.js.map

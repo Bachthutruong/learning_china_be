@@ -79,4 +79,3 @@ const PaymentSchema = new mongoose_1.Schema({
     timestamps: true
 });
 exports.default = mongoose_1.default.model('Payment', PaymentSchema);
-//# sourceMappingURL=Payment.js.map

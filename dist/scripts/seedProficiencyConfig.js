@@ -148,4 +148,3 @@ const seedProficiencyConfig = async () => {
 };
 // Run the seeding function
 seedProficiencyConfig();
-//# sourceMappingURL=seedProficiencyConfig.js.map

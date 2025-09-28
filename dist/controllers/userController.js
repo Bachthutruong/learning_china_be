@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.recalculateLevel = exports.forceRecalculateAllLevels = exports.getProfile = exports.getUserLearningStats = exports.getUserAchievements = exports.getAllUsers = exports.getLeaderboard = exports.getPaymentHistory = exports.purchaseCoins = exports.getUserStats = exports.checkIn = void 0;
+exports.deleteUser = exports.updateUser = exports.createUser = exports.recalculateLevel = exports.forceRecalculateAllLevels = exports.getProfile = exports.getUserLearningStats = exports.getUserAchievements = exports.getAllUsers = exports.getLeaderboard = exports.getPaymentHistory = exports.purchaseCoins = exports.getUserStats = exports.checkIn = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const Report_1 = __importDefault(require("../models/Report"));
 const Payment_1 = __importDefault(require("../models/Payment"));
@@ -86,7 +86,7 @@ const getUserStats = async (req, res) => {
         // Get user's reports
         const reports = await Report_1.default.find({ userId: req.user._id });
         const pendingReports = reports.filter(r => r.status === 'pending').length;
-        const approvedReports = reports.filter(r => r.status === 'approved').length;
+        const approvedReports = reports.filter(r => r.status === 'resolved').length;
         res.json({
             user: {
                 id: user._id,
@@ -399,4 +399,91 @@ const recalculateLevel = async (req, res) => {
     }
 };
 exports.recalculateLevel = recalculateLevel;
-//# sourceMappingURL=userController.js.map
+// Admin functions for user management
+const createUser = async (req, res) => {
+    try {
+        const { name, email, password, level = 1, coins = 0, role = 'user' } = req.body;
+        // Check if user already exists
+        const existingUser = await User_1.default.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+        // Create new user
+        const user = new User_1.default({
+            name,
+            email,
+            password,
+            level: parseInt(level),
+            coins: parseInt(coins),
+            role,
+            experience: 0,
+            streak: 0
+        });
+        await user.save();
+        res.status(201).json({
+            message: 'User created successfully',
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                level: user.level,
+                coins: user.coins,
+                role: user.role
+            }
+        });
+    }
+    catch (error) {
+        console.error('Create user error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.createUser = createUser;
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, email, level, coins, role, password } = req.body;
+        const updateData = {};
+        if (name)
+            updateData.name = name;
+        if (email)
+            updateData.email = email;
+        if (level !== undefined)
+            updateData.level = parseInt(level);
+        if (coins !== undefined)
+            updateData.coins = parseInt(coins);
+        if (role)
+            updateData.role = role;
+        if (password)
+            updateData.password = password;
+        const user = await User_1.default.findByIdAndUpdate(id, updateData, { new: true }).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({
+            message: 'User updated successfully',
+            user
+        });
+    }
+    catch (error) {
+        console.error('Update user error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.updateUser = updateUser;
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User_1.default.findByIdAndDelete(id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({
+            message: 'User deleted successfully'
+        });
+    }
+    catch (error) {
+        console.error('Delete user error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.deleteUser = deleteUser;

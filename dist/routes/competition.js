@@ -23,4 +23,3 @@ router.get('/:competitionId/questions', auth_1.authenticate, competitionControll
 router.post('/submit', auth_1.authenticate, competitionController_1.submitCompetition);
 router.get('/stats', auth_1.authenticate, competitionController_1.getCompetitionStats);
 exports.default = router;
-//# sourceMappingURL=competition.js.map

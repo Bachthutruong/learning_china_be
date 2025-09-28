@@ -61,4 +61,3 @@ const PersonalTopicSchema = new mongoose_1.Schema({
 PersonalTopicSchema.index({ userId: 1 });
 PersonalTopicSchema.index({ name: 1, userId: 1 }, { unique: true });
 exports.PersonalTopic = mongoose_1.default.model('PersonalTopic', PersonalTopicSchema);
-//# sourceMappingURL=PersonalTopic.js.map

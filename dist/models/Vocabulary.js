@@ -89,4 +89,3 @@ const VocabularySchema = new mongoose_1.Schema({
     timestamps: true
 });
 exports.default = mongoose_1.default.model('Vocabulary', VocabularySchema);
-//# sourceMappingURL=Vocabulary.js.map

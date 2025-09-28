@@ -338,4 +338,3 @@ const getAISuggestions = async (req, res) => {
     }
 };
 exports.getAISuggestions = getAISuggestions;
-//# sourceMappingURL=vocabularyController.js.map

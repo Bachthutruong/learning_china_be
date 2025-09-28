@@ -35,46 +35,17 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const ReportSchema = new mongoose_1.Schema({
-    userId: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'User ID is required']
-    },
-    type: {
-        type: String,
-        required: [true, 'Report type is required'],
-        enum: ['vocabulary', 'test', 'proficiency']
-    },
-    targetId: {
-        type: String,
-        required: [true, 'Target ID is required']
-    },
-    category: {
-        type: String,
-        required: [true, 'Report category is required'],
-        trim: true
-    },
-    description: {
-        type: String,
-        required: [true, 'Report description is required'],
-        trim: true
-    },
+    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true },
+    type: { type: String, required: true, enum: ['vocabulary', 'question', 'test'] },
+    targetId: { type: String, required: true },
+    category: { type: String, required: true },
+    description: { type: String, required: true },
     status: {
         type: String,
-        enum: ['pending', 'approved', 'rejected'],
+        enum: ['pending', 'reviewed', 'resolved', 'rejected'],
         default: 'pending'
     },
-    rewardExperience: {
-        type: Number,
-        min: 0
-    },
-    rewardCoins: {
-        type: Number,
-        min: 0
-    },
-    adminNotes: String
-}, {
-    timestamps: true
-});
-exports.default = mongoose_1.default.model('Report', ReportSchema);
-//# sourceMappingURL=Report.js.map
+    adminNotes: { type: String, trim: true }
+}, { timestamps: true });
+const Report = mongoose_1.default.model('Report', ReportSchema);
+exports.default = Report;

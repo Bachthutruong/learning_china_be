@@ -45,4 +45,3 @@ router.post('/upload-audio', auth_1.authenticate, (0, auth_1.authorize)('admin')
     });
 });
 exports.default = router;
-//# sourceMappingURL=vocabulary.js.map

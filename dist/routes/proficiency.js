@@ -21,4 +21,3 @@ router.post('/start', auth_1.authenticate, proficiencyController_1.startProficie
 router.post('/submit', auth_1.authenticate, submitProficiencyTestValidation, proficiencyController_1.submitProficiencyTest);
 router.get('/history', auth_1.authenticate, proficiencyController_1.getProficiencyHistory);
 exports.default = router;
-//# sourceMappingURL=proficiency.js.map

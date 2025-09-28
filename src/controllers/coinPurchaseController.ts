@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import CoinPurchase from '../models/CoinPurchase';
 import User from '../models/User';
+import PaymentConfig from '../models/PaymentConfig';
 import { validationResult } from 'express-validator';
 
 // User creates a coin purchase request
@@ -11,30 +12,37 @@ export const createCoinPurchase = async (req: any, res: Response) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { amount, paymentMethod, bankAccount, transactionId, proofOfPayment } = req.body;
+    const { amount, bankAccount, transactionId, receiptImage } = req.body;
     const user = await User.findById(req.user._id);
     
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
     
-    // Validate amount (minimum 10,000 VND)
-    if (amount < 10000) {
-      return res.status(400).json({ message: 'Minimum purchase amount is 10,000 VND' });
+    // Get payment config
+    const paymentConfig = await PaymentConfig.findOne({ isActive: true });
+    if (!paymentConfig) {
+      return res.status(400).json({ message: 'Payment configuration not found' });
     }
     
-    // Calculate coins (1 coin = 1000 VND)
-    const coins = Math.floor(amount / 1000);
+    // Validate amount (minimum 1 TWD)
+    if (amount < 1) {
+      return res.status(400).json({ message: 'Minimum purchase amount is 1 TWD' });
+    }
+    
+    // Calculate coins based on exchange rate
+    const coins = Math.floor(amount * paymentConfig.exchangeRate);
     
     // Create coin purchase request
     const coinPurchase = new CoinPurchase({
       userId: user._id,
       amount,
+      currency: 'TWD',
       coins,
-      paymentMethod,
+      paymentMethod: 'bank_transfer',
       bankAccount,
       transactionId,
-      proofOfPayment,
+      receiptImage,
       status: 'pending'
     });
     
@@ -82,7 +90,8 @@ export const getUserCoinPurchases = async (req: any, res: Response) => {
       purchases,
       totalPages: Math.ceil(total / limit),
       currentPage: page,
-      total
+      total,
+      totalItems: total
     });
   } catch (error) {
     console.error('Get user coin purchases error:', error);
@@ -246,6 +255,75 @@ export const getAllCoinPurchases = async (req: any, res: Response) => {
     });
   } catch (error) {
     console.error('Get all coin purchases error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Get payment configuration
+export const getPaymentConfig = async (req: any, res: Response) => {
+  try {
+    const config = await PaymentConfig.findOne({ isActive: true });
+    if (!config) {
+      return res.status(404).json({ message: 'Payment configuration not found' });
+    }
+    
+    res.json({ config });
+  } catch (error) {
+    console.error('Get payment config error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Update coin purchase (user can edit or cancel)
+export const updateCoinPurchase = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { amount, bankAccount, transactionId, receiptImage, action } = req.body;
+    
+    const purchase = await CoinPurchase.findById(id);
+    if (!purchase) {
+      return res.status(404).json({ message: 'Purchase not found' });
+    }
+    
+    // Check if user owns this purchase
+    if (purchase.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+    
+    // Check if purchase can be edited
+    if (!purchase.canEdit || purchase.status !== 'pending') {
+      return res.status(400).json({ message: 'This purchase cannot be modified' });
+    }
+    
+    if (action === 'cancel') {
+      purchase.status = 'cancelled';
+      purchase.canEdit = false;
+    } else {
+      // Get payment config for recalculation
+      const paymentConfig = await PaymentConfig.findOne({ isActive: true });
+      if (!paymentConfig) {
+        return res.status(400).json({ message: 'Payment configuration not found' });
+      }
+      
+      if (amount < 1) {
+        return res.status(400).json({ message: 'Minimum purchase amount is 1 TWD' });
+      }
+      
+      purchase.amount = amount;
+      purchase.coins = Math.floor(amount * paymentConfig.exchangeRate);
+      purchase.bankAccount = bankAccount;
+      purchase.transactionId = transactionId;
+      purchase.receiptImage = receiptImage;
+    }
+    
+    await purchase.save();
+    
+    res.json({
+      message: action === 'cancel' ? 'Purchase cancelled successfully' : 'Purchase updated successfully',
+      purchase
+    });
+  } catch (error) {
+    console.error('Update coin purchase error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

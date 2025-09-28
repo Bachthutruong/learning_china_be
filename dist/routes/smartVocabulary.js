@@ -32,4 +32,3 @@ router.post('/add', auth_1.authenticate, addVocabularyValidation, smartVocabular
 router.put('/status', auth_1.authenticate, updateStatusValidation, smartVocabularyController_1.updateVocabularyStatus);
 router.post('/complete', auth_1.authenticate, completeLearningValidation, smartVocabularyController_1.completeVocabularyLearning);
 exports.default = router;
-//# sourceMappingURL=smartVocabulary.js.map

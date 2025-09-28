@@ -7,7 +7,9 @@ import {
   getPendingCoinPurchases,
   approveCoinPurchase,
   rejectCoinPurchase,
-  getAllCoinPurchases
+  getAllCoinPurchases,
+  getPaymentConfig,
+  updateCoinPurchase
 } from '../controllers/coinPurchaseController';
 import { authenticate, authorize } from '../middleware/auth';
 
@@ -15,11 +17,10 @@ const router = express.Router();
 
 // Validation rules
 const createCoinPurchaseValidation = [
-  body('amount').isInt({ min: 10000 }).withMessage('Minimum amount is 10,000 VND'),
-  body('paymentMethod').isIn(['bank_transfer', 'momo', 'zalopay', 'vnpay']).withMessage('Invalid payment method'),
+  body('amount').isInt({ min: 1 }).withMessage('Minimum amount is 1 TWD'),
   body('bankAccount').optional().isString().trim(),
   body('transactionId').optional().isString().trim(),
-  body('proofOfPayment').optional().isString().trim()
+  body('receiptImage').optional().isString().trim()
 ];
 
 const adminActionValidation = [
@@ -30,6 +31,8 @@ const adminActionValidation = [
 router.post('/', authenticate, createCoinPurchaseValidation, createCoinPurchase);
 router.get('/my-purchases', authenticate, getUserCoinPurchases);
 router.get('/:id', authenticate, getCoinPurchaseById);
+router.put('/:id', authenticate, updateCoinPurchase);
+router.get('/config/payment', getPaymentConfig);
 
 // Admin routes
 router.get('/admin/pending', authenticate, authorize('admin'), getPendingCoinPurchases);

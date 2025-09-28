@@ -332,4 +332,3 @@ async function getRandomMeanings(excludeId, count) {
         .sort(() => 0.5 - Math.random())
         .slice(0, count);
 }
-//# sourceMappingURL=smartVocabularyController.js.map

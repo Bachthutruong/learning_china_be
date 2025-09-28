@@ -1,40 +1,20 @@
-import express from 'express';
-import { body } from 'express-validator';
+import express from 'express'
+import { authenticate, authorize } from '../middleware/auth'
 import { 
   createReport, 
-  getReports, 
-  getReportById,
-  getAdminReports,
-  updateReportStatus
-} from '../controllers/reportController';
-import { authenticate, authorize } from '../middleware/auth';
+  getUserReports, 
+  getAllReports, 
+  updateReportStatus 
+} from '../controllers/reportController'
 
-const router = express.Router();
+const router = express.Router()
 
-// Validation rules
-const reportValidation = [
-  body('type').isIn(['vocabulary', 'test', 'proficiency']),
-  body('targetId').isMongoId(),
-  body('category').trim().isLength({ min: 1 }),
-  body('description').trim().isLength({ min: 1 })
-];
-
-const updateReportValidation = [
-  body('status').isIn(['pending', 'approved', 'rejected']),
-  body('rewardExperience').optional().isInt({ min: 0 }),
-  body('rewardCoins').optional().isInt({ min: 0 }),
-  body('adminNotes').optional().trim()
-];
-
-// Protected routes
-router.post('/', authenticate, reportValidation, createReport);
-router.get('/', authenticate, getReports);
-router.get('/:id', authenticate, getReportById);
+// User routes
+router.post('/', authenticate, createReport)
+router.get('/my-reports', authenticate, getUserReports)
 
 // Admin routes
-router.get('/admin/all', authenticate, authorize('admin'), getAdminReports);
-router.put('/admin/:id', authenticate, authorize('admin'), updateReportValidation, updateReportStatus);
+router.get('/admin', authenticate, authorize('admin'), getAllReports)
+router.put('/admin/:id', authenticate, authorize('admin'), updateReportStatus)
 
-export default router;
-
-
+export default router

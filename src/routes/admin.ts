@@ -2,6 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 import multer from 'multer';
 import cloudinaryUpload from '../middleware/upload';
+import proficiencyQuestionRoutes from './proficiencyQuestions';
 import { 
   createVocabulary,
   updateVocabulary,
@@ -19,6 +20,7 @@ import {
   updateProficiencyTest,
   deleteProficiencyTest,
   getProficiencyConfigs,
+  getProficiencyConfig,
   createProficiencyConfig,
   updateProficiencyConfig,
   deleteProficiencyConfig,
@@ -196,7 +198,8 @@ router.post('/tests', testValidation, createTest);
 router.put('/tests/:id', testValidation, updateTest);
 router.delete('/tests/:id', deleteTest);
 
-// Proficiency test management
+// Proficiency questions management
+router.use('/proficiency-questions', proficiencyQuestionRoutes);
 router.get('/proficiency-tests', getAllProficiencyTests);
 router.post('/proficiency-tests', proficiencyTestValidation, createProficiencyTest);
 router.put('/proficiency-tests/:id', proficiencyTestValidation, updateProficiencyTest);
@@ -204,6 +207,7 @@ router.delete('/proficiency-tests/:id', deleteProficiencyTest);
 
 // Proficiency config management
 router.get('/proficiency-configs', getProficiencyConfigs);
+router.get('/proficiency-configs/:id', getProficiencyConfig);
 router.post('/proficiency-configs', createProficiencyConfig);
 router.put('/proficiency-configs/:id', updateProficiencyConfig);
 router.delete('/proficiency-configs/:id', deleteProficiencyConfig);
@@ -215,22 +219,18 @@ router.post('/competitions', createCompetition);
 router.put('/competitions/:id', updateCompetition);
 router.delete('/competitions/:id', deleteCompetition);
 
-// Users management - Placeholder routes
-router.get('/users', (req, res) => {
-  res.json({ users: [], message: 'User management not implemented yet' });
-});
+// Users management
+import { getAllUsers, createUser, updateUser, deleteUser } from '../controllers/userController';
 
-router.post('/users', (req, res) => {
-  res.status(501).json({ message: 'User creation not implemented yet' });
-});
+router.get('/users', authenticate, authorize('admin'), getAllUsers);
+router.post('/users', authenticate, authorize('admin'), createUser);
+router.put('/users/:id', authenticate, authorize('admin'), updateUser);
+router.delete('/users/:id', authenticate, authorize('admin'), deleteUser);
 
-router.put('/users/:id', (req, res) => {
-  res.status(501).json({ message: 'User update not implemented yet' });
-});
+// Payment configuration management
+import { getAllPaymentConfigs } from '../controllers/paymentConfigController';
 
-router.delete('/users/:id', (req, res) => {
-  res.status(501).json({ message: 'User deletion not implemented yet' });
-});
+router.get('/payment-configs', authenticate, authorize('admin'), getAllPaymentConfigs);
 
 export default router;
 

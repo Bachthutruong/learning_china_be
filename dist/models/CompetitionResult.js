@@ -98,4 +98,3 @@ const CompetitionResultSchema = new mongoose_1.Schema({
 CompetitionResultSchema.index({ competitionId: 1, score: -1 });
 CompetitionResultSchema.index({ competitionId: 1, userId: 1 }, { unique: true });
 exports.default = mongoose_1.default.model('CompetitionResult', CompetitionResultSchema);
-//# sourceMappingURL=CompetitionResult.js.map

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../models/User';
 import Question from '../models/Question';
+import ProficiencyQuestion from '../models/ProficiencyQuestion';
 import ProficiencyConfig from '../models/ProficiencyConfig';
 import { checkAndUpdateUserLevel } from '../utils/levelUtils';
 
@@ -60,7 +61,7 @@ export const startProficiencyTest = async (req: any, res: Response) => {
     // Get initial questions based on configuration
     const initialQuestions = [];
     for (const initialConfig of config.initialQuestions) {
-      const questions = await Question.find({ level: initialConfig.level })
+      const questions = await ProficiencyQuestion.find({ level: initialConfig.level })
         .limit(initialConfig.count)
         .sort({ createdAt: -1 });
       
@@ -100,39 +101,88 @@ export const submitProficiencyTest = async (req: any, res: Response) => {
       return res.status(404).json({ message: 'Proficiency test configuration not found' });
     }
 
+    // Extract questionIds from answers if not provided
+    const extractedQuestionIds = questionIds || answers.map((answer: any) => answer.questionId);
+    
     // Get questions with correct answers
-    const questions = await Question.find({ _id: { $in: questionIds } });
+    const questions = await ProficiencyQuestion.find({ _id: { $in: extractedQuestionIds } });
     
     // Count correct answers
     let correctCount = 0;
     const questionResults: any[] = [];
     
     answers.forEach((userAnswer: any, index: number) => {
-      const question = questions.find((q: any) => q._id.toString() === questionIds[index]);
+      const question = questions.find((q: any) => q._id.toString() === userAnswer.questionId);
       if (!question) return;
       
-      const isCorrect = checkAnswer(question, userAnswer);
+      const isCorrect = checkAnswer(question, userAnswer.answer);
       if (isCorrect) correctCount++;
       
       questionResults.push({
         questionId: question._id,
         question: question.question,
-        userAnswer,
+        userAnswer: userAnswer.answer,
         correctAnswer: question.correctAnswer,
         isCorrect,
         level: question.level
       });
     });
 
-    // Find matching branch based on current phase and correct count
-    const matchingBranch = config.branches.find(branch => 
-      branch.condition.fromPhase === phase &&
-      correctCount >= branch.condition.correctRange[0] &&
-      correctCount <= branch.condition.correctRange[1]
-    );
+    // Debug log
+    console.log('Debug - Phase:', phase, 'CorrectCount:', correctCount);
+    console.log('Debug - Available branches:', config.branches.map(b => ({
+      name: b.name,
+      fromPhase: b.condition.fromPhase,
+      correctRange: b.condition.correctRange
+    })));
+    
+    // Check each branch condition
+    config.branches.forEach((branch, index) => {
+      console.log(`Branch ${index}:`, {
+        name: branch.name,
+        fromPhase: branch.condition.fromPhase,
+        correctRange: branch.condition.correctRange,
+        phaseMatch: branch.condition.fromPhase === phase,
+        countMatch: correctCount >= branch.condition.correctRange[0] && correctCount <= branch.condition.correctRange[1]
+      });
+    });
+
+    // Recursive function to find matching branch in nested structure
+    const findMatchingBranch = (branches: any[], currentPhase: string, correctCount: number): any => {
+      for (const branch of branches) {
+        if (branch.condition.fromPhase === currentPhase &&
+            correctCount >= branch.condition.correctRange[0] &&
+            correctCount <= branch.condition.correctRange[1]) {
+          return branch;
+        }
+        
+        // Recursively search in subBranches
+        if (branch.subBranches && branch.subBranches.length > 0) {
+          const foundInSubBranches = findMatchingBranch(branch.subBranches, currentPhase, correctCount);
+          if (foundInSubBranches) {
+            return foundInSubBranches;
+          }
+        }
+      }
+      return null;
+    };
+
+    // Find matching branch (including nested subBranches)
+    const matchingBranch = findMatchingBranch(config.branches, phase, correctCount);
 
     if (!matchingBranch) {
-      return res.status(400).json({ message: 'No matching branch found for current results' });
+      return res.status(400).json({ 
+        message: 'No matching branch found for current results',
+        debug: {
+          phase,
+          correctCount,
+          availableBranches: config.branches.map(b => ({
+            name: b.name,
+            fromPhase: b.condition.fromPhase,
+            correctRange: b.condition.correctRange
+          }))
+        }
+      });
     }
 
     // If this branch leads to a final result
@@ -179,7 +229,7 @@ export const submitProficiencyTest = async (req: any, res: Response) => {
     if (matchingBranch.nextPhase) {
       const nextQuestions = [];
       for (const nextConfig of matchingBranch.nextQuestions) {
-        const questions = await Question.find({ level: nextConfig.level })
+        const questions = await ProficiencyQuestion.find({ level: nextConfig.level })
           .limit(nextConfig.count)
           .sort({ createdAt: -1 });
         
@@ -189,6 +239,9 @@ export const submitProficiencyTest = async (req: any, res: Response) => {
         })));
       }
 
+      // Check if there are subBranches for the next phase
+      const hasSubBranches = matchingBranch.subBranches && matchingBranch.subBranches.length > 0;
+      
       return res.json({
         nextPhase: true,
         phase: matchingBranch.nextPhase,
@@ -196,6 +249,8 @@ export const submitProficiencyTest = async (req: any, res: Response) => {
         totalQuestions: nextQuestions.length,
         timeLimit: matchingBranch.nextPhase === 'final' ? 25 : 15,
         branchName: matchingBranch.name,
+        hasSubBranches: hasSubBranches,
+        subBranches: hasSubBranches ? matchingBranch.subBranches : [],
         previousResults: {
           correctCount,
           totalQuestions: answers.length,

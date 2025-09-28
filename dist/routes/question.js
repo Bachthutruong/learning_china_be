@@ -17,4 +17,3 @@ router.post('/', auth_1.authenticate, (0, auth_1.authorize)('admin'), (0, expres
 router.put('/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), (0, express_validator_1.body)('level').optional().isNumeric(), (0, express_validator_1.body)('questionType').optional().isIn(['multiple-choice', 'fill-blank', 'reading-comprehension', 'sentence-order']), (0, express_validator_1.body)('question').optional().trim().isLength({ min: 1 }), questionController_1.updateQuestion);
 router.delete('/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), questionController_1.deleteQuestion);
 exports.default = router;
-//# sourceMappingURL=question.js.map

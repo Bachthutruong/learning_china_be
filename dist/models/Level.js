@@ -72,4 +72,3 @@ const LevelSchema = new mongoose_1.Schema({
     timestamps: true
 });
 exports.default = mongoose_1.default.model('Level', LevelSchema);
-//# sourceMappingURL=Level.js.map

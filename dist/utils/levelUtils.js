@@ -106,4 +106,3 @@ const getNextLevelRequirements = async (userId) => {
     }
 };
 exports.getNextLevelRequirements = getNextLevelRequirements;
-//# sourceMappingURL=levelUtils.js.map

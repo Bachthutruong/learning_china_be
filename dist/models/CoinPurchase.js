@@ -43,7 +43,13 @@ const CoinPurchaseSchema = new mongoose_1.Schema({
     amount: {
         type: Number,
         required: true,
-        min: 10000 // Minimum 10,000 VND
+        min: 1 // Minimum 1 TWD
+    },
+    currency: {
+        type: String,
+        required: true,
+        default: 'TWD',
+        enum: ['TWD']
     },
     coins: {
         type: Number,
@@ -53,7 +59,8 @@ const CoinPurchaseSchema = new mongoose_1.Schema({
     paymentMethod: {
         type: String,
         required: true,
-        enum: ['bank_transfer', 'momo', 'zalopay', 'vnpay']
+        enum: ['bank_transfer'],
+        default: 'bank_transfer'
     },
     bankAccount: {
         type: String,
@@ -65,16 +72,20 @@ const CoinPurchaseSchema = new mongoose_1.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'approved', 'rejected'],
+        enum: ['pending', 'approved', 'rejected', 'cancelled'],
         default: 'pending'
     },
     adminNotes: {
         type: String,
         trim: true
     },
-    proofOfPayment: {
+    receiptImage: {
         type: String,
         trim: true
+    },
+    canEdit: {
+        type: Boolean,
+        default: true
     }
 }, {
     timestamps: true
@@ -83,4 +94,3 @@ const CoinPurchaseSchema = new mongoose_1.Schema({
 CoinPurchaseSchema.index({ userId: 1, status: 1 });
 CoinPurchaseSchema.index({ status: 1, createdAt: -1 });
 exports.default = mongoose_1.default.model('CoinPurchase', CoinPurchaseSchema);
-//# sourceMappingURL=CoinPurchase.js.map

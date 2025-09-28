@@ -45,4 +45,3 @@ const UserQuestionProgressSchema = new mongoose_1.Schema({
 });
 UserQuestionProgressSchema.index({ userId: 1, questionId: 1 }, { unique: true });
 exports.default = mongoose_1.default.model('UserQuestionProgress', UserQuestionProgressSchema);
-//# sourceMappingURL=UserQuestionProgress.js.map

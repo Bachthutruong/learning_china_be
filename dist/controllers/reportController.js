@@ -3,147 +3,138 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateReportStatus = exports.getAdminReports = exports.getReportById = exports.getReports = exports.createReport = void 0;
+exports.updateReportStatus = exports.getAllReports = exports.getUserReports = exports.createReport = void 0;
 const Report_1 = __importDefault(require("../models/Report"));
-const User_1 = __importDefault(require("../models/User"));
-const express_validator_1 = require("express-validator");
-const levelUtils_1 = require("../utils/levelUtils");
 const createReport = async (req, res) => {
     try {
-        const errors = (0, express_validator_1.validationResult)(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
         const { type, targetId, category, description } = req.body;
+        const userId = req.user._id;
+        // Validation
+        if (!type || !category) {
+            return res.status(400).json({
+                message: 'Vui lòng điền đầy đủ thông tin báo lỗi'
+            });
+        }
+        if (!['vocabulary', 'question', 'test'].includes(type)) {
+            return res.status(400).json({
+                message: 'Loại báo lỗi không hợp lệ'
+            });
+        }
+        // Check if user exists
+        const User = require('../models/User').default;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'Người dùng không tồn tại' });
+        }
+        // Create report
         const report = new Report_1.default({
-            userId: req.user._id,
+            userId,
             type,
-            targetId,
+            targetId: targetId || 'unknown',
             category,
-            description
+            description: description ? description.trim() : 'Không có mô tả'
         });
         await report.save();
         res.status(201).json({
-            message: 'Report submitted successfully',
-            report
+            message: 'Đã gửi báo lỗi thành công! Cảm ơn bạn đã đóng góp.',
+            report: {
+                id: report._id,
+                type: report.type,
+                category: report.category,
+                status: report.status,
+                createdAt: report.createdAt
+            }
         });
     }
     catch (error) {
         console.error('Create report error:', error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Lỗi server khi tạo báo lỗi' });
     }
 };
 exports.createReport = createReport;
-const getReports = async (req, res) => {
+const getUserReports = async (req, res) => {
     try {
-        const { status, page = 1, limit = 10 } = req.query;
-        let query = { userId: req.user._id };
+        const userId = req.user._id;
+        const { page = 1, limit = 10, status } = req.query;
+        let query = { userId };
         if (status) {
             query.status = status;
         }
         const reports = await Report_1.default.find(query)
+            .sort({ createdAt: -1 })
             .limit(limit * 1)
-            .skip((page - 1) * limit)
-            .sort({ createdAt: -1 });
+            .skip((page - 1) * limit);
         const total = await Report_1.default.countDocuments(query);
         res.json({
             reports,
             totalPages: Math.ceil(total / limit),
             currentPage: page,
-            total
+            total,
+            totalItems: total
         });
     }
     catch (error) {
-        console.error('Get reports error:', error);
-        res.status(500).json({ message: 'Server error' });
+        console.error('Get user reports error:', error);
+        res.status(500).json({ message: 'Lỗi server khi lấy danh sách báo lỗi' });
     }
 };
-exports.getReports = getReports;
-const getReportById = async (req, res) => {
+exports.getUserReports = getUserReports;
+const getAllReports = async (req, res) => {
     try {
-        const { id } = req.params;
-        const report = await Report_1.default.findById(id);
-        if (!report) {
-            return res.status(404).json({ message: 'Report not found' });
-        }
-        res.json(report);
-    }
-    catch (error) {
-        console.error('Get report error:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
-};
-exports.getReportById = getReportById;
-const getAdminReports = async (req, res) => {
-    try {
-        const { status, page = 1, limit = 10 } = req.query;
+        const { page = 1, limit = 20, status, type } = req.query;
         let query = {};
-        if (status) {
+        if (status)
             query.status = status;
-        }
+        if (type)
+            query.type = type;
         const reports = await Report_1.default.find(query)
-            .populate('userId', 'name email')
+            .populate('userId', 'username email')
+            .sort({ createdAt: -1 })
             .limit(limit * 1)
-            .skip((page - 1) * limit)
-            .sort({ createdAt: -1 });
+            .skip((page - 1) * limit);
         const total = await Report_1.default.countDocuments(query);
         res.json({
             reports,
             totalPages: Math.ceil(total / limit),
             currentPage: page,
-            total
+            total,
+            totalItems: total
         });
     }
     catch (error) {
-        console.error('Get admin reports error:', error);
-        res.status(500).json({ message: 'Server error' });
+        console.error('Get all reports error:', error);
+        res.status(500).json({ message: 'Lỗi server khi lấy danh sách báo lỗi' });
     }
 };
-exports.getAdminReports = getAdminReports;
+exports.getAllReports = getAllReports;
 const updateReportStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const { status, rewardExperience, rewardCoins, adminNotes } = req.body;
+        const { status, adminNotes } = req.body;
+        if (!['pending', 'reviewed', 'resolved', 'rejected'].includes(status)) {
+            return res.status(400).json({ message: 'Trạng thái không hợp lệ' });
+        }
         const report = await Report_1.default.findById(id);
         if (!report) {
-            return res.status(404).json({ message: 'Report not found' });
+            return res.status(404).json({ message: 'Báo lỗi không tồn tại' });
         }
         report.status = status;
-        if (rewardExperience)
-            report.rewardExperience = rewardExperience;
-        if (rewardCoins)
-            report.rewardCoins = rewardCoins;
-        if (adminNotes)
+        if (adminNotes) {
             report.adminNotes = adminNotes;
-        await report.save();
-        // If approved, give rewards to user
-        if (status === 'approved' && (rewardExperience || rewardCoins)) {
-            const user = await User_1.default.findById(report.userId);
-            if (user) {
-                console.log(`Giving rewards to user ${user.name}: +${rewardExperience} XP, +${rewardCoins} coins`);
-                console.log(`User current stats: Level ${user.level}, ${user.experience} XP, ${user.coins} coins`);
-                if (rewardExperience)
-                    user.experience += rewardExperience;
-                if (rewardCoins)
-                    user.coins += rewardCoins;
-                await user.save();
-                console.log(`User updated stats: Level ${user.level}, ${user.experience} XP, ${user.coins} coins`);
-                // Check for level up using dynamic level requirements
-                const levelResult = await (0, levelUtils_1.checkAndUpdateUserLevel)(user._id.toString());
-                if (levelResult.leveledUp) {
-                    console.log(`User ${user.name} leveled up to level ${levelResult.newLevel}!`);
-                }
-            }
         }
+        await report.save();
         res.json({
-            message: 'Report status updated successfully',
-            report
+            message: 'Cập nhật trạng thái báo lỗi thành công',
+            report: {
+                id: report._id,
+                status: report.status,
+                adminNotes: report.adminNotes
+            }
         });
     }
     catch (error) {
         console.error('Update report status error:', error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Lỗi server khi cập nhật báo lỗi' });
     }
 };
 exports.updateReportStatus = updateReportStatus;
-//# sourceMappingURL=reportController.js.map

@@ -326,4 +326,3 @@ const getCompetitionStats = async (req, res) => {
     }
 };
 exports.getCompetitionStats = getCompetitionStats;
-//# sourceMappingURL=competitionController.js.map

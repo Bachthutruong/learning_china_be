@@ -83,4 +83,3 @@ const CompetitionSchema = new mongoose_1.Schema({
     maxParticipants: { type: Number, min: 1 }
 }, { timestamps: true });
 exports.default = mongoose_1.default.model('Competition', CompetitionSchema);
-//# sourceMappingURL=Competition.js.map
