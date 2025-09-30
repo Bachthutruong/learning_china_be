@@ -16,8 +16,8 @@ import {
 
 const router = express.Router()
 
-// Public routes (no auth required for browsing vocabularies)
-router.get('/vocabularies', getVocabularies)
+// Auth required to personalize list (exclude learned)
+router.get('/vocabularies', authenticate, getVocabularies)
 router.get('/vocabularies/:vocabularyId/quiz', getVocabularyQuiz)
 
 // Protected routes (require authentication)

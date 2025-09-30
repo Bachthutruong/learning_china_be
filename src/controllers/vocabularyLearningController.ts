@@ -9,7 +9,7 @@ import { checkAndUpdateUserLevel } from '../utils/levelUtils'
 // Get vocabularies with search and topic filters
 export const getVocabularies = async (req: Request, res: Response) => {
   try {
-    const { search, topic, limit = 50, page = 1 } = req.query
+    const { search, topic, limit = 50, page = 1, excludeLearned = 'true' } = req.query as any
     const userId = (req as any).user?._id
 
     let query: any = {}
@@ -26,6 +26,15 @@ export const getVocabularies = async (req: Request, res: Response) => {
     // Topic filter
     if (topic && topic !== 'all') {
       query.topics = { $in: [topic] }
+    }
+
+    // Exclude vocabularies that the user already learned (optional)
+    if (excludeLearned !== 'false' && userId) {
+      const learnedDocs = await UserVocabulary.find({ userId, status: 'learned' }).select('vocabularyId')
+      const learnedIds = learnedDocs.map((d: any) => d.vocabularyId)
+      if (learnedIds.length > 0) {
+        query._id = { $nin: learnedIds }
+      }
     }
 
     const skip = (Number(page) - 1) * Number(limit)
@@ -240,6 +249,10 @@ export const completeVocabularyLearning = async (req: Request, res: Response) =>
       return res.status(404).json({ message: 'Từ vựng không tồn tại' })
     }
 
+    // Check prior state before updating to avoid always treating as already learned
+    const existingUserVocab = await UserVocabulary.findOne({ userId, vocabularyId })
+    const wasAlreadyLearned = !!(existingUserVocab && existingUserVocab.status === 'learned' && existingUserVocab.learnedAt)
+
     // Update or create user vocabulary
     const userVocabulary = await UserVocabulary.findOneAndUpdate(
       { userId, vocabularyId },
@@ -250,9 +263,6 @@ export const completeVocabularyLearning = async (req: Request, res: Response) =>
       },
       { upsert: true, new: true }
     )
-
-    // Check if vocabulary was already learned before
-    const wasAlreadyLearned = userVocabulary.status === 'learned' && userVocabulary.learnedAt;
     
     let rewards = { experience: 0, coins: 0 };
     

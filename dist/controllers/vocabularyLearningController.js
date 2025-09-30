@@ -13,7 +13,7 @@ const levelUtils_1 = require("../utils/levelUtils");
 // Get vocabularies with search and topic filters
 const getVocabularies = async (req, res) => {
     try {
-        const { search, topic, limit = 50, page = 1 } = req.query;
+        const { search, topic, limit = 50, page = 1, excludeLearned = 'true' } = req.query;
         const userId = req.user?._id;
         let query = {};
         // Search filter
@@ -27,6 +27,14 @@ const getVocabularies = async (req, res) => {
         // Topic filter
         if (topic && topic !== 'all') {
             query.topics = { $in: [topic] };
+        }
+        // Exclude vocabularies that the user already learned (optional)
+        if (excludeLearned !== 'false' && userId) {
+            const learnedDocs = await UserVocabulary_1.UserVocabulary.find({ userId, status: 'learned' }).select('vocabularyId');
+            const learnedIds = learnedDocs.map((d) => d.vocabularyId);
+            if (learnedIds.length > 0) {
+                query._id = { $nin: learnedIds };
+            }
         }
         const skip = (Number(page) - 1) * Number(limit);
         const vocabularies = await Vocabulary_1.default.find(query)
@@ -218,14 +226,15 @@ const completeVocabularyLearning = async (req, res) => {
         if (!vocabulary) {
             return res.status(404).json({ message: 'Từ vựng không tồn tại' });
         }
+        // Check prior state before updating to avoid always treating as already learned
+        const existingUserVocab = await UserVocabulary_1.UserVocabulary.findOne({ userId, vocabularyId });
+        const wasAlreadyLearned = !!(existingUserVocab && existingUserVocab.status === 'learned' && existingUserVocab.learnedAt);
         // Update or create user vocabulary
         const userVocabulary = await UserVocabulary_1.UserVocabulary.findOneAndUpdate({ userId, vocabularyId }, {
             status: 'learned',
             personalTopicId,
             learnedAt: new Date()
         }, { upsert: true, new: true });
-        // Check if vocabulary was already learned before
-        const wasAlreadyLearned = userVocabulary.status === 'learned' && userVocabulary.learnedAt;
         let rewards = { experience: 0, coins: 0 };
         if (wasAlreadyLearned) {
             // Already learned vocabulary: 1 XP, 1 coin

@@ -7,8 +7,8 @@ const express_1 = __importDefault(require("express"));
 const auth_1 = require("../middleware/auth");
 const vocabularyLearningController_1 = require("../controllers/vocabularyLearningController");
 const router = express_1.default.Router();
-// Public routes (no auth required for browsing vocabularies)
-router.get('/vocabularies', vocabularyLearningController_1.getVocabularies);
+// Auth required to personalize list (exclude learned)
+router.get('/vocabularies', auth_1.authenticate, vocabularyLearningController_1.getVocabularies);
 router.get('/vocabularies/:vocabularyId/quiz', vocabularyLearningController_1.getVocabularyQuiz);
 // Protected routes (require authentication)
 router.get('/user/personal-topics', auth_1.authenticate, vocabularyLearningController_1.getPersonalTopics);
