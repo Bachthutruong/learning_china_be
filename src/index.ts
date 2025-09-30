@@ -19,6 +19,7 @@ import vocabularyLearningRoutes from './routes/vocabularyLearning';
 import coinPurchaseRoutes from './routes/coinPurchase';
 import paymentConfigRoutes from './routes/paymentConfig';
 import uploadRoutes from './routes/upload';
+import checkinRoutes from './routes/checkin';
 
 // Load environment variables
 dotenv.config();
@@ -68,6 +69,7 @@ app.use('/api/vocabulary-learning', vocabularyLearningRoutes);
 app.use('/api/coin-purchases', coinPurchaseRoutes);
 app.use('/api/payment-config', paymentConfigRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/checkin', checkinRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
