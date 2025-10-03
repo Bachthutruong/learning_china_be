@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import XLSX from 'xlsx';
 import Question from '../models/Question';
 import User from '../models/User';
 import UserQuestionProgress from '../models/UserQuestionProgress';
@@ -159,6 +160,98 @@ export const deleteQuestion = async (req: any, res: Response) => {
   } catch (error) {
     console.error('deleteQuestion error:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Download Excel template for Questions
+export const downloadQuestionTemplate = async (_req: Request, res: Response) => {
+  const headers = [
+    'level',
+    'questionType',
+    'question',
+    'options (|| separated, for multiple-choice)',
+    'correctAnswer (index or [indexes])',
+    'explanation (optional)'
+  ];
+  const sample = [
+    headers,
+    [1, 'multiple-choice', 'Câu hỏi ví dụ?', 'Đáp án A||Đáp án B||Đáp án C||Đáp án D', 0, 'Giải thích (nếu có)']
+  ];
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(sample);
+  XLSX.utils.book_append_sheet(wb, ws, 'Questions');
+  const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  res.setHeader('Content-Disposition', 'attachment; filename="questions_template.xlsx"');
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  return res.send(buf);
+};
+
+// Import Questions from Excel
+export const importQuestionsExcel = async (req: any, res: Response) => {
+  try {
+    if (!req.file || !req.file.buffer) return res.status(400).json({ message: 'Thiếu file' });
+    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const rows: any[] = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+    let created = 0;
+    let updated = 0;
+    const errors: Array<{ row: number; message: string }> = [];
+
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i];
+      try {
+        const level = Number(r.level || r.Level || 1);
+        const questionType = String(r.questionType || r.QuestionType || 'multiple-choice').trim();
+        const question = String(r.question || r.Question || '').trim();
+        const optionsRaw = String(r['options (|| separated, for multiple-choice)'] || r.options || '').trim();
+        const correctRaw = String(r['correctAnswer (index or [indexes])'] || r.correctAnswer || '').trim();
+        const explanation = String(r.explanation || r.Explanation || '').trim();
+
+        if (!question) throw new Error('Thiếu nội dung câu hỏi');
+
+        let options: string[] | undefined = undefined;
+        if (questionType === 'multiple-choice') {
+          options = optionsRaw ? optionsRaw.split('||').map((t) => t.trim()).filter(Boolean) : [];
+          if (!options || options.length < 2) throw new Error('Cần tối thiểu 2 đáp án');
+        }
+
+        let correctAnswer: any = undefined;
+        if (correctRaw.startsWith('[')) {
+          try {
+            const arr = JSON.parse(correctRaw);
+            correctAnswer = Array.isArray(arr) ? arr : [];
+          } catch {
+            throw new Error('Định dạng correctAnswer không hợp lệ');
+          }
+        } else if (correctRaw !== '') {
+          const idx = Number(correctRaw);
+          if (!Number.isFinite(idx)) throw new Error('Định dạng correctAnswer không hợp lệ');
+          correctAnswer = idx;
+        }
+
+        const exist = await Question.findOne({ question });
+        if (exist) {
+          exist.level = level;
+          (exist as any).questionType = questionType;
+          (exist as any).options = options;
+          (exist as any).correctAnswer = correctAnswer;
+          (exist as any).explanation = explanation || undefined;
+          await exist.save();
+          updated++;
+        } else {
+          await Question.create({ level, questionType, question, options, correctAnswer, explanation });
+          created++;
+        }
+      } catch (e: any) {
+        errors.push({ row: i + 2, message: e?.message || 'Lỗi không rõ' });
+      }
+    }
+
+    return res.json({ message: 'Import hoàn tất', created, updated, errors });
+  } catch (error) {
+    console.error('importQuestionsExcel error:', error);
+    return res.status(500).json({ message: 'Server error' });
   }
 };
 

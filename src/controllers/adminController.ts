@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import XLSX from 'xlsx';
 import Vocabulary from '../models/Vocabulary';
+// NOTE: XLSX-based template and import helpers are provided below
 import Topic from '../models/Topic';
 import Level from '../models/Level';
 import Test from '../models/Test';
@@ -100,6 +102,144 @@ export const createVocabulary = async (req: any, res: Response) => {
   } catch (error) {
     console.error('Create vocabulary error:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Download Excel template for vocabularies (including nested questions)
+export const downloadVocabularyTemplate = async (_req: Request, res: Response) => {
+  // Define header columns
+  const headers = [
+    'word',
+    'pronunciation',
+    'meaning',
+    'partOfSpeech',
+    'level',
+    'topics (comma-separated)',
+    'examples (|| separated)',
+    'synonyms (|| separated)',
+    'antonyms (|| separated)',
+    'audioUrl (optional)',
+    'questions JSON (optional)'
+  ];
+
+  const exampleQuestions = [
+    {
+      question: 'Nghĩa của \'你好\' là gì?',
+      options: ['Xin chào', 'Tạm biệt', 'Cảm ơn', 'Xin lỗi'],
+      correctAnswer: 0,
+      explanation: '你好 nghĩa là Xin chào'
+    }
+  ];
+
+  const sample = [
+    headers,
+    ['你好', 'nǐ hǎo', 'Xin chào', 'interjection', 1, 'Chào hỏi', 'Ví dụ 1||Ví dụ 2', 'chào||xin chào', 'tạm biệt', '', JSON.stringify(exampleQuestions)]
+  ];
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(sample);
+  XLSX.utils.book_append_sheet(wb, ws, 'Vocabularies');
+  const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  res.setHeader('Content-Disposition', 'attachment; filename="vocabularies_template.xlsx"');
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  return res.send(buf);
+};
+
+// Import vocabularies from Excel
+export const importVocabulariesExcel = async (req: any, res: Response) => {
+  try {
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ message: 'Thiếu file để import' });
+    }
+    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const rows: any[] = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+
+    let created = 0;
+    let updated = 0;
+    const errors: Array<{ row: number; message: string }> = [];
+
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      try {
+        const word = String(row.word || row['Word'] || '').trim();
+        const pronunciation = String(row.pronunciation || row['Pronunciation'] || '').trim();
+        const meaning = String(row.meaning || row['Meaning'] || '').trim();
+        const partOfSpeech = String(row.partOfSpeech || row['PartOfSpeech'] || '').trim();
+        const level = Number(row.level || row['Level'] || 1);
+        const topics = String(row['topics (comma-separated)'] || row.topics || '')
+          .split(',')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const examples = String(row['examples (|| separated)'] || row.examples || '')
+          .split('||')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const synonyms = String(row['synonyms (|| separated)'] || row.synonyms || '')
+          .split('||')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const antonyms = String(row['antonyms (|| separated)'] || row.antonyms || '')
+          .split('||')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const audioUrl = String(row.audioUrl || row['audioUrl (optional)'] || '').trim() || undefined;
+        const questionsRaw = String(row['questions JSON (optional)'] || row.questions || '').trim();
+        let questions: any[] = [];
+        if (questionsRaw) {
+          try {
+            const parsed = JSON.parse(questionsRaw);
+            if (Array.isArray(parsed)) questions = parsed;
+          } catch (e) {
+            // ignore invalid questions JSON, push error
+            errors.push({ row: i + 2, message: 'JSON câu hỏi không hợp lệ, bỏ qua trường này' });
+          }
+        }
+
+        if (!word || !pronunciation || !meaning || !partOfSpeech) {
+          throw new Error('Thiếu trường bắt buộc (word, pronunciation, meaning, partOfSpeech)');
+        }
+
+        const existing = await Vocabulary.findOne({ word });
+        if (existing) {
+          existing.pronunciation = pronunciation;
+          existing.meaning = meaning;
+          existing.partOfSpeech = partOfSpeech;
+          existing.level = level;
+          existing.topics = topics;
+          existing.examples = examples;
+          existing.synonyms = synonyms;
+          existing.antonyms = antonyms;
+          if (audioUrl) existing.audioUrl = audioUrl;
+          if (questions && questions.length > 0) existing.questions = questions as any;
+          await existing.save();
+          updated++;
+        } else {
+          await Vocabulary.create({
+            word,
+            pronunciation,
+            meaning,
+            partOfSpeech,
+            level,
+            topics,
+            examples,
+            synonyms,
+            antonyms,
+            audioUrl,
+            questions
+          });
+          created++;
+        }
+      } catch (e: any) {
+        errors.push({ row: i + 2, message: e?.message || 'Lỗi không rõ' });
+      }
+    }
+
+    return res.json({ message: 'Import hoàn tất', created, updated, errors });
+  } catch (error) {
+    console.error('importVocabulariesExcel error:', error);
+    return res.status(500).json({ message: 'Server error' });
   }
 };
 

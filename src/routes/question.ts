@@ -1,7 +1,8 @@
 import express from 'express';
 import { body, query } from 'express-validator';
 import { authenticate, authorize } from '../middleware/auth';
-import { getNextQuestions, submitAnswer, getProgressSummary, listQuestions, createQuestion, updateQuestion, deleteQuestion } from '../controllers/questionController';
+import { getNextQuestions, submitAnswer, getProgressSummary, listQuestions, createQuestion, updateQuestion, deleteQuestion, downloadQuestionTemplate, importQuestionsExcel } from '../controllers/questionController';
+import multer from 'multer';
 
 const router = express.Router();
 
@@ -24,6 +25,11 @@ router.put('/:id', authenticate, authorize('admin'),
   updateQuestion
 );
 router.delete('/:id', authenticate, authorize('admin'), deleteQuestion);
+
+// Admin: Import/Template download for question bank
+const memoryUpload = multer({ storage: multer.memoryStorage() });
+router.get('/template', authenticate, authorize('admin'), downloadQuestionTemplate);
+router.post('/import', authenticate, authorize('admin'), memoryUpload.single('file'), importQuestionsExcel);
 
 export default router;
 

@@ -7,6 +7,8 @@ import {
   createVocabulary,
   updateVocabulary,
   deleteVocabulary,
+  downloadVocabularyTemplate,
+  importVocabulariesExcel,
   createTopic,
   updateTopic,
   deleteTopic,
@@ -163,6 +165,7 @@ router.get('/activities', getAdminActivities);
 
 // Vocabulary management
 router.get('/vocabularies', getAllVocabularies);
+router.get('/vocabularies/template', downloadVocabularyTemplate);
 router.post('/vocabularies', cloudinaryUpload.single('audio'), (err, req, res, next) => {
   if (err) {
     console.error('Upload error:', err);
@@ -179,6 +182,10 @@ router.put('/vocabularies/:id', cloudinaryUpload.single('audio'), (err, req, res
   next();
 }, vocabularyValidation, updateVocabulary);
 router.delete('/vocabularies/:id', deleteVocabulary);
+
+// Import vocabularies via Excel (simple memory upload)
+const memoryUpload = multer({ storage: multer.memoryStorage() });
+router.post('/vocabularies/import', memoryUpload.single('file'), importVocabulariesExcel);
 
 // Topic management
 router.get('/topics', getAllTopics);
