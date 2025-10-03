@@ -16,13 +16,22 @@ const seedPaymentConfig = async () => {
         // Clear existing payment configs
         await PaymentConfig_1.default.deleteMany({});
         console.log('Cleared existing payment configs');
-        // Create default payment config
+        // Create default payment config (Taiwan and Vietnam)
         const defaultConfig = new PaymentConfig_1.default({
-            qrCodeImage: 'https://via.placeholder.com/200x200/000000/FFFFFF?text=QR+Code',
-            exchangeRate: 10, // 1 TWD = 10 coins
-            bankAccount: '1234567890',
-            bankName: 'Taiwan Bank',
-            accountHolder: 'Learning China Admin',
+            tw: {
+                qrCodeImage: 'https://via.placeholder.com/200x200/000000/FFFFFF?text=TW+QR',
+                exchangeRate: 10, // 1 TWD = 10 coins
+                bankAccount: '1234567890',
+                bankName: 'Taiwan Bank',
+                accountHolder: 'Learning China Admin'
+            },
+            vn: {
+                qrCodeImage: 'https://via.placeholder.com/200x200/000000/FFFFFF?text=VN+QR',
+                exchangeRate: 0.001, // 1 VND = 0.001 coins (example)
+                bankAccount: '0987654321',
+                bankName: 'Vietcombank',
+                accountHolder: 'Learning China Admin'
+            },
             isActive: true
         });
         await defaultConfig.save();

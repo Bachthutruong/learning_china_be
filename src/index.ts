@@ -16,6 +16,8 @@ import smartVocabularyRoutes from './routes/smartVocabulary';
 import advancedTestRoutes from './routes/advancedTest';
 import questionRoutes from './routes/question';
 import vocabularyLearningRoutes from './routes/vocabularyLearning';
+// Models for index maintenance
+import { UserVocabulary } from './models/UserVocabulary';
 import coinPurchaseRoutes from './routes/coinPurchase';
 import paymentConfigRoutes from './routes/paymentConfig';
 import uploadRoutes from './routes/upload';
@@ -23,6 +25,9 @@ import checkinRoutes from './routes/checkin';
 
 // Load environment variables
 dotenv.config();
+
+// Debug: Check if JWT_SECRET is loaded
+console.log('JWT_SECRET loaded:', process.env.JWT_SECRET ? 'YES' : 'NO');
 
 const app = express();
 
@@ -91,6 +96,24 @@ app.use('*', (req, res) => {
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/chinese-learning')
   .then(() => {
     console.log('Connected to MongoDB');
+
+    // Safe one-time migration: drop old unique index (userId_1_vocabularyId_1)
+    // so a user can add the same vocabulary to multiple personal topics.
+    UserVocabulary.collection.dropIndex('userId_1_vocabularyId_1').then(() => {
+      console.log('Dropped legacy index userId_1_vocabularyId_1');
+    }).catch(() => {
+      // Ignore if it does not exist
+    });
+
+    // Ensure new compound unique index exists
+    UserVocabulary.collection.createIndex(
+      { userId: 1, vocabularyId: 1, personalTopicId: 1 },
+      { unique: true }
+    ).then(() => {
+      console.log('Ensured index userId_1_vocabularyId_1_personalTopicId_1');
+    }).catch((err) => {
+      console.error('Error ensuring UserVocabulary index:', err);
+    });
   })
   .catch((error) => {
     console.error('MongoDB connection error:', error);

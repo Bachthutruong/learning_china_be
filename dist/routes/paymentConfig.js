@@ -9,12 +9,16 @@ const paymentConfigController_1 = require("../controllers/paymentConfigControlle
 const auth_1 = require("../middleware/auth");
 const router = express_1.default.Router();
 // Validation rules
+const accountValidation = (prefix) => [
+    (0, express_validator_1.body)(`${prefix}.qrCodeImage`).isString().trim().notEmpty().withMessage(`${prefix} QR is required`),
+    (0, express_validator_1.body)(`${prefix}.exchangeRate`).isFloat({ min: 0.01 }).withMessage(`${prefix} exchangeRate >= 0.01`),
+    (0, express_validator_1.body)(`${prefix}.bankAccount`).isString().trim().notEmpty().withMessage(`${prefix} bankAccount required`),
+    (0, express_validator_1.body)(`${prefix}.bankName`).isString().trim().notEmpty().withMessage(`${prefix} bankName required`),
+    (0, express_validator_1.body)(`${prefix}.accountHolder`).isString().trim().notEmpty().withMessage(`${prefix} accountHolder required`),
+];
 const paymentConfigValidation = [
-    (0, express_validator_1.body)('qrCodeImage').isString().trim().notEmpty().withMessage('QR code image is required'),
-    (0, express_validator_1.body)('exchangeRate').isFloat({ min: 0.01 }).withMessage('Exchange rate must be at least 0.01'),
-    (0, express_validator_1.body)('bankAccount').isString().trim().notEmpty().withMessage('Bank account is required'),
-    (0, express_validator_1.body)('bankName').isString().trim().notEmpty().withMessage('Bank name is required'),
-    (0, express_validator_1.body)('accountHolder').isString().trim().notEmpty().withMessage('Account holder is required')
+    ...accountValidation('tw'),
+    ...accountValidation('vn'),
 ];
 // Public route to get active config
 router.get('/', paymentConfigController_1.getPaymentConfig);

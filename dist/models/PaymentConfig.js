@@ -34,36 +34,17 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
+const PaymentAccountConfigSchema = new mongoose_1.Schema({
+    qrCodeImage: { type: String, required: true, trim: true },
+    exchangeRate: { type: Number, required: true, min: 0.01 },
+    bankAccount: { type: String, required: true, trim: true },
+    bankName: { type: String, required: true, trim: true },
+    accountHolder: { type: String, required: true, trim: true }
+});
 const PaymentConfigSchema = new mongoose_1.Schema({
-    qrCodeImage: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    exchangeRate: {
-        type: Number,
-        required: true,
-        min: 0.01 // Minimum 0.01 coins per TWD
-    },
-    bankAccount: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    bankName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    accountHolder: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    isActive: {
-        type: Boolean,
-        default: true
-    }
+    tw: { type: PaymentAccountConfigSchema, required: true },
+    vn: { type: PaymentAccountConfigSchema, required: true },
+    isActive: { type: Boolean, default: true }
 }, {
     timestamps: true
 });

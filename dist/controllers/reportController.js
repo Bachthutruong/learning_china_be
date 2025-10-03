@@ -81,20 +81,80 @@ const getUserReports = async (req, res) => {
 exports.getUserReports = getUserReports;
 const getAllReports = async (req, res) => {
     try {
-        const { page = 1, limit = 20, status, type } = req.query;
+        const { page = 1, limit = 20, status, type, search } = req.query;
         let query = {};
         if (status)
             query.status = status;
         if (type)
             query.type = type;
+        if (search) {
+            const s = String(search).trim();
+            query.$or = [
+                { category: { $regex: s, $options: 'i' } },
+                { description: { $regex: s, $options: 'i' } },
+                { targetId: { $regex: s, $options: 'i' } }
+            ];
+        }
         const reports = await Report_1.default.find(query)
             .populate('userId', 'username email')
             .sort({ createdAt: -1 })
             .limit(limit * 1)
             .skip((page - 1) * limit);
+        // Enrich with target entity summary so admin sees cụ thể nội dung
+        const [Vocabulary, Question] = [
+            require('../models/Vocabulary').default,
+            require('../models/Question').default
+        ];
+        const enrichedReports = await Promise.all(reports.map(async (r) => {
+            let targetSummary = null;
+            try {
+                if (r.type === 'vocabulary' && r.targetId) {
+                    const v = await Vocabulary.findById(r.targetId).select('word pronunciation meaning level topics');
+                    if (v) {
+                        targetSummary = {
+                            word: v.word,
+                            pronunciation: v.pronunciation,
+                            meaning: v.meaning,
+                            level: v.level,
+                            topics: v.topics
+                        };
+                    }
+                }
+                else if (r.type === 'question' && r.targetId) {
+                    const q = await Question.findById(r.targetId).select('question level questionType');
+                    if (q) {
+                        targetSummary = {
+                            question: q.question,
+                            level: q.level,
+                            questionType: q.questionType
+                        };
+                    }
+                }
+            }
+            catch (e) {
+                // ignore enrich failure, keep baseline report
+            }
+            return {
+                id: String(r._id),
+                _id: String(r._id),
+                type: r.type,
+                targetId: r.targetId,
+                category: r.category,
+                description: r.description,
+                status: r.status,
+                createdAt: r.createdAt,
+                user: r.userId ? {
+                    _id: String(r.userId._id || ''),
+                    email: r.userId.email,
+                    username: r.userId.username,
+                    name: r.userId.name
+                } : undefined,
+                targetSummary
+            };
+        }));
         const total = await Report_1.default.countDocuments(query);
         res.json({
-            reports,
+            reports: enrichedReports,
             totalPages: Math.ceil(total / limit),
             currentPage: page,
             total,
@@ -111,22 +171,38 @@ const updateReportStatus = async (req, res) => {
     try {
         const { id } = req.params;
         const { status, adminNotes } = req.body;
-        if (!['pending', 'reviewed', 'resolved', 'rejected'].includes(status)) {
+        const normalizedStatus = status === 'approved' ? 'reviewed' : status;
+        if (!['pending', 'reviewed', 'resolved', 'rejected'].includes(normalizedStatus)) {
             return res.status(400).json({ message: 'Trạng thái không hợp lệ' });
         }
         const report = await Report_1.default.findById(id);
         if (!report) {
             return res.status(404).json({ message: 'Báo lỗi không tồn tại' });
         }
-        report.status = status;
+        report.status = normalizedStatus;
         if (adminNotes) {
             report.adminNotes = adminNotes;
         }
         await report.save();
+        // Fixed reward when a report is approved/reviewed
+        if (normalizedStatus === 'reviewed') {
+            try {
+                const User = require('../models/User').default;
+                const user = await User.findById(report.userId);
+                if (user) {
+                    user.experience += 5;
+                    user.coins += 5;
+                    await user.save();
+                }
+            }
+            catch (e) {
+                // non-blocking
+            }
+        }
         res.json({
             message: 'Cập nhật trạng thái báo lỗi thành công',
             report: {
-                id: report._id,
+                id: String(report._id),
                 status: report.status,
                 adminNotes: report.adminNotes
             }

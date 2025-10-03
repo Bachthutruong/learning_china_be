@@ -11,7 +11,9 @@ import {
   getSuggestedVocabularies,
   completeVocabulary,
   getVocabularyQuiz,
-  getAISuggestions
+  getAISuggestions,
+  getVocabulariesByCategories,
+  getCategories
 } from '../controllers/vocabularyController';
 import { authenticate, authorize } from '../middleware/auth';
 import upload from '../middleware/upload';
@@ -36,6 +38,10 @@ const topicValidation = [
 
 // Public routes
 router.get('/topics', getTopics);
+
+// Public routes (must be before /:id routes)
+router.get('/categories', getCategories);
+router.get('/by-categories', authenticate, getVocabulariesByCategories);
 
 // Protected routes
 router.get('/', authenticate, getVocabularies);

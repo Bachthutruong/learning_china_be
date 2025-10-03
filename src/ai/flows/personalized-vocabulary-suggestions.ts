@@ -1,48 +1,42 @@
-import { defineFlow } from '@genkit-ai/flow';
-import { z } from 'zod';
+// Temporarily disabled due to missing dependencies
+/*
+// import { defineFlow } from '@genkit-ai/flow';
+// import { z } from 'zod';
 
-const inputSchema = z.object({
-  topic: z.string().describe('The topic for vocabulary suggestions'),
-  keywords: z.string().describe('Additional keywords for suggestions')
-});
+// const inputSchema = z.object({
+//   topic: z.string().describe('The topic for vocabulary suggestions'),
+//   keywords: z.string().describe('Additional keywords for suggestions')
+// });
 
-const outputSchema = z.object({
-  suggestedVocabulary: z.array(z.object({
-    hanzi: z.string(),
-    pinyin: z.string(),
-    meaning: z.string(),
-    partOfSpeech: z.string(),
-    level: z.string(),
-    examples: z.array(z.string())
-  }))
-});
+// const outputSchema = z.object({
+//   suggestedVocabulary: z.array(z.object({
+//     hanzi: z.string(),
+//     pinyin: z.string(),
+//     meaning: z.string(),
+//     partOfSpeech: z.string(),
+//     level: z.string(),
+//     examples: z.array(z.string())
+//   }))
+// });
 
-export const personalizedVocabularySuggestions = defineFlow(
-  {
-    name: 'personalizedVocabularySuggestions',
-    inputSchema,
-    outputSchema
-  },
-  async (input: { topic: string; keywords: string }) => {
-    // Mock AI suggestions based on topic and keywords
-    const suggestions = generateVocabularySuggestions(input.topic, input.keywords);
+// export const personalizedVocabularySuggestions = defineFlow(
+//   {
+//     name: 'personalizedVocabularySuggestions',
+//     inputSchema,
+//     outputSchema
+//   },
+//   async (input: { topic: string; keywords: string }) => {
+//     // Mock AI suggestions based on topic and keywords
+//     const suggestions = generateVocabularySuggestions(input.topic, input.keywords);
     
-    return {
-      suggestedVocabulary: suggestions
-    };
-  }
-);
+//     return {
+//       suggestedVocabulary: suggestions
+//     };
+//   }
+// );
 
 // Export a simple function that can be called directly
 export async function getPersonalizedVocabularySuggestions(input: { topic: string; keywords: string }) {
-  const suggestions = generateVocabularySuggestions(input.topic, input.keywords);
-  
-  return {
-    suggestedVocabulary: suggestions
-  };
-}
-
-function generateVocabularySuggestions(topic: string, keywords: string): any[] {
   // Mock vocabulary database based on topics
   const vocabularyDatabase: Record<string, any[]> = {
     'gia đình': [
@@ -96,14 +90,14 @@ function generateVocabularySuggestions(topic: string, keywords: string): any[] {
   };
 
   // Get suggestions based on topic
-  let suggestions = vocabularyDatabase[topic] || vocabularyDatabase['Tùy chỉnh'];
+  let suggestions = vocabularyDatabase[input.topic] || vocabularyDatabase['Tùy chỉnh'];
   
   // If keywords are provided, try to find related vocabulary
-  if (keywords && keywords.trim()) {
+  if (input.keywords && input.keywords.trim()) {
     const keywordSuggestions = vocabularyDatabase['Tùy chỉnh'].filter(vocab => 
-      vocab.meaning.toLowerCase().includes(keywords.toLowerCase()) ||
-      vocab.hanzi.includes(keywords) ||
-      vocab.pinyin.includes(keywords.toLowerCase())
+      vocab.meaning.toLowerCase().includes(input.keywords.toLowerCase()) ||
+      vocab.hanzi.includes(input.keywords) ||
+      vocab.pinyin.includes(input.keywords.toLowerCase())
     );
     
     if (keywordSuggestions.length > 0) {
@@ -112,5 +106,8 @@ function generateVocabularySuggestions(topic: string, keywords: string): any[] {
   }
   
   // Return 10 random suggestions
-  return suggestions.slice(0, 10);
+  return {
+    suggestedVocabulary: suggestions.slice(0, 10)
+  };
 }
+*/

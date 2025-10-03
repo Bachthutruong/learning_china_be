@@ -25,6 +25,9 @@ const topicValidation = [
 ];
 // Public routes
 router.get('/topics', vocabularyController_1.getTopics);
+// Public routes (must be before /:id routes)
+router.get('/categories', vocabularyController_1.getCategories);
+router.get('/by-categories', auth_1.authenticate, vocabularyController_1.getVocabulariesByCategories);
 // Protected routes
 router.get('/', auth_1.authenticate, vocabularyController_1.getVocabularies);
 router.get('/suggested', auth_1.authenticate, vocabularyController_1.getSuggestedVocabularies);

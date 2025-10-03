@@ -9,7 +9,8 @@ import {
   rejectCoinPurchase,
   getAllCoinPurchases,
   getPaymentConfig,
-  updateCoinPurchase
+  updateCoinPurchase,
+  getAdminCoinPurchaseById
 } from '../controllers/coinPurchaseController';
 import { authenticate, authorize } from '../middleware/auth';
 
@@ -37,6 +38,7 @@ router.get('/config/payment', getPaymentConfig);
 // Admin routes
 router.get('/admin/pending', authenticate, authorize('admin'), getPendingCoinPurchases);
 router.get('/admin/all', authenticate, authorize('admin'), getAllCoinPurchases);
+router.get('/admin/:id', authenticate, authorize('admin'), getAdminCoinPurchaseById);
 router.put('/admin/:id/approve', authenticate, authorize('admin'), adminActionValidation, approveCoinPurchase);
 router.put('/admin/:id/reject', authenticate, authorize('admin'), adminActionValidation, rejectCoinPurchase);
 

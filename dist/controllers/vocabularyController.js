@@ -1,42 +1,9 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAISuggestions = exports.getVocabularyQuiz = exports.completeVocabulary = exports.getSuggestedVocabularies = exports.createTopic = exports.getTopics = exports.deleteVocabulary = exports.updateVocabulary = exports.createVocabulary = exports.getVocabularyById = exports.getVocabularies = void 0;
+exports.getCategories = exports.getVocabulariesByCategories = exports.getAISuggestions = exports.getVocabularyQuiz = exports.completeVocabulary = exports.getSuggestedVocabularies = exports.createTopic = exports.getTopics = exports.deleteVocabulary = exports.updateVocabulary = exports.createVocabulary = exports.getVocabularyById = exports.getVocabularies = void 0;
 const Vocabulary_1 = __importDefault(require("../models/Vocabulary"));
 const Topic_1 = __importDefault(require("../models/Topic"));
 const User_1 = __importDefault(require("../models/User"));
@@ -321,12 +288,19 @@ exports.getVocabularyQuiz = getVocabularyQuiz;
 const getAISuggestions = async (req, res) => {
     try {
         const { topic, keywords } = req.body;
-        // Use AI to generate vocabulary suggestions
-        const { getPersonalizedVocabularySuggestions } = await Promise.resolve().then(() => __importStar(require('../ai/flows/personalized-vocabulary-suggestions')));
-        const suggestions = await getPersonalizedVocabularySuggestions({
-            topic,
-            keywords: keywords || ''
-        });
+        // Use AI to generate vocabulary suggestions (temporarily disabled)
+        // const { getPersonalizedVocabularySuggestions } = await import('../ai/flows/personalized-vocabulary-suggestions');
+        // const suggestions = await getPersonalizedVocabularySuggestions({
+        //   topic,
+        //   keywords: keywords || ''
+        // });
+        // Mock suggestions for now
+        const suggestions = {
+            suggestedVocabulary: [
+                { hanzi: '学习', pinyin: 'xuéxí', meaning: 'học tập', partOfSpeech: 'verb', level: 'A', examples: ['我在学习中文'] },
+                { hanzi: '工作', pinyin: 'gōngzuò', meaning: 'làm việc', partOfSpeech: 'verb', level: 'A', examples: ['我在工作'] }
+            ]
+        };
         res.json({
             message: 'AI suggestions generated successfully',
             suggestedVocabulary: suggestions.suggestedVocabulary
@@ -338,3 +312,54 @@ const getAISuggestions = async (req, res) => {
     }
 };
 exports.getAISuggestions = getAISuggestions;
+const getVocabulariesByCategories = async (req, res) => {
+    try {
+        const { categories, search, limit = 50 } = req.query;
+        if (!categories) {
+            return res.status(400).json({ message: 'Vui lòng chọn ít nhất một danh mục' });
+        }
+        let query = {};
+        // Search filter
+        if (search) {
+            query.$or = [
+                { word: { $regex: search, $options: 'i' } },
+                { meaning: { $regex: search, $options: 'i' } },
+                { pronunciation: { $regex: search, $options: 'i' } }
+            ];
+        }
+        // Category filter - get vocabularies that match any of the selected categories
+        const categoryArray = categories.split(',').map((c) => c.trim());
+        query.topics = { $in: categoryArray };
+        const vocabularies = await Vocabulary_1.default.find(query)
+            .limit(Number(limit))
+            .sort({ level: 1, createdAt: -1 });
+        res.json({ vocabularies });
+    }
+    catch (error) {
+        console.error('Error fetching vocabularies by categories:', error);
+        res.status(500).json({ message: 'Không thể tải từ vựng theo danh mục' });
+    }
+};
+exports.getVocabulariesByCategories = getVocabulariesByCategories;
+const getCategories = async (req, res) => {
+    try {
+        // Get unique topics from vocabularies
+        const topics = await Vocabulary_1.default.distinct('topics');
+        // Count vocabularies for each topic
+        const categories = await Promise.all(topics.map(async (topic) => {
+            const count = await Vocabulary_1.default.countDocuments({ topics: topic });
+            return {
+                _id: topic,
+                name: topic,
+                description: `Từ vựng về ${topic}`,
+                vocabularyCount: count
+            };
+        }));
+        res.json({ categories });
+    }
+    catch (error) {
+        console.error('Error fetching categories:', error);
+        res.status(500).json({ message: 'Không thể tải danh mục' });
+    }
+};
+exports.getCategories = getCategories;

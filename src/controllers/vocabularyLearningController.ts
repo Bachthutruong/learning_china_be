@@ -73,9 +73,27 @@ export const getPersonalTopics = async (req: Request, res: Response) => {
           userId,
           personalTopicId: topic._id
         })
+
+        // Count learned vocabularies in this topic that have at least 1 question
+        const learnedMappings = await UserVocabulary.find({
+          userId,
+          personalTopicId: topic._id,
+          status: 'learned'
+        }).select('vocabularyId')
+
+        const learnedIds = learnedMappings.map((m: any) => m.vocabularyId)
+        let learnedCount = 0
+        if (learnedIds.length > 0) {
+          learnedCount = await Vocabulary.countDocuments({
+            _id: { $in: learnedIds },
+            'questions.0': { $exists: true }
+          })
+        }
+
         return {
           ...topic.toObject(),
-          vocabularyCount: count
+          vocabularyCount: count,
+          learnedCount
         }
       })
     )
@@ -159,7 +177,7 @@ export const addUserVocabulary = async (req: Request, res: Response) => {
     }
 
     const userId = (req as any).user?._id
-    const { vocabularyId, status, personalTopicId } = req.body
+    let { vocabularyId, status, personalTopicId } = req.body
 
     // Check if vocabulary exists
     const vocabulary = await Vocabulary.findById(vocabularyId)
@@ -167,7 +185,17 @@ export const addUserVocabulary = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'Từ vựng không tồn tại' })
     }
 
-    // Check if personal topic exists (if provided)
+    // If personalTopicId missing, infer the most recent mapping for this user+vocab
+    if (!personalTopicId) {
+      const latestMapping = await UserVocabulary.findOne({ userId, vocabularyId })
+        .sort({ updatedAt: -1 })
+        .select('personalTopicId')
+      if (latestMapping?.personalTopicId) {
+        personalTopicId = latestMapping.personalTopicId
+      }
+    }
+
+    // Check if personal topic exists (if provided or inferred)
     if (personalTopicId) {
       const personalTopic = await PersonalTopic.findOne({ _id: personalTopicId, userId })
       if (!personalTopic) {
@@ -175,18 +203,24 @@ export const addUserVocabulary = async (req: Request, res: Response) => {
       }
     }
 
-    // Check if user vocabulary already exists
-    const existingUserVocab = await UserVocabulary.findOne({ userId, vocabularyId })
-    if (existingUserVocab) {
-      // Update existing
-      existingUserVocab.status = status
-      existingUserVocab.personalTopicId = personalTopicId
-      if (status === 'learned') {
-        existingUserVocab.learnedAt = new Date()
+    // Only update the document within the SAME topic if it exists.
+    // This avoids moving a vocabulary from another topic into this one and
+    // accidentally violating the unique (userId, vocabularyId, personalTopicId) index.
+    let isNewlyLearned = false
+
+    // Always update the mapping within the provided personalTopicId
+    const existingInThisTopic = await UserVocabulary.findOne({ userId, vocabularyId, personalTopicId })
+
+    if (existingInThisTopic) {
+      const wasLearned = existingInThisTopic.status === 'learned'
+      existingInThisTopic.status = status
+      if (status === 'learned' && !wasLearned) {
+        existingInThisTopic.learnedAt = new Date()
+        isNewlyLearned = true
       }
-      await existingUserVocab.save()
+      await existingInThisTopic.save()
     } else {
-      // Create new
+      // Create a new mapping for this topic only
       const userVocabulary = new UserVocabulary({
         userId,
         vocabularyId,
@@ -195,6 +229,48 @@ export const addUserVocabulary = async (req: Request, res: Response) => {
         learnedAt: status === 'learned' ? new Date() : undefined
       })
       await userVocabulary.save()
+      if (status === 'learned') {
+        isNewlyLearned = true
+      }
+    }
+
+    // Cộng xu và exp nếu học thuộc thành công
+    if (status === 'learned') {
+      const user = await User.findById(userId)
+      if (user) {
+        let expGain, coinGain
+        
+        if (isNewlyLearned) {
+          // Từ mới chưa thuộc lần nào: +10 EXP, +10 xu
+          expGain = 10
+          coinGain = 10
+        } else {
+          // Từ đã thuộc rồi, học lại: +1 EXP, +1 xu
+          expGain = 1
+          coinGain = 1
+        }
+        
+        user.experience += expGain
+        user.coins += coinGain
+        
+        // Kiểm tra và cập nhật level
+        const levelUpResult = await checkAndUpdateUserLevel(userId)
+        
+        await user.save()
+        
+        res.json({
+          message: 'Đã học thuộc từ vựng thành công!',
+          status,
+          rewards: {
+            exp: expGain,
+            coins: coinGain,
+            levelUp: levelUpResult.leveledUp,
+            newLevel: levelUpResult.newLevel,
+            isNewlyLearned
+          }
+        })
+        return
+      }
     }
 
     res.json({
@@ -336,7 +412,7 @@ export const personalTopicValidation = [
 export const userVocabularyValidation = [
   body('vocabularyId').notEmpty().withMessage('ID từ vựng là bắt buộc'),
   body('status').isIn(['learned', 'studying', 'skipped']).withMessage('Trạng thái không hợp lệ'),
-  body('personalTopicId').optional().isMongoId().withMessage('ID chủ đề cá nhân không hợp lệ')
+  body('personalTopicId').notEmpty().withMessage('ID chủ đề cá nhân là bắt buộc').isMongoId().withMessage('ID chủ đề cá nhân không hợp lệ')
 ]
 
 export const completeLearningValidation = [
@@ -344,3 +420,229 @@ export const completeLearningValidation = [
   body('quizScore').isNumeric().withMessage('Điểm khảo bài phải là số'),
   body('personalTopicId').optional().isMongoId().withMessage('ID chủ đề cá nhân không hợp lệ')
 ]
+
+// Get available vocabularies for personal topics
+export const getAvailableVocabularies = async (req: Request, res: Response) => {
+  try {
+    const { topics, search, limit = 20 } = req.query as any
+    const userId = (req as any).user?._id
+
+    if (!topics) {
+      return res.status(400).json({ message: 'Vui lòng chọn ít nhất một chủ đề' })
+    }
+
+    // Get user's current level
+    const user = await User.findById(userId).select('level')
+    const userLevel = user?.level || 1
+
+    let query: any = {
+      // Filter by user level (show vocabularies within 2 levels of user's level)
+      level: { $gte: Math.max(1, userLevel - 1), $lte: userLevel + 1 }
+    }
+
+    // Search filter
+    if (search) {
+      query.$or = [
+        { word: { $regex: search, $options: 'i' } },
+        { meaning: { $regex: search, $options: 'i' } },
+        { pronunciation: { $regex: search, $options: 'i' } }
+      ]
+    }
+
+    // Topic filter - get vocabularies that match any of the selected topics
+    const topicArray = topics.split(',').map((t: string) => t.trim())
+    query.topics = { $in: topicArray }
+
+    // Exclude vocabularies that the user already has in any personal topic
+    const existingUserVocabularies = await UserVocabulary.find({ userId }).select('vocabularyId')
+    const existingIds = existingUserVocabularies.map((d: any) => d.vocabularyId)
+    if (existingIds.length > 0) {
+      query._id = { $nin: existingIds }
+    }
+
+    const vocabularies = await Vocabulary.find(query)
+      .limit(Number(limit))
+      .sort({ level: 1, createdAt: -1 })
+
+    res.json(vocabularies)
+  } catch (error) {
+    console.error('Error fetching available vocabularies:', error)
+    res.status(500).json({ message: 'Không thể tải danh sách từ vựng có sẵn' })
+  }
+}
+
+// Add vocabularies to personal topic
+export const addVocabulariesToTopic = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?._id
+    const { topicId, vocabularyIds } = req.body
+
+    if (!topicId || !vocabularyIds || !Array.isArray(vocabularyIds) || vocabularyIds.length === 0) {
+      return res.status(400).json({ message: 'Vui lòng cung cấp chủ đề và danh sách từ vựng' })
+    }
+
+    // Check if topic exists and belongs to user
+    const topic = await PersonalTopic.findOne({ _id: topicId, userId })
+    if (!topic) {
+      return res.status(404).json({ message: 'Chủ đề không tồn tại' })
+    }
+
+    // Check if vocabularies exist
+    const vocabularies = await Vocabulary.find({ _id: { $in: vocabularyIds } })
+    if (vocabularies.length !== vocabularyIds.length) {
+      return res.status(400).json({ message: 'Một số từ vựng không tồn tại' })
+    }
+
+    // Check which vocabularies already exist for this user in THIS specific topic
+    const existingUserVocabularies = await UserVocabulary.find({
+      userId,
+      vocabularyId: { $in: vocabularyIds },
+      personalTopicId: topicId
+    }).select('vocabularyId')
+
+    const existingVocabularyIds = existingUserVocabularies.map(uv => uv.vocabularyId.toString())
+    const newVocabularyIds = vocabularyIds.filter(id => !existingVocabularyIds.includes(id))
+
+    if (newVocabularyIds.length === 0) {
+      return res.json({ 
+        message: 'Tất cả từ vựng đã tồn tại trong chủ đề này',
+        added: 0,
+        skipped: vocabularyIds.length
+      })
+    }
+
+    // Add only new vocabularies to topic
+    const userVocabularies = newVocabularyIds.map((vocabularyId: string) => ({
+      userId,
+      vocabularyId,
+      personalTopicId: topicId,
+      status: 'studying',
+      addedAt: new Date()
+    }))
+
+    try {
+      await UserVocabulary.insertMany(userVocabularies, { ordered: false })
+    } catch (error: any) {
+      // Handle duplicate key errors gracefully
+      if (error.code === 11000) {
+        // Some documents were inserted, some failed due to duplicates
+        const insertedCount = error.result?.insertedCount || 0
+        const duplicateCount = newVocabularyIds.length - insertedCount
+        
+        res.json({ 
+          message: `Thêm ${insertedCount} từ vựng mới, ${duplicateCount} từ đã tồn tại`,
+          added: insertedCount,
+          skipped: duplicateCount
+        })
+        return
+      }
+      throw error
+    }
+
+    res.json({ 
+      message: `Thêm ${newVocabularyIds.length} từ vựng vào chủ đề thành công`,
+      added: newVocabularyIds.length,
+      skipped: existingVocabularyIds.length
+    })
+  } catch (error) {
+    console.error('Error adding vocabularies to topic:', error)
+    res.status(500).json({ message: 'Không thể thêm từ vựng vào chủ đề' })
+  }
+}
+
+export const getLearnedVocabulariesForQuiz = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?._id
+    const { personalTopicId } = req.query as any
+
+    if (!personalTopicId) {
+      return res.status(400).json({ message: 'Vui lòng cung cấp chủ đề' })
+    }
+
+    // Bước 1: Lấy tất cả vocabularyIds thuộc chủ đề này của người dùng
+    const topicMappings = await UserVocabulary.find({ userId, personalTopicId }).select('vocabularyId')
+    const topicVocabularyIds = topicMappings.map(m => m.vocabularyId)
+
+    if (topicVocabularyIds.length === 0) {
+      return res.json({ vocabularies: [], count: 0 })
+    }
+
+    // Bước 2: Với các vocabularyIds trên, chọn những từ mà user đã "learned" ở bất kỳ chủ đề nào
+    const learnedMappings = await UserVocabulary.find({
+      userId,
+      vocabularyId: { $in: topicVocabularyIds },
+      status: 'learned'
+    }).select('vocabularyId')
+
+    const learnedIds = Array.from(new Set(learnedMappings.map(m => String(m.vocabularyId))))
+
+    if (learnedIds.length === 0) {
+      return res.json({ vocabularies: [], count: 0 })
+    }
+
+    // Bước 3: Lấy dữ liệu từ vựng có câu hỏi cho các id đã học
+    const vocabularies = await Vocabulary.find({
+      _id: { $in: learnedIds },
+      'questions.0': { $exists: true }
+    })
+
+    res.json({
+      vocabularies,
+      count: vocabularies.length
+    })
+  } catch (error) {
+    console.error('Error fetching learned vocabularies for quiz:', error)
+    res.status(500).json({ message: 'Không thể tải từ vựng đã học cho khảo bài' })
+  }
+}
+
+// Get vocabularies by personal topic
+export const getVocabulariesByTopic = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).user?._id
+    const { personalTopicId, search, limit = 20 } = req.query as any
+
+    if (!personalTopicId) {
+      return res.status(400).json({ message: 'Vui lòng cung cấp chủ đề' })
+    }
+
+    // Lấy từ vựng trong chủ đề cá nhân
+    const userVocabularies = await UserVocabulary.find({
+      userId,
+      personalTopicId
+    })
+      .populate('vocabularyId')
+      .populate('personalTopicId')
+
+    // Lọc bỏ những từ không tồn tại
+    const validVocabularies = userVocabularies.filter(uv => uv.vocabularyId)
+
+    // Build items with status
+    let items = validVocabularies.map(uv => ({ vocabulary: (uv as any).vocabularyId, status: uv.status }))
+    // Apply search filter if provided
+    let filteredItems = items
+    
+    if (search) {
+      const s = String(search).toLowerCase()
+      filteredItems = items.filter(({ vocabulary }: any) => 
+        vocabulary.word.toLowerCase().includes(s) ||
+        vocabulary.meaning.toLowerCase().includes(s) ||
+        vocabulary.pronunciation.toLowerCase().includes(s)
+      )
+    }
+
+    // Apply limit
+    if (limit) {
+      filteredItems = filteredItems.slice(0, Number(limit))
+    }
+
+    const vocabularies = filteredItems.map(i => i.vocabulary)
+    const statuses: Record<string, string> = {}
+    filteredItems.forEach(i => { statuses[String((i as any).vocabulary._id)] = i.status })
+
+    res.json({ vocabularies, statuses, count: vocabularies.length })
+  } catch (error) {
+    console.error('Error fetching vocabularies by topic:', error)
+    res.status(500).json({ message: 'Không thể tải từ vựng theo chủ đề' })
+  }
+}

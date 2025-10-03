@@ -43,13 +43,13 @@ const CoinPurchaseSchema = new mongoose_1.Schema({
     amount: {
         type: Number,
         required: true,
-        min: 1 // Minimum 1 TWD
+        min: 1 // Minimum amount
     },
     currency: {
         type: String,
         required: true,
         default: 'TWD',
-        enum: ['TWD']
+        enum: ['TWD', 'VND']
     },
     coins: {
         type: Number,

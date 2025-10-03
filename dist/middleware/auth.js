@@ -12,6 +12,10 @@ const authenticate = async (req, res, next) => {
         if (!token) {
             return res.status(401).json({ message: 'No token, authorization denied' });
         }
+        if (!process.env.JWT_SECRET) {
+            console.error('JWT_SECRET is not defined!');
+            return res.status(500).json({ message: 'Server configuration error' });
+        }
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         const user = await User_1.default.findById(decoded.userId).select('-password');
         if (!user) {
@@ -21,6 +25,7 @@ const authenticate = async (req, res, next) => {
         next();
     }
     catch (error) {
+        console.error('Auth middleware error:', error);
         res.status(401).json({ message: 'Token is not valid' });
     }
 };

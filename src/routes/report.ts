@@ -15,6 +15,7 @@ router.get('/my-reports', authenticate, getUserReports)
 
 // Admin routes
 router.get('/admin', authenticate, authorize('admin'), getAllReports)
+router.get('/admin/all', authenticate, authorize('admin'), getAllReports)
 router.put('/admin/:id', authenticate, authorize('admin'), updateReportStatus)
 
 export default router

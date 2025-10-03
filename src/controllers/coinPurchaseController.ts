@@ -12,7 +12,7 @@ export const createCoinPurchase = async (req: any, res: Response) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { amount, bankAccount, transactionId, receiptImage } = req.body;
+    const { amount, bankAccount, transactionId, receiptImage, currency = 'TWD' } = req.body;
     const user = await User.findById(req.user._id);
     
     if (!user) {
@@ -25,19 +25,20 @@ export const createCoinPurchase = async (req: any, res: Response) => {
       return res.status(400).json({ message: 'Payment configuration not found' });
     }
     
-    // Validate amount (minimum 1 TWD)
+    // Validate amount (minimum 1)
     if (amount < 1) {
-      return res.status(400).json({ message: 'Minimum purchase amount is 1 TWD' });
+      return res.status(400).json({ message: 'Minimum purchase amount is 1' });
     }
     
-    // Calculate coins based on exchange rate
-    const coins = Math.floor(amount * paymentConfig.exchangeRate);
+    // Calculate coins based on exchange rate per currency
+    const cfg = currency === 'VND' ? (paymentConfig as any).vn : (paymentConfig as any).tw;
+    const coins = Math.floor(amount * cfg.exchangeRate);
     
     // Create coin purchase request
     const coinPurchase = new CoinPurchase({
       userId: user._id,
       amount,
-      currency: 'TWD',
+      currency,
       coins,
       paymentMethod: 'bank_transfer',
       bankAccount,
@@ -128,6 +129,7 @@ export const getPendingCoinPurchases = async (req: any, res: Response) => {
     const { page = 1, limit = 10 } = req.query;
     
     const purchases = await CoinPurchase.find({ status: 'pending' })
+      .select('-receiptImage')
       .populate('userId', 'name email')
       .sort({ createdAt: -1 })
       .limit(limit * 1)
@@ -240,6 +242,7 @@ export const getAllCoinPurchases = async (req: any, res: Response) => {
     }
     
     const purchases = await CoinPurchase.find(query)
+      .select('-receiptImage')
       .populate('userId', 'name email')
       .sort({ createdAt: -1 })
       .limit(limit * 1)
@@ -259,6 +262,21 @@ export const getAllCoinPurchases = async (req: any, res: Response) => {
   }
 };
 
+// Admin gets specific purchase details (including receipt image)
+export const getAdminCoinPurchaseById = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const purchase = await CoinPurchase.findById(id).populate('userId', 'name email');
+    if (!purchase) {
+      return res.status(404).json({ message: 'Purchase not found' });
+    }
+    res.json({ purchase });
+  } catch (error) {
+    console.error('Get admin coin purchase by id error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 // Get payment configuration
 export const getPaymentConfig = async (req: any, res: Response) => {
   try {
@@ -267,7 +285,14 @@ export const getPaymentConfig = async (req: any, res: Response) => {
       return res.status(404).json({ message: 'Payment configuration not found' });
     }
     
-    res.json({ config });
+    res.json({
+      config: {
+        tw: (config as any).tw,
+        vn: (config as any).vn,
+        isActive: (config as any).isActive,
+        _id: (config as any)._id
+      }
+    });
   } catch (error) {
     console.error('Get payment config error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -278,7 +303,7 @@ export const getPaymentConfig = async (req: any, res: Response) => {
 export const updateCoinPurchase = async (req: any, res: Response) => {
   try {
     const { id } = req.params;
-    const { amount, bankAccount, transactionId, receiptImage, action } = req.body;
+    const { amount, bankAccount, transactionId, receiptImage, action, currency } = req.body;
     
     const purchase = await CoinPurchase.findById(id);
     if (!purchase) {
@@ -306,11 +331,13 @@ export const updateCoinPurchase = async (req: any, res: Response) => {
       }
       
       if (amount < 1) {
-        return res.status(400).json({ message: 'Minimum purchase amount is 1 TWD' });
+        return res.status(400).json({ message: 'Minimum purchase amount is 1' });
       }
       
       purchase.amount = amount;
-      purchase.coins = Math.floor(amount * paymentConfig.exchangeRate);
+      const cfg = (currency || purchase.currency) === 'VND' ? (paymentConfig as any).vn : (paymentConfig as any).tw;
+      purchase.currency = currency || purchase.currency;
+      purchase.coins = Math.floor(amount * cfg.exchangeRate);
       purchase.bankAccount = bankAccount;
       purchase.transactionId = transactionId;
       purchase.receiptImage = receiptImage;

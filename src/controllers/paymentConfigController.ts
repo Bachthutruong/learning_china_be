@@ -25,20 +25,13 @@ export const createOrUpdatePaymentConfig = async (req: any, res: Response) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { qrCodeImage, exchangeRate, bankAccount, bankName, accountHolder } = req.body;
+    const { tw, vn } = req.body;
     
     // Deactivate current config if exists
     await PaymentConfig.updateMany({ isActive: true }, { isActive: false });
     
     // Create new config
-    const config = new PaymentConfig({
-      qrCodeImage,
-      exchangeRate,
-      bankAccount,
-      bankName,
-      accountHolder,
-      isActive: true
-    });
+    const config = new PaymentConfig({ tw, vn, isActive: true });
     
     await config.save();
     

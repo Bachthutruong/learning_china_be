@@ -66,5 +66,6 @@ UserVocabularySchema.index({ userId: 1 });
 UserVocabularySchema.index({ vocabularyId: 1 });
 UserVocabularySchema.index({ status: 1 });
 UserVocabularySchema.index({ personalTopicId: 1 });
-UserVocabularySchema.index({ userId: 1, vocabularyId: 1 }, { unique: true });
+// Unique per user per topic per vocabulary so a user can learn the same word in different topics
+UserVocabularySchema.index({ userId: 1, vocabularyId: 1, personalTopicId: 1 }, { unique: true });
 exports.UserVocabulary = mongoose_1.default.model('UserVocabulary', UserVocabularySchema);

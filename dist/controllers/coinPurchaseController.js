@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateCoinPurchase = exports.getPaymentConfig = exports.getAllCoinPurchases = exports.rejectCoinPurchase = exports.approveCoinPurchase = exports.getPendingCoinPurchases = exports.getCoinPurchaseById = exports.getUserCoinPurchases = exports.createCoinPurchase = void 0;
+exports.updateCoinPurchase = exports.getPaymentConfig = exports.getAdminCoinPurchaseById = exports.getAllCoinPurchases = exports.rejectCoinPurchase = exports.approveCoinPurchase = exports.getPendingCoinPurchases = exports.getCoinPurchaseById = exports.getUserCoinPurchases = exports.createCoinPurchase = void 0;
 const CoinPurchase_1 = __importDefault(require("../models/CoinPurchase"));
 const User_1 = __importDefault(require("../models/User"));
 const PaymentConfig_1 = __importDefault(require("../models/PaymentConfig"));
@@ -15,7 +15,7 @@ const createCoinPurchase = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { amount, bankAccount, transactionId, receiptImage } = req.body;
+        const { amount, bankAccount, transactionId, receiptImage, currency = 'TWD' } = req.body;
         const user = await User_1.default.findById(req.user._id);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -25,17 +25,18 @@ const createCoinPurchase = async (req, res) => {
         if (!paymentConfig) {
             return res.status(400).json({ message: 'Payment configuration not found' });
         }
-        // Validate amount (minimum 1 TWD)
+        // Validate amount (minimum 1)
         if (amount < 1) {
-            return res.status(400).json({ message: 'Minimum purchase amount is 1 TWD' });
+            return res.status(400).json({ message: 'Minimum purchase amount is 1' });
         }
-        // Calculate coins based on exchange rate
-        const coins = Math.floor(amount * paymentConfig.exchangeRate);
+        // Calculate coins based on exchange rate per currency
+        const cfg = currency === 'VND' ? paymentConfig.vn : paymentConfig.tw;
+        const coins = Math.floor(amount * cfg.exchangeRate);
         // Create coin purchase request
         const coinPurchase = new CoinPurchase_1.default({
             userId: user._id,
             amount,
-            currency: 'TWD',
+            currency,
             coins,
             paymentMethod: 'bank_transfer',
             bankAccount,
@@ -117,6 +118,7 @@ const getPendingCoinPurchases = async (req, res) => {
     try {
         const { page = 1, limit = 10 } = req.query;
         const purchases = await CoinPurchase_1.default.find({ status: 'pending' })
+            .select('-receiptImage')
             .populate('userId', 'name email')
             .sort({ createdAt: -1 })
             .limit(limit * 1)
@@ -219,6 +221,7 @@ const getAllCoinPurchases = async (req, res) => {
             query.userId = userId;
         }
         const purchases = await CoinPurchase_1.default.find(query)
+            .select('-receiptImage')
             .populate('userId', 'name email')
             .sort({ createdAt: -1 })
             .limit(limit * 1)
@@ -237,6 +240,22 @@ const getAllCoinPurchases = async (req, res) => {
     }
 };
 exports.getAllCoinPurchases = getAllCoinPurchases;
+// Admin gets specific purchase details (including receipt image)
+const getAdminCoinPurchaseById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const purchase = await CoinPurchase_1.default.findById(id).populate('userId', 'name email');
+        if (!purchase) {
+            return res.status(404).json({ message: 'Purchase not found' });
+        }
+        res.json({ purchase });
+    }
+    catch (error) {
+        console.error('Get admin coin purchase by id error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.getAdminCoinPurchaseById = getAdminCoinPurchaseById;
 // Get payment configuration
 const getPaymentConfig = async (req, res) => {
     try {
@@ -244,7 +263,14 @@ const getPaymentConfig = async (req, res) => {
         if (!config) {
             return res.status(404).json({ message: 'Payment configuration not found' });
         }
-        res.json({ config });
+        res.json({
+            config: {
+                tw: config.tw,
+                vn: config.vn,
+                isActive: config.isActive,
+                _id: config._id
+            }
+        });
     }
     catch (error) {
         console.error('Get payment config error:', error);
@@ -256,7 +282,7 @@ exports.getPaymentConfig = getPaymentConfig;
 const updateCoinPurchase = async (req, res) => {
     try {
         const { id } = req.params;
-        const { amount, bankAccount, transactionId, receiptImage, action } = req.body;
+        const { amount, bankAccount, transactionId, receiptImage, action, currency } = req.body;
         const purchase = await CoinPurchase_1.default.findById(id);
         if (!purchase) {
             return res.status(404).json({ message: 'Purchase not found' });
@@ -280,10 +306,12 @@ const updateCoinPurchase = async (req, res) => {
                 return res.status(400).json({ message: 'Payment configuration not found' });
             }
             if (amount < 1) {
-                return res.status(400).json({ message: 'Minimum purchase amount is 1 TWD' });
+                return res.status(400).json({ message: 'Minimum purchase amount is 1' });
             }
             purchase.amount = amount;
-            purchase.coins = Math.floor(amount * paymentConfig.exchangeRate);
+            const cfg = (currency || purchase.currency) === 'VND' ? paymentConfig.vn : paymentConfig.tw;
+            purchase.currency = currency || purchase.currency;
+            purchase.coins = Math.floor(amount * cfg.exchangeRate);
             purchase.bankAccount = bankAccount;
             purchase.transactionId = transactionId;
             purchase.receiptImage = receiptImage;

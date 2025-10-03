@@ -2,8 +2,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ICoinPurchase extends Document {
   userId: mongoose.Types.ObjectId;
-  amount: number; // Amount in TWD
-  currency: string; // Currency (TWD)
+  amount: number; // Amount in original currency
+  currency: string; // Currency (TWD or VND)
   coins: number; // Coins to be added
   paymentMethod: string;
   bankAccount?: string;
@@ -25,13 +25,13 @@ const CoinPurchaseSchema = new Schema<ICoinPurchase>({
   amount: {
     type: Number,
     required: true,
-    min: 1 // Minimum 1 TWD
+    min: 1 // Minimum amount
   },
   currency: {
     type: String,
     required: true,
     default: 'TWD',
-    enum: ['TWD']
+    enum: ['TWD', 'VND']
   },
   coins: {
     type: Number,

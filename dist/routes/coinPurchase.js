@@ -27,6 +27,7 @@ router.get('/config/payment', coinPurchaseController_1.getPaymentConfig);
 // Admin routes
 router.get('/admin/pending', auth_1.authenticate, (0, auth_1.authorize)('admin'), coinPurchaseController_1.getPendingCoinPurchases);
 router.get('/admin/all', auth_1.authenticate, (0, auth_1.authorize)('admin'), coinPurchaseController_1.getAllCoinPurchases);
+router.get('/admin/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), coinPurchaseController_1.getAdminCoinPurchaseById);
 router.put('/admin/:id/approve', auth_1.authenticate, (0, auth_1.authorize)('admin'), adminActionValidation, coinPurchaseController_1.approveCoinPurchase);
 router.put('/admin/:id/reject', auth_1.authenticate, (0, auth_1.authorize)('admin'), adminActionValidation, coinPurchaseController_1.rejectCoinPurchase);
 exports.default = router;

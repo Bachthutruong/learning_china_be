@@ -315,13 +315,21 @@ export const getAISuggestions = async (req: any, res: Response) => {
   try {
     const { topic, keywords } = req.body;
     
-    // Use AI to generate vocabulary suggestions
-    const { getPersonalizedVocabularySuggestions } = await import('../ai/flows/personalized-vocabulary-suggestions');
+    // Use AI to generate vocabulary suggestions (temporarily disabled)
+    // const { getPersonalizedVocabularySuggestions } = await import('../ai/flows/personalized-vocabulary-suggestions');
     
-    const suggestions = await getPersonalizedVocabularySuggestions({
-      topic,
-      keywords: keywords || ''
-    });
+    // const suggestions = await getPersonalizedVocabularySuggestions({
+    //   topic,
+    //   keywords: keywords || ''
+    // });
+    
+    // Mock suggestions for now
+    const suggestions = {
+      suggestedVocabulary: [
+        { hanzi: '学习', pinyin: 'xuéxí', meaning: 'học tập', partOfSpeech: 'verb', level: 'A', examples: ['我在学习中文'] },
+        { hanzi: '工作', pinyin: 'gōngzuò', meaning: 'làm việc', partOfSpeech: 'verb', level: 'A', examples: ['我在工作'] }
+      ]
+    };
     
     res.json({
       message: 'AI suggestions generated successfully',
@@ -332,3 +340,62 @@ export const getAISuggestions = async (req: any, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const getVocabulariesByCategories = async (req: Request, res: Response) => {
+  try {
+    const { categories, search, limit = 50 } = req.query as any
+
+    if (!categories) {
+      return res.status(400).json({ message: 'Vui lòng chọn ít nhất một danh mục' })
+    }
+
+    let query: any = {}
+
+    // Search filter
+    if (search) {
+      query.$or = [
+        { word: { $regex: search, $options: 'i' } },
+        { meaning: { $regex: search, $options: 'i' } },
+        { pronunciation: { $regex: search, $options: 'i' } }
+      ]
+    }
+
+    // Category filter - get vocabularies that match any of the selected categories
+    const categoryArray = categories.split(',').map((c: string) => c.trim())
+    query.topics = { $in: categoryArray }
+
+    const vocabularies = await Vocabulary.find(query)
+      .limit(Number(limit))
+      .sort({ level: 1, createdAt: -1 })
+
+    res.json({ vocabularies })
+  } catch (error) {
+    console.error('Error fetching vocabularies by categories:', error)
+    res.status(500).json({ message: 'Không thể tải từ vựng theo danh mục' })
+  }
+}
+
+export const getCategories = async (req: Request, res: Response) => {
+  try {
+    // Get unique topics from vocabularies
+    const topics = await Vocabulary.distinct('topics')
+    
+    // Count vocabularies for each topic
+    const categories = await Promise.all(
+      topics.map(async (topic) => {
+        const count = await Vocabulary.countDocuments({ topics: topic })
+        return {
+          _id: topic,
+          name: topic,
+          description: `Từ vựng về ${topic}`,
+          vocabularyCount: count
+        }
+      })
+    )
+
+    res.json({ categories })
+  } catch (error) {
+    console.error('Error fetching categories:', error)
+    res.status(500).json({ message: 'Không thể tải danh mục' })
+  }
+}
