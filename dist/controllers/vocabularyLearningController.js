@@ -21,7 +21,8 @@ const getVocabularies = async (req, res) => {
             query.$or = [
                 { word: { $regex: search, $options: 'i' } },
                 { meaning: { $regex: search, $options: 'i' } },
-                { pronunciation: { $regex: search, $options: 'i' } }
+                { pinyin: { $regex: search, $options: 'i' } },
+                { zhuyin: { $regex: search, $options: 'i' } }
             ];
         }
         // Topic filter
@@ -391,7 +392,8 @@ const getAvailableVocabularies = async (req, res) => {
             query.$or = [
                 { word: { $regex: search, $options: 'i' } },
                 { meaning: { $regex: search, $options: 'i' } },
-                { pronunciation: { $regex: search, $options: 'i' } }
+                { pinyin: { $regex: search, $options: 'i' } },
+                { zhuyin: { $regex: search, $options: 'i' } }
             ];
         }
         // Topic filter - get vocabularies that match any of the selected topics

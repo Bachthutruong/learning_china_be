@@ -49,6 +49,11 @@ const QuestionBankSchema = new mongoose_1.Schema({
     blanks: [{ position: Number, correctAnswer: String }],
     sentences: [String],
     correctOrder: [Number],
+    subQuestions: [{
+            question: { type: String, required: true },
+            options: [String],
+            correctAnswer: { type: Number, required: true }
+        }],
     tags: [String]
 }, {
     timestamps: true

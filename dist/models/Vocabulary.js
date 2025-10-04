@@ -44,7 +44,7 @@ const QuestionSchema = new mongoose_1.Schema({
             required: true
         }],
     correctAnswer: {
-        type: Number,
+        type: mongoose_1.Schema.Types.Mixed,
         required: true
     },
     explanation: String
@@ -55,9 +55,13 @@ const VocabularySchema = new mongoose_1.Schema({
         required: [true, 'Word is required'],
         trim: true
     },
-    pronunciation: {
+    pinyin: {
         type: String,
-        required: [true, 'Pronunciation is required'],
+        required: [true, 'Pinyin is required'],
+        trim: true
+    },
+    zhuyin: {
+        type: String,
         trim: true
     },
     meaning: {
@@ -65,6 +69,7 @@ const VocabularySchema = new mongoose_1.Schema({
         required: [true, 'Meaning is required'],
         trim: true
     },
+    imageUrl: String,
     audioUrl: String,
     level: {
         type: Number,

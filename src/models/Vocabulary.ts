@@ -3,14 +3,16 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface IQuestion {
   question: string;
   options: string[];
-  correctAnswer: number;
+  correctAnswer: number | number[];
   explanation?: string;
 }
 
 export interface IVocabulary extends Document {
   word: string;
-  pronunciation: string;
+  pinyin: string; // Renamed from pronunciation
+  zhuyin?: string; // New field
   meaning: string;
+  imageUrl?: string; // New field for Cloudinary image
   audioUrl?: string;
   level: number;
   topics: string[];
@@ -31,7 +33,7 @@ const QuestionSchema = new Schema<IQuestion>({
     required: true
   }],
   correctAnswer: {
-    type: Number,
+    type: Schema.Types.Mixed,
     required: true
   },
   explanation: String
@@ -43,9 +45,13 @@ const VocabularySchema = new Schema<IVocabulary>({
     required: [true, 'Word is required'],
     trim: true
   },
-  pronunciation: {
+  pinyin: {
     type: String,
-    required: [true, 'Pronunciation is required'],
+    required: [true, 'Pinyin is required'],
+    trim: true
+  },
+  zhuyin: {
+    type: String,
     trim: true
   },
   meaning: {
@@ -53,6 +59,7 @@ const VocabularySchema = new Schema<IVocabulary>({
     required: [true, 'Meaning is required'],
     trim: true
   },
+  imageUrl: String,
   audioUrl: String,
   level: {
     type: Number,
