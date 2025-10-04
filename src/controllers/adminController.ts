@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import * as XLSX from 'xlsx';
 import Vocabulary from '../models/Vocabulary';
+// NOTE: XLSX-based template and import helpers are provided below
 import Topic from '../models/Topic';
 import Level from '../models/Level';
 import Test from '../models/Test';
@@ -24,8 +26,10 @@ export const createVocabulary = async (req: any, res: Response) => {
 
     const {
       word,
-      pronunciation,
+      pinyin,
+      zhuyin,
       meaning,
+      imageUrl,
       audioUrl,
       level,
       topics,
@@ -53,32 +57,45 @@ export const createVocabulary = async (req: any, res: Response) => {
       });
     }
 
-    // Handle file upload if present
+    // Handle file uploads if present
     let audioUrlFinal = audioUrl;
-    if (req.file) {
+    let imageUrlFinal = imageUrl;
+    
+    if (req.files) {
       try {
-        audioUrlFinal = req.file.path; // Cloudinary URL
-        console.log('Audio file uploaded successfully:', req.file.path);
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+        
+        if (files.audio && files.audio[0]) {
+          audioUrlFinal = files.audio[0].path; // Cloudinary URL
+          console.log('Audio file uploaded successfully:', files.audio[0].path);
+        }
+        
+        if (files.image && files.image[0]) {
+          imageUrlFinal = files.image[0].path; // Cloudinary URL
+          console.log('Image file uploaded successfully:', files.image[0].path);
+        }
       } catch (uploadError) {
         console.error('Cloudinary upload error:', uploadError);
         return res.status(500).json({ 
-          message: 'Failed to upload audio file',
+          message: 'Failed to upload file',
           error: uploadError 
         });
       }
     }
 
     // Validate required fields
-    if (!word || !pronunciation || !meaning || !partOfSpeech) {
+    if (!word || !pinyin || !meaning || !partOfSpeech) {
       return res.status(400).json({ 
-        message: 'Missing required fields: word, pronunciation, meaning, partOfSpeech' 
+        message: 'Missing required fields: word, pinyin, meaning, partOfSpeech' 
       });
     }
 
     const vocabulary = new Vocabulary({
       word,
-      pronunciation,
+      pinyin,
+      zhuyin,
       meaning,
+      imageUrl: imageUrlFinal,
       audioUrl: audioUrlFinal,
       level,
       topics: parsedTopics || [],
@@ -103,6 +120,213 @@ export const createVocabulary = async (req: any, res: Response) => {
   }
 };
 
+// Download Excel template for vocabularies (including nested questions)
+export const downloadVocabularyTemplate = async (_req: Request, res: Response) => {
+  // Define header columns
+  const headers = [
+    'word',
+    'pinyin',
+    'zhuyin (optional)',
+    'meaning',
+    'partOfSpeech',
+    'level',
+    'topics (comma-separated)',
+    'examples (|| separated)',
+    'synonyms (|| separated)',
+    'antonyms (|| separated)',
+    'imageUrl (optional)',
+    'audioUrl (optional)',
+    'questions JSON (optional)'
+  ];
+
+  const exampleQuestions = [
+    {
+      question: 'Nghĩa của \'你好\' là gì?',
+      options: ['Xin chào', 'Tạm biệt', 'Cảm ơn', 'Xin lỗi'],
+      correctAnswer: 0,
+      explanation: '你好 nghĩa là Xin chào'
+    },
+    {
+      question: 'Những từ nào sau đây là từ chào hỏi?',
+      options: ['你好', '再见', '谢谢', '早上好'],
+      correctAnswer: [0, 3],
+      explanation: '你好 và 早上好 đều là từ chào hỏi'
+    }
+  ];
+
+  const sample = [
+    headers,
+    ['你好', 'nǐ hǎo', 'ㄋㄧˇ ㄏㄠˇ', 'Xin chào', 'interjection', 1, 'Chào hỏi, Giao tiếp cơ bản', '你好，我是小明||你好，很高兴认识你', 'chào||xin chào||hello', 'tạm biệt||goodbye', '', '', JSON.stringify(exampleQuestions)],
+    ['谢谢', 'xiè xiè', 'ㄒㄧㄝˋ ㄒㄧㄝˋ', 'Cảm ơn', 'verb', 1, 'Lịch sự, Giao tiếp cơ bản', '谢谢你的帮助||非常感谢', 'cảm ơn||thank you', 'không cần||không phải', '', '', ''],
+    ['学习', 'xué xí', 'ㄒㄩㄝˊ ㄒㄧˊ', 'Học tập', 'verb', 2, 'Giáo dục, Học tập', '我在学习中文||学习很重要', 'học||study||learn', 'dạy||teach', '', '', '']
+  ];
+
+  const wb = (XLSX.utils as any).book_new();
+  const ws = (XLSX.utils as any).aoa_to_sheet(sample);
+  (XLSX.utils as any).book_append_sheet(wb, ws, 'Vocabularies');
+  const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  res.setHeader('Content-Disposition', 'attachment; filename="vocabularies_template.xlsx"');
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  return res.send(buf);
+};
+
+// Import vocabularies from Excel
+export const importVocabulariesExcel = async (req: any, res: Response) => {
+  try {
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ message: 'Thiếu file để import' });
+    }
+    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const rows: any[] = (XLSX.utils as any).sheet_to_json(sheet);
+
+    let created = 0;
+    let updated = 0;
+    const errors: Array<{ row: number; message: string }> = [];
+    const createdTopics: string[] = [];
+
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      try {
+        const word = String(row.word || row['Word'] || row['word'] || '').trim();
+        const pinyin = String(row.pinyin || row['Pinyin'] || row['pinyin'] || '').trim();
+        const zhuyin = String(row.zhuyin || row['Zhuyin'] || row['zhuyin'] || row['zhuyin (optional)'] || '').trim();
+        
+        // // Debug: Log the row data to help identify column mapping issues
+        // if (i < 3) { // Only log first 3 rows to avoid spam
+        //   console.log(`Row ${i + 2} - Raw data:`, {
+        //     word,
+        //     pinyin,
+        //     zhuyin,
+        //     meaning,
+        //     partOfSpeech,
+        //     level,
+        //     imageUrl,
+        //     allKeys: Object.keys(row)
+        //   });
+        // }
+        const meaning = String(row.meaning || row['Meaning'] || row['meaning'] || '').trim();
+        const partOfSpeech = String(row.partOfSpeech || row['PartOfSpeech'] || row['partOfSpeech'] || '').trim();
+        const level = Number(row.level || row['Level'] || row['level'] || 1);
+        const imageUrl = String(row.imageUrl || row['ImageUrl'] || row['imageUrl'] || row['imageUrl (optional)'] || '').trim();
+        const topicsRaw = String(row['topics (comma-separated)'] || row.topics || '').trim();
+        const topics = topicsRaw
+          .split(',')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        
+        // Auto-create topics if they don't exist
+        for (const topicName of topics) {
+          if (topicName && !createdTopics.includes(topicName)) {
+            const existingTopic = await Topic.findOne({ name: topicName });
+            if (!existingTopic) {
+              await Topic.create({
+                name: topicName,
+                description: `Chủ đề tự động tạo từ import: ${topicName}`,
+                color: `#${Math.floor(Math.random()*16777215).toString(16)}`
+              });
+              createdTopics.push(topicName);
+            }
+          }
+        }
+
+        const examples = String(row['examples (|| separated)'] || row.examples || '')
+          .split('||')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const synonyms = String(row['synonyms (|| separated)'] || row.synonyms || '')
+          .split('||')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const antonyms = String(row['antonyms (|| separated)'] || row.antonyms || '')
+          .split('||')
+          .map((t: string) => t.trim())
+          .filter(Boolean);
+        const audioUrl = String(row.audioUrl || row['audioUrl (optional)'] || '').trim() || undefined;
+        const questionsRaw = String(row['questions JSON (optional)'] || row.questions || '').trim();
+        let questions: any[] = [];
+        if (questionsRaw) {
+          try {
+            const parsed = JSON.parse(questionsRaw);
+            if (Array.isArray(parsed)) {
+              // Validate and fix correctAnswer format
+              questions = parsed.map((q: any) => {
+                if (q.correctAnswer !== undefined) {
+                  // If correctAnswer is a string that looks like an array, parse it
+                  if (typeof q.correctAnswer === 'string' && q.correctAnswer.startsWith('[') && q.correctAnswer.endsWith(']')) {
+                    try {
+                      q.correctAnswer = JSON.parse(q.correctAnswer);
+                    } catch (e) {
+                      // If parsing fails, keep as string
+                    }
+                  }
+                }
+                return q;
+              });
+            }
+          } catch (e) {
+            // ignore invalid questions JSON, push error
+            errors.push({ row: i + 2, message: 'JSON câu hỏi không hợp lệ, bỏ qua trường này' });
+          }
+        }
+
+        if (!word || !pinyin || !meaning || !partOfSpeech) {
+          throw new Error('Thiếu trường bắt buộc (word, pinyin, meaning, partOfSpeech)');
+        }
+
+        const existing = await Vocabulary.findOne({ word });
+        if (existing) {
+          existing.pinyin = pinyin;
+          existing.zhuyin = zhuyin;
+          existing.meaning = meaning;
+          existing.imageUrl = imageUrl;
+          existing.partOfSpeech = partOfSpeech;
+          existing.level = level;
+          existing.topics = topics;
+          existing.examples = examples;
+          existing.synonyms = synonyms;
+          existing.antonyms = antonyms;
+          if (audioUrl) existing.audioUrl = audioUrl;
+          if (questions && questions.length > 0) existing.questions = questions as any;
+          await existing.save();
+          updated++;
+        } else {
+          await Vocabulary.create({
+            word,
+            pinyin,
+            zhuyin,
+            meaning,
+            imageUrl,
+            partOfSpeech,
+            level,
+            topics,
+            examples,
+            synonyms,
+            antonyms,
+            audioUrl,
+            questions
+          });
+          created++;
+        }
+      } catch (e: any) {
+        errors.push({ row: i + 2, message: e?.message || 'Lỗi không rõ' });
+      }
+    }
+
+    return res.json({ 
+      message: 'Import hoàn tất', 
+      created, 
+      updated, 
+      errors,
+      createdTopics: createdTopics.length > 0 ? createdTopics : undefined
+    });
+  } catch (error) {
+    console.error('importVocabulariesExcel error:', error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
 export const updateVocabulary = async (req: any, res: Response) => {
   try {
     const { id } = req.params;
@@ -110,15 +334,24 @@ export const updateVocabulary = async (req: any, res: Response) => {
 
     console.log('Update data received:', updateData);
 
-    // Handle file upload if present
-    if (req.file) {
+    // Handle file uploads if present
+    if (req.files) {
       try {
-        updateData.audioUrl = req.file.path; // Cloudinary URL
-        console.log('Audio file uploaded successfully:', req.file.path);
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+        
+        if (files.audio && files.audio[0]) {
+          updateData.audioUrl = files.audio[0].path; // Cloudinary URL
+          console.log('Audio file uploaded successfully:', files.audio[0].path);
+        }
+        
+        if (files.image && files.image[0]) {
+          updateData.imageUrl = files.image[0].path; // Cloudinary URL
+          console.log('Image file uploaded successfully:', files.image[0].path);
+        }
       } catch (uploadError) {
         console.error('Cloudinary upload error:', uploadError);
         return res.status(500).json({ 
-          message: 'Failed to upload audio file',
+          message: 'Failed to upload file',
           error: uploadError 
         });
       }
@@ -144,9 +377,9 @@ export const updateVocabulary = async (req: any, res: Response) => {
     console.log('Filtered data:', filteredData);
 
     // Ensure required fields are present
-    if (!filteredData.word || !filteredData.pronunciation || !filteredData.meaning || !filteredData.partOfSpeech) {
+    if (!filteredData.word || !filteredData.pinyin || !filteredData.meaning || !filteredData.partOfSpeech) {
       return res.status(400).json({ 
-        message: 'Missing required fields: word, pronunciation, meaning, partOfSpeech',
+        message: 'Missing required fields: word, pinyin, meaning, partOfSpeech',
         received: filteredData
       });
     }

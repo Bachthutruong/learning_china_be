@@ -1,12 +1,14 @@
 import express from 'express';
 import { body } from 'express-validator';
 import multer from 'multer';
-import cloudinaryUpload from '../middleware/upload';
+import { cloudinaryUpload } from '../middleware/cloudinaryUpload';
 import proficiencyQuestionRoutes from './proficiencyQuestions';
 import { 
   createVocabulary,
   updateVocabulary,
   deleteVocabulary,
+  downloadVocabularyTemplate,
+  importVocabulariesExcel,
   createTopic,
   updateTopic,
   deleteTopic,
@@ -52,7 +54,8 @@ const upload = multer({
 // Validation rules
 const vocabularyValidation = [
   body('word').trim().isLength({ min: 1 }),
-  body('pronunciation').trim().isLength({ min: 1 }),
+  body('pinyin').trim().isLength({ min: 1 }),
+  body('zhuyin').optional().trim(),
   body('meaning').trim().isLength({ min: 1 }),
   body('level').isInt({ min: 1, max: 6 }),
   body('topics').custom((value) => {
@@ -163,7 +166,11 @@ router.get('/activities', getAdminActivities);
 
 // Vocabulary management
 router.get('/vocabularies', getAllVocabularies);
-router.post('/vocabularies', cloudinaryUpload.single('audio'), (err, req, res, next) => {
+router.get('/vocabularies/template', downloadVocabularyTemplate);
+router.post('/vocabularies', cloudinaryUpload.fields([
+  { name: 'audio', maxCount: 1 },
+  { name: 'image', maxCount: 1 }
+]), (err, req, res, next) => {
   if (err) {
     console.error('Upload error:', err);
     return res.status(400).json({ message: 'File upload failed', error: err.message });
@@ -171,7 +178,10 @@ router.post('/vocabularies', cloudinaryUpload.single('audio'), (err, req, res, n
   next();
 }, vocabularyValidation, createVocabulary);
 
-router.put('/vocabularies/:id', cloudinaryUpload.single('audio'), (err, req, res, next) => {
+router.put('/vocabularies/:id', cloudinaryUpload.fields([
+  { name: 'audio', maxCount: 1 },
+  { name: 'image', maxCount: 1 }
+]), (err, req, res, next) => {
   if (err) {
     console.error('Upload error:', err);
     return res.status(400).json({ message: 'File upload failed', error: err.message });
@@ -179,6 +189,10 @@ router.put('/vocabularies/:id', cloudinaryUpload.single('audio'), (err, req, res
   next();
 }, vocabularyValidation, updateVocabulary);
 router.delete('/vocabularies/:id', deleteVocabulary);
+
+// Import vocabularies via Excel (simple memory upload)
+const memoryUpload = multer({ storage: multer.memoryStorage() });
+router.post('/vocabularies/import', memoryUpload.single('file'), importVocabulariesExcel);
 
 // Topic management
 router.get('/topics', getAllTopics);

@@ -13,6 +13,11 @@ export interface IQuestionBank extends Document {
   blanks?: { position: number; correctAnswer: string }[];
   sentences?: string[];
   correctOrder?: number[];
+  subQuestions?: Array<{
+    question: string;
+    options: string[];
+    correctAnswer: number;
+  }>;
   tags?: string[];
 }
 
@@ -31,6 +36,11 @@ const QuestionBankSchema = new Schema<IQuestionBank>({
   blanks: [{ position: Number, correctAnswer: String }],
   sentences: [String],
   correctOrder: [Number],
+  subQuestions: [{
+    question: { type: String, required: true },
+    options: [String],
+    correctAnswer: { type: Number, required: true }
+  }],
   tags: [String]
 }, {
   timestamps: true

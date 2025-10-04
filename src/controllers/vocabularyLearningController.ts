@@ -19,7 +19,8 @@ export const getVocabularies = async (req: Request, res: Response) => {
       query.$or = [
         { word: { $regex: search, $options: 'i' } },
         { meaning: { $regex: search, $options: 'i' } },
-        { pronunciation: { $regex: search, $options: 'i' } }
+        { pinyin: { $regex: search, $options: 'i' } },
+        { zhuyin: { $regex: search, $options: 'i' } }
       ]
     }
 
@@ -445,7 +446,8 @@ export const getAvailableVocabularies = async (req: Request, res: Response) => {
       query.$or = [
         { word: { $regex: search, $options: 'i' } },
         { meaning: { $regex: search, $options: 'i' } },
-        { pronunciation: { $regex: search, $options: 'i' } }
+        { pinyin: { $regex: search, $options: 'i' } },
+        { zhuyin: { $regex: search, $options: 'i' } }
       ]
     }
 

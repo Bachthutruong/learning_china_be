@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const express_validator_1 = require("express-validator");
 const multer_1 = __importDefault(require("multer"));
-const upload_1 = __importDefault(require("../middleware/upload"));
+const cloudinaryUpload_1 = require("../middleware/cloudinaryUpload");
 const proficiencyQuestions_1 = __importDefault(require("./proficiencyQuestions"));
 const adminController_1 = require("../controllers/adminController");
 const auth_1 = require("../middleware/auth");
@@ -21,7 +21,8 @@ const upload = (0, multer_1.default)({
 // Validation rules
 const vocabularyValidation = [
     (0, express_validator_1.body)('word').trim().isLength({ min: 1 }),
-    (0, express_validator_1.body)('pronunciation').trim().isLength({ min: 1 }),
+    (0, express_validator_1.body)('pinyin').trim().isLength({ min: 1 }),
+    (0, express_validator_1.body)('zhuyin').optional().trim(),
     (0, express_validator_1.body)('meaning').trim().isLength({ min: 1 }),
     (0, express_validator_1.body)('level').isInt({ min: 1, max: 6 }),
     (0, express_validator_1.body)('topics').custom((value) => {
@@ -133,14 +134,21 @@ router.get('/stats', adminController_1.getAdminStats);
 router.get('/activities', adminController_1.getAdminActivities);
 // Vocabulary management
 router.get('/vocabularies', adminController_1.getAllVocabularies);
-router.post('/vocabularies', upload_1.default.single('audio'), (err, req, res, next) => {
+router.get('/vocabularies/template', adminController_1.downloadVocabularyTemplate);
+router.post('/vocabularies', cloudinaryUpload_1.cloudinaryUpload.fields([
+    { name: 'audio', maxCount: 1 },
+    { name: 'image', maxCount: 1 }
+]), (err, req, res, next) => {
     if (err) {
         console.error('Upload error:', err);
         return res.status(400).json({ message: 'File upload failed', error: err.message });
     }
     next();
 }, vocabularyValidation, adminController_1.createVocabulary);
-router.put('/vocabularies/:id', upload_1.default.single('audio'), (err, req, res, next) => {
+router.put('/vocabularies/:id', cloudinaryUpload_1.cloudinaryUpload.fields([
+    { name: 'audio', maxCount: 1 },
+    { name: 'image', maxCount: 1 }
+]), (err, req, res, next) => {
     if (err) {
         console.error('Upload error:', err);
         return res.status(400).json({ message: 'File upload failed', error: err.message });
@@ -148,6 +156,9 @@ router.put('/vocabularies/:id', upload_1.default.single('audio'), (err, req, res
     next();
 }, vocabularyValidation, adminController_1.updateVocabulary);
 router.delete('/vocabularies/:id', adminController_1.deleteVocabulary);
+// Import vocabularies via Excel (simple memory upload)
+const memoryUpload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
+router.post('/vocabularies/import', memoryUpload.single('file'), adminController_1.importVocabulariesExcel);
 // Topic management
 router.get('/topics', adminController_1.getAllTopics);
 router.post('/topics', topicValidation, adminController_1.createTopic);
