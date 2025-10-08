@@ -10,3 +10,4 @@ router.post('/', authenticate as any, performCheckin as any)
 export default router
 
 
+
