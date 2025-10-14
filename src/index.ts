@@ -23,6 +23,7 @@ import paymentConfigRoutes from './routes/paymentConfig';
 import coinTransactionRoutes from './routes/coinTransaction';
 import uploadRoutes from './routes/upload';
 import checkinRoutes from './routes/checkin';
+import userCompetitionRoutes from './routes/userCompetition';
 
 // Load environment variables
 dotenv.config();
@@ -77,6 +78,7 @@ app.use('/api/payment-config', paymentConfigRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/checkin', checkinRoutes);
 app.use('/api/coin-transactions', coinTransactionRoutes);
+app.use('/api/user-competitions', userCompetitionRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

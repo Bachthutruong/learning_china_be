@@ -27,6 +27,7 @@ const paymentConfig_1 = __importDefault(require("./routes/paymentConfig"));
 const coinTransaction_1 = __importDefault(require("./routes/coinTransaction"));
 const upload_1 = __importDefault(require("./routes/upload"));
 const checkin_1 = __importDefault(require("./routes/checkin"));
+const userCompetition_1 = __importDefault(require("./routes/userCompetition"));
 // Load environment variables
 dotenv_1.default.config();
 // Debug: Check if JWT_SECRET is loaded
@@ -72,6 +73,7 @@ app.use('/api/payment-config', paymentConfig_1.default);
 app.use('/api/upload', upload_1.default);
 app.use('/api/checkin', checkin_1.default);
 app.use('/api/coin-transactions', coinTransaction_1.default);
+app.use('/api/user-competitions', userCompetition_1.default);
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ message: 'Server is running' });
