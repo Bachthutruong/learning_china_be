@@ -3,6 +3,7 @@ import Test from '../models/Test';
 import User from '../models/User';
 import Question from '../models/Question';
 import { validationResult } from 'express-validator';
+import TestHistory from '../models/TestHistory';
 import { checkAndUpdateUserLevel } from '../utils/levelUtils';
 
 export const getTests = async (req: any, res: Response) => {
@@ -202,45 +203,109 @@ export const submitTest = async (req: any, res: Response) => {
     const correctQuestions: any[] = [];
     const wrongQuestions: any[] = [];
     
-    // Check each answer
-    answers.forEach((userAnswer: any, index: number) => {
+    // Check each answer and update per-question progress
+    for (let index = 0; index < answers.length; index++) {
+      const userAnswer = answers[index];
       const question = questions.find((q: any) => q._id.toString() === questionIds[index]);
-      if (!question) return;
-      
-      const isCorrect = checkAnswer(question, userAnswer);
-      
+      if (!question) continue;
+
+      const { isCorrect, canonicalCorrect } = evaluateAnswer(question, userAnswer);
+      // Normalize primitives to numbers for choices
+      const normalizedUserAnswer = Array.isArray(userAnswer)
+        ? userAnswer.map((v: any) => (typeof v === 'string' && /^\d+$/.test(v) ? parseInt(v, 10) : v))
+        : (typeof userAnswer === 'string' && /^\d+$/.test(userAnswer) ? parseInt(userAnswer, 10) : userAnswer)
+
       if (isCorrect) {
         correctCount++;
         correctQuestions.push({
           questionId: question._id,
           question: question.question,
-          userAnswer,
-          correctAnswer: question.correctAnswer,
+          userAnswer: normalizedUserAnswer,
+          correctAnswer: canonicalCorrect,
+          options: question.options || undefined,
           explanation: question.explanation
         });
       } else {
         wrongQuestions.push({
           questionId: question._id,
           question: question.question,
-          userAnswer,
-          correctAnswer: question.correctAnswer,
+          userAnswer: normalizedUserAnswer,
+          correctAnswer: canonicalCorrect,
+          options: question.options || undefined,
           explanation: question.explanation
         });
       }
-    });
+
+      // Persist user progress
+      try {
+        const UserQuestionProgress = (await import('../models/UserQuestionProgress')).default;
+        await UserQuestionProgress.findOneAndUpdate(
+          { userId: user._id, questionId: question._id },
+          { $set: { correct: isCorrect, lastAttemptAt: new Date() }, $inc: { attempts: 1 } },
+          { upsert: true }
+        );
+      } catch (e) {
+        console.error('Update UserQuestionProgress failed:', e);
+      }
+    }
     
-    // Calculate rewards: 100 coins + 100 exp per correct answer
-    const totalCoinsReward = correctCount * 100;
-    const totalExpReward = correctCount * 100;
+    // Calculate rewards: 10 coins + 100 exp per correct answer
+    const totalCoinsReward = correctCount * 10;
+    const totalExpReward = correctCount * 10;
     
     // Update user stats
     user.coins += totalCoinsReward;
     user.experience += totalExpReward;
     await user.save();
-    
+
+    // Record coin transaction
+    try {
+      const CoinTransaction = (await import('../models/CoinTransaction')).default;
+      await CoinTransaction.create({
+        userId: user._id,
+        amount: totalCoinsReward,
+        type: 'earn',
+        category: 'test',
+        description: `Thưởng làm đúng ${correctCount}/${totalQuestions} câu hỏi`,
+        balanceAfter: user.coins,
+        metadata: { correctCount, totalQuestions }
+      });
+    } catch (e) {
+      console.error('Failed to record coin transaction (test):', e);
+    }
+
+    // Persist test history for admin viewing (await to ensure availability)
+    try {
+      await TestHistory.create({
+        userId: user._id,
+        level: user.level,
+        totalQuestions,
+        correctCount,
+        wrongCount: totalQuestions - correctCount,
+        rewards: { coins: totalCoinsReward, experience: totalExpReward },
+        details: [...correctQuestions.map((d: any) => ({
+          questionId: d.questionId,
+          question: d.question,
+          userAnswer: d.userAnswer,
+          correctAnswer: d.correctAnswer,
+          options: d.options,
+          correct: true
+        })), ...wrongQuestions.map((d: any) => ({
+          questionId: d.questionId,
+          question: d.question,
+          userAnswer: d.userAnswer,
+          correctAnswer: d.correctAnswer,
+          options: d.options,
+          correct: false
+        }))]
+      })
+    } catch (err) {
+      console.error('Failed to save test history:', err)
+    }
+
     // Check for level up
     const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
-    
+
     res.json({
       message: 'Test hoàn thành!',
       report: {
@@ -269,36 +334,40 @@ export const submitTest = async (req: any, res: Response) => {
 };
 
 // Helper function to check if answer is correct
-function checkAnswer(question: any, userAnswer: any): boolean {
+function evaluateAnswer(question: any, userAnswer: any): { isCorrect: boolean, canonicalCorrect: any } {
   if (question.questionType === 'multiple-choice') {
     if (Array.isArray(question.correctAnswer)) {
-      // Multiple correct answers
       if (Array.isArray(userAnswer)) {
-        return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
+        const isCorrect = JSON.stringify([...userAnswer].sort()) === JSON.stringify([...question.correctAnswer].sort())
+        return { isCorrect, canonicalCorrect: question.correctAnswer }
       }
-      return false;
+      return { isCorrect: false, canonicalCorrect: question.correctAnswer }
     } else {
-      // Single correct answer
-      return userAnswer === question.correctAnswer;
+      return { isCorrect: userAnswer === question.correctAnswer, canonicalCorrect: question.correctAnswer }
     }
-  } else if (question.questionType === 'fill-blank') {
-    return userAnswer?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim();
-  } else if (question.questionType === 'reading-comprehension') {
-    if (Array.isArray(question.correctAnswer)) {
-      // Multiple correct answers
-      if (Array.isArray(userAnswer)) {
-        return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
-      }
-      return false;
-    } else {
-      // Single correct answer
-      return userAnswer === question.correctAnswer;
-    }
-  } else if (question.questionType === 'sentence-order') {
-    return JSON.stringify(userAnswer) === JSON.stringify(question.correctAnswer);
   }
-  
-  return false;
+
+  if (question.questionType === 'fill-blank') {
+    const ca = typeof question.correctAnswer === 'string' ? question.correctAnswer : ''
+    return { isCorrect: String(userAnswer || '').trim().toLowerCase() === ca.trim().toLowerCase(), canonicalCorrect: ca }
+  }
+
+  if (question.questionType === 'reading-comprehension') {
+    const correctArray = Array.isArray(question.subQuestions) ? question.subQuestions.map((sq: any) => sq.correctAnswer) : []
+    if (Array.isArray(userAnswer)) {
+      const isCorrect = correctArray.length === userAnswer.length && correctArray.every((v: any, i: number) => v === userAnswer[i])
+      return { isCorrect, canonicalCorrect: correctArray }
+    }
+    return { isCorrect: false, canonicalCorrect: correctArray }
+  }
+
+  if (question.questionType === 'sentence-order') {
+    const correctOrder = Array.isArray(question.correctOrder) ? question.correctOrder : question.correctAnswer
+    const isCorrect = JSON.stringify(userAnswer) === JSON.stringify(correctOrder)
+    return { isCorrect, canonicalCorrect: correctOrder }
+  }
+
+  return { isCorrect: false, canonicalCorrect: question.correctAnswer }
 }
 
 export const getTestByLevel = async (req: any, res: Response) => {

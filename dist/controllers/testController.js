@@ -1,4 +1,37 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,6 +41,7 @@ const Test_1 = __importDefault(require("../models/Test"));
 const User_1 = __importDefault(require("../models/User"));
 const Question_1 = __importDefault(require("../models/Question"));
 const express_validator_1 = require("express-validator");
+const TestHistory_1 = __importDefault(require("../models/TestHistory"));
 const levelUtils_1 = require("../utils/levelUtils");
 const getTests = async (req, res) => {
     try {
@@ -183,19 +217,25 @@ const submitTest = async (req, res) => {
         let totalQuestions = answers.length;
         const correctQuestions = [];
         const wrongQuestions = [];
-        // Check each answer
-        answers.forEach((userAnswer, index) => {
+        // Check each answer and update per-question progress
+        for (let index = 0; index < answers.length; index++) {
+            const userAnswer = answers[index];
             const question = questions.find((q) => q._id.toString() === questionIds[index]);
             if (!question)
-                return;
-            const isCorrect = checkAnswer(question, userAnswer);
+                continue;
+            const { isCorrect, canonicalCorrect } = evaluateAnswer(question, userAnswer);
+            // Normalize primitives to numbers for choices
+            const normalizedUserAnswer = Array.isArray(userAnswer)
+                ? userAnswer.map((v) => (typeof v === 'string' && /^\d+$/.test(v) ? parseInt(v, 10) : v))
+                : (typeof userAnswer === 'string' && /^\d+$/.test(userAnswer) ? parseInt(userAnswer, 10) : userAnswer);
             if (isCorrect) {
                 correctCount++;
                 correctQuestions.push({
                     questionId: question._id,
                     question: question.question,
-                    userAnswer,
-                    correctAnswer: question.correctAnswer,
+                    userAnswer: normalizedUserAnswer,
+                    correctAnswer: canonicalCorrect,
+                    options: question.options || undefined,
                     explanation: question.explanation
                 });
             }
@@ -203,19 +243,73 @@ const submitTest = async (req, res) => {
                 wrongQuestions.push({
                     questionId: question._id,
                     question: question.question,
-                    userAnswer,
-                    correctAnswer: question.correctAnswer,
+                    userAnswer: normalizedUserAnswer,
+                    correctAnswer: canonicalCorrect,
+                    options: question.options || undefined,
                     explanation: question.explanation
                 });
             }
-        });
-        // Calculate rewards: 100 coins + 100 exp per correct answer
-        const totalCoinsReward = correctCount * 100;
-        const totalExpReward = correctCount * 100;
+            // Persist user progress
+            try {
+                const UserQuestionProgress = (await Promise.resolve().then(() => __importStar(require('../models/UserQuestionProgress')))).default;
+                await UserQuestionProgress.findOneAndUpdate({ userId: user._id, questionId: question._id }, { $set: { correct: isCorrect, lastAttemptAt: new Date() }, $inc: { attempts: 1 } }, { upsert: true });
+            }
+            catch (e) {
+                console.error('Update UserQuestionProgress failed:', e);
+            }
+        }
+        // Calculate rewards: 10 coins + 100 exp per correct answer
+        const totalCoinsReward = correctCount * 10;
+        const totalExpReward = correctCount * 10;
         // Update user stats
         user.coins += totalCoinsReward;
         user.experience += totalExpReward;
         await user.save();
+        // Record coin transaction
+        try {
+            const CoinTransaction = (await Promise.resolve().then(() => __importStar(require('../models/CoinTransaction')))).default;
+            await CoinTransaction.create({
+                userId: user._id,
+                amount: totalCoinsReward,
+                type: 'earn',
+                category: 'test',
+                description: `Thưởng làm đúng ${correctCount}/${totalQuestions} câu hỏi`,
+                balanceAfter: user.coins,
+                metadata: { correctCount, totalQuestions }
+            });
+        }
+        catch (e) {
+            console.error('Failed to record coin transaction (test):', e);
+        }
+        // Persist test history for admin viewing (await to ensure availability)
+        try {
+            await TestHistory_1.default.create({
+                userId: user._id,
+                level: user.level,
+                totalQuestions,
+                correctCount,
+                wrongCount: totalQuestions - correctCount,
+                rewards: { coins: totalCoinsReward, experience: totalExpReward },
+                details: [...correctQuestions.map((d) => ({
+                        questionId: d.questionId,
+                        question: d.question,
+                        userAnswer: d.userAnswer,
+                        correctAnswer: d.correctAnswer,
+                        options: d.options,
+                        correct: true
+                    })), ...wrongQuestions.map((d) => ({
+                        questionId: d.questionId,
+                        question: d.question,
+                        userAnswer: d.userAnswer,
+                        correctAnswer: d.correctAnswer,
+                        options: d.options,
+                        correct: false
+                    }))]
+            });
+        }
+        catch (err) {
+            console.error('Failed to save test history:', err);
+        }
         // Check for level up
         const levelResult = await (0, levelUtils_1.checkAndUpdateUserLevel)(user._id.toString());
         res.json({
@@ -247,40 +341,37 @@ const submitTest = async (req, res) => {
 };
 exports.submitTest = submitTest;
 // Helper function to check if answer is correct
-function checkAnswer(question, userAnswer) {
+function evaluateAnswer(question, userAnswer) {
     if (question.questionType === 'multiple-choice') {
         if (Array.isArray(question.correctAnswer)) {
-            // Multiple correct answers
             if (Array.isArray(userAnswer)) {
-                return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
+                const isCorrect = JSON.stringify([...userAnswer].sort()) === JSON.stringify([...question.correctAnswer].sort());
+                return { isCorrect, canonicalCorrect: question.correctAnswer };
             }
-            return false;
+            return { isCorrect: false, canonicalCorrect: question.correctAnswer };
         }
         else {
-            // Single correct answer
-            return userAnswer === question.correctAnswer;
+            return { isCorrect: userAnswer === question.correctAnswer, canonicalCorrect: question.correctAnswer };
         }
     }
-    else if (question.questionType === 'fill-blank') {
-        return userAnswer?.toLowerCase().trim() === question.correctAnswer?.toLowerCase().trim();
+    if (question.questionType === 'fill-blank') {
+        const ca = typeof question.correctAnswer === 'string' ? question.correctAnswer : '';
+        return { isCorrect: String(userAnswer || '').trim().toLowerCase() === ca.trim().toLowerCase(), canonicalCorrect: ca };
     }
-    else if (question.questionType === 'reading-comprehension') {
-        if (Array.isArray(question.correctAnswer)) {
-            // Multiple correct answers
-            if (Array.isArray(userAnswer)) {
-                return JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correctAnswer.sort());
-            }
-            return false;
+    if (question.questionType === 'reading-comprehension') {
+        const correctArray = Array.isArray(question.subQuestions) ? question.subQuestions.map((sq) => sq.correctAnswer) : [];
+        if (Array.isArray(userAnswer)) {
+            const isCorrect = correctArray.length === userAnswer.length && correctArray.every((v, i) => v === userAnswer[i]);
+            return { isCorrect, canonicalCorrect: correctArray };
         }
-        else {
-            // Single correct answer
-            return userAnswer === question.correctAnswer;
-        }
+        return { isCorrect: false, canonicalCorrect: correctArray };
     }
-    else if (question.questionType === 'sentence-order') {
-        return JSON.stringify(userAnswer) === JSON.stringify(question.correctAnswer);
+    if (question.questionType === 'sentence-order') {
+        const correctOrder = Array.isArray(question.correctOrder) ? question.correctOrder : question.correctAnswer;
+        const isCorrect = JSON.stringify(userAnswer) === JSON.stringify(correctOrder);
+        return { isCorrect, canonicalCorrect: correctOrder };
     }
-    return false;
+    return { isCorrect: false, canonicalCorrect: question.correctAnswer };
 }
 const getTestByLevel = async (req, res) => {
     try {

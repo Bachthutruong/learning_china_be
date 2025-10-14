@@ -40,6 +40,7 @@ import {
   getAdminActivities
 } from '../controllers/adminController';
 import { authenticate, authorize } from '../middleware/auth';
+import TestHistory from '../models/TestHistory';
 
 const router = express.Router();
 
@@ -245,6 +246,25 @@ router.delete('/users/:id', authenticate, authorize('admin'), deleteUser);
 import { getAllPaymentConfigs } from '../controllers/paymentConfigController';
 
 router.get('/payment-configs', authenticate, authorize('admin'), getAllPaymentConfigs);
+
+// Test history (admin)
+router.get('/test-histories', async (req: any, res) => {
+  try {
+    const { userId, page = 1, limit = 20 } = req.query;
+    const query: any = {};
+    if (userId) query.userId = userId;
+    const items = await TestHistory.find(query)
+      .populate('userId', 'name email')
+      .sort({ createdAt: -1 })
+      .skip((Number(page) - 1) * Number(limit))
+      .limit(Number(limit));
+    const total = await TestHistory.countDocuments(query);
+    res.json({ items, total, page: Number(page), totalPages: Math.ceil(total / Number(limit)) });
+  } catch (e) {
+    console.error('List test histories error:', e);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 export default router;
 

@@ -170,7 +170,7 @@ exports.getAllReports = getAllReports;
 const updateReportStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const { status, adminNotes } = req.body;
+        const { status, adminNotes, rewardExperience, rewardCoins } = req.body;
         const normalizedStatus = status === 'approved' ? 'reviewed' : status;
         if (!['pending', 'reviewed', 'resolved', 'rejected'].includes(normalizedStatus)) {
             return res.status(400).json({ message: 'Trạng thái không hợp lệ' });
@@ -184,14 +184,22 @@ const updateReportStatus = async (req, res) => {
             report.adminNotes = adminNotes;
         }
         await report.save();
-        // Fixed reward when a report is approved/reviewed
+        // Apply rewards when a report is approved/reviewed
         if (normalizedStatus === 'reviewed') {
             try {
                 const User = require('../models/User').default;
                 const user = await User.findById(report.userId);
                 if (user) {
-                    user.experience += 5;
-                    user.coins += 5;
+                    const defaultXp = 0.5;
+                    const defaultCoins = 0.5;
+                    const xp = typeof rewardExperience === 'number' && !Number.isNaN(rewardExperience)
+                        ? rewardExperience
+                        : defaultXp;
+                    const coins = typeof rewardCoins === 'number' && !Number.isNaN(rewardCoins)
+                        ? rewardCoins
+                        : defaultCoins;
+                    user.experience += xp;
+                    user.coins += coins;
                     await user.save();
                 }
             }

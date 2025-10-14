@@ -24,6 +24,7 @@ const vocabularyLearning_1 = __importDefault(require("./routes/vocabularyLearnin
 const UserVocabulary_1 = require("./models/UserVocabulary");
 const coinPurchase_1 = __importDefault(require("./routes/coinPurchase"));
 const paymentConfig_1 = __importDefault(require("./routes/paymentConfig"));
+const coinTransaction_1 = __importDefault(require("./routes/coinTransaction"));
 const upload_1 = __importDefault(require("./routes/upload"));
 const checkin_1 = __importDefault(require("./routes/checkin"));
 // Load environment variables
@@ -70,6 +71,7 @@ app.use('/api/coin-purchases', coinPurchase_1.default);
 app.use('/api/payment-config', paymentConfig_1.default);
 app.use('/api/upload', upload_1.default);
 app.use('/api/checkin', checkin_1.default);
+app.use('/api/coin-transactions', coinTransaction_1.default);
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ message: 'Server is running' });

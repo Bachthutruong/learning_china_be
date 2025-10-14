@@ -174,6 +174,20 @@ export const approveCoinPurchase = async (req: any, res: Response) => {
     if (user) {
       user.coins += purchase.coins;
       await user.save();
+      try {
+        const CoinTransaction = (await import('../models/CoinTransaction')).default;
+        await CoinTransaction.create({
+          userId: user._id,
+          amount: purchase.coins,
+          type: 'earn',
+          category: 'purchase_approved',
+          description: 'Admin duyệt nạp xu',
+          balanceAfter: user.coins,
+          metadata: { purchaseId: purchase._id }
+        });
+      } catch (e) {
+        console.error('Failed to record coin transaction (purchase approved):', e);
+      }
     }
     
     res.json({

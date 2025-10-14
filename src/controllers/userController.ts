@@ -54,6 +54,20 @@ export const checkIn = async (req: any, res: Response) => {
     user.lastCheckIn = today;
     
     await user.save();
+    try {
+      const CoinTransaction = (await import('../models/CoinTransaction')).default;
+      await CoinTransaction.create({
+        userId: user._id,
+        amount: finalCoins,
+        type: 'earn',
+        category: 'checkin',
+        description: `Điểm danh. Streak ${user.streak}`,
+        balanceAfter: user.coins,
+        metadata: { streak: user.streak, milestoneBonus }
+      });
+    } catch (e) {
+      console.error('Failed to record coin transaction (checkin):', e);
+    }
     
     // Check for level up using dynamic level requirements
     const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());
@@ -155,6 +169,20 @@ export const purchaseCoins = async (req: any, res: Response) => {
     // Add coins to user
     user.coins += coins;
     await user.save();
+    try {
+      const CoinTransaction = (await import('../models/CoinTransaction')).default;
+      await CoinTransaction.create({
+        userId: user._id,
+        amount: coins,
+        type: 'earn',
+        category: 'purchase',
+        description: `Mua xu: +${coins}`,
+        balanceAfter: user.coins,
+        metadata: { paymentId: payment._id, amount, currency }
+      });
+    } catch (e) {
+      console.error('Failed to record coin transaction (purchase):', e);
+    }
 
     res.json({
       message: 'Coins purchased successfully',

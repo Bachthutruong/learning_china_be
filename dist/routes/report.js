@@ -9,6 +9,8 @@ const reportController_1 = require("../controllers/reportController");
 const router = express_1.default.Router();
 // User routes
 router.post('/', auth_1.authenticate, reportController_1.createReport);
+// Provide default GET / to fetch current user's reports (fixes 404 on /api/reports)
+router.get('/', auth_1.authenticate, reportController_1.getUserReports);
 router.get('/my-reports', auth_1.authenticate, reportController_1.getUserReports);
 // Admin routes
 router.get('/admin', auth_1.authenticate, (0, auth_1.authorize)('admin'), reportController_1.getAllReports);

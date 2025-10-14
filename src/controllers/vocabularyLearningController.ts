@@ -354,6 +354,20 @@ export const completeVocabularyLearning = async (req: Request, res: Response) =>
     user.experience += rewards.experience;
     user.coins += rewards.coins;
     await user.save();
+    try {
+      const CoinTransaction = (await import('../models/CoinTransaction')).default;
+      await CoinTransaction.create({
+        userId: user._id,
+        amount: rewards.coins,
+        type: 'earn',
+        category: 'vocabulary',
+        description: wasAlreadyLearned ? 'Ôn lại từ vựng' : 'Học từ vựng mới',
+        balanceAfter: user.coins,
+        metadata: { vocabularyId, personalTopicId, quizScore }
+      });
+    } catch (e) {
+      console.error('Failed to record coin transaction (vocabulary):', e);
+    }
 
     // Check for level up
     const levelResult = await checkAndUpdateUserLevel((user._id as any).toString());

@@ -20,6 +20,7 @@ import vocabularyLearningRoutes from './routes/vocabularyLearning';
 import { UserVocabulary } from './models/UserVocabulary';
 import coinPurchaseRoutes from './routes/coinPurchase';
 import paymentConfigRoutes from './routes/paymentConfig';
+import coinTransactionRoutes from './routes/coinTransaction';
 import uploadRoutes from './routes/upload';
 import checkinRoutes from './routes/checkin';
 
@@ -75,6 +76,7 @@ app.use('/api/coin-purchases', coinPurchaseRoutes);
 app.use('/api/payment-config', paymentConfigRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/checkin', checkinRoutes);
+app.use('/api/coin-transactions', coinTransactionRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

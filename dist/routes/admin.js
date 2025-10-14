@@ -10,6 +10,7 @@ const cloudinaryUpload_1 = require("../middleware/cloudinaryUpload");
 const proficiencyQuestions_1 = __importDefault(require("./proficiencyQuestions"));
 const adminController_1 = require("../controllers/adminController");
 const auth_1 = require("../middleware/auth");
+const TestHistory_1 = __importDefault(require("../models/TestHistory"));
 const router = express_1.default.Router();
 // Configure multer for handling multipart/form-data
 const upload = (0, multer_1.default)({
@@ -201,4 +202,24 @@ router.delete('/users/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'),
 // Payment configuration management
 const paymentConfigController_1 = require("../controllers/paymentConfigController");
 router.get('/payment-configs', auth_1.authenticate, (0, auth_1.authorize)('admin'), paymentConfigController_1.getAllPaymentConfigs);
+// Test history (admin)
+router.get('/test-histories', async (req, res) => {
+    try {
+        const { userId, page = 1, limit = 20 } = req.query;
+        const query = {};
+        if (userId)
+            query.userId = userId;
+        const items = await TestHistory_1.default.find(query)
+            .populate('userId', 'name email')
+            .sort({ createdAt: -1 })
+            .skip((Number(page) - 1) * Number(limit))
+            .limit(Number(limit));
+        const total = await TestHistory_1.default.countDocuments(query);
+        res.json({ items, total, page: Number(page), totalPages: Math.ceil(total / Number(limit)) });
+    }
+    catch (e) {
+        console.error('List test histories error:', e);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 exports.default = router;

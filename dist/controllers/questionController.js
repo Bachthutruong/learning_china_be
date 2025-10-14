@@ -148,6 +148,21 @@ const submitAnswer = async (req, res) => {
             user.experience += 100;
             user.coins += 100;
             await user.save();
+            try {
+                const CoinTransaction = (await Promise.resolve().then(() => __importStar(require('../models/CoinTransaction')))).default;
+                await CoinTransaction.create({
+                    userId: user._id,
+                    amount: 100,
+                    type: 'earn',
+                    category: 'question',
+                    description: `Trả lời đúng câu hỏi ${questionId}`,
+                    balanceAfter: user.coins,
+                    metadata: { questionId }
+                });
+            }
+            catch (e) {
+                console.error('Failed to record coin transaction (question):', e);
+            }
             // Check for level up using dynamic level requirements
             const levelResult = await (0, levelUtils_1.checkAndUpdateUserLevel)(user._id.toString());
         }
