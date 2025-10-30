@@ -17,7 +17,7 @@ export interface IUserCompetition extends Document {
   startTime: Date;
   endTime: Date;
   cost: number; // 10000 coins
-  level: number; // creator's level
+  level: number; // competition level (captured at creation time, independent of creator's current level)
   questions: IUserCompetitionQuestion[];
   participants: mongoose.Types.ObjectId[];
   pendingRequests: mongoose.Types.ObjectId[];

@@ -43,6 +43,7 @@ const UserCompetitionResult_1 = __importDefault(require("../models/UserCompetiti
 const User_1 = __importDefault(require("../models/User"));
 const Question_1 = __importDefault(require("../models/Question"));
 const express_validator_1 = require("express-validator");
+const competitionRankingController_1 = require("./competitionRankingController");
 // Create a new user competition
 const createUserCompetition = async (req, res) => {
     try {
@@ -621,12 +622,20 @@ const submitCompetitionAnswers = async (req, res) => {
             .sort({ score: -1, timeSpent: 1 });
         const rank = allResults.findIndex(r => r._id.toString() === result._id.toString()) + 1;
         result.rank = rank;
+        // Calculate points based on rank and competition size
+        const participantsCount = competition.participants.length;
+        const points = await (0, competitionRankingController_1.calculatePoints)(rank, participantsCount);
+        result.points = points;
         try {
             await result.save();
         }
         catch (rankError) {
             console.error('Save rank error:', rankError);
             // Don't fail the request if rank saving fails
+        }
+        // Update user's global ranking
+        if (points > 0) {
+            await (0, competitionRankingController_1.updateUserGlobalRanking)(userId, points);
         }
         res.json({
             message: 'Nộp bài thành công',
@@ -635,7 +644,8 @@ const submitCompetitionAnswers = async (req, res) => {
                 correctAnswers: correctCount,
                 totalQuestions: competition.questions.length,
                 timeSpent: validTimeSpent,
-                rank
+                rank,
+                points
             }
         });
     }

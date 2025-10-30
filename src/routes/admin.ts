@@ -235,12 +235,13 @@ router.put('/competitions/:id', updateCompetition);
 router.delete('/competitions/:id', deleteCompetition);
 
 // Users management
-import { getAllUsers, createUser, updateUser, deleteUser } from '../controllers/userController';
+import { getAllUsers, createUser, updateUser, deleteUser, getLevelExperienceRange } from '../controllers/userController';
 
 router.get('/users', authenticate, authorize('admin'), getAllUsers);
 router.post('/users', authenticate, authorize('admin'), createUser);
 router.put('/users/:id', authenticate, authorize('admin'), updateUser);
 router.delete('/users/:id', authenticate, authorize('admin'), deleteUser);
+router.get('/level/:level/experience-range', authenticate, authorize('admin'), getLevelExperienceRange);
 
 // Payment configuration management
 import { getAllPaymentConfigs } from '../controllers/paymentConfigController';

@@ -5,6 +5,7 @@ import UserCompetitionResult from '../models/UserCompetitionResult';
 import User from '../models/User';
 import Question from '../models/Question';
 import { validationResult } from 'express-validator';
+import { calculatePoints, updateUserGlobalRanking } from './competitionRankingController';
 
 // Create a new user competition
 export const createUserCompetition = async (req: any, res: Response) => {
@@ -687,11 +688,21 @@ export const submitCompetitionAnswers = async (req: any, res: Response) => {
     const rank = allResults.findIndex(r => (r._id as any).toString() === (result._id as any).toString()) + 1;
     result.rank = rank;
     
+    // Calculate points based on rank and competition size
+    const participantsCount = competition.participants.length;
+    const points = await calculatePoints(rank, participantsCount);
+    result.points = points;
+    
     try {
       await result.save();
     } catch (rankError: any) {
       console.error('Save rank error:', rankError);
       // Don't fail the request if rank saving fails
+    }
+    
+    // Update user's global ranking
+    if (points > 0) {
+      await updateUserGlobalRanking(userId, points);
     }
     
     res.json({
@@ -701,7 +712,8 @@ export const submitCompetitionAnswers = async (req: any, res: Response) => {
         correctAnswers: correctCount,
         totalQuestions: competition.questions.length,
         timeSpent: validTimeSpent,
-        rank
+        rank,
+        points
       }
     });
   } catch (error) {

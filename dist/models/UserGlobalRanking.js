@@ -34,79 +34,37 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const UserCompetitionResultSchema = new mongoose_1.Schema({
-    competition: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'UserCompetition',
-        required: [true, 'Competition is required']
-    },
+const UserGlobalRankingSchema = new mongoose_1.Schema({
     user: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'User is required']
+        required: [true, 'User is required'],
+        unique: true
     },
-    score: {
+    totalPoints: {
         type: Number,
-        required: [true, 'Score is required'],
-        min: 0,
-        max: 100
-    },
-    correctAnswers: {
-        type: Number,
-        required: [true, 'Correct answers count is required'],
+        required: true,
+        default: 0,
         min: 0
     },
-    totalQuestions: {
+    competitionsParticipated: {
         type: Number,
-        required: [true, 'Total questions count is required'],
-        min: 1
-    },
-    timeSpent: {
-        type: Number,
-        required: [true, 'Time spent is required'],
+        required: true,
+        default: 0,
         min: 0
     },
-    startedAt: {
+    lastUpdated: {
         type: Date,
-        required: [true, 'Start time is required']
+        default: Date.now
     },
-    completedAt: {
-        type: Date,
-        required: [true, 'Completion time is required']
-    },
-    answers: [{
-            questionIndex: {
-                type: Number,
-                required: true
-            },
-            userAnswer: {
-                type: mongoose_1.Schema.Types.Mixed,
-                default: null
-            },
-            isCorrect: {
-                type: Boolean,
-                required: true
-            },
-            timeSpent: {
-                type: Number,
-                required: true,
-                min: 0
-            }
-        }],
     rank: {
         type: Number,
         min: 1
-    },
-    points: {
-        type: Number,
-        min: 0,
-        default: 0
     }
 }, {
     timestamps: true
 });
-// Ensure one result per user per competition
-UserCompetitionResultSchema.index({ competition: 1, user: 1 }, { unique: true });
-// For efficient leaderboard queries
-UserCompetitionResultSchema.index({ competition: 1, score: -1, timeSpent: 1 });
-exports.default = mongoose_1.default.model('UserCompetitionResult', UserCompetitionResultSchema);
+// Index for efficient ranking queries
+UserGlobalRankingSchema.index({ totalPoints: -1, competitionsParticipated: -1 });
+UserGlobalRankingSchema.index({ user: 1 });
+exports.default = mongoose_1.default.model('UserGlobalRanking', UserGlobalRankingSchema);

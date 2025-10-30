@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.createUser = exports.recalculateLevel = exports.forceRecalculateAllLevels = exports.getProfile = exports.getUserLearningStats = exports.getUserAchievements = exports.getAllUsers = exports.getLeaderboard = exports.getPaymentHistory = exports.purchaseCoins = exports.getUserStats = exports.checkIn = void 0;
+exports.deleteUser = exports.getLevelExperienceRange = exports.updateUser = exports.createUser = exports.recalculateLevel = exports.forceRecalculateAllLevels = exports.getProfile = exports.getUserLearningStats = exports.getUserAchievements = exports.getAllUsers = exports.getLeaderboard = exports.getPaymentHistory = exports.purchaseCoins = exports.getUserStats = exports.checkIn = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const Report_1 = __importDefault(require("../models/Report"));
 const Payment_1 = __importDefault(require("../models/Payment"));
@@ -504,20 +504,79 @@ exports.createUser = createUser;
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, email, level, coins, role, password } = req.body;
+        const { name, email, level, experience, coins, role, password } = req.body;
+        // Get current user first
+        const currentUser = await User_1.default.findById(id);
+        if (!currentUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
         const updateData = {};
         if (name)
             updateData.name = name;
         if (email)
             updateData.email = email;
-        if (level !== undefined)
-            updateData.level = parseInt(level);
         if (coins !== undefined)
             updateData.coins = parseInt(coins);
         if (role)
             updateData.role = role;
         if (password)
             updateData.password = password;
+        // If level is being changed, validate experience is provided and in valid range
+        if (level !== undefined) {
+            const newLevel = parseInt(level);
+            updateData.level = newLevel;
+            // Get Level model to find required experience
+            const Level = (await Promise.resolve().then(() => __importStar(require('../models/Level')))).default;
+            const levels = await Level.find({}).sort({ number: 1 });
+            let requiredExp;
+            let nextLevelExp;
+            if (levels.length > 0) {
+                const levelData = levels.find(l => l.number === newLevel);
+                const nextLevelData = levels.find(l => l.number === newLevel + 1);
+                if (levelData) {
+                    requiredExp = levelData.requiredExperience;
+                    nextLevelExp = nextLevelData?.requiredExperience;
+                }
+                else {
+                    return res.status(400).json({
+                        message: `Level ${newLevel} không tồn tại trong hệ thống`
+                    });
+                }
+            }
+            else {
+                // Fallback to hardcoded levels if database is empty
+                const fallbackLevels = {
+                    1: 0, 2: 100, 3: 300, 4: 600, 5: 1000, 6: 1500
+                };
+                requiredExp = fallbackLevels[newLevel];
+                nextLevelExp = fallbackLevels[newLevel + 1];
+                if (requiredExp === undefined) {
+                    return res.status(400).json({
+                        message: `Level ${newLevel} không hợp lệ`
+                    });
+                }
+            }
+            // If level is changed, experience must be provided
+            if (experience === undefined || experience === null) {
+                const range = nextLevelExp !== undefined ? `${requiredExp} - ${nextLevelExp - 1}` : `${requiredExp}+`;
+                return res.status(400).json({
+                    message: `Khi thay đổi level, vui lòng nhập experience. Khoảng hợp lệ: ${range}`
+                });
+            }
+            const newExp = parseInt(experience);
+            // Validate experience is within valid range for the level
+            if (newExp < requiredExp) {
+                return res.status(400).json({
+                    message: `Experience phải tối thiểu ${requiredExp} cho level ${newLevel}`
+                });
+            }
+            if (nextLevelExp !== undefined && newExp >= nextLevelExp) {
+                return res.status(400).json({
+                    message: `Experience phải nhỏ hơn ${nextLevelExp} cho level ${newLevel} (tối đa ${nextLevelExp - 1})`
+                });
+            }
+            updateData.experience = newExp;
+        }
         const user = await User_1.default.findByIdAndUpdate(id, updateData, { new: true }).select('-password');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -533,6 +592,53 @@ const updateUser = async (req, res) => {
     }
 };
 exports.updateUser = updateUser;
+// Get experience range for a level
+const getLevelExperienceRange = async (req, res) => {
+    try {
+        const { level } = req.params;
+        const levelNumber = parseInt(level);
+        if (isNaN(levelNumber)) {
+            return res.status(400).json({ message: 'Level không hợp lệ' });
+        }
+        // Get Level model
+        const Level = (await Promise.resolve().then(() => __importStar(require('../models/Level')))).default;
+        const levels = await Level.find({}).sort({ number: 1 });
+        let requiredExp;
+        let maxExp;
+        if (levels.length > 0) {
+            const levelData = levels.find(l => l.number === levelNumber);
+            const nextLevelData = levels.find(l => l.number === levelNumber + 1);
+            if (!levelData) {
+                return res.status(404).json({ message: `Level ${levelNumber} không tồn tại` });
+            }
+            requiredExp = levelData.requiredExperience;
+            maxExp = nextLevelData ? nextLevelData.requiredExperience - 1 : undefined;
+        }
+        else {
+            // Fallback to hardcoded levels
+            const fallbackLevels = {
+                1: 0, 2: 100, 3: 300, 4: 600, 5: 1000, 6: 1500
+            };
+            requiredExp = fallbackLevels[levelNumber];
+            const nextExp = fallbackLevels[levelNumber + 1];
+            maxExp = nextExp !== undefined ? nextExp - 1 : undefined;
+            if (requiredExp === undefined) {
+                return res.status(404).json({ message: `Level ${levelNumber} không hợp lệ` });
+            }
+        }
+        res.json({
+            level: levelNumber,
+            minExperience: requiredExp,
+            maxExperience: maxExp,
+            range: maxExp !== undefined ? `${requiredExp} - ${maxExp}` : `${requiredExp}+`
+        });
+    }
+    catch (error) {
+        console.error('Get level experience range error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.getLevelExperienceRange = getLevelExperienceRange;
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;

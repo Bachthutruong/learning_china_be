@@ -16,6 +16,7 @@ export interface IUserCompetitionResult extends Document {
     timeSpent: number; // in seconds
   }[];
   rank?: number;
+  points?: number; // Points earned based on rank and scoring config
 }
 
 const UserCompetitionResultSchema: Schema = new Schema({
@@ -80,6 +81,11 @@ const UserCompetitionResultSchema: Schema = new Schema({
   rank: {
     type: Number,
     min: 1
+  },
+  points: {
+    type: Number,
+    min: 0,
+    default: 0
   }
 }, {
   timestamps: true

@@ -16,6 +16,7 @@
     "seed:master": "ts-node src/scripts/seedMaster.ts",
     "seed:all": "npm run seed:data && npm run seed:advanced && npm run seed:admin",
     "seed:full": "npm run seed:data && npm run seed:advanced",
+    "delete:user-competitions": "ts-node src/scripts/deleteUserCompetitions.ts",
     "test": "jest"
   },
   "dependencies": {

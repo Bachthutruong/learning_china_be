@@ -199,6 +199,7 @@ router.get('/users', auth_1.authenticate, (0, auth_1.authorize)('admin'), userCo
 router.post('/users', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.createUser);
 router.put('/users/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.updateUser);
 router.delete('/users/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.deleteUser);
+router.get('/level/:level/experience-range', auth_1.authenticate, (0, auth_1.authorize)('admin'), userController_1.getLevelExperienceRange);
 // Payment configuration management
 const paymentConfigController_1 = require("../controllers/paymentConfigController");
 router.get('/payment-configs', auth_1.authenticate, (0, auth_1.authorize)('admin'), paymentConfigController_1.getAllPaymentConfigs);
