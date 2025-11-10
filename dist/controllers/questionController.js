@@ -36,13 +36,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.importQuestionsExcel = exports.downloadQuestionTemplate = exports.deleteQuestion = exports.updateQuestion = exports.createQuestion = exports.listQuestions = exports.getProgressSummary = exports.submitAnswer = exports.getAllQuestionsByLevel = exports.getNextQuestions = void 0;
+exports.getQuestionAttemptHistory = exports.importQuestionsExcel = exports.downloadQuestionTemplate = exports.deleteQuestion = exports.updateQuestion = exports.createQuestion = exports.listQuestions = exports.getProgressSummary = exports.submitAnswer = exports.getAllQuestionsByLevel = exports.getNextQuestions = void 0;
 const XLSX = __importStar(require("xlsx"));
 const Question_1 = __importDefault(require("../models/Question"));
 const User_1 = __importDefault(require("../models/User"));
 const UserQuestionProgress_1 = __importDefault(require("../models/UserQuestionProgress"));
 const levelUtils_1 = require("../utils/levelUtils");
 const express_validator_1 = require("express-validator");
+const mongoose_1 = __importDefault(require("mongoose"));
+const TestHistory_1 = __importDefault(require("../models/TestHistory"));
 // Get next questions for user based on level and progress
 const getNextQuestions = async (req, res) => {
     try {
@@ -143,6 +145,30 @@ const submitAnswer = async (req, res) => {
             $set: { correct: isCorrect, lastAttemptAt: new Date() },
             $inc: { attempts: 1 }
         }, { upsert: true, new: true });
+        // Persist a lightweight history record so admin can see per-question attempts
+        try {
+            await TestHistory_1.default.create({
+                userId: user._id,
+                level: user.level,
+                totalQuestions: 1,
+                correctCount: isCorrect ? 1 : 0,
+                wrongCount: isCorrect ? 0 : 1,
+                rewards: { coins: isCorrect ? 100 : 0, experience: isCorrect ? 100 : 0 },
+                details: [{
+                        questionId: question._id,
+                        question: question.question,
+                        userAnswer: answer,
+                        correctAnswer: question.questionType === 'sentence-order'
+                            ? (question.correctOrder ?? [])
+                            : (question.correctAnswer),
+                        options: question.options || undefined,
+                        correct: isCorrect
+                    }]
+            });
+        }
+        catch (e) {
+            console.error('Failed to record question attempt history:', e);
+        }
         // Reward XP and coins when correct
         if (isCorrect) {
             user.experience += 100;
@@ -559,3 +585,67 @@ const importQuestionsExcel = async (req, res) => {
     }
 };
 exports.importQuestionsExcel = importQuestionsExcel;
+// Admin: Get attempt history for a specific question
+const getQuestionAttemptHistory = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { page = 1, limit = 20 } = req.query;
+        if (!mongoose_1.default.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid question id' });
+        }
+        const questionObjectId = new mongoose_1.default.Types.ObjectId(id);
+        const skip = (Number(page) - 1) * Number(limit);
+        const pipeline = [
+            { $match: { 'details.questionId': questionObjectId } },
+            { $unwind: '$details' },
+            { $match: { 'details.questionId': questionObjectId } },
+            { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' } },
+            { $unwind: '$user' },
+            {
+                $project: {
+                    _id: 0,
+                    attemptedAt: '$createdAt',
+                    user: { _id: '$user._id', name: '$user.name', email: '$user.email' },
+                    userAnswer: '$details.userAnswer',
+                    correctAnswer: '$details.correctAnswer',
+                    options: '$details.options',
+                    correct: '$details.correct',
+                }
+            },
+            { $sort: { attemptedAt: -1 } },
+            {
+                $facet: {
+                    items: [{ $skip: skip }, { $limit: Number(limit) }],
+                    stats: [
+                        {
+                            $group: {
+                                _id: null,
+                                total: { $sum: 1 },
+                                correct: {
+                                    $sum: {
+                                        $cond: [{ $eq: ['$correct', true] }, 1, 0]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ];
+        const result = await TestHistory_1.default.aggregate(pipeline);
+        const facet = result[0] || { items: [], stats: [] };
+        const stats = facet.stats[0] || { total: 0, correct: 0 };
+        return res.json({
+            items: facet.items,
+            total: stats.total || 0,
+            correct: stats.correct || 0,
+            page: Number(page),
+            totalPages: Math.ceil((stats.total || 0) / Number(limit))
+        });
+    }
+    catch (error) {
+        console.error('getQuestionAttemptHistory error:', error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.getQuestionAttemptHistory = getQuestionAttemptHistory;

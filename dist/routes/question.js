@@ -22,4 +22,5 @@ router.delete('/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), quest
 const memoryUpload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
 router.get('/template', auth_1.authenticate, (0, auth_1.authorize)('admin'), questionController_1.downloadQuestionTemplate);
 router.post('/import', auth_1.authenticate, (0, auth_1.authorize)('admin'), memoryUpload.single('file'), questionController_1.importQuestionsExcel);
+router.get('/:id/history', auth_1.authenticate, (0, auth_1.authorize)('admin'), questionController_1.getQuestionAttemptHistory);
 exports.default = router;

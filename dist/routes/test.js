@@ -26,11 +26,12 @@ const submitTestValidation = [
 // Protected routes
 router.get('/', auth_1.authenticate, testController_1.getTests);
 router.get('/stats', auth_1.authenticate, testController_1.getTestStats);
+router.get('/statistics/month', auth_1.authenticate, testController_1.getTestStatisticsByMonth);
 router.get('/level/:level', auth_1.authenticate, testController_1.getTestByLevel);
-router.get('/:id', auth_1.authenticate, testController_1.getTestById);
-router.post('/start', auth_1.authenticate, testController_1.startTest);
 router.get('/questions/random', auth_1.authenticate, testController_1.getRandomQuestions);
+router.post('/start', auth_1.authenticate, testController_1.startTest);
 router.post('/submit', auth_1.authenticate, submitTestValidation, testController_1.submitTest);
+router.get('/:id', auth_1.authenticate, testController_1.getTestById);
 // Admin routes
 router.post('/', auth_1.authenticate, (0, auth_1.authorize)('admin'), testValidation, testController_1.createTest);
 router.put('/:id', auth_1.authenticate, (0, auth_1.authorize)('admin'), testValidation, testController_1.updateTest);

@@ -5,6 +5,7 @@ import { PersonalTopic, IPersonalTopic } from '../models/PersonalTopic'
 import { UserVocabulary, IUserVocabulary } from '../models/UserVocabulary'
 import User, { IUser } from '../models/User'
 import { checkAndUpdateUserLevel } from '../utils/levelUtils'
+import mongoose from 'mongoose'
 
 // Get vocabularies with search and topic filters
 export const getVocabularies = async (req: Request, res: Response) => {
@@ -660,5 +661,198 @@ export const getVocabulariesByTopic = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error fetching vocabularies by topic:', error)
     res.status(500).json({ message: 'Không thể tải từ vựng theo chủ đề' })
+  }
+}
+
+// Get monthly vocabulary learners statistics
+// GET /vocabulary-learning/stats/monthly?month=YYYY-MM
+export const getMonthlyVocabularyLearners = async (req: Request, res: Response) => {
+  try {
+    const { month } = req.query as { month?: string }
+    // Determine time window
+    let start: Date
+    let end: Date
+    if (month && /^\d{4}-\d{2}$/.test(month)) {
+      const [y, m] = month.split('-').map((v) => parseInt(v, 10))
+      // JS month is 0-based
+      start = new Date(Date.UTC(y, m - 1, 1, 0, 0, 0, 0))
+      end = new Date(Date.UTC(y, m, 1, 0, 0, 0, 0))
+    } else {
+      // Default to current month (UTC boundary)
+      const now = new Date()
+      start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0))
+      end = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 0, 0, 0, 0))
+    }
+
+    // Aggregate by user to get statistics
+    const agg = await UserVocabulary.aggregate([
+      { 
+        $match: { 
+          createdAt: { $gte: start, $lt: end },
+          status: { $in: ['learned', 'studying'] }
+        } 
+      },
+      {
+        $group: {
+          _id: '$userId',
+          learnedCount: { 
+            $sum: { $cond: [{ $eq: ['$status', 'learned'] }, 1, 0] } 
+          },
+          studyingCount: { 
+            $sum: { $cond: [{ $eq: ['$status', 'studying'] }, 1, 0] } 
+          },
+          totalVocabularies: { $sum: 1 }
+        }
+      },
+      { $sort: { totalVocabularies: -1, learnedCount: -1 } }
+    ])
+
+    // Hydrate user info
+    const results = await Promise.all(
+      agg.map(async (r: any) => {
+        // userId is stored as String in UserVocabulary, convert to ObjectId for User query
+        const userIdObj = mongoose.Types.ObjectId.isValid(r._id) 
+          ? new mongoose.Types.ObjectId(r._id) 
+          : r._id
+        const u = await User.findById(userIdObj).select('name email level')
+        return {
+          userId: String(r._id),
+          name: u?.name || 'Unknown',
+          email: u?.email || '',
+          level: u?.level ?? null,
+          learnedCount: r.learnedCount,
+          studyingCount: r.studyingCount,
+          totalVocabularies: r.totalVocabularies
+        }
+      })
+    )
+
+    res.json({
+      month: month || null,
+      start,
+      end,
+      results
+    })
+  } catch (error) {
+    console.error('Get monthly vocabulary learners stats error:', error)
+    res.status(500).json({ message: 'Không thể tải thống kê người học từ vựng' })
+  }
+}
+
+// Stats: learners by vocabulary for a given month
+export const getLearnersByVocabularyStats = async (req: Request, res: Response) => {
+  try {
+    const { month, vocabularyIds } = req.query as any
+    // month: 'YYYY-MM'; default to current month
+    const now = new Date()
+    let year = now.getUTCFullYear()
+    let monthIdx = now.getUTCMonth() // 0-11
+    if (typeof month === 'string' && /^\d{4}-\d{2}$/.test(month)) {
+      const [y, m] = month.split('-').map((n: string) => Number(n))
+      year = y
+      monthIdx = m - 1
+    }
+    const monthStart = new Date(Date.UTC(year, monthIdx, 1, 0, 0, 0))
+    const monthEnd = new Date(Date.UTC(year, monthIdx + 1, 1, 0, 0, 0))
+
+    const match: any = {
+      status: 'learned',
+      learnedAt: { $gte: monthStart, $lt: monthEnd }
+    }
+    if (vocabularyIds) {
+      const ids = String(vocabularyIds)
+        .split(',')
+        .map((s: string) => s.trim())
+        .filter(Boolean)
+      if (ids.length > 0) {
+        match.vocabularyId = { $in: ids }
+      }
+    }
+
+    const pipeline = [
+      { $match: match },
+      {
+        $group: {
+          _id: '$vocabularyId',
+          learnedCount: { $sum: 1 },
+          uniqueLearners: { $addToSet: '$userId' }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          vocabularyId: '$_id',
+          learnedCount: 1,
+          uniqueLearnersCount: { $size: '$uniqueLearners' }
+        }
+      }
+    ] as any[]
+
+    const results = await UserVocabulary.aggregate(pipeline)
+
+    // Join vocabulary info
+    const vocabIds = results.map((r: any) => r.vocabularyId)
+    const vocabDocs = await Vocabulary.find({ _id: { $in: vocabIds } }).select(
+      'word pinyin zhuyin meaning'
+    )
+    const idToVocab = new Map<string, any>()
+    vocabDocs.forEach((v: any) => idToVocab.set(String(v._id), v))
+
+    const stats = results.map((r: any) => {
+      const v = idToVocab.get(String(r.vocabularyId))
+      return {
+        vocabularyId: r.vocabularyId,
+        word: v?.word || '',
+        pinyin: v?.pinyin || v?.pronunciation || '',
+        meaning: v?.meaning || '',
+        learnedCount: r.learnedCount,
+        uniqueLearners: r.uniqueLearnersCount
+      }
+    })
+
+    // If client passed vocabularyIds but some have zero for this month, include zeros
+    if (vocabularyIds) {
+      const requested = String(vocabularyIds)
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean)
+      const existingSet = new Set(stats.map(s => String(s.vocabularyId)))
+      if (requested.length > 0) {
+        const missingIds = requested.filter(id => !existingSet.has(id))
+        if (missingIds.length > 0) {
+          const missingVocabDocs = await Vocabulary.find({ _id: { $in: missingIds } }).select(
+            'word pinyin zhuyin meaning'
+          )
+          const missingMap = new Map<string, any>()
+          missingVocabDocs.forEach((v: any) => missingMap.set(String(v._id), v))
+          missingIds.forEach(id => {
+            const v = missingMap.get(id)
+            stats.push({
+              vocabularyId: id,
+              word: v?.word || '',
+              pinyin: v?.pinyin || v?.pronunciation || '',
+              meaning: v?.meaning || '',
+              learnedCount: 0,
+              uniqueLearners: 0
+            })
+          })
+        }
+      }
+    }
+
+    // Sort by learnedCount desc then word asc
+    stats.sort((a, b) => {
+      if (b.learnedCount !== a.learnedCount) return b.learnedCount - a.learnedCount
+      return String(a.word).localeCompare(String(b.word))
+    })
+
+    res.json({
+      month: `${year}-${String(monthIdx + 1).padStart(2, '0')}`,
+      stats,
+      count: stats.length
+    })
+  } catch (error) {
+    console.error('Error fetching learners-by-vocabulary stats:', error)
+    res.status(500).json({ message: 'Không thể tải thống kê người học theo từ vựng' })
   }
 }

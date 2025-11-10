@@ -15,7 +15,9 @@ import {
   getVocabulariesByTopic,
   personalTopicValidation,
   userVocabularyValidation,
-  completeLearningValidation
+  completeLearningValidation,
+  getLearnersByVocabularyStats,
+  getMonthlyVocabularyLearners
 } from '../controllers/vocabularyLearningController'
 
 const router = express.Router()
@@ -38,6 +40,9 @@ router.get('/vocabulary/available', authenticate, getAvailableVocabularies)
 router.get('/vocabulary/by-topic', authenticate, getVocabulariesByTopic)
 router.post('/personal-topics/add-vocabularies', authenticate, addVocabulariesToTopic)
 router.get('/vocabulary/learned-for-quiz', authenticate, getLearnedVocabulariesForQuiz)
+// Stats
+router.get('/stats/learners-by-vocabulary', authenticate, getLearnersByVocabularyStats)
+router.get('/stats/monthly', authenticate, getMonthlyVocabularyLearners)
 
 export default router
 

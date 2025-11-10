@@ -1,7 +1,7 @@
 import express from 'express';
 import { body, query } from 'express-validator';
 import { authenticate, authorize } from '../middleware/auth';
-import { getNextQuestions, getAllQuestionsByLevel, submitAnswer, getProgressSummary, listQuestions, createQuestion, updateQuestion, deleteQuestion, downloadQuestionTemplate, importQuestionsExcel } from '../controllers/questionController';
+import { getNextQuestions, getAllQuestionsByLevel, submitAnswer, getProgressSummary, listQuestions, createQuestion, updateQuestion, deleteQuestion, downloadQuestionTemplate, importQuestionsExcel, getQuestionAttemptHistory } from '../controllers/questionController';
 import multer from 'multer';
 
 const router = express.Router();
@@ -31,6 +31,7 @@ router.delete('/:id', authenticate, authorize('admin'), deleteQuestion);
 const memoryUpload = multer({ storage: multer.memoryStorage() });
 router.get('/template', authenticate, authorize('admin'), downloadQuestionTemplate);
 router.post('/import', authenticate, authorize('admin'), memoryUpload.single('file'), importQuestionsExcel);
+router.get('/:id/history', authenticate, authorize('admin'), getQuestionAttemptHistory);
 
 export default router;
 

@@ -25,6 +25,7 @@ import uploadRoutes from './routes/upload';
 import checkinRoutes from './routes/checkin';
 import userCompetitionRoutes from './routes/userCompetition';
 import competitionRankingRoutes from './routes/competitionRanking';
+import blogPostRoutes from './routes/blogPost';
 
 // Load environment variables
 dotenv.config();
@@ -81,6 +82,7 @@ app.use('/api/checkin', checkinRoutes);
 app.use('/api/coin-transactions', coinTransactionRoutes);
 app.use('/api/user-competitions', userCompetitionRoutes);
 app.use('/api/competition-ranking', competitionRankingRoutes);
+app.use('/api/blog-posts', blogPostRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

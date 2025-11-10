@@ -10,7 +10,8 @@ import {
   getTestByLevel,
   getTestStats,
   startTest,
-  getRandomQuestions
+  getRandomQuestions,
+  getTestStatisticsByMonth
 } from '../controllers/testController';
 import { authenticate, authorize } from '../middleware/auth';
 
@@ -36,11 +37,12 @@ const submitTestValidation = [
 // Protected routes
 router.get('/', authenticate, getTests);
 router.get('/stats', authenticate, getTestStats);
+router.get('/statistics/month', authenticate, getTestStatisticsByMonth);
 router.get('/level/:level', authenticate, getTestByLevel);
-router.get('/:id', authenticate, getTestById);
-router.post('/start', authenticate, startTest);
 router.get('/questions/random', authenticate, getRandomQuestions);
+router.post('/start', authenticate, startTest);
 router.post('/submit', authenticate, submitTestValidation, submitTest);
+router.get('/:id', authenticate, getTestById);
 
 // Admin routes
 router.post('/', authenticate, authorize('admin'), testValidation, createTest);

@@ -23,4 +23,7 @@ router.get('/vocabulary/available', auth_1.authenticate, vocabularyLearningContr
 router.get('/vocabulary/by-topic', auth_1.authenticate, vocabularyLearningController_1.getVocabulariesByTopic);
 router.post('/personal-topics/add-vocabularies', auth_1.authenticate, vocabularyLearningController_1.addVocabulariesToTopic);
 router.get('/vocabulary/learned-for-quiz', auth_1.authenticate, vocabularyLearningController_1.getLearnedVocabulariesForQuiz);
+// Stats
+router.get('/stats/learners-by-vocabulary', auth_1.authenticate, vocabularyLearningController_1.getLearnersByVocabularyStats);
+router.get('/stats/monthly', auth_1.authenticate, vocabularyLearningController_1.getMonthlyVocabularyLearners);
 exports.default = router;

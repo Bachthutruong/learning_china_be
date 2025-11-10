@@ -5,6 +5,8 @@ import User from '../models/User';
 import UserQuestionProgress from '../models/UserQuestionProgress';
 import { checkAndUpdateUserLevel } from '../utils/levelUtils';
 import { validationResult } from 'express-validator';
+import mongoose from 'mongoose';
+import TestHistory from '../models/TestHistory';
 
 // Get next questions for user based on level and progress
 export const getNextQuestions = async (req: any, res: Response) => {
@@ -111,6 +113,30 @@ export const submitAnswer = async (req: any, res: Response) => {
       },
       { upsert: true, new: true }
     );
+
+    // Persist a lightweight history record so admin can see per-question attempts
+    try {
+      await TestHistory.create({
+        userId: user._id,
+        level: user.level,
+        totalQuestions: 1,
+        correctCount: isCorrect ? 1 : 0,
+        wrongCount: isCorrect ? 0 : 1,
+        rewards: { coins: isCorrect ? 100 : 0, experience: isCorrect ? 100 : 0 },
+        details: [{
+          questionId: question._id,
+          question: question.question,
+          userAnswer: answer,
+          correctAnswer: question.questionType === 'sentence-order'
+            ? (question.correctOrder ?? [])
+            : (question.correctAnswer),
+          options: question.options || undefined,
+          correct: isCorrect
+        }]
+      })
+    } catch (e) {
+      console.error('Failed to record question attempt history:', e);
+    }
 
     // Reward XP and coins when correct
     if (isCorrect) {
@@ -512,6 +538,71 @@ export const importQuestionsExcel = async (req: any, res: Response) => {
     return res.json({ message: 'Import hoàn tất', created, updated, errors });
   } catch (error) {
     console.error('importQuestionsExcel error:', error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Admin: Get attempt history for a specific question
+export const getQuestionAttemptHistory = async (req: any, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { page = 1, limit = 20 } = req.query;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid question id' });
+    }
+
+    const questionObjectId = new mongoose.Types.ObjectId(id);
+    const skip = (Number(page) - 1) * Number(limit);
+    const pipeline: any[] = [
+      { $match: { 'details.questionId': questionObjectId } },
+      { $unwind: '$details' },
+      { $match: { 'details.questionId': questionObjectId } },
+      { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' } },
+      { $unwind: '$user' },
+      {
+        $project: {
+          _id: 0,
+          attemptedAt: '$createdAt',
+          user: { _id: '$user._id', name: '$user.name', email: '$user.email' },
+          userAnswer: '$details.userAnswer',
+          correctAnswer: '$details.correctAnswer',
+          options: '$details.options',
+          correct: '$details.correct',
+        }
+      },
+      { $sort: { attemptedAt: -1 } },
+      {
+        $facet: {
+          items: [{ $skip: skip }, { $limit: Number(limit) }],
+          stats: [
+            {
+              $group: {
+                _id: null,
+                total: { $sum: 1 },
+                correct: {
+                  $sum: {
+                    $cond: [{ $eq: ['$correct', true] }, 1, 0]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ];
+
+    const result: any[] = await (TestHistory as any).aggregate(pipeline);
+    const facet = result[0] || { items: [], stats: [] };
+    const stats = facet.stats[0] || { total: 0, correct: 0 };
+    return res.json({
+      items: facet.items,
+      total: stats.total || 0,
+      correct: stats.correct || 0,
+      page: Number(page),
+      totalPages: Math.ceil((stats.total || 0) / Number(limit))
+    });
+  } catch (error) {
+    console.error('getQuestionAttemptHistory error:', error);
     return res.status(500).json({ message: 'Server error' });
   }
 };
