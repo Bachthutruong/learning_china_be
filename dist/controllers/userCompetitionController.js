@@ -150,17 +150,20 @@ exports.createUserCompetition = createUserCompetition;
 // Get all competitions (pending and active)
 const getUserCompetitions = async (req, res) => {
     try {
-        const { status, myCompetitions } = req.query;
+        const { status, my, myCompetitions, level } = req.query;
         const userId = req.user?._id;
         let query = {};
         if (status) {
             query.status = status;
         }
-        if (myCompetitions === 'true' && userId) {
+        if ((my === 'true' || myCompetitions === 'true') && userId) {
             query.$or = [
                 { creator: userId },
                 { participants: userId }
             ];
+        }
+        if (level) {
+            query.level = Number(level);
         }
         const competitions = await UserCompetition_1.default.find(query)
             .populate('creator', 'name level')

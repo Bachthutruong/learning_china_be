@@ -60,14 +60,22 @@ const defaultConfig = {
     },
     // Followup branches
     {
+      name: 'Đúng 0 câu followup (Yếu)',
+      condition: {
+        correctRange: [0, 0],
+        fromPhase: 'followup'
+      },
+      nextQuestions: [],
+      resultLevel: 1
+    },
+    {
       name: 'Đúng 1-6 câu A (A1)',
       condition: {
         correctRange: [1, 6],
         fromPhase: 'followup'
       },
       nextQuestions: [],
-      resultLevel: 1,
-      nextPhase: 'final'
+      resultLevel: 1
     },
     {
       name: 'Đúng 7-14 câu A (A2)',
@@ -76,28 +84,17 @@ const defaultConfig = {
         fromPhase: 'followup'
       },
       nextQuestions: [],
-      resultLevel: 2,
-      nextPhase: 'final'
+      resultLevel: 2
     },
+    // Final branches
     {
-      name: 'Đúng 1-6 câu B (B1)',
+      name: 'Đúng 0 câu final (Yếu)',
       condition: {
-        correctRange: [1, 6],
-        fromPhase: 'followup'
+        correctRange: [0, 0],
+        fromPhase: 'final'
       },
       nextQuestions: [],
-      resultLevel: 3,
-      nextPhase: 'final'
-    },
-    {
-      name: 'Đúng 7-14 câu B (B2)',
-      condition: {
-        correctRange: [7, 14],
-        fromPhase: 'followup'
-      },
-      nextQuestions: [],
-      resultLevel: 4,
-      nextPhase: 'final'
+      resultLevel: 3
     },
     {
       name: 'Đúng 1-9 câu C (C1)',
@@ -106,8 +103,7 @@ const defaultConfig = {
         fromPhase: 'final'
       },
       nextQuestions: [],
-      resultLevel: 5,
-      nextPhase: 'final'
+      resultLevel: 5
     },
     {
       name: 'Đúng 10-14 câu C (C2)',
@@ -116,8 +112,7 @@ const defaultConfig = {
         fromPhase: 'final'
       },
       nextQuestions: [],
-      resultLevel: 6,
-      nextPhase: 'final'
+      resultLevel: 6
     }
   ],
   isActive: true

@@ -245,30 +245,73 @@ export const rejectCoinPurchase = async (req: any, res: Response) => {
 // Admin gets all coin purchases
 export const getAllCoinPurchases = async (req: any, res: Response) => {
   try {
-    const { page = 1, limit = 10, status, userId } = req.query;
+    const { 
+      page = 1, 
+      limit = 10, 
+      status, 
+      userId, 
+      search, 
+      startDate, 
+      endDate 
+    } = req.query;
     
     let query: any = {};
-    if (status) {
+    if (status && status !== 'all') {
       query.status = status;
     }
     if (userId) {
       query.userId = userId;
     }
+
+    // Date range filter
+    if (startDate || endDate) {
+      query.createdAt = {};
+      if (startDate) {
+        query.createdAt.$gte = new Date(startDate as string);
+      }
+      if (endDate) {
+        const end = new Date(endDate as string);
+        end.setHours(23, 59, 59, 999);
+        query.createdAt.$lte = end;
+      }
+    }
+
+    // Search by user name or email or transaction ID
+    if (search) {
+      const users = await User.find({
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { email: { $regex: search, $options: 'i' } }
+        ]
+      }).select('_id');
+      
+      const userIds = users.map(u => u._id);
+      
+      query.$or = [
+        { userId: { $in: userIds } },
+        { transactionId: { $regex: search, $options: 'i' } },
+        { bankAccount: { $regex: search, $options: 'i' } }
+      ];
+    }
     
+    const limitNum = parseInt(limit as string) || 10;
+    const pageNum = parseInt(page as string) || 1;
+
     const purchases = await CoinPurchase.find(query)
       .select('-receiptImage')
       .populate('userId', 'name email')
       .sort({ createdAt: -1 })
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+      .limit(limitNum)
+      .skip((pageNum - 1) * limitNum);
     
     const total = await CoinPurchase.countDocuments(query);
     
     res.json({
       purchases,
-      totalPages: Math.ceil(total / limit),
-      currentPage: page,
-      total
+      totalPages: Math.ceil(total / limitNum),
+      currentPage: pageNum,
+      total,
+      limit: limitNum
     });
   } catch (error) {
     console.error('Get all coin purchases error:', error);

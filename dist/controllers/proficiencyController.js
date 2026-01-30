@@ -101,16 +101,23 @@ const submitProficiencyTest = async (req, res) => {
         let correctCount = 0;
         const questionResults = [];
         answers.forEach((userAnswer, index) => {
-            const question = questions.find((q) => q._id.toString() === userAnswer.questionId);
+            const qId = extractedQuestionIds[index];
+            if (!qId)
+                return;
+            const question = questions.find((q) => q._id.toString() === qId.toString());
             if (!question)
                 return;
-            const isCorrect = checkAnswer(question, userAnswer.answer);
+            // userAnswer can be a raw value (from frontend) or an object with { questionId, answer }
+            const answerValue = userAnswer && typeof userAnswer === 'object' && 'answer' in userAnswer
+                ? userAnswer.answer
+                : userAnswer;
+            const isCorrect = checkAnswer(question, answerValue);
             if (isCorrect)
                 correctCount++;
             questionResults.push({
                 questionId: question._id,
                 question: question.question,
-                userAnswer: userAnswer.answer,
+                userAnswer: answerValue,
                 correctAnswer: question.correctAnswer,
                 isCorrect,
                 level: question.level
