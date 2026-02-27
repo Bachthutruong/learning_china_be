@@ -326,11 +326,16 @@ const completeVocabularyLearning = async (req, res) => {
         if (!vocabulary) {
             return res.status(404).json({ message: 'Từ vựng không tồn tại' });
         }
+        // Build query including personalTopicId to match the unique index (userId, vocabularyId, personalTopicId)
+        const findQuery = { userId, vocabularyId };
+        if (personalTopicId) {
+            findQuery.personalTopicId = personalTopicId;
+        }
         // Check prior state before updating to avoid always treating as already learned
-        const existingUserVocab = await UserVocabulary_1.UserVocabulary.findOne({ userId, vocabularyId });
+        const existingUserVocab = await UserVocabulary_1.UserVocabulary.findOne(findQuery);
         const wasAlreadyLearned = !!(existingUserVocab && existingUserVocab.status === 'learned' && existingUserVocab.learnedAt);
         // Update or create user vocabulary
-        const userVocabulary = await UserVocabulary_1.UserVocabulary.findOneAndUpdate({ userId, vocabularyId }, {
+        const userVocabulary = await UserVocabulary_1.UserVocabulary.findOneAndUpdate(findQuery, {
             status: 'learned',
             personalTopicId,
             learnedAt: new Date()
