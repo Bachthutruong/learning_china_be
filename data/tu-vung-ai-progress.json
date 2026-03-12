@@ -1,0 +1,5380 @@
+{
+  "start": 0,
+  "end": 60,
+  "enriched": [
+    {
+      "word": "愛",
+      "pinyin": "ài",
+      "zhuyin": "ㄞˋ",
+      "meaning": "yêu, tình yêu",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我愛你。\nPinyin: wǒ ài nǐ\nNghĩa: Tôi yêu bạn.",
+        "我很愛吃台灣的夜市小吃。\nPinyin: wǒ hěn ài chī táiwān de yèshì xiǎochī\nNghĩa: Tôi rất thích ăn các món ăn vặt chợ đêm Đài Loan.",
+        "她說她愛喝咖啡勝過喝茶。\nPinyin: tā shuō tā ài hē kāfēi shèngguò hē chá\nNghĩa: Cô ấy nói cô ấy thích uống cà phê hơn uống trà."
+      ],
+      "synonyms": [
+        "喜歡 (xǐhuān)",
+        "疼愛 (téng'ài)"
+      ],
+      "antonyms": [
+        "恨 (hèn)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '愛' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "buồn",
+            "sợ",
+            "giận",
+            "vui",
+            "yêu, tình yêu",
+            "ghét"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của '愛' là gì?",
+          "options": [
+            "āi",
+            "è",
+            "ài",
+            "ā",
+            "ái",
+            "ǎi"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我愛你。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Tôi yêu bạn.",
+            "Tôi nhớ bạn.",
+            "Tôi ghét bạn.",
+            "Tôi sợ bạn.",
+            "Tôi thích bạn."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '我很愛吃台灣的夜市小吃。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Tôi rất thích ăn các món ăn vặt chợ đêm Đài Loan.",
+            "Tôi thỉnh thoảng ăn các món ăn vặt chợ đêm Đài Loan.",
+            "Tôi không thích ăn các món ăn vặt chợ đêm Đài Loan.",
+            "Tôi chưa bao giờ ăn các món ăn vặt chợ đêm Đài Loan."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '她說她愛喝咖啡勝過喝茶。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Cô ấy nói cô ấy không uống gì cả.",
+            "Cô ấy nói cô ấy thích uống trà hơn uống cà phê.",
+            "Cô ấy nói cô ấy thích uống cà phê hơn uống trà.",
+            "Cô ấy nói cô ấy không thích uống cà phê.",
+            "Cô ấy nói cô ấy chỉ uống nước."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'yêu, tình yêu'?",
+          "options": [
+            "恨",
+            "想",
+            "喜",
+            "愛",
+            "要",
+            "怕"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "愛"
+    },
+    {
+      "word": "吧",
+      "pinyin": "ba",
+      "zhuyin": "ㄅㄚ˙",
+      "meaning": "trợ từ biểu thị đề nghị, khuyên bảo hoặc đoán định",
+      "partOfSpeech": "particle",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "走吧！\nPinyin: zǒu ba!\nNghĩa: Đi thôi!",
+        "我們今天晚上去看電影吧，你覺得怎麼樣？\nPinyin: wǒ men jīn tiān wǎn shàng qù kàn diàn yǐng ba, nǐ jué de zěn me yàng?\nNghĩa: Tối nay chúng ta đi xem phim nhé, bạn thấy thế nào?",
+        "這個問題太難了，我們先討論別的吧。\nPinyin: zhè ge wèn tí tài nán le, wǒ men xiān tǎo lùn bié de ba.\nNghĩa: Câu hỏi này quá khó rồi, chúng ta thảo luận cái khác trước đi."
+      ],
+      "synonyms": [
+        "啊 (a)",
+        "呢 (ne)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '吧' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "động từ chỉ hành động",
+            "tính từ miêu tả",
+            "trợ từ biểu thị đề nghị, khuyên bảo",
+            "danh từ chỉ địa điểm",
+            "thán từ bày tỏ cảm xúc"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của '吧' là gì?",
+          "options": [
+            "bā",
+            "ba",
+            "bà",
+            "bǎ",
+            "bá"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '走吧！' có nghĩa là gì?",
+          "options": [
+            "Muốn đi!",
+            "Đi thôi!",
+            "Đừng đi!",
+            "Đã đi rồi!",
+            "Sẽ đi!"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我們今天晚上去看電影吧，你覺得怎麼樣？' có nghĩa là gì?",
+          "options": [
+            "Chúng ta không đi xem phim được, bạn nghĩ sao?",
+            "Tối nay chúng ta đi xem phim nhé, bạn thấy thế nào?",
+            "Mai tối đi xem phim nhé, bạn có rảnh không?",
+            "Hôm qua chúng ta đã xem phim, bạn thấy sao?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '這個問題太難了，我們先討論別的吧。' có nghĩa là gì?",
+          "options": [
+            "Câu hỏi này quá khó rồi, chúng ta thảo luận cái khác trước đi.",
+            "Câu hỏi này dễ quá, chúng ta thảo luận tiếp đi.",
+            "Vấn đề này đã giải quyết, chúng ta làm việc khác.",
+            "Đây là câu hỏi hay, chúng ta tập trung vào nó thôi."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa trợ từ đề nghị, khuyên bảo?",
+          "options": [
+            "巴",
+            "吧",
+            "把",
+            "八",
+            "爸"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "吧"
+    },
+    {
+      "word": "八",
+      "pinyin": "bā",
+      "zhuyin": "ㄅㄚ",
+      "meaning": "số tám",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "今天是八號。\nPinyin: jīn tiān shì bā hào.\nNghĩa: Hôm nay là ngày 8.",
+        "醫生說病人需要在八點準時服藥。\nPinyin: yī shēng shuō bìng rén xū yào zài bā diǎn zhǔn shí fú yào.\nNghĩa: Bác sĩ nói bệnh nhân cần uống thuốc đúng 8 giờ.",
+        "我剛才打電話給你八次都沒接通。\nPinyin: wǒ gāng cái dǎ diàn huà gěi nǐ bā cì dōu méi jiē tōng.\nNghĩa: Tôi vừa gọi điện cho bạn 8 lần mà không thông được."
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"八\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "số bảy",
+            "số sáu",
+            "số mười",
+            "số chín",
+            "số tám"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của \"八\" là gì?",
+          "options": [
+            "bǎ",
+            "bá",
+            "bà",
+            "bāi",
+            "bā"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "\"今天是八號。\" có nghĩa là gì?",
+          "options": [
+            "Hôm nay là ngày 7.",
+            "Hôm nay là ngày 9.",
+            "Hôm nay là ngày 6.",
+            "Hôm nay là ngày 8.",
+            "Hôm nay là ngày 10."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "\"醫生說病人需要在八點準時服藥。\" có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói bệnh nhân cần uống thuốc đúng 9 giờ.",
+            "Bác sĩ nói bệnh nhân cần uống thuốc đúng 8 giờ.",
+            "Bác sĩ nói bệnh nhân cần uống thuốc đúng 6 giờ.",
+            "Bác sĩ nói bệnh nhân cần uống thuốc đúng 7 giờ."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"我剛才打電話給你八次都沒接通。\" có nghĩa là gì?",
+          "options": [
+            "Tôi vừa gọi điện cho bạn 8 lần mà không thông được.",
+            "Tôi vừa gọi điện cho bạn 9 lần mà không thông được.",
+            "Tôi vừa gọi điện cho bạn 6 lần mà không thông được.",
+            "Tôi vừa gọi điện cho bạn 10 lần mà không thông được.",
+            "Tôi vừa gọi điện cho bạn 7 lần mà không thông được."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào biểu thị số tám?",
+          "options": [
+            "八",
+            "十",
+            "九",
+            "七",
+            "六"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "八"
+    },
+    {
+      "word": "爸爸",
+      "pinyin": "bàba",
+      "zhuyin": "ㄅㄚˋㄅㄚ˙",
+      "meaning": "bố, ba",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我爸爸很好。\nPinyin: wǒ bàba hěn hǎo.\nNghĩa: Bố tôi rất tốt.",
+        "我打電話給爸爸，告訴他我已經安全到家了。\nPinyin: wǒ dǎ diànhuà gěi bàba, gàosù tā wǒ yǐjīng ānquán dào jiā le.\nNghĩa: Tôi gọi điện cho bố, báo với bố là tôi đã về nhà an toàn rồi.",
+        "在婚禮上，爸爸牽著我的手走向新郎。\nPinyin: zài hūnlǐ shàng, bàba qiānzhe wǒ de shǒu zǒu xiàng xīnláng.\nNghĩa: Trong đám cưới, bố nắm tay tôi đi về phía chú rể."
+      ],
+      "synonyms": [
+        "父親 (fùqīn)",
+        "爹 (diē)"
+      ],
+      "antonyms": [
+        "媽媽 (māma)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '爸爸' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "chú",
+            "em trai",
+            "anh trai",
+            "mẹ",
+            "bố, ba",
+            "ông"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của '爸爸' là gì?",
+          "options": [
+            "bàbà",
+            "bába",
+            "bāba",
+            "bǎba",
+            "bàba",
+            "pàpa"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '我爸爸很好。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Bố tôi rất tốt.",
+            "Mẹ tôi rất tốt.",
+            "Gia đình tôi rất tốt.",
+            "Anh tôi rất tốt.",
+            "Tôi rất tốt."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '我打電話給爸爸，告訴他我已經安全到家了。' có nghĩa là gì?",
+          "options": [
+            "Tôi gọi điện cho bố, hỏi thăm sức khỏe của bố.",
+            "Bố gọi điện cho tôi, báo là đã về nhà an toàn.",
+            "Tôi gọi điện cho mẹ, báo với mẹ là tôi đã về nhà an toàn rồi.",
+            "Tôi gọi điện về nhà, báo là bố đã về an toàn rồi.",
+            "Tôi gọi điện cho bố, báo với bố là tôi đã về nhà an toàn rồi."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '在婚禮上，爸爸牽著我的手走向新郎。' có nghĩa là gì?",
+          "options": [
+            "Trong đám cưới, bố và mẹ cùng dẫn tôi đến gặp chú rể.",
+            "Trong đám cưới, tôi nắm tay bố đi gặp khách mời.",
+            "Trong đám cưới, bố nắm tay tôi đi về phía chú rể.",
+            "Trong đám cưới, bố dẫn chú rể đến gặp tôi.",
+            "Trong đám cưới, mẹ nắm tay tôi đi về phía chú rể."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào đúng với nghĩa 'bố, ba'?",
+          "options": [
+            "爸爸",
+            "媽媽",
+            "弟弟",
+            "叔叔",
+            "哥哥",
+            "爺爺"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "爸爸 / 爸"
+    },
+    {
+      "word": "百",
+      "pinyin": "bǎi",
+      "zhuyin": "ㄅㄞˇ",
+      "meaning": "trăm, một trăm",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這裡有一百個人。\nPinyin: zhè lǐ yǒu yī bǎi gè rén.\nNghĩa: Ở đây có một trăm người.",
+        "老師說我們班上有百分之九十的學生通過了考試。\nPinyin: lǎo shī shuō wǒ men bān shàng yǒu bǎi fēn zhī jiǔ shí de xué shēng tōng guò le kǎo shì.\nNghĩa: Thầy cô nói rằng có 90% học sinh trong lớp chúng tôi đã vượt qua kỳ thi.",
+        "根據研究報告顯示，百歲以上的人口正在逐年增加。\nPinyin: gēn jù yán jiū bào gào xiǎn shì, bǎi suì yǐ shàng de rén kǒu zhèng zài zhú nián zēng jiā.\nNghĩa: Theo báo cáo nghiên cứu cho thấy, dân số trên 100 tuổi đang tăng dần qua từng năm."
+      ],
+      "synonyms": [
+        "一百 (yī bǎi)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '百' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "chục",
+            "nghìn",
+            "triệu",
+            "trăm",
+            "mười",
+            "vạn"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '百' là gì?",
+          "options": [
+            "bā",
+            "bái",
+            "bǎi",
+            "bá",
+            "bài",
+            "bāi"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '這裡有一百個人。' có nghĩa là gì?",
+          "options": [
+            "Ở đây có một vạn người.",
+            "Ở đây có mười người.",
+            "Ở đây có một trăm người.",
+            "Ở đây có một nghìn người.",
+            "Ở đây có một triệu người."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '老師說我們班上有百分之九十的學生通過了考試。' có nghĩa là gì?",
+          "options": [
+            "Thầy cô nói rằng có 60% học sinh trong lớp chúng tôi đã vượt qua kỳ thi.",
+            "Thầy cô nói rằng có 70% học sinh trong lớp chúng tôi đã vượt qua kỳ thi.",
+            "Thầy cô nói rằng có 80% học sinh trong lớp chúng tôi đã vượt qua kỳ thi.",
+            "Thầy cô nói rằng có 90% học sinh trong lớp chúng tôi đã vượt qua kỳ thi.",
+            "Thầy cô nói rằng có 100% học sinh trong lớp chúng tôi đã vượt qua kỳ thi."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '根據研究報告顯示，百歲以上的人口正在逐年增加。' có nghĩa là gì?",
+          "options": [
+            "Theo báo cáo nghiên cứu cho thấy, dân số trên 100 tuổi đang tăng dần qua từng năm.",
+            "Theo báo cáo nghiên cứu cho thấy, dân số trên 90 tuổi đang tăng dần qua từng năm.",
+            "Theo báo cáo nghiên cứu cho thấy, dân số trên 80 tuổi đang tăng dần qua từng năm.",
+            "Theo báo cáo nghiên cứu cho thấy, dân số trên 70 tuổi đang tăng dần qua từng năm."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'trăm'?",
+          "options": [
+            "億",
+            "萬",
+            "千",
+            "百",
+            "十",
+            "兆"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "百"
+    },
+    {
+      "word": "半",
+      "pinyin": "bàn",
+      "zhuyin": "ㄅㄢˋ",
+      "meaning": "một nửa, phân nửa",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "現在幾點？三點半。\nPinyin: xiàn zài jǐ diǎn? sān diǎn bàn.\nNghĩa: Bây giờ mấy giờ? Ba giờ rưỡi.",
+        "我在圖書館待了半天，終於找到需要的資料。\nPinyin: wǒ zài tú shū guǎn dāi le bàn tiān, zhōng yú zhǎo dào xū yào de zī liào.\nNghĩa: Tôi ở thư viện nửa ngày, cuối cùng đã tìm được tài liệu cần thiết.",
+        "這個問題我們討論了半小時，還是沒有結論。\nPinyin: zhè gè wèn tí wǒ men tǎo lùn le bàn xiǎo shí, hái shì méi yǒu jié lùn.\nNghĩa: Vấn đề này chúng tôi thảo luận nửa tiếng rồi, vẫn chưa có kết luận."
+      ],
+      "synonyms": [
+        "一半 (yī bàn)"
+      ],
+      "antonyms": [
+        "全 (quán)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '半' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "một phần ba",
+            "một phần tư",
+            "hai phần ba",
+            "toàn bộ",
+            "một nửa"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của '半' là gì?",
+          "options": [
+            "bāng",
+            "bàn",
+            "bán",
+            "bǎn",
+            "bān"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '現在幾點？三點半。' có nghĩa là gì?",
+          "options": [
+            "Bây giờ mấy giờ? Hai giờ rưỡi.",
+            "Bây giờ mấy giờ? Ba giờ rưỡi.",
+            "Bây giờ mấy giờ? Ba giờ.",
+            "Hôm nay thứ mấy? Thứ ba."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我在圖書館待了半天，終於找到需要的資料。' có nghĩa là gì?",
+          "options": [
+            "Tôi ở trường học nửa ngày, cuối cùng đã hoàn thành bài tập.",
+            "Tôi ở thư viện cả ngày, cuối cùng đã tìm được tài liệu cần thiết.",
+            "Tôi ở nhà hàng nửa ngày, cuối cùng đã tìm được món ăn ngon.",
+            "Tôi ở thư viện nửa ngày, cuối cùng đã tìm được tài liệu cần thiết."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '這個問題我們討論了半小時，還是沒有結論。' có nghĩa là gì?",
+          "options": [
+            "Vấn đề này chúng tôi thảo luận một tiếng rồi, vẫn chưa có kết luận.",
+            "Vấn đề này chúng tôi nghiên cứu nửa tiếng rồi, đã có kết quả.",
+            "Vấn đề này chúng tôi thảo luận nửa tiếng rồi, vẫn chưa có kết luận.",
+            "Câu hỏi này chúng tôi trả lời nửa tiếng rồi, đã xong."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'một nửa'?",
+          "options": [
+            "滿",
+            "整",
+            "空",
+            "全",
+            "半"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "半"
+    },
+    {
+      "word": "本",
+      "pinyin": "běn",
+      "zhuyin": "ㄅㄣˇ",
+      "meaning": "quyển, cuốn (sách); gốc, căn bản",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這本書很好看。\nPinyin: zhè běn shū hěn hǎo kàn\nNghĩa: Cuốn sách này rất hay.",
+        "我昨天在咖啡廳看完了那本小說。\nPinyin: wǒ zuó tiān zài kā fēi tīng kàn wán le nà běn xiǎo shuō\nNghĩa: Hôm qua tôi đã đọc xong cuốn tiểu thuyết đó ở quán cà phê.",
+        "婚禮上新娘送給每位客人一本相冊。\nPinyin: hūn lǐ shàng xīn niáng sòng gěi měi wèi kè rén yī běn xiàng cè\nNghĩa: Trong đám cưới, cô dâu tặng mỗi khách mời một cuốn album ảnh."
+      ],
+      "synonyms": [
+        "冊 (cè)",
+        "部 (bù)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '本' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "chương, phần",
+            "quyển, cuốn",
+            "dòng, hàng",
+            "trang, lá"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '本' là gì?",
+          "options": [
+            "bèn",
+            "bēn",
+            "běn",
+            "bén"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '這本書很好看' có nghĩa là gì?",
+          "options": [
+            "Cuốn sách này rất dày.",
+            "Cuốn sách này rất mới.",
+            "Cuốn sách này rất đắt.",
+            "Cuốn sách này rất hay."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我昨天在咖啡廳看完了那本小說' có nghĩa là gì?",
+          "options": [
+            "Hôm qua tôi đã cho mượn cuốn tiểu thuyết đó ở quán cà phê.",
+            "Hôm qua tôi đã mua cuốn tiểu thuyết đó ở quán cà phê.",
+            "Hôm qua tôi đã đọc xong cuốn tiểu thuyết đó ở quán cà phê.",
+            "Hôm qua tôi đã viết xong cuốn tiểu thuyết đó ở quán cà phê."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '婚禮上新娘送給每位客人一本相冊' có nghĩa là gì?",
+          "options": [
+            "Trong đám cưới, cô dâu tặng mỗi khách mời một bông hoa.",
+            "Trong đám cưới, cô dâu tặng mỗi khách mời một món quà.",
+            "Trong đám cưới, cô dâu tặng mỗi khách mời một cuốn album ảnh.",
+            "Trong đám cưới, cô dâu tặng mỗi khách mời một tấm thiệp."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'quyển, cuốn'?",
+          "options": [
+            "未",
+            "本",
+            "末",
+            "木"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "本"
+    },
+    {
+      "word": "不",
+      "pinyin": "bù",
+      "zhuyin": "ㄅㄨˋ",
+      "meaning": "không, chẳng",
+      "partOfSpeech": "adverb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我不喝茶。\nPinyin: wǒ bù hē chá.\nNghĩa: Tôi không uống trà.",
+        "這家飯店不提供免費早餐服務。\nPinyin: zhè jiā fàn diàn bù tí gōng miǎn fèi zǎo cān fú wù.\nNghĩa: Khách sạn này không cung cấp dịch vụ ăn sáng miễn phí.",
+        "圖書館裡不能大聲講話和吃東西。\nPinyin: tú shū guǎn lǐ bù néng dà shēng jiǎng huà hé chī dōng xi.\nNghĩa: Trong thư viện không được nói chuyện to và ăn uống."
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ \"不\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "cũng",
+            "có",
+            "rất",
+            "không",
+            "sẽ",
+            "đã"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của \"不\" là gì?",
+          "options": [
+            "bú",
+            "bǔ",
+            "bù",
+            "bū"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu \"我不喝茶。\" có nghĩa là gì?",
+          "options": [
+            "Tôi uống trà.",
+            "Tôi không uống trà.",
+            "Tôi muốn uống trà.",
+            "Tôi thích uống trà.",
+            "Tôi đang uống trà."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu \"這家飯店不提供免費早餐服務。\" có nghĩa là gì?",
+          "options": [
+            "Khách sạn này không cung cấp dịch vụ ăn sáng miễn phí.",
+            "Khách sạn này cung cấp dịch vụ ăn sáng miễn phí.",
+            "Khách sạn này có ăn sáng rất ngon.",
+            "Khách sạn này bán ăn sáng rẻ."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu \"圖書館裡不能大聲講話和吃東西。\" có nghĩa là gì?",
+          "options": [
+            "Trong thư viện được phép nói chuyện to và ăn uống.",
+            "Thư viện rất ồn ào và bừa bộn.",
+            "Trong thư viện không được nói chuyện to và ăn uống.",
+            "Trong thư viện có thể làm mọi thứ.",
+            "Thư viện có bán đồ ăn và nước uống."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa \"không, chẳng\"?",
+          "options": [
+            "還",
+            "也",
+            "很",
+            "就",
+            "都",
+            "不"
+          ],
+          "correctAnswer": 5
+        }
+      ],
+      "allForms": "不"
+    },
+    {
+      "word": "茶",
+      "pinyin": "chá",
+      "zhuyin": "ㄔㄚˊ",
+      "meaning": "trà",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Ăn uống, nấu ăn"
+      ],
+      "examples": [
+        "我喝茶。\nPinyin: wǒ hē chá.\nNghĩa: Tôi uống trà.",
+        "在機場等飛機的時候，我想喝一杯熱茶。\nPinyin: zài jī chǎng děng fēi jī de shí hòu, wǒ xiǎng hē yī bēi rè chá.\nNghĩa: Khi đang chờ máy bay ở sân bay, tôi muốn uống một tách trà nóng.",
+        "婚禮上新娘要給長輩敬茶表示尊敬。\nPinyin: hūn lǐ shàng xīn niáng yào gěi zhǎng bèi jìng chá biǎo shì zūn jìng.\nNghĩa: Trong đám cưới, cô dâu phải kính trà cho các bậc trưởng bối để thể hiện sự tôn kính."
+      ],
+      "synonyms": [
+        "茶水 (chá shuǐ)",
+        "茶葉 (chá yè)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "茶 có nghĩa tiếng Việt là gì?",
+          "options": [
+            "cà phê",
+            "nước",
+            "nước ngọt",
+            "trà",
+            "sữa"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "茶 có phiên âm pinyin là gì?",
+          "options": [
+            "chà",
+            "chá",
+            "chá",
+            "chā",
+            "chǎ"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "我喝茶。 có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Tôi uống sữa.",
+            "Tôi uống cà phê.",
+            "Tôi uống nước.",
+            "Tôi ăn cơm.",
+            "Tôi uống trà."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "在機場等飛機的時候，我想喝一杯熱茶。 có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Ở công ty, tôi hay uống trà đá.",
+            "Khi đang chờ máy bay ở sân bay, tôi muốn uống một tách trà nóng.",
+            "Trong khách sạn, tôi thích uống cà phê đen.",
+            "Ở nhà hàng, tôi muốn uống một ly nước lạnh."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "婚禮上新娘要給長輩敬茶表示尊敬。 có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Ở nhà, con cái phải pha trà cho bố mẹ.",
+            "Trong đám cưới, cô dâu phải kính trà cho các bậc trưởng bối để thể hiện sự tôn kính.",
+            "Trong tiệc sinh nhật, mọi người cùng nhau uống trà.",
+            "Tại công ty, nhân viên mới phải mời sếp uống trà."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'trà'?",
+          "options": [
+            "水",
+            "酒",
+            "茶",
+            "咖",
+            "奶"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "茶"
+    },
+    {
+      "word": "車子",
+      "pinyin": "chē zi",
+      "zhuyin": "ㄔㄜ ㄗ˙",
+      "meaning": "xe, ô tô",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這是我的車子。\nPinyin: zhè shì wǒ de chē zi.\nNghĩa: Đây là xe của tôi.",
+        "我在圖書館看到一本介紹各種車子的書。\nPinyin: wǒ zài tú shū guǎn kàn dào yī běn jiè shào gè zhǒng chē zi de shū.\nNghĩa: Tôi thấy một quyển sách giới thiệu các loại xe ở thư viện.",
+        "服務員說餐廳外面可以停車子。\nPinyin: fú wù yuán shuō cān tīng wài miàn kě yǐ tíng chē zi.\nNghĩa: Nhân viên phục vụ nói có thể đậu xe bên ngoài nhà hàng."
+      ],
+      "synonyms": [
+        "汽車 (qì chē)",
+        "車輛 (chē liàng)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "車子 trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "máy bay",
+            "tàu thủy",
+            "xe lửa",
+            "xe đạp",
+            "xe, ô tô"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của 車子 là gì?",
+          "options": [
+            "chē zǐ",
+            "chè zi",
+            "ché zi",
+            "chē zì",
+            "chē zi"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "這是我的車子。 có nghĩa là gì?",
+          "options": [
+            "Đây là xe của tôi.",
+            "Đây là chó của tôi.",
+            "Đây là nhà của tôi.",
+            "Đây là bạn của tôi.",
+            "Đây là sách của tôi."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "我在圖書館看到一本介紹各種車子的書。 có nghĩa là gì?",
+          "options": [
+            "Tôi thấy một quyển sách giới thiệu các loại xe ở thư viện.",
+            "Tôi mua một quyển sách về xe ở hiệu sách.",
+            "Tôi đọc báo về xe ở thư viện.",
+            "Tôi viết một bài về xe ở thư viện."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "服務員說餐廳外面可以停車子。 có nghĩa là gì?",
+          "options": [
+            "Chủ nhà hàng cấm đậu xe bên ngoài.",
+            "Nhân viên rửa xe ở ngoài nhà hàng.",
+            "Khách hàng hỏi chỗ đậu xe ở nhà hàng.",
+            "Nhân viên nói trong nhà hàng có bán xe.",
+            "Nhân viên phục vụ nói có thể đậu xe bên ngoài nhà hàng."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'xe, ô tô'?",
+          "options": [
+            "杯子",
+            "椅子",
+            "盒子",
+            "桌子",
+            "車子",
+            "房子"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "車子 / 車"
+    },
+    {
+      "word": "吃",
+      "pinyin": "chī",
+      "zhuyin": "ㄔ",
+      "meaning": "ăn",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我吃飯。\nPinyin: wǒ chī fàn\nNghĩa: Tôi ăn cơm.",
+        "我們想找一家好餐廳吃晚餐，你有推薦嗎？\nPinyin: wǒ men xiǎng zhǎo yī jiā hǎo cān tīng chī wǎn cān, nǐ yǒu tuī jiàn ma?\nNghĩa: Chúng tôi muốn tìm một nhà hàng ngon để ăn tối, bạn có gợi ý gì không?",
+        "開會前我們先去樓下吃個便當，十分鐘後回來。\nPinyin: kāi huì qián wǒ men xiān qù lóu xià chī gè biàn dāng, shí fēn zhōng hòu huí lái\nNghĩa: Trước khi họp chúng ta xuống tầng dưới ăn cơm hộp trước, mười phút nữa quay lại."
+      ],
+      "synonyms": [
+        "食 (shí)",
+        "用餐 (yòng cān)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '吃' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "uống",
+            "nhìn",
+            "ngủ",
+            "ăn",
+            "nói",
+            "chạy"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '吃' là gì?",
+          "options": [
+            "chì",
+            "chí",
+            "chǐ",
+            "qī",
+            "chī",
+            "cī"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '我吃飯。' có nghĩa là gì?",
+          "options": [
+            "Tôi nấu cơm.",
+            "Tôi uống nước.",
+            "Tôi rửa bát.",
+            "Tôi ăn cơm.",
+            "Tôi mua cơm."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我們想找一家好餐廳吃晚餐，你有推薦嗎？' có nghĩa là gì?",
+          "options": [
+            "Chúng tôi muốn tìm một nhà hàng ngon để ăn tối, bạn có gợi ý gì không?",
+            "Chúng tôi muốn đặt bàn ăn sáng, bạn có thể giúp không?",
+            "Chúng tôi muốn mua thức ăn về nhà, bạn biết chỗ nào không?",
+            "Chúng tôi muốn tìm khách sạn tốt để nghỉ ngơi, bạn có gợi ý không?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '開會前我們先去樓下吃個便當，十分鐘後回來。' có nghĩa là gì?",
+          "options": [
+            "Trước khi họp chúng ta xuống tầng dưới ăn cơm hộp trước, mười phút nữa quay lại.",
+            "Sau khi họp chúng ta đi ăn tối ở ngoài, một giờ sau về.",
+            "Cuối buổi họp chúng ta đi uống cà phê, hai mười phút sau quay lại.",
+            "Trong lúc họp chúng ta gọi đồ ăn lên, năm phút nữa sẽ có."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'ăn'?",
+          "options": [
+            "跑",
+            "吃",
+            "說",
+            "喝",
+            "睡"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "吃"
+    },
+    {
+      "word": "吃飯",
+      "pinyin": "chī fàn",
+      "zhuyin": "ㄔ ㄈㄢˋ",
+      "meaning": "ăn cơm, ăn uống",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "你吃飯了嗎？\nPinyin: nǐ chī fàn le ma?\nNghĩa: Bạn ăn cơm chưa?",
+        "我們中午一起去公司附近的餐廳吃飯吧。\nPinyin: wǒ men zhōng wǔ yì qǐ qù gōng sī fù jìn de cān tīng chī fàn ba.\nNghĩa: Trưa chúng ta cùng đi nhà hàng gần công ty ăn cơm nhé.",
+        "飯店裡有很多不錯的地方可以吃飯。\nPinyin: fàn diàn lǐ yǒu hěn duō bù cuò de dì fāng kě yǐ chī fàn.\nNghĩa: Trong khách sạn có rất nhiều nơi tốt để ăn uống."
+      ],
+      "synonyms": [
+        "用餐 (yòng cān)",
+        "進食 (jìn shí)"
+      ],
+      "antonyms": [
+        "禁食 (jìn shí)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '吃飯' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "ăn cơm, ăn uống",
+            "đi chơi",
+            "ngủ nghỉ",
+            "làm việc",
+            "uống nước"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của '吃飯' là gì?",
+          "options": [
+            "chí fàn",
+            "chī fán",
+            "chǐ fàn",
+            "chì fān",
+            "chī fàn"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '你吃飯了嗎？' có nghĩa là gì?",
+          "options": [
+            "Bạn có khỏe không?",
+            "Bạn ăn cơm chưa?",
+            "Bạn ngủ chưa?",
+            "Bạn làm gì?",
+            "Bạn đi đâu?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我們中午一起去公司附近的餐廳吃飯吧。' có nghĩa là gì?",
+          "options": [
+            "Họp xong chúng ta đi uống cà phê.",
+            "Tối nay chúng ta về nhà sớm.",
+            "Chúng ta sáng mai đi làm cùng nhau.",
+            "Chúng ta đi mua sắm cuối tuần.",
+            "Trưa chúng ta cùng đi nhà hàng gần công ty ăn cơm nhé."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '飯店裡有很多不錯的地方可以吃飯。' có nghĩa là gì?",
+          "options": [
+            "Khách sạn này rất đắt tiền.",
+            "Dịch vụ khách sạn rất tốt.",
+            "Phòng khách sạn rất sạch sẽ.",
+            "Trong khách sạn có rất nhiều nơi tốt để ăn uống.",
+            "Khách sạn có nhiều phòng trống."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'ăn cơm, ăn uống'?",
+          "options": [
+            "休息",
+            "工作",
+            "睡覺",
+            "吃飯",
+            "喝水",
+            "玩耍"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "吃飯"
+    },
+    {
+      "word": "打",
+      "pinyin": "dǎ",
+      "zhuyin": "ㄉㄚˇ",
+      "meaning": "đánh, gõ, đập",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "他打球。\nPinyin: tā dǎ qiú.\nNghĩa: Anh ấy chơi bóng.",
+        "經理要求我們明天打電話給客戶確認訂單。\nPinyin: jīnglǐ yāoqiú wǒmen míngtiān dǎ diànhuà gěi kèhù quèrèn dìngdān.\nNghĩa: Quản lý yêu cầu chúng tôi gọi điện cho khách hàng vào ngày mai để xác nhận đơn hàng.",
+        "請服務員打包剩下的菜，我們要帶回家。\nPinyin: qǐng fúwùyuán dǎbāo shèngxià de cài, wǒmen yào dài huí jiā.\nNghĩa: Xin nhờ nhân viên phục vụ đóng gói những món còn lại, chúng tôi muốn mang về nhà."
+      ],
+      "synonyms": [
+        "擊 (jī)",
+        "敲 (qiāo)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"打\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "đi",
+            "đánh, gõ, đập",
+            "ngủ",
+            "ngồi",
+            "ăn"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của \"打\" là gì?",
+          "options": [
+            "dǎ",
+            "dā",
+            "dǎi",
+            "dá",
+            "dà"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"他打球。\" có nghĩa là gì?",
+          "options": [
+            "Anh ấy ngủ.",
+            "Anh ấy ăn cơm.",
+            "Anh ấy chơi bóng.",
+            "Anh ấy đi học.",
+            "Anh ấy làm việc."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"經理要求我們明天打電話給客戶確認訂單。\" có nghĩa là gì?",
+          "options": [
+            "Quản lý yêu cầu chúng tôi gọi điện cho khách hàng vào ngày mai để xác nhận đơn hàng.",
+            "Quản lý yêu cầu chúng tôi hủy đơn hàng.",
+            "Quản lý yêu cầu chúng tôi gặp khách hàng vào ngày mai.",
+            "Quản lý yêu cầu chúng tôi viết email cho khách hàng."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"請服務員打包剩下的菜，我們要帶回家。\" có nghĩa là gì?",
+          "options": [
+            "Xin nhờ nhân viên phục vụ tính tiền.",
+            "Xin nhờ nhân viên phục vụ mang nước.",
+            "Xin nhờ nhân viên phục vụ gọi món mới.",
+            "Xin nhờ nhân viên phục vụ dọn bàn.",
+            "Xin nhờ nhân viên phục vụ đóng gói những món còn lại, chúng tôi muốn mang về nhà."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa \"đánh, gõ, đập\"?",
+          "options": [
+            "抱",
+            "打",
+            "推",
+            "握",
+            "拍"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "打"
+    },
+    {
+      "word": "大",
+      "pinyin": "dà",
+      "zhuyin": "ㄉㄚˋ",
+      "meaning": "to, lớn",
+      "partOfSpeech": "adjective",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我是大學生。\nPinyin: wǒ shì dàxuéshēng\nNghĩa: Tôi là sinh viên đại học.",
+        "這間大飯店的房間很舒適，我想訂兩晚。\nPinyin: zhè jiān dà fàndiàn de fángjiān hěn shūshì, wǒ xiǎng dìng liǎng wǎn\nNghĩa: Phòng của khách sạn lớn này rất thoải mái, tôi muốn đặt hai đêm.",
+        "你看那個大蛋糕多漂亮，我們一起分享吧！\nPinyin: nǐ kàn nàge dà dàngāo duō piàoliang, wǒmen yīqǐ fēnxiǎng ba\nNghĩa: Bạn xem cái bánh lớn kia đẹp quá, chúng ta cùng chia sẻ nhé!"
+      ],
+      "synonyms": [
+        "巨 (jù)",
+        "廣 (guǎng)"
+      ],
+      "antonyms": [
+        "小 (xiǎo)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '大' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "nhỏ",
+            "to, lớn",
+            "cao",
+            "thấp",
+            "dài",
+            "ngắn"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '大' là gì?",
+          "options": [
+            "dǎ",
+            "dá",
+            "de",
+            "dà",
+            "tà",
+            "dā"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我是大學生。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Tôi là học sinh tiểu học.",
+            "Tôi là giáo viên đại học.",
+            "Tôi là hiệu trưởng.",
+            "Tôi là học sinh trung học.",
+            "Tôi là phụ huynh.",
+            "Tôi là sinh viên đại học."
+          ],
+          "correctAnswer": 5
+        },
+        {
+          "question": "Câu '這間大飯店的房間很舒適，我想訂兩晚。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Nhà hàng này rất ngon, tôi muốn ăn tối.",
+            "Tôi muốn hủy đặt phòng khách sạn.",
+            "Phòng của khách sạn lớn này rất thoải mái, tôi muốn đặt hai đêm.",
+            "Khách sạn này không có phòng trống.",
+            "Khách sạn nhỏ này rất đắt, tôi không muốn ở."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '你看那個大蛋糕多漂亮，我們一起分享吧！' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Cái bánh này không ngon lắm.",
+            "Bạn mua cái bánh nhỏ đó về nhà đi!",
+            "Bánh này quá đắt rồi.",
+            "Tôi không thích ăn bánh ngọt.",
+            "Bạn xem cái bánh lớn kia đẹp quá, chúng ta cùng chia sẻ nhé!"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'to, lớn'?",
+          "options": [
+            "細",
+            "大",
+            "瘦",
+            "短",
+            "高",
+            "小"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "大"
+    },
+    {
+      "word": "大家",
+      "pinyin": "dàjiā",
+      "zhuyin": "ㄉㄚˋㄐㄧㄚ",
+      "meaning": "mọi người, tất cả mọi người",
+      "partOfSpeech": "pronoun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "大家好！\nPinyin: Dàjiā hǎo!\nNghĩa: Chào mọi người!",
+        "請大家在飯店大廳集合，我們準備出發去觀光。\nPinyin: Qǐng dàjiā zài fàndiàn dàtīng jíhé, wǒmen zhǔnbèi chūfā qù guānguāng.\nNghĩa: Xin mọi người tập trung ở sảnh khách sạn, chúng ta chuẩn bị khởi hành đi tham quan.",
+        "圖書館裡大家都很安靜地在看書和做研究。\nPinyin: Túshūguǎn lǐ dàjiā dōu hěn ānjìng de zài kànshū hé zuò yánjiū.\nNghĩa: Trong thư viện mọi người đều rất yên lặng đọc sách và làm nghiên cứu."
+      ],
+      "synonyms": [
+        "各位 (gèwèi)",
+        "眾人 (zhòngrén)"
+      ],
+      "antonyms": [
+        "個人 (gèrén)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '大家' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "nhà to",
+            "người lớn",
+            "đại gia",
+            "mọi người",
+            "cả nhà",
+            "gia đình lớn"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '大家' là gì?",
+          "options": [
+            "dǎjiā",
+            "dájiā",
+            "dàjiā",
+            "dàjiá",
+            "dàjià",
+            "dājià"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '大家好！' có nghĩa là gì?",
+          "options": [
+            "Mọi người ơi!",
+            "Chúc mọi người!",
+            "Tạm biệt mọi người!",
+            "Chào mọi người!",
+            "Cảm ơn mọi người!",
+            "Xin lỗi mọi người!"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu 'Qǐng dàjiā zài fàndiàn dàtīng jíhé, wǒmen zhǔnbèi chūfā qù guānguāng.' có nghĩa là gì?",
+          "options": [
+            "Mọi người hãy chờ ở sảnh để xe đưa đón đến.",
+            "Xin mọi người tập trung ở sảnh khách sạn, chúng ta chuẩn bị khởi hành đi tham quan.",
+            "Xin mọi người đến quầy lễ tân để làm thủ tục.",
+            "Xin mọi người ở lại khách sạn, chúng ta sẽ nghỉ ngơi.",
+            "Mọi người hãy về phòng khách sạn để chuẩn bị hành lý.",
+            "Chúng ta sẽ gặp nhau tại nhà hàng khách sạn để ăn tối."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu 'Túshūguǎn lǐ dàjiā dōu hěn ānjìng de zài kànshū hé zuò yánjiū.' có nghĩa là gì?",
+          "options": [
+            "Thư viện có nhiều sách hay nên mọi người đều thích.",
+            "Thư viện rất yên tĩnh nên mọi người đều thích đến đây.",
+            "Trong thư viện mọi người đều rất yên lặng đọc sách và làm nghiên cứu.",
+            "Mọi người đều tìm được tài liệu cần thiết ở thư viện.",
+            "Trong thư viện có rất nhiều người đang nghiên cứu.",
+            "Mọi người đều muốn đến thư viện để học tập."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'mọi người'?",
+          "options": [
+            "大人",
+            "自家",
+            "人人",
+            "家人",
+            "大家",
+            "人家"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "大家"
+    },
+    {
+      "word": "大學",
+      "pinyin": "dà xué",
+      "zhuyin": "ㄉㄚˋ ㄒㄩㄝˊ",
+      "meaning": "đại học",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Giáo dục, học tập"
+      ],
+      "examples": [
+        "我在大學讀書。\nPinyin: wǒ zài dà xué dú shū\nNghĩa: Tôi đang học đại học.",
+        "我需要帶著大學的成績單去機場辦理出國手續。\nPinyin: wǒ xū yào dài zhe dà xué de chéng jì dān qù jī chǎng bàn lǐ chū guó shǒu xù\nNghĩa: Tôi cần mang theo bảng điểm đại học đến sân bay để làm thủ tục xuất nước.",
+        "在圖書館裡，我找到了很多關於大學歷史的研究資料。\nPinyin: zài tú shū guǎn lǐ, wǒ zhǎo dào le hěn duō guān yú dà xué lì shǐ de yán jiū zī liào\nNghĩa: Trong thư viện, tôi đã tìm thấy rất nhiều tài liệu nghiên cứu về lịch sử đại học."
+      ],
+      "synonyms": [
+        "高等學府 (gāo děng xué fǔ)",
+        "學院 (xué yuàn)"
+      ],
+      "antonyms": [
+        "小學 (xiǎo xué)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '大學' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "tiểu học",
+            "cao đẳng",
+            "đại học",
+            "trung học"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của '大學' là gì?",
+          "options": [
+            "dà xuè",
+            "dà xué",
+            "dà xuě",
+            "dá xué"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我在大學讀書。' có nghĩa là gì?",
+          "options": [
+            "Tôi đang học trung học.",
+            "Tôi đã tốt nghiệp đại học.",
+            "Tôi đang học đại học.",
+            "Tôi đang dạy đại học."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我需要帶著大學的成績單去機場辦理出國手續。' có nghĩa là gì?",
+          "options": [
+            "Tôi cần mang theo bảng điểm đại học đến sân bay để làm thủ tục xuất nước.",
+            "Tôi cần nộp hồ sơ đại học tại sân bay để đi du học.",
+            "Tôi cần gửi bảng điểm đại học về nhà trước khi đi máy bay.",
+            "Tôi cần mang theo bằng tốt nghiệp đại học đến sân bay để làm thủ tục xuất nước."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '在圖書館裡，我找到了很多關於大學歷史的研究資料。' có nghĩa là gì?",
+          "options": [
+            "Trong thư viện đại học, tôi đã nghiên cứu về lịch sử.",
+            "Trong thư viện, tôi đã mượn nhiều sách về lịch sử đại học.",
+            "Trong thư viện, tôi đã tìm thấy rất nhiều tài liệu nghiên cứu về lịch sử đại học.",
+            "Tôi đã viết luận văn về lịch sử đại học trong thư viện."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'đại học'?",
+          "options": [
+            "小學",
+            "大學",
+            "高中",
+            "中學"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "大學"
+    },
+    {
+      "word": "帶",
+      "pinyin": "dài",
+      "zhuyin": "ㄉㄞˋ",
+      "meaning": "mang, đem theo, dẫn theo",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "你帶錢了嗎？\nPinyin: nǐ dài qián le ma?\nNghĩa: Bạn có mang tiền không?",
+        "我今天忘記帶雨傘，結果淋濕了。\nPinyin: wǒ jīn tiān wàng jì dài yǔ sǎn, jié guǒ lín shī le.\nNghĩa: Hôm nay tôi quên mang ô, kết quả là bị ướt.",
+        "請帶這份文件到會議室給經理。\nPinyin: qǐng dài zhè fèn wén jiàn dào huì yì shì gěi jīng lǐ.\nNghĩa: Xin hãy mang tài liệu này đến phòng họp cho quản lý."
+      ],
+      "synonyms": [
+        "拿 (ná)",
+        "攜帶 (xié dài)"
+      ],
+      "antonyms": [
+        "放 (fàng)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '帶' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "đi, về",
+            "ngủ, nghỉ",
+            "ăn, uống",
+            "mang, đem theo",
+            "mua, bán"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '帶' là gì?",
+          "options": [
+            "daì",
+            "dái",
+            "dài",
+            "dǎi",
+            "dāi"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '你帶錢了嗎？' có nghĩa là gì?",
+          "options": [
+            "Bạn cần tiền không?",
+            "Bạn có mang tiền không?",
+            "Bạn muốn tiền không?",
+            "Bạn có tiền không?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我今天忘記帶雨傘，結果淋濕了。' có nghĩa là gì?",
+          "options": [
+            "Hôm nay trời mưa nên tôi mang ô.",
+            "Ô của tôi bị hỏng nên bị ướt.",
+            "Hôm nay tôi quên mang ô, kết quả là bị ướt.",
+            "Tôi không thích mang ô khi trời mưa."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '請帶這份文件到會議室給經理。' có nghĩa là gì?",
+          "options": [
+            "Quản lý đang ở phòng họp với tài liệu.",
+            "Quản lý yêu cầu mang tài liệu đến.",
+            "Xin hãy mang tài liệu này đến phòng họp cho quản lý.",
+            "Tài liệu này dành cho cuộc họp của quản lý."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'mang, đem theo'?",
+          "options": [
+            "戴",
+            "待",
+            "帶",
+            "代",
+            "袋"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "帶"
+    },
+    {
+      "word": "到",
+      "pinyin": "dào",
+      "zhuyin": "ㄉㄠˋ",
+      "meaning": "đến, tới, đạt tới",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我到家了。\nPinyin: wǒ dào jiā le.\nNghĩa: Tôi đã về đến nhà rồi.",
+        "如果你到超市買東西的話，可以順便幫我買一瓶牛奶嗎？\nPinyin: rúguǒ nǐ dào chāoshì mǎi dōngxi de huà, kěyǐ shùnbiàn bāng wǒ mǎi yī píng niúnǎi ma?\nNghĩa: Nếu bạn đến siêu thị mua đồ thì có thể giúp tôi mua một chai sữa được không?",
+        "我們約好三點到咖啡廳見面，你記得要準時到喔！\nPinyin: wǒmen yuēhǎo sān diǎn dào kāfēitīng jiànmiàn, nǐ jìde yào zhǔnshí dào ō!\nNghĩa: Chúng ta đã hẹn ba giờ đến quán cà phê gặp nhau, bạn nhớ phải đến đúng giờ nhé!"
+      ],
+      "synonyms": [
+        "至 (zhì)",
+        "抵 (dǐ)"
+      ],
+      "antonyms": [
+        "離 (lí)"
+      ],
+      "questions": [
+        {
+          "question": "Từ \"到\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "đi",
+            "ra",
+            "về",
+            "vào",
+            "đến, tới"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của \"到\" là gì?",
+          "options": [
+            "dào",
+            "dāo",
+            "dǎo",
+            "dáo",
+            "dà"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu \"我到家了\" nghĩa là gì?",
+          "options": [
+            "Tôi không về nhà",
+            "Tôi muốn về nhà",
+            "Tôi sắp về nhà",
+            "Tôi đã về đến nhà rồi"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu \"如果你到超市買東西的話，可以順便幫我買一瓶牛奶嗎？\" nghĩa là gì?",
+          "options": [
+            "Bạn có thể đi siêu thị mua sữa cho tôi không?",
+            "Bạn đã mua sữa ở siêu thị chưa?",
+            "Nếu bạn đến siêu thị mua đồ thì có thể giúp tôi mua một chai sữa được không?",
+            "Siêu thị có bán sữa không?"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu \"我們約好三點到咖啡廳見面，你記得要準時到喔！\" nghĩa là gì?",
+          "options": [
+            "Chúng ta đã hẹn ba giờ đến quán cà phê gặp nhau, bạn nhớ phải đến đúng giờ nhé!",
+            "Chúng ta hẹn gặp nhau ở quán cà phê lúc ba giờ nhé!",
+            "Quán cà phê mở cửa lúc ba giờ",
+            "Ba giờ chúng ta uống cà phê"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"đến, tới\"?",
+          "options": [
+            "倒",
+            "到",
+            "島",
+            "刀",
+            "道"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "到"
+    },
+    {
+      "word": "的",
+      "pinyin": "de",
+      "zhuyin": "ㄉㄜ˙",
+      "meaning": "của, trợ từ sở hữu",
+      "partOfSpeech": "particle",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我的書\nPinyin: wǒ de shū\nNghĩa: sách của tôi",
+        "這是我朋友昨天買的新手機\nPinyin: zhè shì wǒ péngyǒu zuótiān mǎi de xīn shǒujī\nNghĩa: Đây là chiếc điện thoại mới mà bạn tôi đã mua hôm qua",
+        "老師今天教的數學題目很難懂\nPinyin: lǎoshī jīntiān jiāo de shùxué tímù hěn nán dǒng\nNghĩa: Bài toán mà thầy giáo dạy hôm nay rất khó hiểu"
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '的' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "cho",
+            "của",
+            "và",
+            "từ",
+            "với"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '的' là gì?",
+          "options": [
+            "de",
+            "dē",
+            "děi",
+            "dè",
+            "dé"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '我的書' có nghĩa là gì?",
+          "options": [
+            "sách hay",
+            "tôi mua sách",
+            "tôi viết sách",
+            "sách của tôi",
+            "tôi đọc sách"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '這是我朋友昨天買的新手機' có nghĩa là gì?",
+          "options": [
+            "Bạn tôi thích điện thoại mới",
+            "Tôi muốn mua điện thoại mới",
+            "Đây là chiếc điện thoại mới mà bạn tôi đã mua hôm qua",
+            "Hôm qua có nhiều điện thoại mới"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '老師今天教的數學題目很難懂' có nghĩa là gì?",
+          "options": [
+            "Thầy giáo dạy toán hôm nay",
+            "Hôm nay có bài toán mới",
+            "Bài toán mà thầy giáo dạy hôm nay rất khó hiểu",
+            "Toán học rất khó",
+            "Thầy giáo giải thích bài toán"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'của' trong tiếng Trung?",
+          "options": [
+            "和",
+            "地",
+            "的",
+            "得",
+            "在"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "的"
+    },
+    {
+      "word": "點",
+      "pinyin": "diǎn",
+      "zhuyin": "ㄉㄧㄢˇ",
+      "meaning": "điểm, chấm; giờ",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "現在三點了。\nPinyin: xiàn zài sān diǎn le.\nNghĩa: Bây giờ ba giờ rồi.",
+        "我們約在咖啡廳五點半見面。\nPinyin: wǒ men yuē zài kā fēi tīng wǔ diǎn bàn jiàn miàn.\nNghĩa: Chúng ta hẹn gặp nhau ở quán cà phê lúc năm giờ rưỡi.",
+        "這個重點需要特別注意和理解。\nPinyin: zhè ge zhòng diǎn xū yào tè bié zhù yì hé lǐ jiě.\nNghĩa: Điểm quan trọng này cần được chú ý và hiểu đặc biệt."
+      ],
+      "synonyms": [
+        "時 (shí)",
+        "刻 (kè)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '點' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "đường",
+            "đầu",
+            "điểm, chấm; giờ",
+            "dòng"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của '點' là gì?",
+          "options": [
+            "diàn",
+            "diǎn",
+            "dián",
+            "diān"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '現在三點了。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Bây giờ bốn giờ rồi.",
+            "Bây giờ năm giờ rồi.",
+            "Bây giờ ba giờ rồi.",
+            "Bây giờ hai giờ rồi."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我們約在咖啡廳五點半見面。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Chúng ta hẹn gặp nhau ở trường học lúc năm giờ rưỡi.",
+            "Chúng ta hẹn gặp nhau ở quán cà phê lúc sáu giờ rưỡi.",
+            "Chúng ta hẹn gặp nhau ở nhà hàng lúc năm giờ rưỡi.",
+            "Chúng ta hẹn gặp nhau ở quán cà phê lúc năm giờ rưỡi."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '這個重點需要特別注意和理解。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Bài học này cần được học thuộc lòng.",
+            "Vấn đề này cần được giải quyết nhanh chóng.",
+            "Câu hỏi này rất khó để trả lời.",
+            "Điểm quan trọng này cần được chú ý và hiểu đặc biệt."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'điểm, chấm; giờ'?",
+          "options": [
+            "點",
+            "線",
+            "面",
+            "角"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "點"
+    },
+    {
+      "word": "電話",
+      "pinyin": "diànhuà",
+      "zhuyin": "ㄉㄧㄢˋㄏㄨㄚˋ",
+      "meaning": "điện thoại",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "你的電話號碼是多少？\nPinyin: nǐ de diànhuà hàomǎ shì duōshǎo?\nNghĩa: Số điện thoại của bạn là bao nhiêu?",
+        "老師說我們上課的時候不能用電話。\nPinyin: lǎoshī shuō wǒmen shàngkè de shíhòu bùnéng yòng diànhuà.\nNghĩa: Thầy giáo nói chúng ta không được dùng điện thoại khi đang học.",
+        "如果你收到我的電話，請馬上回電給我。\nPinyin: rúguǒ nǐ shōudào wǒ de diànhuà, qǐng mǎshàng huídiàn gěi wǒ.\nNghĩa: Nếu bạn nhận được điện thoại của tôi, xin hãy gọi lại cho tôi ngay."
+      ],
+      "synonyms": [
+        "手機 (shǒujī)",
+        "電話機 (diànhuàjī)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"電話\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "tivi",
+            "điện thoại",
+            "máy ảnh",
+            "đài radio",
+            "máy tính"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của \"電話\" là gì?",
+          "options": [
+            "diànhuà",
+            "diànhuá",
+            "diànhuā",
+            "diānhuà",
+            "diànhuǎ"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"你的電話號碼是多少？\" nghĩa là gì?",
+          "options": [
+            "Bạn có bao nhiêu điện thoại?",
+            "Bạn có thích điện thoại không?",
+            "Số điện thoại của bạn là bao nhiêu?",
+            "Điện thoại của bạn đắt không?",
+            "Bạn mua điện thoại ở đâu?"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"老師說我們上課的時候不能用電話。\" nghĩa là gì?",
+          "options": [
+            "Thầy giáo nói chúng ta có thể dùng điện thoại bất cứ lúc nào.",
+            "Thầy giáo nói chúng ta phải mang điện thoại đến lớp.",
+            "Thầy giáo nói điện thoại rất quan trọng trong học tập.",
+            "Thầy giáo nói chúng ta không được dùng điện thoại khi đang học.",
+            "Thầy giáo nói chúng ta nên mua điện thoại mới."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "\"如果你收到我的電話，請馬上回電給我。\" nghĩa là gì?",
+          "options": [
+            "Nếu bạn nhận được điện thoại của tôi, xin hãy gọi lại cho tôi ngay.",
+            "Nếu bạn thấy điện thoại của tôi, xin hãy trả lại.",
+            "Nếu điện thoại của bạn hỏng, tôi sẽ cho bạn mượn.",
+            "Nếu bạn không có điện thoại, tôi sẽ mua cho bạn.",
+            "Nếu bạn muốn mượn điện thoại, hãy hỏi tôi trước."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"điện thoại\"?",
+          "options": [
+            "電視",
+            "電燈",
+            "電話",
+            "電車",
+            "電腦"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "電話"
+    },
+    {
+      "word": "弟弟",
+      "pinyin": "dìdi",
+      "zhuyin": "ㄉㄧˋㄉㄧ˙",
+      "meaning": "em trai",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我弟弟很高。\nPinyin: wǒ dìdi hěn gāo.\nNghĩa: Em trai tôi rất cao.",
+        "我弟弟在餐廳點了一份牛肉麵和可樂。\nPinyin: wǒ dìdi zài cāntīng diǎn le yī fèn niúròu miàn hé kělè.\nNghĩa: Em trai tôi đã gọi một bát bún bò và coca trong nhà hàng.",
+        "老師說我弟弟在班上的數學成績進步很多。\nPinyin: lǎoshī shuō wǒ dìdi zài bān shàng de shùxué chéngjì jìnbù hěn duō.\nNghĩa: Cô giáo nói em trai tôi đã tiến bộ rất nhiều về điểm số môn toán trong lớp."
+      ],
+      "synonyms": [],
+      "antonyms": [
+        "哥哥 (gēge)"
+      ],
+      "questions": [
+        {
+          "question": "'弟弟' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "anh trai",
+            "chị gái",
+            "em trai",
+            "em gái",
+            "bố",
+            "mẹ"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của '弟弟' là gì?",
+          "options": [
+            "dìdi",
+            "dǐdi",
+            "dìdì",
+            "dídí",
+            "dīdi",
+            "dídi"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '我弟弟很高。' có nghĩa là gì?",
+          "options": [
+            "Em gái tôi rất cao.",
+            "Em trai tôi rất thấp.",
+            "Anh trai tôi rất cao.",
+            "Tôi rất cao.",
+            "Em trai tôi rất cao."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '我弟弟在餐廳點了一份牛肉麵和可樂。' có nghĩa là gì?",
+          "options": [
+            "Em gái tôi đã gọi một bát bún bò và coca trong nhà hàng.",
+            "Em trai tôi đã gọi một bát bún bò và coca trong nhà hàng.",
+            "Anh trai tôi đã gọi một bát bún bò và coca trong nhà hàng.",
+            "Em trai tôi đã gọi một bát phở và nước cam trong nhà hàng."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '老師說我弟弟在班上的數學成績進步很多。' có nghĩa là gì?",
+          "options": [
+            "Cô giáo nói anh trai tôi đã tiến bộ rất nhiều về điểm số môn toán trong lớp.",
+            "Cô giáo nói em trai tôi đã tiến bộ rất nhiều về điểm số môn toán trong lớp.",
+            "Cô giáo nói em gái tôi đã tiến bộ rất nhiều về điểm số môn toán trong lớp.",
+            "Cô giáo nói em trai tôi đã tiến bộ rất nhiều về điểm số môn văn trong lớp."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'em trai'?",
+          "options": [
+            "妹妹",
+            "哥哥",
+            "弟弟",
+            "姐姐",
+            "爸爸"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "弟弟 / 弟"
+    },
+    {
+      "word": "東西",
+      "pinyin": "dōng xī",
+      "zhuyin": "ㄉㄨㄥ ㄒㄧ",
+      "meaning": "đồ vật, thứ, vật",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這是什麼東西？\nPinyin: zhè shì shén me dōng xī?\nNghĩa: Đây là cái gì?",
+        "我在超市買了很多好吃的東西回家。\nPinyin: wǒ zài chāo shì mǎi le hěn duō hǎo chī de dōng xī huí jiā.\nNghĩa: Tôi đã mua rất nhiều đồ ăn ngon ở siêu thị về nhà.",
+        "老師說我們要帶自己的東西來學校做實驗。\nPinyin: lǎo shī shuō wǒ men yào dài zì jǐ de dōng xī lái xué xiào zuò shí yàn.\nNghĩa: Giáo viên nói chúng ta phải mang đồ của mình đến trường để làm thí nghiệm."
+      ],
+      "synonyms": [
+        "物品 (wù pǐn)",
+        "物件 (wù jiàn)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '東西' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "thời gian",
+            "con người",
+            "địa điểm",
+            "phương hướng",
+            "đồ vật, thứ"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Cách phát âm pinyin của '東西' là gì?",
+          "options": [
+            "dòng xī",
+            "dóng xī",
+            "dōng xì",
+            "dōng xǐ",
+            "dōng xī"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '這是什麼東西？' có nghĩa là gì?",
+          "options": [
+            "Đây là ở đâu?",
+            "Đây là tại sao?",
+            "Đây là ai?",
+            "Đây là khi nào?",
+            "Đây là cái gì?"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '我在超市買了很多好吃的東西回家。' có nghĩa là gì?",
+          "options": [
+            "Tôi làm việc ở siêu thị.",
+            "Siêu thị có nhiều đồ ăn ngon.",
+            "Tôi đi siêu thị với gia đình.",
+            "Tôi đã mua rất nhiều đồ ăn ngon ở siêu thị về nhà.",
+            "Tôi thích đi siêu thị mua sắm."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '老師說我們要帶自己的東西來學校做實驗。' có nghĩa là gì?",
+          "options": [
+            "Giáo viên nói chúng ta phải mang đồ của mình đến trường để làm thí nghiệm.",
+            "Chúng ta phải học ở trường.",
+            "Trường có nhiều đồ để làm thí nghiệm.",
+            "Giáo viên dạy chúng ta làm thí nghiệm.",
+            "Thí nghiệm rất khó làm."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào viết đúng cho từ có nghĩa 'đồ vật, thứ'?",
+          "options": [
+            "東西",
+            "棟溪",
+            "動息",
+            "冬夕",
+            "童戲"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "東西"
+    },
+    {
+      "word": "都",
+      "pinyin": "dōu",
+      "zhuyin": "ㄉㄡ",
+      "meaning": "đều, tất cả",
+      "partOfSpeech": "adverb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我們都是學生。\nPinyin: wǒmen dōu shì xuéshēng\nNghĩa: Chúng tôi đều là học sinh.",
+        "公司裡的員工都必須準時上班。\nPinyin: gōngsī lǐ de yuángōng dōu bìxū zhǔnshí shàngbān\nNghĩa: Tất cả nhân viên trong công ty đều phải đi làm đúng giờ.",
+        "這些問題我們都已經討論過了。\nPinyin: zhèxiē wèntí wǒmen dōu yǐjīng tǎolùn guò le\nNghĩa: Những vấn đề này chúng ta đều đã thảo luận rồi."
+      ],
+      "synonyms": [
+        "全部 (quánbù)",
+        "皆 (jiē)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '都' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "đều, tất cả",
+            "không, chẳng",
+            "chỉ, chỉ có",
+            "rất, lắm",
+            "còn, vẫn"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của từ '都' là gì?",
+          "options": [
+            "dū",
+            "dòng",
+            "dōu",
+            "dòu",
+            "duō",
+            "dǒu"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我們都是學生。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Chúng tôi không phải học sinh.",
+            "Chúng tôi là giáo viên.",
+            "Chúng tôi rất thích học.",
+            "Chúng tôi đang đi học.",
+            "Chúng tôi đều là học sinh."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '公司裡的員工都必須準時上班。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Công ty có rất nhiều nhân viên.",
+            "Nhân viên được nghỉ làm sớm.",
+            "Nhân viên công ty thường đi làm muộn.",
+            "Tất cả nhân viên trong công ty đều phải đi làm đúng giờ.",
+            "Công ty mới tuyển thêm nhân viên."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '這些問題我們都已經討論過了。' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Những vấn đề này chúng ta đều đã thảo luận rồi.",
+            "Chúng ta cần thảo luận thêm về vấn đề này.",
+            "Những vấn đề này rất khó giải quyết.",
+            "Chúng ta sẽ thảo luận vấn đề này sau.",
+            "Vấn đề này chưa được giải quyết."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'đều, tất cả'?",
+          "options": [
+            "度",
+            "毒",
+            "多",
+            "到",
+            "都"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "都"
+    },
+    {
+      "word": "對",
+      "pinyin": "duì",
+      "zhuyin": "ㄉㄨㄟˋ",
+      "meaning": "đúng, đối, với",
+      "partOfSpeech": "adjective",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這個答案對嗎？\nPinyin: zhè ge dá àn duì ma?\nNghĩa: Câu trả lời này đúng không?",
+        "請問這家飯店對觀光客來說方便嗎？\nPinyin: qǐng wèn zhè jiā fàn diàn duì guān guāng kè lái shuō fāng biàn ma?\nNghĩa: Xin hỏi khách sạn này có tiện lợi cho khách du lịch không?",
+        "我覺得這個婚禮對新人很有意義。\nPinyin: wǒ jué de zhè ge hūn lǐ duì xīn rén hěn yǒu yì yì.\nNghĩa: Tôi cảm thấy đám cưới này rất có ý nghĩa đối với cặp đôi."
+      ],
+      "synonyms": [
+        "正確 (zhèng què)",
+        "沒錯 (méi cuò)"
+      ],
+      "antonyms": [
+        "錯 (cuò)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '對' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "sai, không đúng",
+            "không biết",
+            "rất tốt",
+            "đúng, đối, với",
+            "có thể, được",
+            "xin lỗi"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Cách phát âm pinyin của '對' là gì?",
+          "options": [
+            "dùi",
+            "duī",
+            "duò",
+            "duí",
+            "duǐ",
+            "duì"
+          ],
+          "correctAnswer": 5
+        },
+        {
+          "question": "Câu '這個答案對嗎？' có nghĩa là gì?",
+          "options": [
+            "Câu trả lời này dài không?",
+            "Câu trả lời này khó không?",
+            "Câu trả lời này hay không?",
+            "Câu trả lời này đúng không?"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '請問這家飯店對觀光客來說方便嗎？' có nghĩa là gì?",
+          "options": [
+            "Xin hỏi khách sạn này có đẹp cho khách du lịch không?",
+            "Xin hỏi khách sạn này có đắt cho khách du lịch không?",
+            "Xin hỏi khách sạn này có tiện lợi cho khách du lịch không?",
+            "Xin hỏi khách sạn này có xa cho khách du lịch không?"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我覺得這個婚禮對新人很有意義。' có nghĩa là gì?",
+          "options": [
+            "Tôi cảm thấy đám cưới này rất có ý nghĩa đối với cặp đôi.",
+            "Tôi cảm thấy đám cưới này rất đắt đỏ đối với cặp đôi.",
+            "Tôi cảm thấy đám cưới này rất vui vẻ đối với cặp đôi.",
+            "Tôi cảm thấy đám cưới này rất khó khăn đối với cặp đôi."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'đúng, đối, với'?",
+          "options": [
+            "錯",
+            "壞",
+            "對",
+            "不",
+            "好",
+            "是"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "對"
+    },
+    {
+      "word": "對不起",
+      "pinyin": "duì bù qǐ",
+      "zhuyin": "ㄉㄨㄟˋ ㄅㄨˋ ㄑㄧˇ",
+      "meaning": "xin lỗi, tôi xin lỗi",
+      "partOfSpeech": "interjection",
+      "level": 1,
+      "topics": [
+        "Giao tiếp xã hội, quan hệ con người"
+      ],
+      "examples": [
+        "對不起，我遲到了。\nPinyin: duì bù qǐ, wǒ chí dào le.\nNghĩa: Xin lỗi, tôi đến muộn.",
+        "對不起，因為塞車的關係，所以會議延遲了十分鐘。\nPinyin: duì bù qǐ, yīn wèi sāi chē de guān xì, suǒ yǐ huì yì yán chí le shí fēn zhōng.\nNghĩa: Xin lỗi, vì tắc đường nên cuộc họp bị trì hoãn mười phút.",
+        "對不起，請問您剛才點的是牛肉麵還是豬肉麵？\nPinyin: duì bù qǐ, qǐng wèn nín gāng cái diǎn de shì niú ròu miàn hái shì zhū ròu miàn?\nNghĩa: Xin lỗi, cho tôi hỏi vừa nãy anh/chị gọi mì bò hay mì heo?"
+      ],
+      "synonyms": [
+        "抱歉 (bào qiàn)",
+        "不好意思 (bù hǎo yì si)"
+      ],
+      "antonyms": [
+        "不客氣 (bù kè qì)"
+      ],
+      "questions": [
+        {
+          "question": "\"對不起\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "xin lỗi",
+            "không có gì",
+            "cảm ơn",
+            "tạm biệt",
+            "chào bạn"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của \"對不起\" là gì?",
+          "options": [
+            "duì bú qí",
+            "duì bù qǐ",
+            "duì bù qì",
+            "duì bū qí",
+            "duì bú qì"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"對不起，我遲到了。\" có nghĩa là gì?",
+          "options": [
+            "Cảm ơn, tôi về nhà.",
+            "Xin lỗi, tôi đến muộn.",
+            "Tạm biệt, tôi đi đây.",
+            "Chúc mừng, tôi thành công.",
+            "Xin chào, tôi đến rồi."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"對不起，因為塞車的關係，所以會議延遲了十分鐘。\" có nghĩa là gì?",
+          "options": [
+            "Cảm ơn, vì thời tiết đẹp nên cuộc họp kết thúc sớm mười phút.",
+            "Tạm biệt, vì mệt quá nên tôi nghỉ thêm mười phút.",
+            "Xin lỗi, vì tắc đường nên cuộc họp bị trì hoãn mười phút.",
+            "Chào anh, vì có việc gấp nên tôi phải đi trước mười phút."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"對不起，請問您剛才點的是牛肉麵還是豬肉麵？\" có nghĩa là gì?",
+          "options": [
+            "Xin chào, anh/chị thích ăn mì bò hơn mì heo phải không?",
+            "Xin lỗi, cho tôi hỏi vừa nãy anh/chị gọi mì bò hay mì heo?",
+            "Tạm biệt, mì bò và mì heo đã hết rồi.",
+            "Chào anh/chị, hôm nay có mì bò và mì heo.",
+            "Cảm ơn, anh/chị muốn ăn mì bò hay mì gà?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa \"xin lỗi\"?",
+          "options": [
+            "你好",
+            "沒關係",
+            "謝謝",
+            "對不起",
+            "再見",
+            "不客氣"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "對不起"
+    },
+    {
+      "word": "多",
+      "pinyin": "duō",
+      "zhuyin": "ㄉㄨㄛ",
+      "meaning": "nhiều, đông",
+      "partOfSpeech": "adjective",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我有很多朋友。\nPinyin: wǒ yǒu hěn duō péngyǒu\nNghĩa: Tôi có nhiều bạn bè.",
+        "這個專案需要多一些時間才能完成。\nPinyin: zhège zhuān'àn xūyào duō yīxiē shíjiān cái néng wánchéng\nNghĩa: Dự án này cần thêm một chút thời gian nữa mới có thể hoàn thành.",
+        "你能告訴我多少錢可以買到這個嗎？\nPinyin: nǐ néng gàosù wǒ duōshǎo qián kěyǐ mǎidào zhège ma\nNghĩa: Bạn có thể cho tôi biết bao nhiêu tiền có thể mua được cái này không?"
+      ],
+      "synonyms": [
+        "許多 (xǔduō)",
+        "很多 (hěnduō)"
+      ],
+      "antonyms": [
+        "少 (shǎo)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '多' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "nhanh",
+            "nhiều",
+            "ít",
+            "chậm",
+            "thấp",
+            "cao"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của từ '多' là gì?",
+          "options": [
+            "dùo",
+            "duǒ",
+            "dūo",
+            "duō",
+            "duó",
+            "duò"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我有很多朋友。' có nghĩa là gì?",
+          "options": [
+            "Tôi có nhiều bạn bè.",
+            "Tôi ghét bạn bè.",
+            "Tôi không có bạn bè.",
+            "Tôi có ít bạn bè.",
+            "Tôi muốn có bạn bè."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '這個專案需要多一些時間才能完成。' có nghĩa là gì?",
+          "options": [
+            "Dự án này không thể hoàn thành.",
+            "Dự án này cần thêm một chút thời gian nữa mới có thể hoàn thành.",
+            "Dự án này đã hoàn thành rồi.",
+            "Dự án này không cần thời gian.",
+            "Dự án này cần ít thời gian hơn."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '你能告訴我多少錢可以買到這個嗎？' có nghĩa là gì?",
+          "options": [
+            "Tôi không muốn mua cái này.",
+            "Bạn có tiền không?",
+            "Bạn có thể cho tôi biết bao nhiêu tiền có thể mua được cái này không?",
+            "Cái này rất đắt.",
+            "Cái này không cần tiền."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'nhiều'?",
+          "options": [
+            "低",
+            "小",
+            "少",
+            "多",
+            "大",
+            "高"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "多"
+    },
+    {
+      "word": "多少",
+      "pinyin": "duō shǎo",
+      "zhuyin": "ㄉㄨㄛ ㄕㄠˇ",
+      "meaning": "bao nhiêu",
+      "partOfSpeech": "pronoun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "你多少歲？\nPinyin: nǐ duō shǎo suì?\nNghĩa: Bạn bao nhiêu tuổi?",
+        "醫生，這個藥要吃多少天才會好？\nPinyin: yī shēng, zhè ge yào yào chī duō shǎo tiān cái huì hǎo?\nNghĩa: Bác sĩ ơi, thuốc này phải uống bao nhiêu ngày mới khỏi?",
+        "老闆，這些蘋果多少錢一斤？可以便宜一點嗎？\nPinyin: lǎo bǎn, zhè xiē píng guǒ duō shǎo qián yī jīn? kě yǐ pián yí yī diǎn ma?\nNghĩa: Ông chủ ơi, những quả táo này bao nhiêu tiền một cân? Có thể rẻ hơn một chút không?"
+      ],
+      "synonyms": [
+        "幾個 (jǐ ge)",
+        "幾多 (jǐ duō)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"多少\" có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "bao nhiêu",
+            "một ít",
+            "quá ít",
+            "không có gì",
+            "rất nhiều"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của \"多少\" là gì?",
+          "options": [
+            "duó shào",
+            "duō shǎo",
+            "duǒ shào",
+            "dūo sháo",
+            "duò shāo"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"你多少歲？\" có nghĩa là gì?",
+          "options": [
+            "Bạn làm gì?",
+            "Bạn ở đâu?",
+            "Bạn bao nhiêu tuổi?",
+            "Bạn tên gì?",
+            "Bạn có khỏe không?"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"醫生，這個藥要吃多少天才會好？\" có nghĩa là gì?",
+          "options": [
+            "Bác sĩ ơi, tôi cần uống thuốc gì?",
+            "Bác sĩ ơi, thuốc này uống khi nào?",
+            "Bác sĩ ơi, thuốc này có đắt không?",
+            "Bác sĩ ơi, thuốc này phải uống bao nhiêu ngày mới khỏi?"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "\"老闆，這些蘋果多少錢一斤？可以便宜一點嗎？\" có nghĩa là gì?",
+          "options": [
+            "Ông chủ ơi, táo này từ đâu đến? Có tươi không?",
+            "Ông chủ ơi, những quả táo này bao nhiêu tiền một cân? Có thể rẻ hơn một chút không?",
+            "Ông chủ ơi, táo này có ngon không? Tôi muốn mua ít thôi.",
+            "Ông chủ ơi, tôi muốn mua táo. Còn hàng không?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa \"bao nhiêu\"?",
+          "options": [
+            "一些",
+            "沒有",
+            "太少",
+            "許多",
+            "多少",
+            "很多"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "多少"
+    },
+    {
+      "word": "二",
+      "pinyin": "èr",
+      "zhuyin": "ㄦˋ",
+      "meaning": "hai, số 2",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我有二個蘋果。\nPinyin: wǒ yǒu èr gè píngguǒ.\nNghĩa: Tôi có hai quả táo.",
+        "醫生說病人需要住院二個星期才能完全康復。\nPinyin: yīshēng shuō bìngrén xūyào zhùyuàn èr gè xīngqí cáinéng wánquán kāngfù.\nNghĩa: Bác sĩ nói bệnh nhân cần nằm viện hai tuần mới có thể khỏi hoàn toàn.",
+        "他們結婚二十年了，今天舉辦盛大的慶祝晚會。\nPinyin: tāmen jiéhūn èrshí nián le, jīntiān jǔbàn shèngdà de qìngzhù wǎnhuì.\nNghĩa: Họ đã kết hôn hai mươi năm rồi, hôm nay tổ chức tiệc kỷ niệm thịnh đại."
+      ],
+      "synonyms": [
+        "兩 (liǎng)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '二' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "một",
+            "ba",
+            "năm",
+            "hai",
+            "bốn"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '二' là gì?",
+          "options": [
+            "er",
+            "êr",
+            "èr",
+            "ér",
+            "ěr"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我有二個蘋果。' có nghĩa là gì?",
+          "options": [
+            "Tôi muốn mua táo.",
+            "Tôi có ba quả táo.",
+            "Tôi không có táo.",
+            "Tôi có một quả táo.",
+            "Tôi có hai quả táo."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '醫生說病人需要住院二個星期才能完全康復。' có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói bệnh nhân cần tái khám sau hai tháng.",
+            "Bác sĩ nói bệnh nhân cần nằm viện hai tuần mới có thể khỏi hoàn toàn.",
+            "Bác sĩ nói bệnh nhân cần uống thuốc hai lần.",
+            "Bác sĩ nói bệnh nhân cần nghỉ ngơi hai ngày."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '他們結婚二十年了，今天舉辦盛大的慶祝晚會。' có nghĩa là gì?",
+          "options": [
+            "Họ đã kết hôn hai mươi năm rồi, hôm nay tổ chức tiệc kỷ niệm thịnh đại.",
+            "Họ đã ly hôn được hai mười năm.",
+            "Họ đang chuẩn bị đám cưới vào tháng hai.",
+            "Họ sắp kết hôn sau hai mười ngày nữa."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào biểu thị số '2'?",
+          "options": [
+            "二",
+            "四",
+            "五",
+            "三",
+            "一"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "二"
+    },
+    {
+      "word": "兒子",
+      "pinyin": "ér zi",
+      "zhuyin": "ㄦˊ ㄗ˙",
+      "meaning": "con trai",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Thông tin cá nhân"
+      ],
+      "examples": [
+        "他是我兒子。\nPinyin: tā shì wǒ ér zi.\nNghĩa: Anh ấy là con trai tôi.",
+        "我想為我兒子點一份兒童餐，謝謝。\nPinyin: wǒ xiǎng wèi wǒ ér zi diǎn yī fèn ér tóng cān, xiè xiè.\nNghĩa: Tôi muốn gọi một suất cơm trẻ em cho con trai tôi, cảm ơn.",
+        "王經理的兒子今年剛從大學畢業。\nPinyin: wáng jīng lǐ de ér zi jīn nián gāng cóng dà xué bì yè.\nNghĩa: Con trai của giám đốc Vương năm nay vừa mới tốt nghiệp đại học."
+      ],
+      "synonyms": [
+        "男兒 (nán ér)",
+        "兒郎 (ér láng)"
+      ],
+      "antonyms": [
+        "女兒 (nǚ ér)"
+      ],
+      "questions": [
+        {
+          "question": "\"兒子\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "em trai",
+            "mẹ",
+            "anh trai",
+            "con trai",
+            "bố",
+            "con gái"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của \"兒子\" là gì?",
+          "options": [
+            "ér zì",
+            "ér zi",
+            "ěr zi",
+            "èr zi",
+            "ér zǐ"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu \"他是我兒子。\" có nghĩa là gì?",
+          "options": [
+            "Anh ấy là con trai tôi.",
+            "Anh ấy là bố tôi.",
+            "Anh ấy là anh trai tôi.",
+            "Anh ấy là em trai tôi.",
+            "Anh ấy là chồng tôi."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu \"我想為我兒子點一份兒童餐，謝謝。\" có nghĩa là gì?",
+          "options": [
+            "Tôi muốn gọi một suất cơm cho bản thân, cảm ơn.",
+            "Tôi muốn gọi một suất cơm trẻ em cho con trai tôi, cảm ơn.",
+            "Tôi muốn gọi một suất cơm người lớn cho con trai tôi, cảm ơn.",
+            "Tôi muốn gọi một ly nước cho con trai tôi, cảm ơn."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu \"王經理的兒子今年剛從大學畢業。\" có nghĩa là gì?",
+          "options": [
+            "Con trai của giám đốc Vương năm nay vừa mới vào đại học.",
+            "Con trai của giám đốc Vương năm nay vừa mới tốt nghiệp đại học.",
+            "Anh trai của giám đốc Vương năm nay vừa mới tốt nghiệp đại học.",
+            "Giám đốc Vương năm nay vừa mới tốt nghiệp đại học.",
+            "Con gái của giám đốc Vương năm nay vừa mới tốt nghiệp đại học."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"con trai\"?",
+          "options": [
+            "兒子",
+            "母親",
+            "姐妹",
+            "女兒",
+            "父親",
+            "兄弟"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "兒子"
+    },
+    {
+      "word": "分",
+      "pinyin": "fēn",
+      "zhuyin": "ㄈㄣ",
+      "meaning": "phút, chia, phân",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "現在三點十分。\nPinyin: xiàn zài sān diǎn shí fēn\nNghĩa: Bây giờ là 3 giờ 10 phút.",
+        "會議預計進行兩個小時三十分鐘。\nPinyin: huì yì yù jì jìn xíng liǎng gè xiǎo shí sān shí fēn zhōng\nNghĩa: Cuộc họp dự kiến diễn ra trong hai tiếng ba mười phút.",
+        "醫生說檢查結果十五分鐘後就出來。\nPinyin: yī shēng shuō jiǎn chá jié guǒ shí wǔ fēn zhōng hòu jiù chū lái\nNghĩa: Bác sĩ nói kết quả xét nghiệm sẽ có sau mười lăm phút."
+      ],
+      "synonyms": [
+        "鐘 (zhōng)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"分\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "ngày",
+            "phút",
+            "tháng",
+            "giờ",
+            "tuần"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của \"分\" là gì?",
+          "options": [
+            "fèn",
+            "fén",
+            "fēng",
+            "fēn",
+            "fěn"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "\"現在三點十分\" có nghĩa là gì?",
+          "options": [
+            "Bây giờ là 2 giờ 10 phút",
+            "Bây giờ là 3 giờ 30 phút",
+            "Bây giờ là 3 giờ 10 phút",
+            "Bây giờ là 13 giờ 10 phút"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"會議預計進行兩個小時三十分鐘\" có nghĩa là gì?",
+          "options": [
+            "Cuộc họp dự kiến diễn ra trong hai tiếng ba mười phút",
+            "Cuộc họp dự kiến diễn ra trong hai tiếng mười ba phút",
+            "Cuộc họp dự kiến diễn ra trong một tiếng ba mười phút",
+            "Cuộc họp dự kiến diễn ra trong ba tiếng hai mười phút"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"醫生說檢查結果十五分鐘後就出來\" có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói kết quả xét nghiệm sẽ có sau mười phút",
+            "Bác sĩ nói kết quả xét nghiệm sẽ có sau mười lăm phút",
+            "Bác sĩ nói kết quả xét nghiệm sẽ có sau năm mười lăm phút",
+            "Bác sĩ nói kết quả xét nghiệm sẽ có sau năm mười phút"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"phút\"?",
+          "options": [
+            "份",
+            "分",
+            "紛",
+            "奮",
+            "粉"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "分"
+    },
+    {
+      "word": "高",
+      "pinyin": "gāo",
+      "zhuyin": "ㄍㄠ",
+      "meaning": "cao",
+      "partOfSpeech": "adjective",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這棟樓很高。\nPinyin: zhè dòng lóu hěn gāo.\nNghĩa: Tòa nhà này rất cao.",
+        "我哥哥的身高比我高很多，所以他經常幫我拿高處的東西。\nPinyin: wǒ gēge de shēn gāo bǐ wǒ gāo hěn duō, suǒyǐ tā jīngcháng bāng wǒ ná gāo chù de dōngxi.\nNghĩa: Chiều cao của anh trai tôi cao hơn tôi rất nhiều, nên anh ấy thường xuyên giúp tôi lấy đồ ở chỗ cao.",
+        "這個專案的技術要求很高，我們需要找更有經驗的工程師來協助。\nPinyin: zhège zhuān àn de jìshù yāoqiú hěn gāo, wǒmen xūyào zhǎo gèng yǒu jīngyàn de gōngchéngshī lái xiézhù.\nNghĩa: Yêu cầu kỹ thuật của dự án này rất cao, chúng ta cần tìm kỹ sư có kinh nghiệm hơn để hỗ trợ."
+      ],
+      "synonyms": [
+        "矮 (ǎi)"
+      ],
+      "antonyms": [
+        "矮 (ǎi)"
+      ],
+      "questions": [
+        {
+          "question": "\"高\" có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "hẹp",
+            "rộng",
+            "ngắn",
+            "thấp",
+            "cao",
+            "dài"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của \"高\" là gì?",
+          "options": [
+            "gāo",
+            "gào",
+            "gá",
+            "gāi",
+            "gǎo"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"這棟樓很高。\" có nghĩa là gì?",
+          "options": [
+            "Tòa nhà này rất thấp.",
+            "Tòa nhà này rất nhỏ.",
+            "Tòa nhà này rất rộng.",
+            "Tòa nhà này rất cao."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "\"我哥哥的身高比我高很多，所以他經常幫我拿高處的東西。\" có nghĩa là gì?",
+          "options": [
+            "Anh trai tôi và tôi có chiều cao như nhau.",
+            "Chiều cao của anh trai tôi cao hơn tôi rất nhiều, nên anh ấy thường xuyên giúp tôi lấy đồ ở chỗ cao.",
+            "Em trai tôi cao hơn tôi nên thường giúp tôi lấy đồ ở chỗ cao.",
+            "Anh trai tôi thấp hơn tôi nên không thể giúp tôi lấy đồ."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"這個專案的技術要求很高，我們需要找更有經驗的工程師來協助。\" có nghĩa là gì?",
+          "options": [
+            "Dự án này dễ làm nên không cần kỹ sư có kinh nghiệm.",
+            "Yêu cầu kỹ thuật của dự án này rất cao, chúng ta cần tìm kỹ sư có kinh nghiệm hơn để hỗ trợ.",
+            "Dự án này chỉ cần kỹ sư mới tốt nghiệp.",
+            "Yêu cầu kỹ thuật của dự án này rất thấp."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"cao\"?",
+          "options": [
+            "低",
+            "短",
+            "高",
+            "少",
+            "小"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "高"
+    },
+    {
+      "word": "個",
+      "pinyin": "gè",
+      "zhuyin": "ㄍㄜˋ",
+      "meaning": "từ chỉ lượng (đơn vị đếm chung)",
+      "partOfSpeech": "particle",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我買了三個蘋果。\nPinyin: wǒ mǎi le sān gè píng guǒ\nNghĩa: Tôi đã mua ba quả táo.",
+        "請問您要點幾個菜？我們推薦這個套餐。\nPinyin: qǐng wèn nín yào diǎn jǐ gè cài? wǒ men tuī jiàn zhè gè tào cān\nNghĩa: Xin hỏi quý khách muốn gọi mấy món? Chúng tôi giới thiệu combo này.",
+        "這個專案需要五個人來完成，請安排人力。\nPinyin: zhè gè zhuān àn xū yào wǔ gè rén lái wán chéng, qǐng ān pái rén lì\nNghĩa: Dự án này cần năm người để hoàn thành, xin hãy sắp xếp nhân lực."
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '個' trong tiếng Trung có nghĩa là gì?",
+          "options": [
+            "động từ ăn",
+            "danh từ người",
+            "tính từ đẹp",
+            "từ chỉ lượng (đơn vị đếm chung)",
+            "trạng từ nhanh"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '個' là gì?",
+          "options": [
+            "gà",
+            "gè",
+            "gě",
+            "gē",
+            "gé"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我買了三個蘋果。' có nghĩa là gì?",
+          "options": [
+            "Táo này rất ngon.",
+            "Tôi không thích táo.",
+            "Tôi muốn mua táo.",
+            "Tôi đã ăn táo.",
+            "Tôi đã mua ba quả táo."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '請問您要點幾個菜？我們推薦這個套餐。' có nghĩa là gì?",
+          "options": [
+            "Quý khách muốn ăn gì?",
+            "Xin lỗi chúng tôi hết món.",
+            "Xin hỏi quý khách muốn gọi mấy món? Chúng tôi giới thiệu combo này.",
+            "Món này rất ngon.",
+            "Quý khách có thể thanh toán."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '這個專案需要五個人來完成，請安排人力。' có nghĩa là gì?",
+          "options": [
+            "Dự án này cần năm người để hoàn thành, xin hãy sắp xếp nhân lực.",
+            "Công việc này rất khó.",
+            "Dự án đã bị hủy.",
+            "Nhân viên đã hoàn thành công việc.",
+            "Chúng ta cần thêm thời gian."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào biểu thị từ chỉ lượng đơn vị đếm chung?",
+          "options": [
+            "件",
+            "個",
+            "條",
+            "本",
+            "位",
+            "張"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "個"
+    },
+    {
+      "word": "哥哥",
+      "pinyin": "gēgē",
+      "zhuyin": "ㄍㄜㄍㄜ",
+      "meaning": "anh trai, anh",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我的哥哥很高。\nPinyin: wǒ de gēgē hěn gāo.\nNghĩa: Anh trai tôi rất cao.",
+        "哥哥在超市買菜的時候總是會跟老闆討價還價。\nPinyin: gēgē zài chāoshì mǎi cài de shíhòu zǒngshì huì gēn lǎobǎn tǎojiàhuánjià.\nNghĩa: Anh trai luôn mặc cả với ông chủ khi mua rau ở siêu thị.",
+        "哥哥在會議室跟同事們討論新的專案計劃。\nPinyin: gēgē zài huìyìshì gēn tóngshìmen tǎolùn xīn de zhuān'àn jìhuà.\nNghĩa: Anh trai đang thảo luận kế hoạch dự án mới với các đồng nghiệp trong phòng họp."
+      ],
+      "synonyms": [
+        "兄長 (xiōngzhǎng)",
+        "大哥 (dàgē)"
+      ],
+      "antonyms": [
+        "弟弟 (dìdì)"
+      ],
+      "questions": [
+        {
+          "question": "Từ \"哥哥\" có nghĩa tiếng Việt là gì?",
+          "options": [
+            "mẹ",
+            "em gái",
+            "anh trai",
+            "bố",
+            "em trai",
+            "chị gái"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của \"哥哥\" là gì?",
+          "options": [
+            "gègè",
+            "gāogāo",
+            "gègē",
+            "gēgē",
+            "gǒugǒu",
+            "géi"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu \"我的哥哥很高。\" có nghĩa là gì?",
+          "options": [
+            "Tôi rất cao.",
+            "Em trai tôi rất cao.",
+            "Chị gái tôi rất cao.",
+            "Mẹ tôi rất cao.",
+            "Bố tôi rất cao.",
+            "Anh trai tôi rất cao."
+          ],
+          "correctAnswer": 5
+        },
+        {
+          "question": "Câu \"哥哥在超市買菜的時候總是會跟老闆討價還價。\" có nghĩa là gì?",
+          "options": [
+            "Anh trai chỉ mua thịt ở siêu thị.",
+            "Anh trai không bao giờ mua rau ở siêu thị.",
+            "Anh trai luôn mặc cả với ông chủ khi mua rau ở siêu thị.",
+            "Anh trai luôn trả tiền đầy đủ khi mua rau ở siêu thị.",
+            "Em trai luôn mặc cả với ông chủ khi mua rau ở siêu thị."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu \"哥哥在會議室跟同事們討論新的專案計劃。\" có nghĩa là gì?",
+          "options": [
+            "Anh trai đang ăn trưa với đồng nghiệp.",
+            "Anh trai đang nghỉ ngơi trong phòng họp.",
+            "Anh trai đang thảo luận kế hoạch dự án mới với các đồng nghiệp trong phòng họp.",
+            "Anh trai đang làm việc một mình trong văn phòng.",
+            "Anh trai đang dọn dẹp phòng họp."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"anh trai\"?",
+          "options": [
+            "姐姐",
+            "哥哥",
+            "弟弟",
+            "妹妹",
+            "媽媽",
+            "爸爸"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "哥哥 / 哥"
+    },
+    {
+      "word": "給",
+      "pinyin": "gěi",
+      "zhuyin": "ㄍㄟˇ",
+      "meaning": "cho, đưa cho",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我給你水。\nPinyin: wǒ gěi nǐ shuǐ.\nNghĩa: Tôi cho bạn nước.",
+        "老闆給員工發獎金的時候很高興。\nPinyin: lǎobǎn gěi yuángōng fā jiǎngjīn de shíhòu hěn gāoxìng.\nNghĩa: Sếp rất vui khi phát thưởng cho nhân viên.",
+        "這個蘋果太貴了，能給我便宜一點嗎？\nPinyin: zhège píngguǒ tài guì le, néng gěi wǒ piányí yīdiǎn ma?\nNghĩa: Quả táo này quá đắt, có thể cho tôi rẻ hơn một chút được không?"
+      ],
+      "synonyms": [
+        "送 (sòng)",
+        "交 (jiāo)"
+      ],
+      "antonyms": [
+        "拿 (ná)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '給' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "mua",
+            "lấy",
+            "nhận",
+            "cho, đưa cho",
+            "bán"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của từ '給' là gì?",
+          "options": [
+            "gèi",
+            "gēi",
+            "gěi",
+            "géi"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我給你水。' có nghĩa là gì?",
+          "options": [
+            "Tôi uống nước của bạn.",
+            "Tôi cho bạn nước.",
+            "Bạn cho tôi nước.",
+            "Tôi mua nước cho bạn."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '老闆給員工發獎金的時候很高興。' có nghĩa là gì?",
+          "options": [
+            "Sếp rất vui khi phát thưởng cho nhân viên.",
+            "Sếp rất buồn khi phát thưởng cho nhân viên.",
+            "Nhân viên không muốn nhận thưởng từ sếp.",
+            "Nhân viên rất vui khi nhận thưởng từ sếp."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '這個蘋果太貴了，能給我便宜一點嗎？' có nghĩa là gì?",
+          "options": [
+            "Quả táo này quá rẻ, có thể tăng giá được không?",
+            "Quả táo này quá đắt, có thể cho tôi rẻ hơn một chút được không?",
+            "Quả táo này rất ngon, tôi muốn mua nhiều hơn.",
+            "Quả táo này không ngon, tôi không muốn mua."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'cho, đưa cho'?",
+          "options": [
+            "拿",
+            "收",
+            "給",
+            "買",
+            "賣"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "給"
+    },
+    {
+      "word": "工作",
+      "pinyin": "gōngzuò",
+      "zhuyin": "ㄍㄨㄥㄗㄨㄛˋ",
+      "meaning": "công việc, làm việc",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Nghề nghiệp"
+      ],
+      "examples": [
+        "你的工作是什麼？\nPinyin: nǐ de gōngzuò shì shénme?\nNghĩa: Công việc của bạn là gì?",
+        "我在機場工作，負責處理旅客的登機手續。\nPinyin: wǒ zài jīchǎng gōngzuò, fùzé chùlǐ lǚkè de dēngjī shǒuxù.\nNghĩa: Tôi làm việc ở sân bay, phụ trách xử lý thủ tục check-in của hành khách.",
+        "明天的會議中，我們要討論新的工作計畫。\nPinyin: míngtiān de huìyì zhōng, wǒmen yào tǎolùn xīn de gōngzuò jìhuà.\nNghĩa: Trong cuộc họp ngày mai, chúng ta sẽ thảo luận về kế hoạch công việc mới."
+      ],
+      "synonyms": [
+        "職業 (zhíyè)",
+        "工種 (gōngzhǒng)"
+      ],
+      "antonyms": [
+        "休息 (xiūxi)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '工作' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "du lịch",
+            "học tập",
+            "gia đình",
+            "công việc",
+            "nghỉ ngơi"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '工作' là gì?",
+          "options": [
+            "gōngzǒu",
+            "gòngzuò",
+            "gōngzùo",
+            "gǒngzuò",
+            "gōngzuò"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '你的工作是什麼？' có nghĩa là gì?",
+          "options": [
+            "Công việc của bạn là gì?",
+            "Bạn bao nhiêu tuổi?",
+            "Bạn ở đâu?",
+            "Bạn tên gì?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '我在機場工作，負責處理旅客的登機手續。' có nghĩa là gì?",
+          "options": [
+            "Tôi là hành khách và đang chờ lên máy bay.",
+            "Tôi đi du lịch bằng máy bay và mang theo hành lý.",
+            "Tôi làm việc ở sân bay, phụ trách xử lý thủ tục check-in của hành khách.",
+            "Tôi thích đi máy bay và thường xuyên đi công tác."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '明天的會議中，我們要討論新的工作計畫。' có nghĩa là gì?",
+          "options": [
+            "Hôm qua chúng tôi đã họp về dự án cũ.",
+            "Chúng tôi đã hoàn thành kế hoạch công việc.",
+            "Trong cuộc họp ngày mai, chúng ta sẽ thảo luận về kế hoạch công việc mới.",
+            "Tuần tới sẽ có cuộc họp với khách hàng."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'công việc, làm việc'?",
+          "options": [
+            "學習",
+            "購物",
+            "工作",
+            "旅行",
+            "休息"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "工作"
+    },
+    {
+      "word": "國",
+      "pinyin": "guó",
+      "zhuyin": "ㄍㄨㄛˊ",
+      "meaning": "quốc gia, đất nước",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我是中國人。\nPinyin: wǒ shì zhōng guó rén\nNghĩa: Tôi là người Trung Quốc.",
+        "請問您想要品嚐哪個國家的料理呢？\nPinyin: qǐng wèn nín xiǎng yào pǐn cháng nǎ gè guó jiā de liào lǐ ne\nNghĩa: Xin hỏi quý khách muốn thưởng thức món ăn của nước nào ạ?",
+        "醫生說我需要回國接受進一步的治療。\nPinyin: yī shēng shuō wǒ xū yào huí guó jiē shòu jìn yī bù de zhì liáo\nNghĩa: Bác sĩ nói tôi cần về nước để tiếp tục điều trị."
+      ],
+      "synonyms": [
+        "邦 (bāng)",
+        "邦國 (bāng guó)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '國' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "tỉnh thành",
+            "quốc gia, đất nước",
+            "khu vực",
+            "làng xã",
+            "thành phố"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '國' là gì?",
+          "options": [
+            "gúo",
+            "guó",
+            "guò",
+            "guǒ",
+            "gùo"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '我是中國人。' có nghĩa là gì?",
+          "options": [
+            "Tôi yêu Trung Quốc.",
+            "Tôi sống ở Trung Quốc.",
+            "Tôi là người Trung Quốc.",
+            "Tôi đến từ Trung Quốc."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '請問您想要品嚐哪個國家的料理呢？' có nghĩa là gì?",
+          "options": [
+            "Xin hỏi quý khách muốn thưởng thức món ăn của nước nào ạ?",
+            "Quý khách thích món nào nhất ạ?",
+            "Quý khách muốn ăn món gì ạ?",
+            "Hôm nay có món đặc biệt nào không ạ?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '醫生說我需要回國接受進一步的治療。' có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói tôi cần nghỉ ngơi thêm.",
+            "Bác sĩ nói tôi cần tái khám sau một tuần.",
+            "Bác sĩ nói tôi cần uống thuốc đều đặn.",
+            "Bác sĩ nói tôi cần về nước để tiếp tục điều trị."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'quốc gia, đất nước'?",
+          "options": [
+            "因",
+            "園",
+            "困",
+            "圓",
+            "國"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "國"
+    },
+    {
+      "word": "孩子",
+      "pinyin": "háizi",
+      "zhuyin": "ㄏㄞˊㄗ˙",
+      "meaning": "trẻ em, con cái",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這個孩子很可愛。\nPinyin: zhège háizi hěn kě'ài.\nNghĩa: Đứa trẻ này rất dễ thương.",
+        "醫生說這個孩子的身體狀況很健康，不需要擔心。\nPinyin: yīshēng shuō zhège háizi de shēntǐ zhuàngkuàng hěn jiànkāng, bù xūyào dānxīn.\nNghĩa: Bác sĩ nói tình trạng sức khỏe của đứa trẻ này rất tốt, không cần lo lắng.",
+        "服務員，請問你們餐廳有適合孩子吃的兒童餐嗎？\nPinyin: fúwùyuán, qǐngwèn nǐmen cāntīng yǒu shìhé háizi chī de értóng cān ma?\nNghĩa: Anh phục vụ ơi, cho hỏi nhà hàng có suất ăn trẻ em phù hợp cho trẻ không?"
+      ],
+      "synonyms": [
+        "小孩 (xiǎohái)",
+        "兒童 (értóng)"
+      ],
+      "antonyms": [
+        "大人 (dàrén)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '孩子' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "trẻ em, con cái",
+            "anh chị em",
+            "bạn bè",
+            "người lớn",
+            "ông bà"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của '孩子' là gì?",
+          "options": [
+            "hāizi",
+            "hàizi",
+            "háizǐ",
+            "hǎizi",
+            "háizi"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '這個孩子很可愛。' có nghĩa là gì?",
+          "options": [
+            "Đứa trẻ này rất thông minh.",
+            "Đứa trẻ này rất cao.",
+            "Đứa trẻ này rất dễ thương.",
+            "Đứa trẻ này rất khỏe mạnh."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '醫生說這個孩子的身體狀況很健康，不需要擔心。' có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói đứa trẻ này cần uống thuốc.",
+            "Bác sĩ nói đứa trẻ này cần nghỉ ngơi nhiều hơn.",
+            "Bác sĩ nói tình trạng sức khỏe của đứa trẻ này rất tốt, không cần lo lắng.",
+            "Bác sĩ nói đứa trẻ này bị ốm nặng, cần lo lắng."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '服務員，請問你們餐廳有適合孩子吃的兒童餐嗎？' có nghĩa là gì?",
+          "options": [
+            "Anh phục vụ ơi, cho hỏi nhà hàng có đồ uống cho trẻ em không?",
+            "Anh phục vụ ơi, cho hỏi nhà hàng có đồ chơi cho trẻ em không?",
+            "Anh phục vụ ơi, cho hỏi nhà hàng có chỗ ngồi cho trẻ em không?",
+            "Anh phục vụ ơi, cho hỏi nhà hàng có suất ăn trẻ em phù hợp cho trẻ không?"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'trẻ em, con cái'?",
+          "options": [
+            "朋友",
+            "同學",
+            "老師",
+            "孩子",
+            "學生"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "孩子"
+    },
+    {
+      "word": "和",
+      "pinyin": "hé",
+      "zhuyin": "ㄏㄜˊ",
+      "meaning": "và, cùng với",
+      "partOfSpeech": "conjunction",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我和媽媽去買菜。\nPinyin: wǒ hé māma qù mǎi cài\nNghĩa: Tôi và mẹ đi mua rau.",
+        "這個蘋果和那個橘子一共要多少錢？\nPinyin: zhè ge píngguǒ hé nà ge júzi yīgòng yào duōshao qián\nNghĩa: Quả táo này và quả cam kia tổng cộng bao nhiều tiền?",
+        "我在圖書館借了小說和參考書來研究。\nPinyin: wǒ zài túshūguǎn jiè le xiǎoshuō hé cānkǎoshū lái yánjiū\nNghĩa: Tôi đã mượn tiểu thuyết và sách tham khảo ở thư viện để nghiên cứu."
+      ],
+      "synonyms": [
+        "跟 (gēn)",
+        "與 (yǔ)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"和\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "và, cùng với",
+            "nhưng",
+            "vì vậy",
+            "nếu",
+            "hoặc"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Cách phát âm pinyin của \"和\" là gì?",
+          "options": [
+            "hé",
+            "hé",
+            "hē",
+            "hě",
+            "hè"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"我和媽媽去買菜。\" có nghĩa là gì?",
+          "options": [
+            "Tôi với bố đi mua rau.",
+            "Mẹ tôi đi mua rau.",
+            "Tôi và em đi mua hoa quả.",
+            "Tôi cùng chị đi mua thịt.",
+            "Tôi và mẹ đi mua rau."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "\"這個蘋果和那個橘子一共要多少錢？\" nghĩa là gì?",
+          "options": [
+            "Quả táo này và quả cam kia tổng cộng bao nhiều tiền?",
+            "Quả cam kia và quả lê này giá bao nhiều?",
+            "Táo với cam nào ngon hơn?",
+            "Quả táo này bao nhiều tiền?",
+            "Tôi muốn mua táo và cam."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"我在圖書館借了小說和參考書來研究。\" có nghĩa gì?",
+          "options": [
+            "Tôi đã mượn tiểu thuyết và sách tham khảo ở thư viện để nghiên cứu.",
+            "Tôi đã mượn từ điển ở thư viện.",
+            "Tôi mua sách ở hiệu sách.",
+            "Tôi trả sách cho thư viện.",
+            "Tôi đọc sách ở thư viện."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa \"và, cùng với\"?",
+          "options": [
+            "或",
+            "和",
+            "但",
+            "所以",
+            "如果",
+            "因"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "和"
+    },
+    {
+      "word": "號",
+      "pinyin": "hào",
+      "zhuyin": "ㄏㄠˋ",
+      "meaning": "số, ngày, hiệu",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我住三號房間。\nPinyin: wǒ zhù sān hào fáng jiān\nNghĩa: Tôi ở phòng số 3.",
+        "請問您要預訂幾號到幾號的房間？\nPinyin: qǐng wèn nín yào yù dìng jǐ hào dào jǐ hào de fáng jiān\nNghĩa: Xin hỏi anh/chị muốn đặt phòng từ ngày nào đến ngày nào?",
+        "你知道今天幾號嗎？我忘記了。\nPinyin: nǐ zhī dào jīn tiān jǐ hào ma? wǒ wàng jì le\nNghĩa: Bạn có biết hôm nay là ngày mấy không? Tôi quên mất rồi."
+      ],
+      "synonyms": [
+        "數 (shù)",
+        "日 (rì)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"號\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "năm",
+            "tuần",
+            "giờ",
+            "tháng",
+            "số, ngày, hiệu"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của \"號\" là gì?",
+          "options": [
+            "hǎo",
+            "hāo",
+            "hóo",
+            "háo",
+            "hào"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "\"我住三號房間。\" có nghĩa là gì?",
+          "options": [
+            "Tôi ở tầng ba.",
+            "Tôi có ba phòng.",
+            "Tôi thuê ba phòng.",
+            "Tôi thích phòng ba.",
+            "Tôi ở phòng số 3."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "\"請問您要預訂幾號到幾號的房間？\" có nghĩa là gì?",
+          "options": [
+            "Xin hỏi anh/chị muốn đặt mấy phòng?",
+            "Xin hỏi anh/chị muốn đặt phòng mấy ngày?",
+            "Xin hỏi anh/chị muốn ở phòng số mấy?",
+            "Xin hỏi anh/chị muốn đặt phòng từ ngày nào đến ngày nào?"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "\"你知道今天幾號嗎？我忘記了。\" có nghĩa là gì?",
+          "options": [
+            "Bạn có biết hôm nay tháng mấy không? Tôi quên mất rồi.",
+            "Bạn có biết hôm nay thứ mấy không? Tôi quên mất rồi.",
+            "Bạn có biết hôm nay là ngày mấy không? Tôi quên mất rồi.",
+            "Bạn có biết hôm nay mấy giờ không? Tôi quên mất rồi."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"số, ngày, hiệu\"?",
+          "options": [
+            "毫",
+            "好",
+            "號",
+            "嚎",
+            "豪"
+          ],
+          "correctAnswer": 2
+        }
+      ],
+      "allForms": "號"
+    },
+    {
+      "word": "好",
+      "pinyin": "hǎo",
+      "zhuyin": "ㄏㄠˇ",
+      "meaning": "tốt, hay, giỏi",
+      "partOfSpeech": "adjective",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "你好嗎？\nPinyin: nǐ hǎo ma?\nNghĩa: Bạn có khỏe không?",
+        "這家餐廳的菜很好吃，服務也很好。\nPinyin: zhè jiā cān tīng de cài hěn hǎo chī, fú wù yě hěn hǎo.\nNghĩa: Món ăn của nhà hàng này rất ngon, dịch vụ cũng rất tốt.",
+        "請問您的行李都收拾好了嗎？\nPinyin: qǐng wèn nín de xíng lǐ dōu shōu shí hǎo le ma?\nNghĩa: Xin hỏi hành lý của quý khách đã chuẩn bị xong chưa ạ?"
+      ],
+      "synonyms": [
+        "棒 (bàng)",
+        "優 (yōu)"
+      ],
+      "antonyms": [
+        "壞 (huài)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '好' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "nhanh",
+            "tốt",
+            "xấu",
+            "lớn",
+            "nhỏ"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '好' là gì?",
+          "options": [
+            "hǎo",
+            "háo",
+            "hào",
+            "hào",
+            "hāo"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '你好嗎？' có nghĩa là gì?",
+          "options": [
+            "Bạn tên gì?",
+            "Bạn có khỏe không?",
+            "Bạn làm gì?",
+            "Bạn ở đâu?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '這家餐廳的菜很好吃，服務也很好。' có nghĩa là gì?",
+          "options": [
+            "Dịch vụ nhà hàng này chậm.",
+            "Món ăn của nhà hàng này rất ngon, dịch vụ cũng rất tốt.",
+            "Nhà hàng này đắt nhưng ngon.",
+            "Nhà hàng này có nhiều món ăn."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '請問您的行李都收拾好了嗎？' có nghĩa là gì?",
+          "options": [
+            "Quý khách có bao nhiêu túi?",
+            "Quý khách cần giúp đỡ không?",
+            "Xin hỏi hành lý của quý khách đã chuẩn bị xong chưa ạ?",
+            "Hành lý của quý khách nặng không?"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'tốt'?",
+          "options": [
+            "慢",
+            "小",
+            "快",
+            "壞",
+            "大",
+            "好"
+          ],
+          "correctAnswer": 5
+        }
+      ],
+      "allForms": "好"
+    },
+    {
+      "word": "喝",
+      "pinyin": "hē",
+      "zhuyin": "ㄏㄜ",
+      "meaning": "uống",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我喝水。\nPinyin: wǒ hē shuǐ.\nNghĩa: Tôi uống nước.",
+        "老師說我們上課不可以喝飲料。\nPinyin: lǎoshī shuō wǒmen shàngkè bùkěyǐ hē yǐnliào.\nNghĩa: Thầy giáo nói chúng tôi không được uống nước giải khát trong giờ học.",
+        "在飛機上可以喝免費的咖啡和茶。\nPinyin: zài fēijī shàng kěyǐ hē miǎnfèi de kāfēi hé chá.\nNghĩa: Trên máy bay có thể uống cà phê và trà miễn phí."
+      ],
+      "synonyms": [
+        "飲 (yǐn)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"喝\" có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "nói",
+            "đi",
+            "uống",
+            "chạy",
+            "ăn",
+            "ngủ"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của \"喝\" là gì?",
+          "options": [
+            "hé",
+            "hě",
+            "hē",
+            "hè",
+            "hê"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"我喝水。\" có nghĩa là gì?",
+          "options": [
+            "Tôi về nhà.",
+            "Tôi đi ngủ.",
+            "Tôi ăn cơm.",
+            "Tôi đi học.",
+            "Tôi uống nước."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "\"老師說我們上課不可以喝飲料。\" có nghĩa là gì?",
+          "options": [
+            "Thầy giáo nói chúng tôi không được uống nước giải khát trong giờ học.",
+            "Thầy giáo nói chúng tôi phải mang nước đến lớp.",
+            "Thầy giáo nói chúng tôi không được ăn kẹo trong giờ học.",
+            "Thầy giáo nói chúng tôi phải uống nước trong giờ học."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"在飛機上可以喝免費的咖啡和茶。\" có nghĩa là gì?",
+          "options": [
+            "Trên máy bay không có cà phê và trà.",
+            "Trên máy bay có thể uống cà phê và trà miễn phí.",
+            "Trên máy bay chỉ có nước lọc.",
+            "Trên máy bay phải trả tiền để uống cà phê và trà.",
+            "Trên máy bay cấm uống đồ uống."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"uống\"?",
+          "options": [
+            "說",
+            "跑",
+            "睡",
+            "吃",
+            "喝"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "喝"
+    },
+    {
+      "word": "很",
+      "pinyin": "hěn",
+      "zhuyin": "ㄏㄣˇ",
+      "meaning": "rất, lắm",
+      "partOfSpeech": "adverb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我很好。\nPinyin: wǒ hěn hǎo\nNghĩa: Tôi rất khỏe.",
+        "今天的婚禮很熱鬧，大家都很開心。\nPinyin: jīntiān de hūnlǐ hěn rènào, dàjiā dōu hěn kāixīn\nNghĩa: Đám cưới hôm nay rất náo nhiệt, mọi người đều rất vui vẻ.",
+        "這道菜很好吃，我想再點一份。\nPinyin: zhè dào cài hěn hǎochī, wǒ xiǎng zài diǎn yī fèn\nNghĩa: Món này rất ngon, tôi muốn gọi thêm một phần nữa."
+      ],
+      "synonyms": [
+        "非常 (fēicháng)",
+        "特別 (tèbié)"
+      ],
+      "antonyms": [
+        "不 (bù)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '很' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "không, chẳng",
+            "sẽ, sắp",
+            "có thể, được",
+            "rất, lắm",
+            "cũng, cũng vậy"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '很' là gì?",
+          "options": [
+            "hén",
+            "hēn",
+            "hěn",
+            "héng",
+            "hèn"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我很好。' có nghĩa là gì?",
+          "options": [
+            "Tôi rất thích.",
+            "Tôi rất khỏe.",
+            "Tôi rất giỏi.",
+            "Tôi rất đẹp.",
+            "Tôi rất cao."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '今天的婚禮很熱鬧，大家都很開心。' có nghĩa là gì?",
+          "options": [
+            "Đám cưới hôm nay rất náo nhiệt, mọi người đều rất vui vẻ.",
+            "Đám cưới hôm nay rất trang trọng, mọi người đều rất nghiêm túc.",
+            "Đám cưới hôm nay rất đông người, mọi người đều rất bận rộn.",
+            "Đám cưới hôm nay rất đẹp, mọi người đều rất hào hứng."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '這道菜很好吃，我想再點一份。' có nghĩa là gì?",
+          "options": [
+            "Món này rất ít, tôi muốn gọi thêm một phần nữa.",
+            "Món này rất ngon, tôi muốn gọi thêm một phần nữa.",
+            "Món này rất đắt, tôi muốn gọi thêm một phần nữa.",
+            "Món này rất cay, tôi muốn gọi thêm một phần nữa."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'rất, lắm'?",
+          "options": [
+            "很",
+            "痕",
+            "根",
+            "恨",
+            "跟"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "很"
+    },
+    {
+      "word": "後",
+      "pinyin": "hòu",
+      "zhuyin": "ㄏㄡˋ",
+      "meaning": "sau, phía sau, về sau",
+      "partOfSpeech": "adverb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我後來了。\nPinyin: wǒ hòu lái le\nNghĩa: Tôi đến sau.",
+        "我想要訂明天晚上八點後的房間。\nPinyin: wǒ xiǎng yào dìng míng tiān wǎn shàng bā diǎn hòu de fáng jiān\nNghĩa: Tôi muốn đặt phòng sau 8 giờ tối mai.",
+        "婚禮結束後我們全家會一起吃飯慶祝。\nPinyin: hūn lǐ jié shù hòu wǒ men quán jiā huì yī qǐ chī fàn qìng zhù\nNghĩa: Sau khi đám cưới kết thúc, cả gia đình chúng tôi sẽ cùng ăn cơm ăn mừng."
+      ],
+      "synonyms": [
+        "之後 (zhī hòu)",
+        "以後 (yǐ hòu)"
+      ],
+      "antonyms": [
+        "前 (qián)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '後' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "dưới, phía dưới",
+            "giữa, ở giữa",
+            "sau, phía sau, về sau",
+            "trên, phía trên",
+            "trước, phía trước"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của '後' là gì?",
+          "options": [
+            "hǒu",
+            "hoù",
+            "hòu",
+            "hōu",
+            "hóu"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '我後來了' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Tôi đang đến.",
+            "Tôi đã về.",
+            "Tôi không đến.",
+            "Tôi đến sau.",
+            "Tôi đi trước."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我想要訂明天晚上八點後的房間' có nghĩa là gì?",
+          "options": [
+            "Tôi muốn đặt phòng sau 8 giờ tối mai.",
+            "Tôi muốn hủy phòng sau 8 giờ tối mai.",
+            "Tôi muốn đặt phòng trước 8 giờ tối mai.",
+            "Tôi muốn đặt phòng lúc 8 giờ tối mai."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '婚禮結束後我們全家會一起吃飯慶祝' có nghĩa là gì?",
+          "options": [
+            "Trong lúc đám cưới, chúng tôi sẽ ăn cơm.",
+            "Đám cưới sẽ có tiệc ăn mừng.",
+            "Trước đám cưới, cả gia đình chúng tôi sẽ cùng ăn cơm.",
+            "Gia đình tôi không tham gia đám cưới.",
+            "Sau khi đám cưới kết thúc, cả gia đình chúng tôi sẽ cùng ăn cơm ăn mừng."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'sau, phía sau'?",
+          "options": [
+            "後",
+            "下",
+            "左",
+            "上",
+            "前",
+            "中"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "後"
+    },
+    {
+      "word": "話",
+      "pinyin": "huà",
+      "zhuyin": "ㄏㄨㄚˋ",
+      "meaning": "lời nói, câu chuyện, ngôn ngữ",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "他說中國話。\nPinyin: tā shuō zhōng guó huà\nNghĩa: Anh ấy nói tiếng Trung Quốc.",
+        "醫生對病人說了很多安慰的話。\nPinyin: yī shēng duì bìng rén shuō le hěn duō ān wèi de huà\nNghĩa: Bác sĩ đã nói rất nhiều lời an ủi với bệnh nhân.",
+        "在會議中，經理說的每一句話都很重要。\nPinyin: zài huì yì zhōng, jīng lǐ shuō de měi yī jù huà dōu hěn zhòng yào\nNghĩa: Trong cuộc họp, mỗi câu nói của quản lý đều rất quan trọng."
+      ],
+      "synonyms": [
+        "言語 (yán yǔ)",
+        "語言 (yǔ yán)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '話' có nghĩa là gì?",
+          "options": [
+            "lời nói, câu chuyện",
+            "màu sắc",
+            "hình ảnh",
+            "âm nhạc"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của '話' là gì?",
+          "options": [
+            "huǎ",
+            "huā",
+            "huá",
+            "huà"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '他說中國話' có nghĩa là gì?",
+          "options": [
+            "Anh ấy nói tiếng Trung Quốc",
+            "Anh ấy viết chữ Trung Quốc",
+            "Anh ấy học tiếng Trung Quốc",
+            "Anh ấy đọc sách Trung Quốc"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '醫生對病人說了很多安慰的話' có nghĩa là gì?",
+          "options": [
+            "Bác sĩ đã khám bệnh cho bệnh nhân",
+            "Bác sĩ đã nói rất nhiều lời an ủi với bệnh nhân",
+            "Bác sĩ đã chữa khỏi bệnh cho bệnh nhân",
+            "Bác sĩ đã cho bệnh nhân uống thuốc"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '在會議中，經理說的每一句話都很重要' có nghĩa là gì?",
+          "options": [
+            "Trong cuộc họp, quản lý đến rất sớm",
+            "Trong cuộc họp, quản lý ngồi ở vị trí quan trọng",
+            "Trong cuộc họp, quản lý mang theo nhiều tài liệu quan trọng",
+            "Trong cuộc họp, mỗi câu nói của quản lý đều rất quan trọng"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chọn chữ Hán đúng có nghĩa là 'lời nói, câu chuyện':",
+          "options": [
+            "花",
+            "畫",
+            "化",
+            "話"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "話"
+    },
+    {
+      "word": "幾",
+      "pinyin": "jǐ",
+      "zhuyin": "ㄐㄧˇ",
+      "meaning": "bao nhiêu, mấy",
+      "partOfSpeech": "pronoun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "現在幾點？\nPinyin: xiànzài jǐ diǎn?\nNghĩa: Bây giờ là mấy giờ?",
+        "請問您今天要訂幾個人的位子？\nPinyin: qǐngwèn nín jīntiān yào dìng jǐ gè rén de wèizi?\nNghĩa: Xin hỏi hôm nay quý khách muốn đặt bàn cho mấy người?",
+        "你們打算在這裡待幾個小時？\nPinyin: nǐmen dǎsuàn zài zhèlǐ dài jǐ gè xiǎoshí?\nNghĩa: Các bạn dự định ở đây mấy tiếng?"
+      ],
+      "synonyms": [
+        "多少 (duōshao)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '幾' có nghĩa là gì?",
+          "options": [
+            "không có gì",
+            "rất nhiều",
+            "một ít",
+            "bao nhiêu, mấy",
+            "tất cả"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '幾' là gì?",
+          "options": [
+            "jì",
+            "jiǔ",
+            "jī",
+            "jǐ",
+            "jí"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '現在幾點？' có nghĩa là gì?",
+          "options": [
+            "Bây giờ là mấy giờ?",
+            "Làm gì đây?",
+            "Ở đâu vậy?",
+            "Có mấy người?",
+            "Hôm nay thế nào?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '請問您今天要訂幾個人的位子？' có nghĩa là gì?",
+          "options": [
+            "Quý khách từ đâu đến?",
+            "Quý khách có bao nhiêu tiền?",
+            "Hôm nay quý khách muốn ăn gì?",
+            "Xin hỏi hôm nay quý khách muốn đặt bàn cho mấy người?"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '你們打算在這裡待幾個小時？' có nghĩa là gì?",
+          "options": [
+            "Các bạn có mệt không?",
+            "Các bạn dự định ở đây mấy tiếng?",
+            "Các bạn thích ở đây không?",
+            "Các bạn đến đây bao lâu rồi?",
+            "Các bạn sẽ về khi nào?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào biểu thị nghĩa 'bao nhiêu, mấy'?",
+          "options": [
+            "點",
+            "很",
+            "個",
+            "幾",
+            "些"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "幾"
+    },
+    {
+      "word": "家",
+      "pinyin": "jiā",
+      "zhuyin": "ㄐㄧㄚ",
+      "meaning": "nhà, gia đình",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我回家了。\nPinyin: wǒ huí jiā le.\nNghĩa: Tôi về nhà rồi.",
+        "這家飯店的房間很乾淨，服務也不錯。\nPinyin: zhè jiā fàn diàn de fáng jiān hěn gān jìng, fú wù yě bù cuò.\nNghĩa: Khách sạn này có phòng rất sạch sẽ, dịch vụ cũng tốt.",
+        "今天全家人聚在一起吃團圓飯，真的很開心。\nPinyin: jīn tiān quán jiā rén jù zài yī qǐ chī tuán yuán fàn, zhēn de hěn kāi xīn.\nNghĩa: Hôm nay cả gia đình quây quần ăn cơm đoàn viên, thực sự rất vui."
+      ],
+      "synonyms": [
+        "屋 (wū)",
+        "宅 (zhái)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '家' có nghĩa tiếng Việt là gì?",
+          "options": [
+            "công ty",
+            "nhà, gia đình",
+            "cửa hàng",
+            "trường học",
+            "bệnh viện"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '家' là gì?",
+          "options": [
+            "jiǎ",
+            "jiá",
+            "jia",
+            "jià",
+            "jiā"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '我回家了。' có nghĩa là gì?",
+          "options": [
+            "Tôi đi chơi rồi.",
+            "Tôi về nhà rồi.",
+            "Tôi đi làm rồi.",
+            "Tôi đi học rồi."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '這家飯店的房間很乾淨，服務也不錯。' có nghĩa là gì?",
+          "options": [
+            "Cửa hàng này có hàng hóa tốt, nhân viên cũng thân thiện.",
+            "Khách sạn này có phòng rất sạch sẽ, dịch vụ cũng tốt.",
+            "Nhà hàng này có món ăn ngon, giá cả cũng hợp lý.",
+            "Trường học này có cơ sở vật chất tốt, giáo viên cũng giỏi."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '今天全家人聚在一起吃團圓飯，真的很開心。' có nghĩa là gì?",
+          "options": [
+            "Hôm nay bạn bè gặp nhau ăn uống, thực sự rất vui vẻ.",
+            "Hôm nay cả gia đình quây quần ăn cơm đoàn viên, thực sự rất vui.",
+            "Hôm nay đồng nghiệp họp mặt ăn tối, thực sự rất thú vị.",
+            "Hôm nay hàng xóm tụ tập nấu ăn, thực sự rất náo nhiệt."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'nhà, gia đình'?",
+          "options": [
+            "校",
+            "院",
+            "店",
+            "廠",
+            "家"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "家"
+    },
+    {
+      "word": "叫",
+      "pinyin": "jiào",
+      "zhuyin": "ㄐㄧㄠˋ",
+      "meaning": "gọi, tên là, kêu",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我叫小明。\nPinyin: wǒ jiào xiǎo míng.\nNghĩa: Tôi tên là Tiểu Minh.",
+        "在咖啡廳裡，我的朋友叫我過去聊天。\nPinyin: zài kā fēi tīng lǐ, wǒ de péng yǒu jiào wǒ guò qù liáo tiān.\nNghĩa: Trong quán cà phê, bạn tôi gọi tôi qua để tán gẫu.",
+        "在餐廳用餐時，我們叫服務員過來點菜。\nPinyin: zài cān tīng yòng cān shí, wǒ men jiào fú wù yuán guò lái diǎn cài.\nNghĩa: Khi ăn ở nhà hàng, chúng tôi gọi nhân viên phục vụ qua để gọi món."
+      ],
+      "synonyms": [
+        "喚 (huàn)",
+        "稱 (chēng)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '叫' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "mua, bán",
+            "ăn, uống",
+            "gọi, tên là, kêu",
+            "nghe, ngắm",
+            "đi, đến"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Phiên âm pinyin của từ '叫' là gì?",
+          "options": [
+            "jìao",
+            "jiāo",
+            "jiáo",
+            "jiào",
+            "jiǎo"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我叫小明。' có nghĩa là gì?",
+          "options": [
+            "Tôi thích Tiểu Minh.",
+            "Tôi gọi cho Tiểu Minh.",
+            "Tiểu Minh gọi tôi.",
+            "Tôi tên là Tiểu Minh."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '在咖啡廳裡，我的朋友叫我過去聊天。' có nghĩa là gì?",
+          "options": [
+            "Trong quán cà phê, bạn tôi gọi tôi qua để tán gẫu.",
+            "Bạn tôi tên là quán cà phê.",
+            "Trong quán cà phê, tôi gọi bạn qua để tán gẫu.",
+            "Tôi và bạn đang ở quán cà phê tán gẫu."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '在餐廳用餐時，我們叫服務員過來點菜。' có nghĩa là gì?",
+          "options": [
+            "Chúng tôi tên là nhân viên phục vụ nhà hàng.",
+            "Nhân viên phục vụ đang ăn ở nhà hàng.",
+            "Ở nhà hàng, nhân viên phục vụ gọi chúng tôi đến gọi món.",
+            "Khi ăn ở nhà hàng, chúng tôi gọi nhân viên phục vụ qua để gọi món."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'gọi, tên là, kêu'?",
+          "options": [
+            "叫",
+            "較",
+            "教",
+            "腳",
+            "覺"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "叫"
+    },
+    {
+      "word": "腳",
+      "pinyin": "jiǎo",
+      "zhuyin": "ㄐㄧㄠˇ",
+      "meaning": "chân, bàn chân",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我的腳很痛。\nPinyin: wǒ de jiǎo hěn tòng\nNghĩa: Chân tôi rất đau.",
+        "走了一整天，我的腳都起水泡了。\nPinyin: zǒu le yī zhěng tiān, wǒ de jiǎo dōu qǐ shuǐ pào le\nNghĩa: Đi bộ cả ngày, chân tôi đều bị phồng rộp.",
+        "這雙鞋子太小了，穿起來腳會不舒服。\nPinyin: zhè shuāng xié zi tài xiǎo le, chuān qǐ lái jiǎo huì bù shū fú\nNghĩa: Đôi giày này quá nhỏ, mang vào chân sẽ không thoải mái."
+      ],
+      "synonyms": [
+        "足 (zú)"
+      ],
+      "antonyms": [
+        "手 (shǒu)"
+      ],
+      "questions": [
+        {
+          "question": "\"腳\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "đầu",
+            "tai",
+            "mắt",
+            "tay",
+            "miệng",
+            "chân, bàn chân"
+          ],
+          "correctAnswer": 5
+        },
+        {
+          "question": "Phiên âm pinyin của \"腳\" là gì?",
+          "options": [
+            "jiào",
+            "jìao",
+            "jiǎo",
+            "jiāo",
+            "qiǎo",
+            "xiǎo"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"我的腳很痛\" nghĩa là gì?",
+          "options": [
+            "Đầu tôi rất đau",
+            "Chân tôi rất đau",
+            "Tay tôi rất đau",
+            "Bụng tôi rất đau"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"走了一整天，我的腳都起水泡了\" nghĩa là gì?",
+          "options": [
+            "Nhảy cả ngày, chân tôi bị đau",
+            "Đứng cả ngày, chân tôi bị sưng",
+            "Đi bộ cả ngày, chân tôi đều bị phồng rộp",
+            "Chạy cả ngày, chân tôi rất mệt"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"這雙鞋子太小了，穿起來腳會不舒服\" nghĩa là gì?",
+          "options": [
+            "Đôi giày này quá đắt, mua về chân sẽ đẹp",
+            "Đôi giày này quá cũ, mang vào chân sẽ bẩn",
+            "Đôi giày này quá lớn, mang vào chân sẽ rộng",
+            "Đôi giày này quá nhỏ, mang vào chân sẽ không thoải mái"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"chân, bàn chân\"?",
+          "options": [
+            "腳",
+            "手",
+            "頭",
+            "眼",
+            "口",
+            "耳"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "腳"
+    },
+    {
+      "word": "姊姊",
+      "pinyin": "jiě jiě",
+      "zhuyin": "ㄐㄧㄝˇ ㄐㄧㄝˇ",
+      "meaning": "chị gái",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我姊姊很漂亮。\nPinyin: wǒ jiě jiě hěn piào liàng\nNghĩa: Chị gái tôi rất xinh đẹp.",
+        "姊姊在學校教書，她的學生都很喜歡她。\nPinyin: jiě jiě zài xué xiào jiāo shū, tā de xué shēng dōu hěn xǐ huān tā\nNghĩa: Chị gái dạy học ở trường, tất cả học sinh đều rất thích chị ấy.",
+        "姊姊下個月要結婚了，全家人都很高興。\nPinyin: jiě jiě xià gè yuè yào jié hūn le, quán jiā rén dōu hěn gāo xìng\nNghĩa: Chị gái sẽ kết hôn vào tháng tới, cả nhà ai cũng rất vui."
+      ],
+      "synonyms": [
+        "姐姐 (jiě jiě)"
+      ],
+      "antonyms": [
+        "弟弟 (dì dì)",
+        "妹妹 (mèi mèi)"
+      ],
+      "questions": [
+        {
+          "question": "\"姊姊\" có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "em gái",
+            "mẹ",
+            "em trai",
+            "bà",
+            "anh trai",
+            "chị gái"
+          ],
+          "correctAnswer": 5
+        },
+        {
+          "question": "Phiên âm pinyin của \"姊姊\" là gì?",
+          "options": [
+            "jǐ jǐ",
+            "jié jié",
+            "jiē jiē",
+            "jì jì",
+            "jiè jiè",
+            "jiě jiě"
+          ],
+          "correctAnswer": 5
+        },
+        {
+          "question": "\"我姊姊很漂亮。\" có nghĩa là gì?",
+          "options": [
+            "Bạn gái tôi rất xinh đẹp.",
+            "Mẹ tôi rất xinh đẹp.",
+            "Chị gái tôi rất xinh đẹp.",
+            "Em gái tôi rất xinh đẹp.",
+            "Anh trai tôi rất đẹp trai."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"姊姊在學校教書，她的學生都很喜歡她。\" có nghĩa là gì?",
+          "options": [
+            "Chị gái đi học ở trường, chị ấy thích tất cả bạn bè.",
+            "Chị gái làm việc ở trường, chị ấy rất thích công việc.",
+            "Chị gái dạy học ở trường, tất cả học sinh đều rất thích chị ấy.",
+            "Chị gái học ở trường, cô ấy rất thích các bạn học sinh."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"姊姊下個月要結婚了，全家人都很高興。\" có nghĩa là gì?",
+          "options": [
+            "Chị gái muốn kết hôn, gia đình rất lo lắng.",
+            "Chị gái vừa mới cưới, gia đình rất hạnh phúc.",
+            "Chị gái sẽ kết hôn vào tháng tới, cả nhà ai cũng rất vui.",
+            "Chị gái tháng trước đã kết hôn, cả nhà đều vui.",
+            "Chị gái đang chuẩn bị cưới, mọi người đều bận rộn."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"chị gái\"?",
+          "options": [
+            "弟弟",
+            "姊姊",
+            "媽媽",
+            "哥哥",
+            "阿姨",
+            "妹妹"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "姊姊 / 姐姐 / 姊 / 姐"
+    },
+    {
+      "word": "今年",
+      "pinyin": "jīn nián",
+      "zhuyin": "ㄐㄧㄣ ㄋㄧㄢˊ",
+      "meaning": "năm nay",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "今年我二十歲。\nPinyin: jīn nián wǒ èr shí suì.\nNghĩa: Năm nay tôi hai mươi tuổi.",
+        "醫生說今年流感特別嚴重，要多注意身體健康。\nPinyin: yī shēng shuō jīn nián liú gǎn tè bié yán zhòng, yào duō zhù yì shēn tǐ jiàn kāng.\nNghĩa: Bác sĩ nói năm nay cúm đặc biệt nghiêm trọng, phải chú ý sức khỏe nhiều hơn.",
+        "服務員介紹說今年新推出的招牌菜很受歡迎。\nPinyin: fú wù yuán jiè shào shuō jīn nián xīn tuī chū de zhāo pái cài hěn shòu huān yíng.\nNghĩa: Nhân viên phục vụ giới thiệu rằng món đặc sản mới ra mắt năm nay rất được ưa chuộng."
+      ],
+      "synonyms": [
+        "本年 (běn nián)",
+        "這一年 (zhè yī nián)"
+      ],
+      "antonyms": [
+        "去年 (qù nián)",
+        "明年 (míng nián)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '今年' có nghĩa là gì?",
+          "options": [
+            "năm nay",
+            "năm sau",
+            "tuần này",
+            "năm kia",
+            "năm ngoái"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của '今年' là gì?",
+          "options": [
+            "jīn nián",
+            "jǐn nián",
+            "jīng nián",
+            "jìn nián",
+            "jín nián"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '今年我二十歲。' có nghĩa là gì?",
+          "options": [
+            "Năm sau tôi hai mươi tuổi.",
+            "Tuổi tôi là hai mươi.",
+            "Năm nay tôi hai mươi tuổi.",
+            "Năm ngoái tôi hai mươi tuổi.",
+            "Tháng này tôi hai mươi tuổi."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '醫生說今年流感特別嚴重，要多注意身體健康。' có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói năm sau cúm sẽ nghiêm trọng.",
+            "Bác sĩ nói năm ngoái cúm đặc biệt nghiêm trọng.",
+            "Bác sĩ nói năm nay cúm đặc biệt nghiêm trọng, phải chú ý sức khỏe nhiều hơn.",
+            "Bác sĩ nói cúm luôn nghiêm trọng mỗi năm."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '服務員介紹說今年新推出的招牌菜很受歡迎。' có nghĩa là gì?",
+          "options": [
+            "Nhân viên giới thiệu thực đơn mới.",
+            "Nhân viên nói món ăn năm ngoái rất ngon.",
+            "Nhân viên nói món ăn luôn được yêu thích.",
+            "Nhân viên giới thiệu rằng món đặc sản mới ra mắt năm nay rất được ưa chuộng.",
+            "Nhân viên nói họ sẽ có món mới năm sau."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'năm nay'?",
+          "options": [
+            "去年",
+            "明年",
+            "來年",
+            "往年",
+            "昨年",
+            "今年"
+          ],
+          "correctAnswer": 5
+        }
+      ],
+      "allForms": "今年"
+    },
+    {
+      "word": "今天",
+      "pinyin": "jīntiān",
+      "zhuyin": "ㄐㄧㄣㄊㄧㄢ",
+      "meaning": "hôm nay",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "今天天氣很好。\nPinyin: jīntiān tiānqì hěn hǎo.\nNghĩa: Hôm nay thời tiết rất đẹp.",
+        "我今天要跟朋友去看電影，晚上八點開始。\nPinyin: wǒ jīntiān yào gēn péngyǒu qù kàn diànyǐng, wǎnshàng bā diǎn kāishǐ.\nNghĩa: Hôm nay tôi sẽ đi xem phim với bạn, bắt đầu lúc 8 giờ tối.",
+        "請問今天有飛往台北的班機嗎？\nPinyin: qǐngwèn jīntiān yǒu fēi wǎng táiběi de bānjī ma?\nNghĩa: Xin hỏi hôm nay có chuyến bay đi Đài Bắc không?"
+      ],
+      "synonyms": [
+        "本日 (běnrì)"
+      ],
+      "antonyms": [
+        "昨天 (zuótiān)",
+        "明天 (míngtiān)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '今天' có nghĩa là gì?",
+          "options": [
+            "hôm nay",
+            "ngày mai",
+            "hôm qua",
+            "tháng này",
+            "tuần này"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của '今天' là gì?",
+          "options": [
+            "jìntiān",
+            "jīntiān",
+            "jíntiàn",
+            "jīntiǎn",
+            "jǐntiān"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu '今天天氣很好。' có nghĩa là gì?",
+          "options": [
+            "Tháng này thời tiết rất đẹp.",
+            "Hôm qua thời tiết rất đẹp.",
+            "Ngày mai thời tiết rất đẹp.",
+            "Hôm nay thời tiết rất đẹp.",
+            "Tuần này thời tiết rất đẹp."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我今天要跟朋友去看電影，晚上八點開始。' có nghĩa là gì?",
+          "options": [
+            "Hôm nay tôi sẽ đi xem phim với bạn, bắt đầu lúc 8 giờ tối.",
+            "Tuần này tôi sẽ đi xem phim với bạn.",
+            "Ngày mai tôi sẽ đi xem phim với bạn lúc 8 giờ tối.",
+            "Tôi thường đi xem phim với bạn lúc 8 giờ tối.",
+            "Hôm qua tôi đã đi xem phim với bạn lúc 8 giờ tối."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '請問今天有飛往台北的班機嗎？' có nghĩa là gì?",
+          "options": [
+            "Xin hỏi hôm qua có chuyến bay đi Đài Bắc không?",
+            "Xin hỏi hôm nay có chuyến bay đi Đài Bắc không?",
+            "Xin hỏi tháng này có chuyến bay đi Đài Bắc không?",
+            "Xin hỏi ngày mai có chuyến bay đi Đài Bắc không?",
+            "Xin hỏi tuần này có chuyến bay đi Đài Bắc không?"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'hôm nay'?",
+          "options": [
+            "今天",
+            "明天",
+            "後天",
+            "昨天",
+            "前天"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "今天"
+    },
+    {
+      "word": "就",
+      "pinyin": "jiù",
+      "zhuyin": "ㄐㄧㄡˋ",
+      "meaning": "ngay, liền, chỉ, thì",
+      "partOfSpeech": "adverb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我就是學生。\nPinyin: wǒ jiù shì xuéshēng\nNghĩa: Tôi chỉ là học sinh thôi.",
+        "老闆說完話，員工就馬上開始工作了。\nPinyin: lǎobǎn shuō wán huà, yuángōng jiù mǎshàng kāishǐ gōngzuò le\nNghĩa: Sếp vừa nói xong, nhân viên liền bắt đầu làm việc ngay.",
+        "他在圖書館找到那本書，就立刻開始研究。\nPinyin: tā zài túshūguǎn zhǎodào nà běn shū, jiù lìkè kāishǐ yánjiū\nNghĩa: Anh ấy tìm thấy cuốn sách đó trong thư viện thì lập tức bắt đầu nghiên cứu."
+      ],
+      "synonyms": [
+        "即 (jí)",
+        "便 (biàn)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '就' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "phải, cần thiết",
+            "có thể, được phép",
+            "rồi, xong, hoàn thành",
+            "chỉ, ngay, liền, thì"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của '就' là gì?",
+          "options": [
+            "jìu",
+            "jiū",
+            "jǐu",
+            "jiù"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '我就是學生。' có nghĩa là gì?",
+          "options": [
+            "Tôi sẽ thành học sinh.",
+            "Tôi muốn là học sinh.",
+            "Tôi không phải học sinh.",
+            "Tôi chỉ là học sinh thôi."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '老闆說完話，員工就馬上開始工作了。' có nghĩa là gì?",
+          "options": [
+            "Sếp và nhân viên cùng bắt đầu làm việc.",
+            "Nhân viên làm việc trước khi sếp nói.",
+            "Sếp nói chuyện với nhân viên về công việc.",
+            "Sếp vừa nói xong, nhân viên liền bắt đầu làm việc ngay."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '他在圖書館找到那本書，就立刻開始研究。' có nghĩa là gì?",
+          "options": [
+            "Anh ấy không tìm thấy sách nên không nghiên cứu được.",
+            "Anh ấy mượn sách về nhà để nghiên cứu.",
+            "Anh ấy tìm thấy cuốn sách đó trong thư viện thì lập tức bắt đầu nghiên cứu.",
+            "Anh ấy nghiên cứu trước khi tìm sách trong thư viện."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa 'ngay, liền, chỉ, thì'?",
+          "options": [
+            "久",
+            "走",
+            "右",
+            "就"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "就"
+    },
+    {
+      "word": "久",
+      "pinyin": "jiǔ",
+      "zhuyin": "ㄐㄧㄡˇ",
+      "meaning": "lâu, dài (về thời gian)",
+      "partOfSpeech": "adjective",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我等很久了。\nPinyin: wǒ děng hěn jiǔ le.\nNghĩa: Tôi đã đợi rất lâu rồi.",
+        "醫生說這個病需要很久的時間才能完全康復。\nPinyin: yīshēng shuō zhège bìng xūyào hěn jiǔ de shíjiān cái néng wánquán kāngfù.\nNghĩa: Bác sĩ nói bệnh này cần rất lâu thời gian mới có thể khỏi hoàn toàn.",
+        "老師問我們為什麼作業寫了這麼久還沒完成。\nPinyin: lǎoshī wèn wǒmen wèishénme zuòyè xiěle zhème jiǔ hái méi wánchéng.\nNghĩa: Cô giáo hỏi chúng tôi tại sao làm bài tập lâu như vậy mà vẫn chưa xong."
+      ],
+      "synonyms": [
+        "長 (cháng)",
+        "很久 (hěn jiǔ)"
+      ],
+      "antonyms": [
+        "短 (duǎn)",
+        "快 (kuài)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '久' trong tiếng Trung có nghĩa là gì?",
+          "options": [
+            "nhanh, mau",
+            "gần, sát",
+            "ngắn, ít",
+            "mới, trẻ",
+            "lâu, dài (về thời gian)",
+            "xa, cách"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Cách phát âm pinyin của '久' là gì?",
+          "options": [
+            "jiú",
+            "jiù",
+            "jǐu",
+            "jiū",
+            "jiǔ"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '我等很久了。' có nghĩa là gì?",
+          "options": [
+            "Tôi không đợi lâu.",
+            "Tôi sẽ đợi rất lâu.",
+            "Tôi đợi một chút thôi.",
+            "Tôi đã đợi rất nhanh rồi.",
+            "Tôi đã đợi rất lâu rồi."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Câu '醫生說這個病需要很久的時間才能完全康復。' có nghĩa là gì?",
+          "options": [
+            "Bác sĩ nói bệnh này cần rất lâu thời gian mới có thể khỏi hoàn toàn.",
+            "Bác sĩ nói bệnh này không cần điều trị lâu.",
+            "Bác sĩ nói bệnh này khỏi ngay lập tức.",
+            "Bác sĩ nói bệnh này khỏi rất nhanh.",
+            "Bác sĩ nói bệnh này không thể khỏi."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '老師問我們為什麼作業寫了這麼久還沒完成。' có nghĩa là gì?",
+          "options": [
+            "Cô giáo khen chúng tôi làm bài tập nhanh.",
+            "Cô giáo nói chúng tôi đã hoàn thành bài tập.",
+            "Cô giáo hỏi tại sao chúng tôi làm bài tập quá nhanh.",
+            "Cô giáo hỏi chúng tôi tại sao làm bài tập lâu như vậy mà vẫn chưa xong.",
+            "Cô giáo cho chúng tôi nghỉ làm bài tập."
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'lâu, dài (về thời gian)'?",
+          "options": [
+            "新",
+            "久",
+            "近",
+            "短",
+            "長",
+            "快"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "久"
+    },
+    {
+      "word": "九",
+      "pinyin": "jiǔ",
+      "zhuyin": "ㄐㄧㄡˇ",
+      "meaning": "số chín",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "今天九月三號。\nPinyin: jīn tiān jiǔ yuè sān hào\nNghĩa: Hôm nay là ngày 3 tháng 9.",
+        "醫生說我需要在九點前來醫院檢查。\nPinyin: yī shēng shuō wǒ xū yào zài jiǔ diǎn qián lái yī yuàn jiǎn chá\nNghĩa: Bác sĩ nói tôi cần đến bệnh viện khám trước 9 giờ.",
+        "請問九號登機門在哪裡可以辦理登機手續？\nPinyin: qǐng wèn jiǔ hào dēng jī mén zài nǎ lǐ kě yǐ bàn lǐ dēng jī shǒu xù\nNghĩa: Xin hỏi cửa số 9 ở đâu có thể làm thủ tục check-in?"
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"九\" có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "số bảy",
+            "số sáu",
+            "số mười",
+            "số tám",
+            "số chín"
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "Phiên âm pinyin của \"九\" là gì?",
+          "options": [
+            "jíu",
+            "jiū",
+            "jiù",
+            "jiǔ",
+            "jǐu"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu \"今天九月三號\" có nghĩa là gì?",
+          "options": [
+            "Hôm nay là ngày 9 tháng 3",
+            "Hôm nay là ngày 3 tháng 9",
+            "Ngày mai là tháng 9",
+            "Tháng 9 có 3 ngày"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu \"醫生說我需要在九點前來醫院檢查\" có nghĩa là gì?",
+          "options": [
+            "Bệnh viện mở cửa lúc 9 giờ",
+            "Bác sĩ nói tôi cần đến bệnh viện khám sau 9 giờ",
+            "Bác sĩ nói tôi cần đến bệnh viện khám trước 9 giờ",
+            "Bác sĩ làm việc 9 giờ mỗi ngày"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu \"請問九號登機門在哪裡可以辦理登機手續？\" có nghĩa là gì?",
+          "options": [
+            "Xin hỏi cửa số 9 ở đâu có thể làm thủ tục check-in?",
+            "Xin hỏi hành lý có 9 kg không?",
+            "Xin hỏi chuyến bay số 9 khởi hành lúc mấy giờ?",
+            "Xin hỏi máy bay có 9 cửa không?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"số chín\"?",
+          "options": [
+            "九",
+            "十",
+            "八",
+            "六",
+            "七"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "九"
+    },
+    {
+      "word": "咖啡",
+      "pinyin": "kā fēi",
+      "zhuyin": "ㄎㄚ ㄈㄟ",
+      "meaning": "cà phê",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Ăn uống, nấu ăn"
+      ],
+      "examples": [
+        "我要咖啡\nPinyin: wǒ yào kā fēi\nNghĩa: Tôi muốn cà phê",
+        "請問您需要什麼樣的咖啡呢？\nPinyin: qǐng wèn nín xū yào shén me yàng de kā fēi ne?\nNghĩa: Xin hỏi quý khách cần loại cà phê nào ạ?",
+        "我剛才買了一杯很香的咖啡給你\nPinyin: wǒ gāng cái mǎi le yī bēi hěn xiāng de kā fēi gěi nǐ\nNghĩa: Tôi vừa mua một cốc cà phê rất thơm cho bạn"
+      ],
+      "synonyms": [],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"咖啡\" có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "sữa",
+            "cà phê",
+            "nước chanh",
+            "nước cam",
+            "trà"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của \"咖啡\" là gì?",
+          "options": [
+            "kā féi",
+            "jiā fēi",
+            "kā fēi",
+            "kā fèi",
+            "gā fēi"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "\"我要咖啡\" có nghĩa là gì?",
+          "options": [
+            "Tôi muốn cà phê",
+            "Tôi làm cà phê",
+            "Tôi thích cà phê",
+            "Tôi mua cà phê",
+            "Tôi uống cà phê"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"請問您需要什麼樣的咖啡呢？\" có nghĩa là gì?",
+          "options": [
+            "Xin hỏi quý khách cần loại cà phê nào ạ?",
+            "Quý khách có thích cà phê không?",
+            "Quý khách muốn uống cà phê khi nào?",
+            "Quý khách có muốn thêm đường vào cà phê không?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"我剛才買了一杯很香的咖啡給你\" có nghĩa là gì?",
+          "options": [
+            "Bạn vừa mua cà phê thơm cho tôi",
+            "Tôi vừa mua một cốc cà phê rất thơm cho bạn",
+            "Tôi muốn mua cà phê thơm cho bạn",
+            "Tôi sẽ mua một cốc cà phê thơm cho bạn"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"cà phê\"?",
+          "options": [
+            "可樂",
+            "咖啡",
+            "茶葉",
+            "果汁",
+            "牛奶"
+          ],
+          "correctAnswer": 1
+        }
+      ],
+      "allForms": "咖啡"
+    },
+    {
+      "word": "看",
+      "pinyin": "kàn",
+      "zhuyin": "ㄎㄢˋ",
+      "meaning": "nhìn, xem, đọc",
+      "partOfSpeech": "verb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "我看書。\nPinyin: wǒ kàn shū.\nNghĩa: Tôi đọc sách.",
+        "老師要我們看這本課本的第三章。\nPinyin: lǎoshī yào wǒmen kàn zhè běn kèběn de dì sān zhāng.\nNghĩa: Thầy cô muốn chúng tôi đọc chương thứ ba của cuốn sách giáo khoa này.",
+        "在圖書館裡，大家都安靜地看書做研究。\nPinyin: zài túshūguǎn lǐ, dàjiā dōu ānjìng de kàn shū zuò yánjiū.\nNghĩa: Trong thư viện, mọi người đều yên lặng đọc sách và làm nghiên cứu."
+      ],
+      "synonyms": [
+        "觀 (guān)",
+        "視 (shì)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "\"看\" có nghĩa tiếng Việt là gì?",
+          "options": [
+            "nghe",
+            "nói",
+            "chạy",
+            "nhìn, xem, đọc",
+            "viết",
+            "ăn"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Phiên âm pinyin của \"看\" là gì?",
+          "options": [
+            "kàn",
+            "kàng",
+            "kēn",
+            "kán",
+            "kǎn",
+            "kān"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "\"我看書。\" có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Tôi mua sách.",
+            "Tôi cho sách.",
+            "Tôi viết sách.",
+            "Tôi bán sách.",
+            "Tôi đọc sách."
+          ],
+          "correctAnswer": 4
+        },
+        {
+          "question": "\"老師要我們看這本課本的第三章。\" có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Thầy cô muốn chúng tôi viết chương thứ ba.",
+            "Thầy cô muốn chúng tôi đọc chương thứ ba của cuốn sách giáo khoa này.",
+            "Thầy cô muốn chúng tôi bán sách giáo khoa.",
+            "Thầy cô muốn chúng tôi mua cuốn sách giáo khoa này."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "\"在圖書館裡，大家都安靜地看書做研究。\" có nghĩa tiếng Việt là gì?",
+          "options": [
+            "Trong thư viện, mọi người đều ăn uống.",
+            "Trong thư viện, mọi người đều to tiếng nói chuyện.",
+            "Trong thư viện, mọi người đều yên lặng đọc sách và làm nghiên cứu.",
+            "Trong thư viện, mọi người đều chạy nhảy.",
+            "Trong thư viện, mọi người đều ngủ."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa \"nhìn, xem, đọc\"?",
+          "options": [
+            "聽",
+            "寫",
+            "走",
+            "看",
+            "說",
+            "吃"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "看"
+    },
+    {
+      "word": "可能",
+      "pinyin": "kě néng",
+      "zhuyin": "ㄎㄜˇ ㄋㄥˊ",
+      "meaning": "có thể, có khả năng",
+      "partOfSpeech": "adverb",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "他可能會來。\nPinyin: tā kě néng huì lái\nNghĩa: Anh ấy có thể sẽ đến.",
+        "如果明天下雨的話，我們可能要改時間。\nPinyin: rú guǒ míng tiān xià yǔ de huà, wǒ men kě néng yào gǎi shí jiān\nNghĩa: Nếu ngày mai trời mưa thì chúng ta có thể phải đổi thời gian.",
+        "這個蘋果可能有點貴，但是很新鮮。\nPinyin: zhè gè píng guǒ kě néng yǒu diǎn guì, dàn shì hěn xīn xiān\nNghĩa: Quả táo này có thể hơi đắt, nhưng rất tươi."
+      ],
+      "synonyms": [
+        "也許 (yě xǔ)",
+        "或許 (huò xǔ)"
+      ],
+      "antonyms": [
+        "一定 (yī dìng)"
+      ],
+      "questions": [
+        {
+          "question": "Từ \"可能\" trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "có thể",
+            "nhất định",
+            "chắc chắn",
+            "không thể",
+            "tuyệt đối"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Phiên âm pinyin của \"可能\" là gì?",
+          "options": [
+            "kè nèng",
+            "kē níng",
+            "kè néng",
+            "kě néng",
+            "kě nèng"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu \"他可能會來。\" có nghĩa là gì?",
+          "options": [
+            "Anh ấy chắc chắn sẽ đến.",
+            "Anh ấy không thể đến.",
+            "Anh ấy có thể sẽ đến.",
+            "Anh ấy đã đến rồi."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu \"如果明天下雨的話，我們可能要改時間。\" có nghĩa là gì?",
+          "options": [
+            "Nếu ngày mai trời mưa thì chúng ta không cần đổi thời gian.",
+            "Nếu ngày mai trời mưa thì chúng ta có thể phải đổi thời gian.",
+            "Nếu ngày mai trời nắng thì chúng ta có thể phải đổi thời gian.",
+            "Nếu ngày mai trời mưa thì chúng ta chắc chắn phải đổi thời gian."
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Câu \"這個蘋果可能有點貴，但是很新鮮。\" có nghĩa là gì?",
+          "options": [
+            "Quả táo này chắc chắn đắt, và không tươi.",
+            "Quả táo này chắc chắn rẻ, nhưng rất tươi.",
+            "Quả táo này có thể hơi đắt, nhưng rất tươi.",
+            "Quả táo này có thể rẻ, nhưng không tươi."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là \"có thể, có khả năng\"?",
+          "options": [
+            "絕對",
+            "一定",
+            "應該",
+            "可能",
+            "必須"
+          ],
+          "correctAnswer": 3
+        }
+      ],
+      "allForms": "可能"
+    },
+    {
+      "word": "可以",
+      "pinyin": "kě yǐ",
+      "zhuyin": "ㄎㄜˇ ㄧˇ",
+      "meaning": "có thể, được phép",
+      "partOfSpeech": "particle",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "可以進來嗎？\nPinyin: kě yǐ jìn lái ma?\nNghĩa: Có thể vào được không?",
+        "請問我可以在這裡辦理入住手續嗎？\nPinyin: qǐng wèn wǒ kě yǐ zài zhè lǐ bàn lǐ rù zhù shǒu xù ma?\nNghĩa: Xin hỏi tôi có thể làm thủ tục nhận phòng ở đây không?",
+        "老師說我們可以用字典來完成這個作業。\nPinyin: lǎo shī shuō wǒ men kě yǐ yòng zì diǎn lái wán chéng zhè gè zuò yè.\nNghĩa: Giáo viên nói chúng ta có thể dùng từ điển để hoàn thành bài tập này."
+      ],
+      "synonyms": [
+        "能夠 (néng gòu)",
+        "能 (néng)"
+      ],
+      "antonyms": [
+        "不能 (bù néng)",
+        "不可以 (bù kě yǐ)"
+      ],
+      "questions": [
+        {
+          "question": "Từ '可以' có nghĩa là gì trong tiếng Việt?",
+          "options": [
+            "muốn làm",
+            "có thể, được phép",
+            "không được",
+            "đã làm",
+            "phải làm"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '可以' là gì?",
+          "options": [
+            "ké yī",
+            "kē yì",
+            "kěi yǐ",
+            "kě yǐ",
+            "kè yí"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '可以進來嗎？' có nghĩa là gì?",
+          "options": [
+            "Phải vào không?",
+            "Đã vào chưa?",
+            "Có thể vào được không?",
+            "Muốn vào không?"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '請問我可以在這裡辦理入住手續嗎？' có nghĩa là gì?",
+          "options": [
+            "Xin hỏi tôi đã làm thủ tục chưa?",
+            "Xin hỏi tôi phải làm thủ tục ở đây không?",
+            "Xin hỏi tôi muốn ở lại đây không?",
+            "Xin hỏi tôi có thể làm thủ tục nhận phòng ở đây không?"
+          ],
+          "correctAnswer": 3
+        },
+        {
+          "question": "Câu '老師說我們可以用字典來完成這個作業。' có nghĩa là gì?",
+          "options": [
+            "Giáo viên nói chúng ta không được dùng từ điển.",
+            "Giáo viên nói chúng ta phải dùng từ điển để làm bài.",
+            "Giáo viên nói chúng ta có thể dùng từ điển để hoàn thành bài tập này.",
+            "Giáo viên nói chúng ta muốn dùng từ điển."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'có thể, được phép'?",
+          "options": [
+            "不能",
+            "必須",
+            "應該",
+            "一定",
+            "可以"
+          ],
+          "correctAnswer": 4
+        }
+      ],
+      "allForms": "可以"
+    },
+    {
+      "word": "塊",
+      "pinyin": "kuài",
+      "zhuyin": "ㄎㄨㄞˋ",
+      "meaning": "đồng (đơn vị tiền tệ), miếng, khối",
+      "partOfSpeech": "noun",
+      "level": 1,
+      "topics": [
+        "Từ vựng cốt lõi"
+      ],
+      "examples": [
+        "這個五塊錢。\nPinyin: zhè ge wǔ kuài qián\nNghĩa: Cái này năm đồng.",
+        "請問這道菜要多少塊錢呢？\nPinyin: qǐng wèn zhè dào cài yào duō shǎo kuài qián ne\nNghĩa: Xin hỏi món này giá bao nhiêu tiền ạ?",
+        "我買了一塊蛋糕跟朋友分享。\nPinyin: wǒ mǎi le yī kuài dàn gāo gēn péng yǒu fēn xiǎng\nNghĩa: Tôi mua một miếng bánh ngọt để chia sẻ với bạn."
+      ],
+      "synonyms": [
+        "元 (yuán)",
+        "片 (piàn)"
+      ],
+      "antonyms": [],
+      "questions": [
+        {
+          "question": "Từ '塊' trong tiếng Việt có nghĩa là gì?",
+          "options": [
+            "ly, cốc",
+            "đồng, miếng, khối",
+            "con, chú",
+            "cái, chiếc",
+            "tờ, tấm"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Phiên âm pinyin của '塊' là gì?",
+          "options": [
+            "kuāi",
+            "kuǎi",
+            "kuài",
+            "kùai",
+            "kuá"
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '這個五塊錢' có nghĩa là gì?",
+          "options": [
+            "Cái này năm tờ.",
+            "Cái này năm con.",
+            "Cái này năm đồng.",
+            "Cái này năm ly.",
+            "Cái này năm cái."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Câu '請問這道菜要多少塊錢呢？' có nghĩa là gì?",
+          "options": [
+            "Xin hỏi món này giá bao nhiều tiền ạ?",
+            "Xin hỏi món này có bao nhiêu miếng?",
+            "Xin hỏi món này nặng bao nhiêu kg?",
+            "Xin hỏi món này mất bao lâu để làm?"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "question": "Câu '我買了一塊蛋糕跟朋友分享' có nghĩa là gì?",
+          "options": [
+            "Tôi mua một cái bánh ngọt để chia sẻ với bạn.",
+            "Tôi mua một hộp bánh ngọt để chia sẻ với bạn.",
+            "Tôi mua một miếng bánh ngọt để chia sẻ với bạn.",
+            "Tôi làm một miếng bánh ngọt để chia sẻ với bạn."
+          ],
+          "correctAnswer": 2
+        },
+        {
+          "question": "Chữ Hán nào có nghĩa là 'đồng, miếng, khối'?",
+          "options": [
+            "塊",
+            "快",
+            "客",
+            "筷",
+            "課"
+          ],
+          "correctAnswer": 0
+        }
+      ],
+      "allForms": "塊"
+    }
+  ]
+}

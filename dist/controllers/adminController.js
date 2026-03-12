@@ -747,7 +747,7 @@ exports.getAdminActivities = getAdminActivities;
 // Get all data for admin management
 const getAllVocabularies = async (req, res) => {
     try {
-        const { page = 1, limit = 10, search, level, topic } = req.query;
+        const { page = 1, limit = 10, search, level, topic, dateFrom, dateTo } = req.query;
         let query = {};
         if (search) {
             query.$or = [
@@ -759,6 +759,16 @@ const getAllVocabularies = async (req, res) => {
             query.level = level;
         if (topic)
             query.topics = topic;
+        if (dateFrom || dateTo) {
+            query.createdAt = {};
+            if (dateFrom)
+                query.createdAt.$gte = new Date(dateFrom);
+            if (dateTo) {
+                const end = new Date(dateTo);
+                end.setHours(23, 59, 59, 999);
+                query.createdAt.$lte = end;
+            }
+        }
         const vocabularies = await Vocabulary_1.default.find(query)
             .populate('topics', 'name color')
             .limit(limit * 1)
