@@ -343,7 +343,7 @@ export const getAISuggestions = async (req: any, res: Response) => {
 
 export const getVocabulariesByCategories = async (req: Request, res: Response) => {
   try {
-    const { categories, search, limit = 50 } = req.query as any
+    const { categories, search, limit = 20, page = 1 } = req.query as any
 
     if (!categories) {
       return res.status(400).json({ message: 'Vui lòng chọn ít nhất một danh mục' })
@@ -356,7 +356,8 @@ export const getVocabulariesByCategories = async (req: Request, res: Response) =
       query.$or = [
         { word: { $regex: search, $options: 'i' } },
         { meaning: { $regex: search, $options: 'i' } },
-        { pronunciation: { $regex: search, $options: 'i' } }
+        { pronunciation: { $regex: search, $options: 'i' } },
+        { pinyin: { $regex: search, $options: 'i' } }
       ]
     }
 
@@ -364,11 +365,16 @@ export const getVocabulariesByCategories = async (req: Request, res: Response) =
     const categoryArray = categories.split(',').map((c: string) => c.trim())
     query.topics = { $in: categoryArray }
 
+    const skipIndex = (Number(page) - 1) * Number(limit)
+
     const vocabularies = await Vocabulary.find(query)
+      .skip(skipIndex)
       .limit(Number(limit))
       .sort({ level: 1, createdAt: -1 })
+      
+    const total = await Vocabulary.countDocuments(query)
 
-    res.json({ vocabularies })
+    res.json({ vocabularies, total })
   } catch (error) {
     console.error('Error fetching vocabularies by categories:', error)
     res.status(500).json({ message: 'Không thể tải từ vựng theo danh mục' })

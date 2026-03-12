@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authorize = exports.authenticate = void 0;
+exports.authorizeReviewerOrAdmin = exports.authorize = exports.authenticate = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = __importDefault(require("../models/User"));
 const authenticate = async (req, res, next) => {
@@ -42,3 +42,15 @@ const authorize = (...roles) => {
     };
 };
 exports.authorize = authorize;
+const authorizeReviewerOrAdmin = () => {
+    return (req, res, next) => {
+        if (!req.user) {
+            return res.status(401).json({ message: 'Not authenticated' });
+        }
+        if (req.user.role !== 'admin' && !req.user.isReviewer) {
+            return res.status(403).json({ message: 'Not authorized for reviewing' });
+        }
+        next();
+    };
+};
+exports.authorizeReviewerOrAdmin = authorizeReviewerOrAdmin;

@@ -18,10 +18,18 @@
     "seed:all": "npm run seed:data && npm run seed:advanced && npm run seed:admin",
     "seed:full": "npm run seed:data && npm run seed:advanced",
     "delete:user-competitions": "ts-node src/scripts/deleteUserCompetitions.ts",
+    "seed:tocfl": "ts-node scripts/seedTocflVocabulary.ts",
+    "seed:tocfl-ai": "ts-node scripts/seedTocflVocabularyAI.ts",
+    "fix:shuffle-questions": "ts-node scripts/reshuffleVocabularyQuestions.ts",
+    "export:tocfl-words": "ts-node scripts/exportTocflWords.ts",
+    "import:tocfl": "ts-node scripts/importTocflToDb.ts",
+    "import:tocfl-progress": "ts-node scripts/importTocflProgress.ts",
     "test": "jest"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
     "@genkit-ai/flow": "^0.5.17",
+    "@google/genai": "^1.44.0",
     "@types/xlsx": "^0.0.35",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.0",
@@ -36,6 +44,8 @@
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemailer": "^6.9.7",
+    "pinyin": "^4.0.0",
+    "pinyin-zhuyin": "^1.0.4",
     "xlsx": "^0.18.5",
     "zod": "^3.25.76"
   },

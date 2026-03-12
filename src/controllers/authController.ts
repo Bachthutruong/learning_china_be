@@ -48,7 +48,8 @@ export const register = async (req: Request, res: Response) => {
         level: user.level,
         experience: user.experience,
         coins: user.coins,
-        streak: user.streak
+        streak: user.streak,
+        isReviewer: user.isReviewer
       }
     });
   } catch (error) {
@@ -91,7 +92,8 @@ export const login = async (req: Request, res: Response) => {
         level: user.level,
         experience: user.experience,
         coins: user.coins,
-        streak: user.streak
+        streak: user.streak,
+        isReviewer: user.isReviewer
       }
     });
   } catch (error) {

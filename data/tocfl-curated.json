@@ -1,0 +1,695 @@
+{
+  "啊": {
+    "examples": [
+      { "taiwan": "好漂亮啊！", "pinyin": "Hǎo piàoliang a!", "nghia": "Đẹp quá!" },
+      { "taiwan": "真的啊？", "pinyin": "Zhēn de a?", "nghia": "Thật vậy à?" },
+      { "taiwan": "快點啊！", "pinyin": "Kuài diǎn a!", "nghia": "Nhanh lên đi!" }
+    ],
+    "synonyms": "呀 (ya), 喔 (ō)",
+    "antonyms": ""
+  },
+  "愛": {
+    "examples": [
+      { "taiwan": "我愛我的家人。", "pinyin": "Wǒ ài wǒ de jiārén.", "nghia": "Tôi yêu gia đình tôi." },
+      { "taiwan": "他很愛吃台灣小吃。", "pinyin": "Tā hěn ài chī Táiwān xiǎochī.", "nghia": "Anh ấy rất thích ăn món ăn vặt Đài Loan." },
+      { "taiwan": "爸爸媽媽都愛我們。", "pinyin": "Bàba māma dōu ài wǒmen.", "nghia": "Bố mẹ đều yêu chúng ta." }
+    ],
+    "synonyms": "喜歡 (xǐhuan), 喜愛 (xǐ'ài)",
+    "antonyms": "恨 (hèn)"
+  },
+  "矮": {
+    "examples": [
+      { "taiwan": "他很高，我比較矮。", "pinyin": "Tā hěn gāo, wǒ bǐjiào ǎi.", "nghia": "Anh ấy cao, tôi thấp hơn." },
+      { "taiwan": "弟弟比我矮一點。", "pinyin": "Dìdi bǐ wǒ ǎi yīdiǎn.", "nghia": "Em trai thấp hơn tôi một chút." },
+      { "taiwan": "這張桌子太矮了。", "pinyin": "Zhè zhāng zhuōzi tài ǎi le.", "nghia": "Cái bàn này quá thấp." }
+    ],
+    "synonyms": "低 (dī), 矮小 (ǎixiǎo)",
+    "antonyms": "高 (gāo)"
+  },
+  "安靜": {
+    "examples": [
+      { "taiwan": "圖書館很安靜。", "pinyin": "Túshūguǎn hěn ānjìng.", "nghia": "Thư viện rất yên tĩnh." },
+      { "taiwan": "請保持安靜。", "pinyin": "Qǐng bǎochí ānjìng.", "nghia": "Xin giữ yên lặng." },
+      { "taiwan": "他喜歡安靜的地方。", "pinyin": "Tā xǐhuan ānjìng de dìfāng.", "nghia": "Anh ấy thích nơi yên tĩnh." }
+    ],
+    "synonyms": "寧靜 (níngjìng), 清靜 (qīngjìng)",
+    "antonyms": "吵鬧 (chǎonào), 吵 (chǎo)"
+  },
+  "安排": {
+    "examples": [
+      { "taiwan": "老師幫學生安排座位。", "pinyin": "Lǎoshī bāng xuéshēng ānpái zuòwèi.", "nghia": "Giáo viên sắp xếp chỗ ngồi cho học sinh." },
+      { "taiwan": "我們已經安排好行程了。", "pinyin": "Wǒmen yǐjīng ānpái hǎo xíngchéng le.", "nghia": "Chúng tôi đã sắp xếp xong lịch trình." },
+      { "taiwan": "請你安排一下明天的會議。", "pinyin": "Qǐng nǐ ānpái yīxià míngtiān de huìyì.", "nghia": "Bạn sắp xếp cuộc họp ngày mai giúp." }
+    ],
+    "synonyms": "籌劃 (chóuhuà), 規劃 (guīhuà)",
+    "antonyms": "打亂 (dǎluàn)"
+  },
+  "安全": {
+    "examples": [
+      { "taiwan": "騎車要戴安全帽，注意安全。", "pinyin": "Qí chē yào dài ānquán mào, zhùyì ānquán.", "nghia": "Đi xe phải đội mũ bảo hiểm, chú ý an toàn." },
+      { "taiwan": "這裡很安全，不用擔心。", "pinyin": "Zhèlǐ hěn ānquán, bùyòng dānxīn.", "nghia": "Ở đây rất an toàn, đừng lo." },
+      { "taiwan": "安全第一。", "pinyin": "Ānquán dìyī.", "nghia": "An toàn là trên hết." }
+    ],
+    "synonyms": "平安 (píng'ān), 安穩 (ānwěn)",
+    "antonyms": "危險 (wēixiǎn)"
+  },
+  "安全帽": {
+    "examples": [
+      { "taiwan": "騎機車必須戴安全帽。", "pinyin": "Qí jīchē bìxū dài ānquán mào.", "nghia": "Đi xe máy bắt buộc phải đội mũ bảo hiểm." },
+      { "taiwan": "他把安全帽放在車廂裡。", "pinyin": "Tā bǎ ānquán mào fàng zài chēxiāng lǐ.", "nghia": "Anh ấy để mũ bảo hiểm trong cốp xe." },
+      { "taiwan": "這頂安全帽太小了。", "pinyin": "Zhè dǐng ānquán mào tài xiǎo le.", "nghia": "Chiếc mũ bảo hiểm này quá nhỏ." }
+    ],
+    "synonyms": "頭盔 (tóukuī)",
+    "antonyms": ""
+  },
+  "安全門": {
+    "examples": [
+      { "taiwan": "火災時請走安全門。", "pinyin": "Huǒzāi shí qǐng zǒu ānquánmén.", "nghia": "Khi có hỏa hoạn xin đi cửa thoát hiểm." },
+      { "taiwan": "安全門在樓梯旁邊。", "pinyin": "Ānquánmén zài lóutī pángbiān.", "nghia": "Cửa thoát hiểm ở cạnh cầu thang." },
+      { "taiwan": "請勿阻塞安全門。", "pinyin": "Qǐng wù zǔsè ānquánmén.", "nghia": "Xin đừng chặn cửa thoát hiểm." }
+    ],
+    "synonyms": "逃生門 (táoshēngmén)",
+    "antonyms": ""
+  },
+  "阿姨": {
+    "examples": [
+      { "taiwan": "阿姨今天來我們家。", "pinyin": "Āyí jīntiān lái wǒmen jiā.", "nghia": "Dì hôm nay đến nhà chúng tôi." },
+      { "taiwan": "我阿姨住在台北。", "pinyin": "Wǒ āyí zhù zài Táiběi.", "nghia": "Dì tôi sống ở Đài Bắc." },
+      { "taiwan": "小朋友叫媽媽的妹妹「阿姨」。", "pinyin": "Xiǎopéngyou jiào māma de mèimei \"āyí\".", "nghia": "Trẻ con gọi em gái của mẹ là \"dì\"." }
+    ],
+    "synonyms": "姨媽 (yímā), 姑姑 (gūgu)",
+    "antonyms": "叔叔 (shūshu), 伯伯 (bóbo)"
+  },
+  "吧": {
+    "examples": [
+      { "taiwan": "我們走吧！", "pinyin": "Wǒmen zǒu ba!", "nghia": "Chúng ta đi thôi!" },
+      { "taiwan": "一起去吃飯吧。", "pinyin": "Yīqǐ qù chīfàn ba.", "nghia": "Cùng đi ăn cơm nhé." },
+      { "taiwan": "應該沒問題吧？", "pinyin": "Yīnggāi méi wèntí ba?", "nghia": "Chắc không có vấn đề chứ?" }
+    ],
+    "synonyms": "嘛 (ma), 啊 (a)",
+    "antonyms": ""
+  },
+  "把": {
+    "examples": [
+      { "taiwan": "請把書放在桌上。", "pinyin": "Qǐng bǎ shū fàng zài zhuō shàng.", "nghia": "Xin đặt sách lên bàn." },
+      { "taiwan": "他把門打開了。", "pinyin": "Tā bǎ mén dǎkāi le.", "nghia": "Anh ấy đã mở cửa." },
+      { "taiwan": "媽媽把房間打掃乾淨了。", "pinyin": "Māma bǎ fángjiān dǎsǎo gānjìng le.", "nghia": "Mẹ đã dọn phòng sạch sẽ." }
+    ],
+    "synonyms": "將 (jiāng)",
+    "antonyms": ""
+  },
+  "八": {
+    "examples": [
+      { "taiwan": "現在八點了。", "pinyin": "Xiànzài bā diǎn le.", "nghia": "Bây giờ là tám giờ." },
+      { "taiwan": "我買了八個蘋果。", "pinyin": "Wǒ mǎi le bā gè píngguǒ.", "nghia": "Tôi đã mua tám quả táo." },
+      { "taiwan": "八月是暑假。", "pinyin": "Bāyuè shì shǔjià.", "nghia": "Tháng tám là kỳ nghỉ hè." }
+    ],
+    "synonyms": "捌 (bā)",
+    "antonyms": ""
+  },
+  "爸爸": {
+    "examples": [
+      { "taiwan": "我爸爸是工程師。", "pinyin": "Wǒ bàba shì gōngchéngshī.", "nghia": "Bố tôi là kỹ sư." },
+      { "taiwan": "爸爸媽媽都很愛我們。", "pinyin": "Bàba māma dōu hěn ài wǒmen.", "nghia": "Bố mẹ đều rất yêu chúng tôi." },
+      { "taiwan": "爸爸下班回來了。", "pinyin": "Bàba xiàbān huílái le.", "nghia": "Bố đi làm về rồi." }
+    ],
+    "synonyms": "父親 (fùqīn), 爹 (diē)",
+    "antonyms": "媽媽 (māma)"
+  },
+  "百": {
+    "examples": [
+      { "taiwan": "這本書一百塊。", "pinyin": "Zhè běn shū yībǎi kuài.", "nghia": "Cuốn sách này một trăm đồng." },
+      { "taiwan": "百貨公司有很多東西。", "pinyin": "Bǎihuò gōngsī yǒu hěnduō dōngxi.", "nghia": "Trung tâm thương mại có rất nhiều đồ." },
+      { "taiwan": "百分之八十的人同意。", "pinyin": "Bǎifēnzhī bāshí de rén tóngyì.", "nghia": "Tám mươi phần trăm người đồng ý." }
+    ],
+    "synonyms": "佰 (bǎi)",
+    "antonyms": ""
+  },
+  "百貨公司": {
+    "examples": [
+      { "taiwan": "我們去百貨公司逛街吧。", "pinyin": "Wǒmen qù bǎihuò gōngsī guàngjiē ba.", "nghia": "Chúng ta đi trung tâm thương mại dạo phố nhé." },
+      { "taiwan": "百貨公司週年慶打折。", "pinyin": "Bǎihuò gōngsī zhōunián qìng dǎzhé.", "nghia": "Trung tâm thương mại giảm giá dịp kỷ niệm." },
+      { "taiwan": "這家百貨公司很大。", "pinyin": "Zhè jiā bǎihuò gōngsī hěn dà.", "nghia": "Trung tâm thương mại này rất lớn." }
+    ],
+    "synonyms": "商場 (shāngchǎng), 購物中心 (gòuwù zhōngxīn)",
+    "antonyms": ""
+  },
+  "白色": {
+    "examples": [
+      { "taiwan": "她穿白色的裙子。", "pinyin": "Tā chuān báisè de qúnzi.", "nghia": "Cô ấy mặc váy màu trắng." },
+      { "taiwan": "我喜歡白色的牆。", "pinyin": "Wǒ xǐhuan báisè de qiáng.", "nghia": "Tôi thích tường màu trắng." },
+      { "taiwan": "這件白色襯衫很漂亮。", "pinyin": "Zhè jiàn báisè chènshān hěn piàoliang.", "nghia": "Chiếc áo sơ mi trắng này rất đẹp." }
+    ],
+    "synonyms": "白 (bái)",
+    "antonyms": "黑色 (hēisè)"
+  },
+  "半": {
+    "examples": [
+      { "taiwan": "我吃了半個包子。", "pinyin": "Wǒ chī le bàn gè bāozi.", "nghia": "Tôi đã ăn nửa cái bánh bao." },
+      { "taiwan": "現在十二點半。", "pinyin": "Xiànzài shí'èr diǎn bàn.", "nghia": "Bây giờ là mười hai rưỡi." },
+      { "taiwan": "半價優惠。", "pinyin": "Bànjià yōuhuì.", "nghia": "Giảm giá một nửa." }
+    ],
+    "synonyms": "一半 (yībàn)",
+    "antonyms": "全 (quán)"
+  },
+  "辦": {
+    "examples": [
+      { "taiwan": "這件事我來辦。", "pinyin": "Zhè jiàn shì wǒ lái bàn.", "nghia": "Việc này để tôi lo." },
+      { "taiwan": "他正在辦簽證。", "pinyin": "Tā zhèngzài bàn qiānzhèng.", "nghia": "Anh ấy đang làm thủ tục visa." },
+      { "taiwan": "怎麼辦？", "pinyin": "Zěnme bàn?", "nghia": "Làm sao đây?" }
+    ],
+    "synonyms": "處理 (chǔlǐ), 辦理 (bànlǐ)",
+    "antonyms": ""
+  },
+  "搬": {
+    "examples": [
+      { "taiwan": "請幫我搬這張桌子。", "pinyin": "Qǐng bāng wǒ bān zhè zhāng zhuōzi.", "nghia": "Xin giúp tôi khiêng cái bàn này." },
+      { "taiwan": "我們下個月要搬家。", "pinyin": "Wǒmen xià gè yuè yào bānjiā.", "nghia": "Tháng sau chúng tôi sẽ chuyển nhà." },
+      { "taiwan": "他把書從書架搬下來。", "pinyin": "Tā bǎ shū cóng shūjià bān xiàlái.", "nghia": "Anh ấy lấy sách từ giá xuống." }
+    ],
+    "synonyms": "移 (yí), 搬運 (bānyùn)",
+    "antonyms": ""
+  },
+  "班": {
+    "examples": [
+      { "taiwan": "我們班有三十個學生。", "pinyin": "Wǒmen bān yǒu sānshí gè xuéshēng.", "nghia": "Lớp chúng tôi có ba mươi học sinh." },
+      { "taiwan": "他上晚班。", "pinyin": "Tā shàng wǎnbān.", "nghia": "Anh ấy làm ca tối." },
+      { "taiwan": "下一班公車什麼時候來？", "pinyin": "Xià yī bān gōngchē shénme shíhou lái?", "nghia": "Chuyến xe buýt tiếp theo khi nào đến?" }
+    ],
+    "synonyms": "班級 (bānjí), 課 (kè)",
+    "antonyms": ""
+  },
+  "辦法": {
+    "examples": [
+      { "taiwan": "總會有辦法的。", "pinyin": "Zǒng huì yǒu bànfǎ de.", "nghia": "Rồi sẽ có cách thôi." },
+      { "taiwan": "你有什麼好辦法嗎？", "pinyin": "Nǐ yǒu shénme hǎo bànfǎ ma?", "nghia": "Bạn có cách nào hay không?" },
+      { "taiwan": "這是唯一的辦法。", "pinyin": "Zhè shì wéiyī de bànfǎ.", "nghia": "Đây là cách duy nhất." }
+    ],
+    "synonyms": "方法 (fāngfǎ), 方式 (fāngshì)",
+    "antonyms": ""
+  },
+  "棒": {
+    "examples": [
+      { "taiwan": "你做得真棒！", "pinyin": "Nǐ zuò de zhēn bàng!", "nghia": "Bạn làm thật tuyệt!" },
+      { "taiwan": "這家餐廳的菜很棒。", "pinyin": "Zhè jiā cāntīng de cài hěn bàng.", "nghia": "Món ăn nhà hàng này rất ngon." },
+      { "taiwan": "他打棒球打得很棒。", "pinyin": "Tā dǎ bàngqiú dǎ de hěn bàng.", "nghia": "Anh ấy chơi bóng chày rất giỏi." }
+    ],
+    "synonyms": "好 (hǎo), 厲害 (lìhài)",
+    "antonyms": "差 (chà)"
+  },
+  "幫": {
+    "examples": [
+      { "taiwan": "請幫我開門。", "pinyin": "Qǐng bāng wǒ kāi mén.", "nghia": "Xin giúp tôi mở cửa." },
+      { "taiwan": "謝謝你幫我。", "pinyin": "Xièxiè nǐ bāng wǒ.", "nghia": "Cảm ơn bạn đã giúp tôi." },
+      { "taiwan": "我可以幫你嗎？", "pinyin": "Wǒ kěyǐ bāng nǐ ma?", "nghia": "Tôi có thể giúp bạn không?" }
+    ],
+    "synonyms": "幫助 (bāngzhù), 幫忙 (bāngmáng)",
+    "antonyms": ""
+  },
+  "幫忙": {
+    "examples": [
+      { "taiwan": "需要幫忙嗎？", "pinyin": "Xūyào bāngmáng ma?", "nghia": "Cần giúp đỡ không?" },
+      { "taiwan": "他常常幫忙做家事。", "pinyin": "Tā chángcháng bāngmáng zuò jiāshì.", "nghia": "Anh ấy thường giúp làm việc nhà." },
+      { "taiwan": "謝謝你的幫忙。", "pinyin": "Xièxiè nǐ de bāngmáng.", "nghia": "Cảm ơn sự giúp đỡ của bạn." }
+    ],
+    "synonyms": "幫助 (bāngzhù), 幫 (bāng)",
+    "antonyms": ""
+  },
+  "辦公室": {
+    "examples": [
+      { "taiwan": "我的辦公室在五樓。", "pinyin": "Wǒ de bàngōngshì zài wǔ lóu.", "nghia": "Văn phòng tôi ở tầng năm." },
+      { "taiwan": "他每天九點到辦公室。", "pinyin": "Tā měitiān jiǔ diǎn dào bàngōngshì.", "nghia": "Mỗi ngày anh ấy chín giờ đến văn phòng." },
+      { "taiwan": "辦公室裡很安靜。", "pinyin": "Bàngōngshì lǐ hěn ānjìng.", "nghia": "Trong văn phòng rất yên tĩnh." }
+    ],
+    "synonyms": "辦公室 (bàngōngshì), 公司 (gōngsī)",
+    "antonyms": ""
+  },
+  "棒球": {
+    "examples": [
+      { "taiwan": "他喜歡打棒球。", "pinyin": "Tā xǐhuan dǎ bàngqiú.", "nghia": "Anh ấy thích chơi bóng chày." },
+      { "taiwan": "我們去看棒球比賽吧。", "pinyin": "Wǒmen qù kàn bàngqiú bǐsài ba.", "nghia": "Chúng ta đi xem trận bóng chày nhé." },
+      { "taiwan": "台灣的棒球很厲害。", "pinyin": "Táiwān de bàngqiú hěn lìhài.", "nghia": "Bóng chày Đài Loan rất mạnh." }
+    ],
+    "synonyms": "野球 (yěqiú)",
+    "antonyms": ""
+  },
+  "幫助": {
+    "examples": [
+      { "taiwan": "謝謝你的幫助。", "pinyin": "Xièxiè nǐ de bāngzhù.", "nghia": "Cảm ơn sự giúp đỡ của bạn." },
+      { "taiwan": "他需要幫助。", "pinyin": "Tā xūyào bāngzhù.", "nghia": "Anh ấy cần giúp đỡ." },
+      { "taiwan": "我可以幫助你。", "pinyin": "Wǒ kěyǐ bāngzhù nǐ.", "nghia": "Tôi có thể giúp bạn." }
+    ],
+    "synonyms": "幫忙 (bāngmáng), 幫 (bāng)",
+    "antonyms": ""
+  },
+  "搬家": {
+    "examples": [
+      { "taiwan": "我們下個月要搬家。", "pinyin": "Wǒmen xià gè yuè yào bānjiā.", "nghia": "Tháng sau chúng tôi sẽ chuyển nhà." },
+      { "taiwan": "搬家很累。", "pinyin": "Bānjiā hěn lèi.", "nghia": "Chuyển nhà rất mệt." },
+      { "taiwan": "他搬家到台北了。", "pinyin": "Tā bānjiā dào Táiběi le.", "nghia": "Anh ấy đã chuyển nhà đến Đài Bắc." }
+    ],
+    "synonyms": "遷居 (qiānjū)",
+    "antonyms": ""
+  },
+  "半夜": {
+    "examples": [
+      { "taiwan": "他半夜才回家。", "pinyin": "Tā bànyè cái huí jiā.", "nghia": "Anh ấy nửa đêm mới về nhà." },
+      { "taiwan": "半夜不要出門。", "pinyin": "Bànyè bùyào chūmén.", "nghia": "Nửa đêm đừng ra ngoài." },
+      { "taiwan": "我半夜醒來了。", "pinyin": "Wǒ bànyè xǐnglái le.", "nghia": "Tôi nửa đêm thức dậy." }
+    ],
+    "synonyms": "半夜三更 (bànyè sāngēng)",
+    "antonyms": ""
+  },
+  "抱": {
+    "examples": [
+      { "taiwan": "媽媽抱著寶寶。", "pinyin": "Māma bào zhe bǎobao.", "nghia": "Mẹ đang bế em bé." },
+      { "taiwan": "他抱了很多書。", "pinyin": "Tā bào le hěnduō shū.", "nghia": "Anh ấy ôm rất nhiều sách." },
+      { "taiwan": "請抱抱我。", "pinyin": "Qǐng bào bào wǒ.", "nghia": "Xin ôm tôi đi." }
+    ],
+    "synonyms": "摟 (lǒu), 擁抱 (yōngbào)",
+    "antonyms": ""
+  },
+  "飽": {
+    "examples": [
+      { "taiwan": "我吃飽了。", "pinyin": "Wǒ chībǎo le.", "nghia": "Tôi ăn no rồi." },
+      { "taiwan": "你吃飽了嗎？", "pinyin": "Nǐ chībǎo le ma?", "nghia": "Bạn ăn no chưa?" },
+      { "taiwan": "這頓飯吃得很飽。", "pinyin": "Zhè dùn fàn chī de hěn bǎo.", "nghia": "Bữa này ăn rất no." }
+    ],
+    "synonyms": "飽足 (bǎozú)",
+    "antonyms": "餓 (è)"
+  },
+  "包": {
+    "examples": [
+      { "taiwan": "我買了一個新包。", "pinyin": "Wǒ mǎi le yī gè xīn bāo.", "nghia": "Tôi đã mua một cái túi mới." },
+      { "taiwan": "請把東西包起來。", "pinyin": "Qǐng bǎ dōngxi bāo qǐlái.", "nghia": "Xin gói đồ lại." },
+      { "taiwan": "這個包多少錢？", "pinyin": "Zhè gè bāo duōshǎo qián?", "nghia": "Cái túi này bao nhiêu tiền?" }
+    ],
+    "synonyms": "袋子 (dàizi), 包包 (bāobāo)",
+    "antonyms": ""
+  },
+  "報告": {
+    "examples": [
+      { "taiwan": "請交報告。", "pinyin": "Qǐng jiāo bàogào.", "nghia": "Xin nộp báo cáo." },
+      { "taiwan": "他正在寫報告。", "pinyin": "Tā zhèngzài xiě bàogào.", "nghia": "Anh ấy đang viết báo cáo." },
+      { "taiwan": "經理要聽我們的報告。", "pinyin": "Jīnglǐ yào tīng wǒmen de bàogào.", "nghia": "Giám đốc muốn nghe báo cáo của chúng tôi." }
+    ],
+    "synonyms": "匯報 (huìbào), 報告 (bàogào)",
+    "antonyms": ""
+  },
+  "包含": {
+    "examples": [
+      { "taiwan": "學費包含書本費。", "pinyin": "Xuéfèi bāohán shūběn fèi.", "nghia": "Học phí bao gồm tiền sách." },
+      { "taiwan": "這個套餐包含飲料。", "pinyin": "Zhè gè tàocān bāohán yǐnliào.", "nghia": "Combo này có kèm đồ uống." },
+      { "taiwan": "價格包含稅。", "pinyin": "Jiàgé bāohán shuì.", "nghia": "Giá đã bao gồm thuế." }
+    ],
+    "synonyms": "包括 (bāokuò), 包含 (bāohán)",
+    "antonyms": "排除 (páichú)"
+  },
+  "保護": {
+    "examples": [
+      { "taiwan": "我們要保護環境。", "pinyin": "Wǒmen yào bǎohù huánjìng.", "nghia": "Chúng ta cần bảo vệ môi trường." },
+      { "taiwan": "警察保護人民。", "pinyin": "Jǐngchá bǎohù rénmín.", "nghia": "Cảnh sát bảo vệ nhân dân." },
+      { "taiwan": "請保護好你的證件。", "pinyin": "Qǐng bǎohù hǎo nǐ de zhèngjiàn.", "nghia": "Xin bảo vệ giấy tờ của bạn cẩn thận." }
+    ],
+    "synonyms": "維護 (wéihù), 守護 (shǒuhù)",
+    "antonyms": "傷害 (shānghài)"
+  },
+  "抱歉": {
+    "examples": [
+      { "taiwan": "抱歉，我來晚了。", "pinyin": "Bàoqiàn, wǒ lái wǎn le.", "nghia": "Xin lỗi, tôi đến muộn." },
+      { "taiwan": "非常抱歉。", "pinyin": "Fēicháng bàoqiàn.", "nghia": "Rất xin lỗi." },
+      { "taiwan": "他對大家說抱歉。", "pinyin": "Tā duì dàjiā shuō bàoqiàn.", "nghia": "Anh ấy xin lỗi mọi người." }
+    ],
+    "synonyms": "對不起 (duìbùqǐ), 不好意思 (bùhǎoyìsi)",
+    "antonyms": ""
+  },
+  "報紙": {
+    "examples": [
+      { "taiwan": "爸爸每天看報紙。", "pinyin": "Bàba měitiān kàn bàozhǐ.", "nghia": "Bố mỗi ngày đọc báo." },
+      { "taiwan": "報紙上有什麼新聞？", "pinyin": "Bàozhǐ shàng yǒu shénme xīnwén?", "nghia": "Trên báo có tin gì?" },
+      { "taiwan": "請給我一份報紙。", "pinyin": "Qǐng gěi wǒ yī fèn bàozhǐ.", "nghia": "Cho tôi một tờ báo." }
+    ],
+    "synonyms": "報 (bào)",
+    "antonyms": ""
+  },
+  "包子": {
+    "examples": [
+      { "taiwan": "我早餐吃兩個包子。", "pinyin": "Wǒ zǎocān chī liǎng gè bāozi.", "nghia": "Tôi ăn sáng hai cái bánh bao." },
+      { "taiwan": "這家店的包子很好吃。", "pinyin": "Zhè jiā diàn de bāozi hěn hǎochī.", "nghia": "Bánh bao tiệm này rất ngon." },
+      { "taiwan": "肉包和菜包都不錯。", "pinyin": "Ròubāo hé càibāo dōu bùcuò.", "nghia": "Bánh bao thịt và bánh bao rau đều ngon." }
+    ],
+    "synonyms": "饅頭 (mántou)",
+    "antonyms": ""
+  },
+  "被": {
+    "examples": [
+      { "taiwan": "他被老師批評了。", "pinyin": "Tā bèi lǎoshī pīpíng le.", "nghia": "Anh ấy bị giáo viên phê bình." },
+      { "taiwan": "書被拿走了。", "pinyin": "Shū bèi ná zǒu le.", "nghia": "Sách đã bị lấy đi." },
+      { "taiwan": "我被他嚇了一跳。", "pinyin": "Wǒ bèi tā xià le yī tiào.", "nghia": "Tôi bị anh ấy làm giật mình." }
+    ],
+    "synonyms": "讓 (ràng), 給 (gěi)",
+    "antonyms": ""
+  },
+  "北": {
+    "examples": [
+      { "taiwan": "台北在台灣的北部。", "pinyin": "Táiběi zài Táiwān de běibù.", "nghia": "Đài Bắc ở phía bắc Đài Loan." },
+      { "taiwan": "北京是中國的首都。", "pinyin": "Běijīng shì Zhōngguó de shǒudū.", "nghia": "Bắc Kinh là thủ đô Trung Quốc." },
+      { "taiwan": "往北走。", "pinyin": "Wǎng běi zǒu.", "nghia": "Đi về hướng bắc." }
+    ],
+    "synonyms": "北方 (běifāng)",
+    "antonyms": "南 (nán)"
+  },
+  "杯": {
+    "examples": [
+      { "taiwan": "請給我一杯水。", "pinyin": "Qǐng gěi wǒ yī bēi shuǐ.", "nghia": "Cho tôi một ly nước." },
+      { "taiwan": "這杯茶很好喝。", "pinyin": "Zhè bēi chá hěn hǎo hē.", "nghia": "Ly trà này rất ngon." },
+      { "taiwan": "他喝了三杯咖啡。", "pinyin": "Tā hē le sān bēi kāfēi.", "nghia": "Anh ấy đã uống ba ly cà phê." }
+    ],
+    "synonyms": "杯子 (bēizi), 盃 (bēi)",
+    "antonyms": ""
+  },
+  "杯子": {
+    "examples": [
+      { "taiwan": "這個杯子是我的。", "pinyin": "Zhè gè bēizi shì wǒ de.", "nghia": "Cái ly này là của tôi." },
+      { "taiwan": "請把杯子洗乾淨。", "pinyin": "Qǐng bǎ bēizi xǐ gānjìng.", "nghia": "Xin rửa ly sạch sẽ." },
+      { "taiwan": "他打破了一個杯子。", "pinyin": "Tā dǎpò le yī gè bēizi.", "nghia": "Anh ấy làm vỡ một cái ly." }
+    ],
+    "synonyms": "杯 (bēi), 盃 (bēi)",
+    "antonyms": ""
+  },
+  "本": {
+    "examples": [
+      { "taiwan": "我買了三本書。", "pinyin": "Wǒ mǎi le sān běn shū.", "nghia": "Tôi đã mua ba quyển sách." },
+      { "taiwan": "這本書很有趣。", "pinyin": "Zhè běn shū hěn yǒuqù.", "nghia": "Quyển sách này rất hay." },
+      { "taiwan": "請把本子借給我。", "pinyin": "Qǐng bǎ běnzi jiè gěi wǒ.", "nghia": "Cho tôi mượn quyển vở." }
+    ],
+    "synonyms": "冊 (cè), 書 (shū)",
+    "antonyms": ""
+  },
+  "筆": {
+    "examples": [
+      { "taiwan": "請借我一支筆。", "pinyin": "Qǐng jiè wǒ yī zhī bǐ.", "nghia": "Cho tôi mượn một cây bút." },
+      { "taiwan": "這支筆寫不出來了。", "pinyin": "Zhè zhī bǐ xiě bù chūlái le.", "nghia": "Cây bút này viết không ra mực." },
+      { "taiwan": "他用毛筆寫字。", "pinyin": "Tā yòng máobǐ xiě zì.", "nghia": "Anh ấy dùng bút lông viết chữ." }
+    ],
+    "synonyms": "筆 (bǐ)",
+    "antonyms": ""
+  },
+  "比": {
+    "examples": [
+      { "taiwan": "我比他高。", "pinyin": "Wǒ bǐ tā gāo.", "nghia": "Tôi cao hơn anh ấy." },
+      { "taiwan": "今天比昨天冷。", "pinyin": "Jīntiān bǐ zuótiān lěng.", "nghia": "Hôm nay lạnh hơn hôm qua." },
+      { "taiwan": "你比較喜歡哪一個？", "pinyin": "Nǐ bǐjiào xǐhuan nǎ yī gè?", "nghia": "Bạn thích cái nào hơn?" }
+    ],
+    "synonyms": "較 (jiào), 比較 (bǐjiào)",
+    "antonyms": ""
+  },
+  "變": {
+    "examples": [
+      { "taiwan": "天氣變冷了。", "pinyin": "Tiānqì biàn lěng le.", "nghia": "Thời tiết trở lạnh rồi." },
+      { "taiwan": "他變了很多。", "pinyin": "Tā biàn le hěnduō.", "nghia": "Anh ấy thay đổi rất nhiều." },
+      { "taiwan": "把錢變小鈔。", "pinyin": "Bǎ qián biàn xiǎo chāo.", "nghia": "Đổi tiền lẻ." }
+    ],
+    "synonyms": "改變 (gǎibiàn), 變化 (biànhuà)",
+    "antonyms": ""
+  },
+  "邊": {
+    "examples": [
+      { "taiwan": "請坐在我旁邊。", "pinyin": "Qǐng zuò zài wǒ pángbiān.", "nghia": "Xin ngồi bên cạnh tôi." },
+      { "taiwan": "桌子邊有一把椅子。", "pinyin": "Zhuōzi biān yǒu yī bǎ yǐzi.", "nghia": "Bên cạnh bàn có một cái ghế." },
+      { "taiwan": "河邊的風景很美。", "pinyin": "Hé biān de fēngjǐng hěn měi.", "nghia": "Phong cảnh bên sông rất đẹp." }
+    ],
+    "synonyms": "旁邊 (pángbiān), 側 (cè)",
+    "antonyms": ""
+  },
+  "錶": {
+    "examples": [
+      { "taiwan": "現在幾點？我的錶壞了。", "pinyin": "Xiànzài jǐ diǎn? Wǒ de biǎo huài le.", "nghia": "Bây giờ mấy giờ? Đồng hồ tôi hỏng rồi." },
+      { "taiwan": "他買了一隻新手錶。", "pinyin": "Tā mǎi le yī zhī xīn shǒubiǎo.", "nghia": "Anh ấy mua một chiếc đồng hồ mới." },
+      { "taiwan": "牆上掛著一個鐘錶。", "pinyin": "Qiáng shàng guà zhe yī gè zhōngbiǎo.", "nghia": "Trên tường treo một cái đồng hồ." }
+    ],
+    "synonyms": "手錶 (shǒubiǎo), 鐘錶 (zhōngbiǎo)",
+    "antonyms": ""
+  },
+  "表演": {
+    "examples": [
+      { "taiwan": "今晚有音樂表演。", "pinyin": "Jīn wǎn yǒu yīnyuè biǎoyǎn.", "nghia": "Tối nay có biểu diễn âm nhạc." },
+      { "taiwan": "他表演得很精彩。", "pinyin": "Tā biǎoyǎn de hěn jīngcǎi.", "nghia": "Anh ấy biểu diễn rất hay." },
+      { "taiwan": "學生們在台上表演。", "pinyin": "Xuéshēngmen zài táishàng biǎoyǎn.", "nghia": "Học sinh đang biểu diễn trên sân khấu." }
+    ],
+    "synonyms": "演出 (yǎnchū), 表演 (biǎoyǎn)",
+    "antonyms": ""
+  },
+  "病": {
+    "examples": [
+      { "taiwan": "他生病了。", "pinyin": "Tā shēngbìng le.", "nghia": "Anh ấy bị ốm rồi." },
+      { "taiwan": "你哪裡不舒服？病了嗎？", "pinyin": "Nǐ nǎlǐ bù shūfu? Bìng le ma?", "nghia": "Bạn chỗ nào không ổn? Bị bệnh à?" },
+      { "taiwan": "感冒是一種常見的病。", "pinyin": "Gǎnmào shì yī zhǒng chángjiàn de bìng.", "nghia": "Cảm cúm là bệnh thường gặp." }
+    ],
+    "synonyms": "疾病 (jíbìng), 病症 (bìngzhèng)",
+    "antonyms": "健康 (jiànkāng)"
+  },
+  "餅乾": {
+    "examples": [
+      { "taiwan": "我喜歡吃巧克力餅乾。", "pinyin": "Wǒ xǐhuan chī qiǎokèlì bǐnggān.", "nghia": "Tôi thích ăn bánh quy sô cô la." },
+      { "taiwan": "媽媽做了很多餅乾。", "pinyin": "Māma zuò le hěnduō bǐnggān.", "nghia": "Mẹ làm rất nhiều bánh quy." },
+      { "taiwan": "這包餅乾多少錢？", "pinyin": "Zhè bāo bǐnggān duōshǎo qián?", "nghia": "Gói bánh quy này bao nhiêu tiền?" }
+    ],
+    "synonyms": "曲奇 (qūqí)",
+    "antonyms": ""
+  },
+  "冰淇淋": {
+    "examples": [
+      { "taiwan": "夏天我喜歡吃冰淇淋。", "pinyin": "Xiàtiān wǒ xǐhuan chī bīngqílín.", "nghia": "Mùa hè tôi thích ăn kem." },
+      { "taiwan": "請給我一個冰淇淋。", "pinyin": "Qǐng gěi wǒ yī gè bīngqílín.", "nghia": "Cho tôi một cây kem." },
+      { "taiwan": "這家冰淇淋很好吃。", "pinyin": "Zhè jiā bīngqílín hěn hǎochī.", "nghia": "Kem tiệm này rất ngon." }
+    ],
+    "synonyms": "冰激凌 (bīngjīlíng), 雪糕 (xuěgāo)",
+    "antonyms": ""
+  },
+  "冰箱": {
+    "examples": [
+      { "taiwan": "請把牛奶放進冰箱。", "pinyin": "Qǐng bǎ niúnǎi fàng jìn bīngxiāng.", "nghia": "Xin cho sữa vào tủ lạnh." },
+      { "taiwan": "冰箱裡沒有東西了。", "pinyin": "Bīngxiāng lǐ méiyǒu dōngxi le.", "nghia": "Trong tủ lạnh không còn gì." },
+      { "taiwan": "我們需要買一個新冰箱。", "pinyin": "Wǒmen xūyào mǎi yī gè xīn bīngxiāng.", "nghia": "Chúng tôi cần mua tủ lạnh mới." }
+    ],
+    "synonyms": "冰櫃 (bīngguì)",
+    "antonyms": ""
+  },
+  "比賽": {
+    "examples": [
+      { "taiwan": "我們贏了比賽。", "pinyin": "Wǒmen yíng le bǐsài.", "nghia": "Chúng tôi thắng trận đấu." },
+      { "taiwan": "他參加了游泳比賽。", "pinyin": "Tā cānjiā le yóuyǒng bǐsài.", "nghia": "Anh ấy tham gia thi bơi." },
+      { "taiwan": "比賽什麼時候開始？", "pinyin": "Bǐsài shénme shíhou kāishǐ?", "nghia": "Trận đấu khi nào bắt đầu?" }
+    ],
+    "synonyms": "競賽 (jìngsài), 賽事 (sàishì)",
+    "antonyms": ""
+  },
+  "畢業": {
+    "examples": [
+      { "taiwan": "他今年大學畢業。", "pinyin": "Tā jīnnián dàxué bìyè.", "nghia": "Năm nay anh ấy tốt nghiệp đại học." },
+      { "taiwan": "恭喜你畢業了！", "pinyin": "Gōngxǐ nǐ bìyè le!", "nghia": "Chúc mừng bạn đã tốt nghiệp!" },
+      { "taiwan": "畢業典禮在下週。", "pinyin": "Bìyè diǎnlǐ zài xià zhōu.", "nghia": "Lễ tốt nghiệp vào tuần sau." }
+    ],
+    "synonyms": "結業 (jiéyè)",
+    "antonyms": "入學 (rùxué)"
+  },
+  "不": {
+    "examples": [
+      { "taiwan": "我不會說中文。", "pinyin": "Wǒ bù huì shuō Zhōngwén.", "nghia": "Tôi không biết nói tiếng Trung." },
+      { "taiwan": "他今天不來。", "pinyin": "Tā jīntiān bù lái.", "nghia": "Hôm nay anh ấy không đến." },
+      { "taiwan": "這不是我的。", "pinyin": "Zhè bù shì wǒ de.", "nghia": "Cái này không phải của tôi." }
+    ],
+    "synonyms": "沒 (méi), 勿 (wù)",
+    "antonyms": "是 (shì)"
+  },
+  "不錯": {
+    "examples": [
+      { "taiwan": "這家餐廳不錯。", "pinyin": "Zhè jiā cāntīng bùcuò.", "nghia": "Nhà hàng này không tệ." },
+      { "taiwan": "你中文說得不錯。", "pinyin": "Nǐ Zhōngwén shuō de bùcuò.", "nghia": "Bạn nói tiếng Trung khá tốt." },
+      { "taiwan": "今天天氣不錯。", "pinyin": "Jīntiān tiānqì bùcuò.", "nghia": "Hôm nay thời tiết khá đẹp." }
+    ],
+    "synonyms": "還好 (háihǎo), 可以 (kěyǐ)",
+    "antonyms": "很差 (hěn chà)"
+  },
+  "菜": {
+    "examples": [
+      { "taiwan": "媽媽去市場買菜。", "pinyin": "Māma qù shìchǎng mǎi cài.", "nghia": "Mẹ đi chợ mua rau." },
+      { "taiwan": "這道菜很好吃。", "pinyin": "Zhè dào cài hěn hǎochī.", "nghia": "Món này rất ngon." },
+      { "taiwan": "今天有什麼菜？", "pinyin": "Jīntiān yǒu shénme cài?", "nghia": "Hôm nay có món gì?" }
+    ],
+    "synonyms": "蔬菜 (shūcài), 料理 (liàolǐ)",
+    "antonyms": ""
+  },
+  "吃": {
+    "examples": [
+      { "taiwan": "我們一起去吃飯吧。", "pinyin": "Wǒmen yīqǐ qù chīfàn ba.", "nghia": "Chúng ta cùng đi ăn cơm nhé." },
+      { "taiwan": "你吃了嗎？", "pinyin": "Nǐ chī le ma?", "nghia": "Bạn ăn chưa?" },
+      { "taiwan": "我喜歡吃台灣小吃。", "pinyin": "Wǒ xǐhuan chī Táiwān xiǎochī.", "nghia": "Tôi thích ăn món ăn vặt Đài Loan." }
+    ],
+    "synonyms": "食 (shí), 用餐 (yòngcān)",
+    "antonyms": ""
+  },
+  "茶": {
+    "examples": [
+      { "taiwan": "請喝杯茶。", "pinyin": "Qǐng hē bēi chá.", "nghia": "Xin uống trà." },
+      { "taiwan": "台灣的珍珠奶茶很有名。", "pinyin": "Táiwān de zhēnzhū nǎichá hěn yǒumíng.", "nghia": "Trà sữa trân châu Đài Loan rất nổi tiếng." },
+      { "taiwan": "我喜歡喝綠茶。", "pinyin": "Wǒ xǐhuan hē lǜchá.", "nghia": "Tôi thích uống trà xanh." }
+    ],
+    "synonyms": "茶葉 (cháyè)",
+    "antonyms": ""
+  },
+  "車站": {
+    "examples": [
+      { "taiwan": "車站在哪裡？", "pinyin": "Chēzhàn zài nǎlǐ?", "nghia": "Ga tàu ở đâu?" },
+      { "taiwan": "我們在車站見面。", "pinyin": "Wǒmen zài chēzhàn jiànmiàn.", "nghia": "Chúng ta gặp nhau ở ga." },
+      { "taiwan": "下一班車什麼時候到車站？", "pinyin": "Xià yī bān chē shénme shíhou dào chēzhàn?", "nghia": "Chuyến xe tiếp theo khi nào đến ga?" }
+    ],
+    "synonyms": "站 (zhàn), 火車站 (huǒchēzhàn)",
+    "antonyms": ""
+  },
+  "床": {
+    "examples": [
+      { "taiwan": "我累了，想睡覺。床在哪裡？", "pinyin": "Wǒ lèi le, xiǎng shuìjiào. Chuáng zài nǎlǐ?", "nghia": "Tôi mệt, muốn ngủ. Giường ở đâu?" },
+      { "taiwan": "請把床鋪整理好。", "pinyin": "Qǐng bǎ chuángpù zhěnglǐ hǎo.", "nghia": "Xin dọn giường gọn gàng." },
+      { "taiwan": "這張床很舒服。", "pinyin": "Zhè zhāng chuáng hěn shūfu.", "nghia": "Chiếc giường này rất thoải mái." }
+    ],
+    "synonyms": "床鋪 (chuángpù)",
+    "antonyms": ""
+  },
+  "窗戶": {
+    "examples": [
+      { "taiwan": "請打開窗戶。", "pinyin": "Qǐng dǎkāi chuānghù.", "nghia": "Xin mở cửa sổ." },
+      { "taiwan": "窗戶外面在下雨。", "pinyin": "Chuānghù wàimiàn zài xià yǔ.", "nghia": "Ngoài cửa sổ đang mưa." },
+      { "taiwan": "他從窗戶看出去。", "pinyin": "Tā cóng chuānghù kàn chūqù.", "nghia": "Anh ấy nhìn ra ngoài qua cửa sổ." }
+    ],
+    "synonyms": "窗 (chuāng), 窗口 (chuāngkǒu)",
+    "antonyms": ""
+  },
+  "穿": {
+    "examples": [
+      { "taiwan": "今天很冷，多穿一點。", "pinyin": "Jīntiān hěn lěng, duō chuān yīdiǎn.", "nghia": "Hôm nay lạnh, mặc thêm vào." },
+      { "taiwan": "他穿著一件藍色襯衫。", "pinyin": "Tā chuān zhe yī jiàn lánsè chènshān.", "nghia": "Anh ấy mặc áo sơ mi xanh." },
+      { "taiwan": "請穿鞋進來。", "pinyin": "Qǐng chuān xié jìnlái.", "nghia": "Xin đi giày vào." }
+    ],
+    "synonyms": "著 (zhuó), 戴 (dài)",
+    "antonyms": "脫 (tuō)"
+  },
+  "從": {
+    "examples": [
+      { "taiwan": "我從台灣來。", "pinyin": "Wǒ cóng Táiwān lái.", "nghia": "Tôi đến từ Đài Loan." },
+      { "taiwan": "從明天開始上課。", "pinyin": "Cóng míngtiān kāishǐ shàngkè.", "nghia": "Từ ngày mai bắt đầu học." },
+      { "taiwan": "從這裡到車站要十分鐘。", "pinyin": "Cóng zhèlǐ dào chēzhàn yào shí fēnzhōng.", "nghia": "Từ đây đến ga mất mười phút." }
+    ],
+    "synonyms": "自 (zì), 由 (yóu)",
+    "antonyms": ""
+  },
+  "大": {
+    "examples": [
+      { "taiwan": "這個房間很大。", "pinyin": "Zhè gè fángjiān hěn dà.", "nghia": "Căn phòng này rất lớn." },
+      { "taiwan": "他比我大兩歲。", "pinyin": "Tā bǐ wǒ dà liǎng suì.", "nghia": "Anh ấy lớn hơn tôi hai tuổi." },
+      { "taiwan": "大聲一點，我聽不見。", "pinyin": "Dàshēng yīdiǎn, wǒ tīng bù jiàn.", "nghia": "Nói to lên, tôi không nghe thấy." }
+    ],
+    "synonyms": "巨大 (jùdà), 龐大 (pángdà)",
+    "antonyms": "小 (xiǎo)"
+  },
+  "大學": {
+    "examples": [
+      { "taiwan": "他在台灣大學讀書。", "pinyin": "Tā zài Táiwān Dàxué dúshū.", "nghia": "Anh ấy học tại Đại học Đài Loan." },
+      { "taiwan": "我明年要考大學。", "pinyin": "Wǒ míngnián yào kǎo dàxué.", "nghia": "Năm sau tôi sẽ thi đại học." },
+      { "taiwan": "大學生活很有趣。", "pinyin": "Dàxué shēnghuó hěn yǒuqù.", "nghia": "Cuộc sống đại học rất thú vị." }
+    ],
+    "synonyms": "高校 (gāoxiào)",
+    "antonyms": ""
+  },
+  "的": {
+    "examples": [
+      { "taiwan": "這是我的書。", "pinyin": "Zhè shì wǒ de shū.", "nghia": "Đây là sách của tôi." },
+      { "taiwan": "紅色的花很漂亮。", "pinyin": "Hóngsè de huā hěn piàoliang.", "nghia": "Hoa màu đỏ rất đẹp." },
+      { "taiwan": "他是我最好的朋友。", "pinyin": "Tā shì wǒ zuì hǎo de péngyou.", "nghia": "Anh ấy là bạn thân nhất của tôi." }
+    ],
+    "synonyms": "之 (zhī)",
+    "antonyms": ""
+  },
+  "等": {
+    "examples": [
+      { "taiwan": "請等一下。", "pinyin": "Qǐng děng yīxià.", "nghia": "Xin đợi một chút." },
+      { "taiwan": "我在車站等你。", "pinyin": "Wǒ zài chēzhàn děng nǐ.", "nghia": "Tôi đợi bạn ở ga." },
+      { "taiwan": "等了好久，車還沒來。", "pinyin": "Děng le hǎo jiǔ, chē hái méi lái.", "nghia": "Đợi lâu rồi, xe vẫn chưa đến." }
+    ],
+    "synonyms": "等待 (děngdài), 候 (hòu)",
+    "antonyms": ""
+  },
+  "燈": {
+    "examples": [
+      { "taiwan": "請開燈。", "pinyin": "Qǐng kāi dēng.", "nghia": "Xin bật đèn." },
+      { "taiwan": "房間的燈壞了。", "pinyin": "Fángjiān de dēng huài le.", "nghia": "Đèn phòng hỏng rồi." },
+      { "taiwan": "紅綠燈變綠了，可以走了。", "pinyin": "Hónglǜdēng biàn lǜ le, kěyǐ zǒu le.", "nghia": "Đèn giao thông chuyển xanh, có thể đi rồi." }
+    ],
+    "synonyms": "燈光 (dēngguāng), 電燈 (diàndēng)",
+    "antonyms": ""
+  },
+  "電話": {
+    "examples": [
+      { "taiwan": "你的電話號碼是多少？", "pinyin": "Nǐ de diànhuà hàomǎ shì duōshǎo?", "nghia": "Số điện thoại của bạn là bao nhiêu?" },
+      { "taiwan": "他正在講電話。", "pinyin": "Tā zhèngzài jiǎng diànhuà.", "nghia": "Anh ấy đang nói điện thoại." },
+      { "taiwan": "請打電話給我。", "pinyin": "Qǐng dǎ diànhuà gěi wǒ.", "nghia": "Xin gọi điện cho tôi." }
+    ],
+    "synonyms": "手機 (shǒujī), 電話 (diànhuà)",
+    "antonyms": ""
+  },
+  "電腦": {
+    "examples": [
+      { "taiwan": "我用電腦做功課。", "pinyin": "Wǒ yòng diànnǎo zuò gōngkè.", "nghia": "Tôi dùng máy tính làm bài." },
+      { "taiwan": "電腦壞了，要送修。", "pinyin": "Diànnǎo huài le, yào sòng xiū.", "nghia": "Máy tính hỏng, phải đem đi sửa." },
+      { "taiwan": "請把電腦關掉。", "pinyin": "Qǐng bǎ diànnǎo guān diào.", "nghia": "Xin tắt máy tính." }
+    ],
+    "synonyms": "計算機 (jìsuànjī)",
+    "antonyms": ""
+  },
+  "電影": {
+    "examples": [
+      { "taiwan": "我們去看電影吧。", "pinyin": "Wǒmen qù kàn diànyǐng ba.", "nghia": "Chúng ta đi xem phim nhé." },
+      { "taiwan": "這部電影很好看。", "pinyin": "Zhè bù diànyǐng hěn hǎokàn.", "nghia": "Bộ phim này rất hay." },
+      { "taiwan": "電影幾點開始？", "pinyin": "Diànyǐng jǐ diǎn kāishǐ?", "nghia": "Phim mấy giờ bắt đầu?" }
+    ],
+    "synonyms": "影片 (yǐngpiàn)",
+    "antonyms": ""
+  },
+  "懂": {
+    "examples": [
+      { "taiwan": "你懂了嗎？", "pinyin": "Nǐ dǒng le ma?", "nghia": "Bạn đã hiểu chưa?" },
+      { "taiwan": "我聽不懂。", "pinyin": "Wǒ tīng bù dǒng.", "nghia": "Tôi nghe không hiểu." },
+      { "taiwan": "他懂三種語言。", "pinyin": "Tā dǒng sān zhǒng yǔyán.", "nghia": "Anh ấy biết ba thứ tiếng." }
+    ],
+    "synonyms": "明白 (míngbái), 理解 (lǐjiě)",
+    "antonyms": "不懂 (bù dǒng)"
+  },
+  "讀": {
+    "examples": [
+      { "taiwan": "我喜歡讀書。", "pinyin": "Wǒ xǐhuan dúshū.", "nghia": "Tôi thích đọc sách." },
+      { "taiwan": "請大聲讀出來。", "pinyin": "Qǐng dàshēng dú chūlái.", "nghia": "Xin đọc to lên." },
+      { "taiwan": "他在讀大學。", "pinyin": "Tā zài dú dàxué.", "nghia": "Anh ấy đang học đại học." }
+    ],
+    "synonyms": "閱讀 (yuèdú), 念 (niàn)",
+    "antonyms": ""
+  },
+  "多": {
+    "examples": [
+      { "taiwan": "今天人很多。", "pinyin": "Jīntiān rén hěn duō.", "nghia": "Hôm nay người rất đông." },
+      { "taiwan": "多少錢？", "pinyin": "Duōshǎo qián?", "nghia": "Bao nhiêu tiền?" },
+      { "taiwan": "多謝！", "pinyin": "Duōxiè!", "nghia": "Cảm ơn nhiều!" }
+    ],
+    "synonyms": "許多 (xǔduō), 很多 (hěnduō)",
+    "antonyms": "少 (shǎo)"
+  },
+  "座位": {
+    "examples": [
+      { "taiwan": "請問這個座位有人嗎？", "pinyin": "Qǐngwèn zhège zuòwèi yǒu rén ma?", "nghia": "Xin hỏi chỗ ngồi này có người chưa?" },
+      { "taiwan": "老師幫學生安排座位。", "pinyin": "Lǎoshī bāng xuéshēng ānpái zuòwèi.", "nghia": "Giáo viên sắp xếp chỗ ngồi cho học sinh." },
+      { "taiwan": "我們先找個座位坐下吧。", "pinyin": "Wǒmen xiān zhǎo gè zuòwèi zuò xià ba.", "nghia": "Chúng ta tìm chỗ ngồi xuống trước đi." }
+    ],
+    "synonyms": "位子 (wèizi), 座席 (zuòxí)",
+    "antonyms": "站位 (zhànwèi)"
+  }
+}

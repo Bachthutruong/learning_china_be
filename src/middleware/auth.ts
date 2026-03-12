@@ -48,4 +48,16 @@ export const authorize = (...roles: string[]) => {
   };
 };
 
+export const authorizeReviewerOrAdmin = () => {
+  return (req: any, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Not authenticated' });
+    }
 
+    if (req.user.role !== 'admin' && !req.user.isReviewer) {
+      return res.status(403).json({ message: 'Not authorized for reviewing' });
+    }
+
+    next();
+  };
+};

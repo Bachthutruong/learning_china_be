@@ -42,7 +42,8 @@ const register = async (req, res) => {
                 level: user.level,
                 experience: user.experience,
                 coins: user.coins,
-                streak: user.streak
+                streak: user.streak,
+                isReviewer: user.isReviewer
             }
         });
     }
@@ -81,7 +82,8 @@ const login = async (req, res) => {
                 level: user.level,
                 experience: user.experience,
                 coins: user.coins,
-                streak: user.streak
+                streak: user.streak,
+                isReviewer: user.isReviewer
             }
         });
     }

@@ -39,9 +39,8 @@ const UserGlobalRankingSchema: Schema = new Schema({
   timestamps: true
 });
 
-// Index for efficient ranking queries
+// Index for efficient ranking queries (user đã có index từ unique: true)
 UserGlobalRankingSchema.index({ totalPoints: -1, competitionsParticipated: -1 });
-UserGlobalRankingSchema.index({ user: 1 });
 
 export default mongoose.model<IUserGlobalRanking>('UserGlobalRanking', UserGlobalRankingSchema);
 

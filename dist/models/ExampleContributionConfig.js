@@ -34,36 +34,16 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const UserGlobalRankingSchema = new mongoose_1.Schema({
-    user: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'User is required'],
-        unique: true
-    },
-    totalPoints: {
+const ExampleContributionConfigSchema = new mongoose_1.Schema({
+    rewardContributor: {
         type: Number,
-        required: true,
-        default: 0,
-        min: 0
+        default: 1
     },
-    competitionsParticipated: {
+    rewardReviewer: {
         type: Number,
-        required: true,
-        default: 0,
-        min: 0
-    },
-    lastUpdated: {
-        type: Date,
-        default: Date.now
-    },
-    rank: {
-        type: Number,
-        min: 1
+        default: 1
     }
 }, {
     timestamps: true
 });
-// Index for efficient ranking queries (user đã có index từ unique: true)
-UserGlobalRankingSchema.index({ totalPoints: -1, competitionsParticipated: -1 });
-exports.default = mongoose_1.default.model('UserGlobalRanking', UserGlobalRankingSchema);
+exports.default = mongoose_1.default.model('ExampleContributionConfig', ExampleContributionConfigSchema);

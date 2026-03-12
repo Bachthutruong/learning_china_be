@@ -13,6 +13,7 @@ export interface IUser extends Document {
   lastCheckIn: Date;
   learnedVocabulary: string[];
   needsStudyVocabulary: string[];
+  isReviewer: boolean;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -68,7 +69,11 @@ const UserSchema = new Schema<IUser>({
   needsStudyVocabulary: [{
     type: Schema.Types.ObjectId,
     ref: 'Vocabulary'
-  }]
+  }],
+  isReviewer: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: true
 });

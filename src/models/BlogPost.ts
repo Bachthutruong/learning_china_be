@@ -74,9 +74,8 @@ BlogPostSchema.pre('save', function(next) {
   next();
 });
 
-// Index for faster queries
+// Index for faster queries (slug đã có index từ unique: true)
 BlogPostSchema.index({ status: 1, publishedAt: -1 });
-BlogPostSchema.index({ slug: 1 });
 BlogPostSchema.index({ author: 1 });
 
 export default mongoose.model<IBlogPost>('BlogPost', BlogPostSchema);

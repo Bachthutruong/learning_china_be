@@ -90,7 +90,11 @@ const UserSchema = new mongoose_1.Schema({
     needsStudyVocabulary: [{
             type: mongoose_1.Schema.Types.ObjectId,
             ref: 'Vocabulary'
-        }]
+        }],
+    isReviewer: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 });

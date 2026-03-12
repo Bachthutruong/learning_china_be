@@ -276,7 +276,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }
 
     const users = await User.find(query)
-      .select('name email level experience coins role streak createdAt')
+      .select('name email level experience coins role isReviewer streak createdAt')
       .sort({ createdAt: -1 })
       .limit(limitNum)
       .skip((pageNum - 1) * limitNum);
@@ -466,7 +466,7 @@ export const recalculateLevel = async (req: any, res: Response) => {
 // Admin functions for user management
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, level = 1, coins = 0, role = 'user' } = req.body;
+    const { name, email, password, level = 1, coins = 0, role = 'user', isReviewer = false } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -482,6 +482,7 @@ export const createUser = async (req: Request, res: Response) => {
       level: parseInt(level),
       coins: parseInt(coins),
       role,
+      isReviewer,
       experience: 0,
       streak: 0
     });
@@ -496,7 +497,8 @@ export const createUser = async (req: Request, res: Response) => {
         email: user.email,
         level: user.level,
         coins: user.coins,
-        role: user.role
+        role: user.role,
+        isReviewer: user.isReviewer
       }
     });
   } catch (error) {
@@ -508,7 +510,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, email, level, experience, coins, role, password } = req.body;
+    const { name, email, level, experience, coins, role, password, isReviewer } = req.body;
 
     // Get current user first
     const currentUser = await User.findById(id);
@@ -522,6 +524,7 @@ export const updateUser = async (req: Request, res: Response) => {
     if (coins !== undefined) updateData.coins = parseInt(coins);
     if (role) updateData.role = role;
     if (password) updateData.password = password;
+    if (isReviewer !== undefined) updateData.isReviewer = isReviewer;
 
     // If level is being changed, validate experience is provided and in valid range
     if (level !== undefined) {

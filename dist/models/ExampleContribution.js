@@ -34,36 +34,40 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const UserGlobalRankingSchema = new mongoose_1.Schema({
-    user: {
+const ExampleContributionSchema = new mongoose_1.Schema({
+    vocabularyId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Vocabulary',
+        required: true
+    },
+    contributorId: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'User is required'],
-        unique: true
+        required: true
     },
-    totalPoints: {
-        type: Number,
+    content: {
+        type: String,
         required: true,
-        default: 0,
-        min: 0
+        trim: true
     },
-    competitionsParticipated: {
-        type: Number,
-        required: true,
-        default: 0,
-        min: 0
+    isAnonymous: {
+        type: Boolean,
+        default: false
     },
-    lastUpdated: {
-        type: Date,
-        default: Date.now
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
     },
-    rank: {
-        type: Number,
-        min: 1
+    reviewerId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    editedContent: {
+        type: String,
+        trim: true
     }
 }, {
     timestamps: true
 });
-// Index for efficient ranking queries (user đã có index từ unique: true)
-UserGlobalRankingSchema.index({ totalPoints: -1, competitionsParticipated: -1 });
-exports.default = mongoose_1.default.model('UserGlobalRanking', UserGlobalRankingSchema);
+exports.default = mongoose_1.default.model('ExampleContribution', ExampleContributionSchema);
