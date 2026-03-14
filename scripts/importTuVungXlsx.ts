@@ -191,8 +191,6 @@ function pickRandom<T>(arr: T[]): T {
 function buildPrompt(word: string, topic: string, level: string): string {
   const ctxSimple = pickRandom(EXAMPLE_CONTEXTS_SIMPLE);
   const ctxComplex1 = pickRandom(EXAMPLE_CONTEXTS_COMPLEX);
-  let ctxComplex2 = pickRandom(EXAMPLE_CONTEXTS_COMPLEX);
-  while (ctxComplex2 === ctxComplex1) ctxComplex2 = pickRandom(EXAMPLE_CONTEXTS_COMPLEX);
 
   return `Bạn là chuyên gia tiếng Trung phồn thể Đài Loan. Sinh nội dung học tập CHÍNH XÁC cho từ "${word}" (chủ đề: ${topic}, cấp độ: ${level}).
 
@@ -204,64 +202,23 @@ function buildPrompt(word: string, topic: string, level: string): string {
    - Tính từ: chỉ bổ nghĩa cho danh từ thích hợp.
    - Danh từ: làm chủ/vị/tân ngữ đúng ngữ pháp.
 
-2. VÍ DỤ - PHẢI CÓ ĐÚNG 3 CÂU:
-   - Câu 1 (ĐƠN GIẢN): ngắn gọn, dễ hiểu, phù hợp người mới học, ngữ cảnh: ${ctxSimple}.
-     Ví dụ mẫu câu đơn giản: 5-10 chữ, cấu trúc chủ-vị-tân cơ bản.
-   - Câu 2 (PHỨC TẠP): dài hơn, có mệnh đề phụ hoặc cấu trúc nâng cao, ngữ cảnh: ${ctxComplex1}.
-     Ví dụ mẫu câu phức tạp: 12-20 chữ, có trạng ngữ/mệnh đề điều kiện/liên từ.
-   - Câu 3 (PHỨC TẠP): khác ngữ cảnh câu 2, ngữ cảnh: ${ctxComplex2}.
-     Ví dụ mẫu câu phức tạp: 12-20 chữ.
-
-3. MỖI CÂU PHẢI:
-   - Chứa đúng từ "${word}".
-   - Tự nhiên như người Đài Loan nói thật (dùng phồn thể).
-   - Pinyin có đầy đủ dấu thanh điệu.
-   - Nghĩa tiếng Việt rõ ràng, đúng văn cảnh.
-
-4. CÂU HỎI - 6 câu ĐA DẠNG (QUAN TRỌNG):
-   - Q1: hỏi nghĩa tiếng Việt của "${word}" (4-6 đáp án).
-   - Q2: hỏi phiên âm pinyin của "${word}" (4-6 đáp án, đáp án sai phải đổi thanh điệu).
-   - Q3: dịch câu đơn giản (ví dụ 1) sang tiếng Việt (4-6 đáp án).
-   - Q4: dịch câu phức tạp (ví dụ 2) sang tiếng Việt (4-6 đáp án).
-   - Q5: dịch câu phức tạp (ví dụ 3) sang tiếng Việt (4-6 đáp án).
-   - Q6: chọn chữ Hán đúng cho nghĩa "${word}" (4-6 đáp án, đáp án sai phải gần giống).
-   - Đáp án đúng ở VỊ TRÍ NGẪU NHIÊN (không luôn là index 0).
-   - Đáp án sai phải hợp lý (từ cùng cấp độ, gần nghĩa nhưng sai).
+2. VÍ DỤ - ĐÚNG 2 CÂU:
+   - Câu 1 (đơn giản): 5-10 chữ, cấu trúc chủ-vị-tân cơ bản, ngữ cảnh: ${ctxSimple}.
+   - Câu 2 (phức tạp): 12-20 chữ, có mệnh đề phụ/trạng ngữ/liên từ, ngữ cảnh: ${ctxComplex1}.
+   - Mỗi câu phải chứa từ "${word}", tự nhiên như người Đài Loan nói thật (dùng phồn thể).
+   - Pinyin đầy đủ dấu thanh điệu, nghĩa tiếng Việt rõ ràng đúng văn cảnh.
 
 Trả về ĐÚNG JSON (không markdown, không giải thích thêm):
 {
-  "pinyin": "phiên âm có đầy đủ thanh điệu (ví dụ: ài, bā, bàba)",
+  "pinyin": "phiên âm có đầy đủ thanh điệu",
   "meaning": "nghĩa tiếng Việt ngắn gọn, chính xác",
-  "partOfSpeech": "danh từ" | "động từ" | "tính từ" | "trạng từ" | "trợ từ" | "đại từ" | "giới từ" | "liên từ" | "thán từ",
+  "partOfSpeech": "danh từ"|"động từ"|"tính từ"|"trạng từ"|"trợ từ"|"đại từ"|"giới từ"|"liên từ"|"thán từ",
   "examples": [
-    {
-      "type": "simple",
-      "taiwan": "câu phồn thể đơn giản chứa ${word}",
-      "pinyin": "pinyin đầy đủ dấu",
-      "nghia": "nghĩa tiếng Việt"
-    },
-    {
-      "type": "complex",
-      "taiwan": "câu phồn thể phức tạp hơn chứa ${word}",
-      "pinyin": "pinyin đầy đủ dấu",
-      "nghia": "nghĩa tiếng Việt"
-    },
-    {
-      "type": "complex",
-      "taiwan": "câu phồn thể phức tạp khác chứa ${word}",
-      "pinyin": "pinyin đầy đủ dấu",
-      "nghia": "nghĩa tiếng Việt"
-    }
+    {"taiwan": "câu phồn thể đơn giản chứa ${word}", "pinyin": "pinyin đầy đủ dấu", "nghia": "nghĩa tiếng Việt"},
+    {"taiwan": "câu phồn thể phức tạp chứa ${word}", "pinyin": "pinyin đầy đủ dấu", "nghia": "nghĩa tiếng Việt"}
   ],
   "synonyms": "漢字1 (pinyin1), 漢字2 (pinyin2) — để trống nếu không có",
-  "antonyms": "漢字 (pinyin) — để trống nếu không có",
-  "questions": [
-    {
-      "question": "nội dung câu hỏi",
-      "options": ["đáp án 1", "đáp án 2", "đáp án 3", "đáp án 4"],
-      "correctAnswer": 2
-    }
-  ]
+  "antonyms": "漢字 (pinyin) — để trống nếu không có"
 }`;
 }
 
@@ -274,7 +231,6 @@ interface AIResult {
   examples?: Array<{ type?: string; taiwan: string; pinyin: string; nghia: string }>;
   synonyms?: string;
   antonyms?: string;
-  questions?: Array<{ question: string; options: string[]; correctAnswer: number }>;
 }
 
 async function callClaude(client: Anthropic, word: string, topic: string, level: string): Promise<AIResult | null> {
@@ -297,8 +253,7 @@ async function callClaude(client: Anthropic, word: string, topic: string, level:
       if (!jsonMatch) break;
       const parsed = JSON.parse(jsonMatch[0]) as AIResult;
       if (!parsed.pinyin || !parsed.meaning) break;
-      if (!parsed.examples || parsed.examples.length < 3) break;
-      if (!parsed.questions || parsed.questions.length < 4) break;
+      if (!parsed.examples || parsed.examples.length < 2) break;
       return parsed;
     } catch (e: any) {
       const status = e?.status ?? e?.statusCode;
@@ -505,15 +460,8 @@ function processAIResult(
   const levelNum = LEVEL_MAP[raw.level] ?? 1;
   const partOfSpeech = POS_MAP[aiResult.partOfSpeech?.toLowerCase() ?? ''] || inferPartOfSpeech(aiResult.meaning ?? '');
 
-  const examplesRaw = (aiResult.examples ?? []).slice(0, 3);
-  // Đảm bảo đúng thứ tự: 1 simple trước, 2 complex sau
-  const simpleExs = examplesRaw.filter(e => e.type === 'simple');
-  const complexExs = examplesRaw.filter(e => e.type === 'complex');
-  // Nếu AI không set type, xử lý theo thứ tự
-  const orderedExs = simpleExs.length > 0 && complexExs.length >= 2
-    ? [simpleExs[0], complexExs[0], complexExs[1]]
-    : examplesRaw.slice(0, 3);
-  const examples = orderedExs.map(formatExample);
+  const examplesRaw = (aiResult.examples ?? []).slice(0, 2);
+  const examples = examplesRaw.map(formatExample);
 
   const synonyms = (aiResult.synonyms ?? '')
     .split(',')
@@ -523,20 +471,6 @@ function processAIResult(
     .split(',')
     .map((s: string) => s.trim())
     .filter(Boolean);
-
-  const questions = (aiResult.questions ?? []).slice(0, 6).map(q => {
-    const opts = Array.isArray(q.options) ? [...q.options].slice(0, 6) : [];
-    while (opts.length < 4) opts.push(`Đáp án ${opts.length + 1}`);
-    const correctIdx = Math.min(q.correctAnswer ?? 0, opts.length - 1);
-    const correctItem = opts[correctIdx];
-    const shuffled = shuffleAndTrack(opts, correctItem);
-    return {
-      question: q.question,
-      options: shuffled.arr,
-      correctAnswer: shuffled.correctAnswer,
-      explanation: undefined,
-    };
-  });
 
   return {
     word: raw.word,
@@ -549,7 +483,7 @@ function processAIResult(
     examples,
     synonyms,
     antonyms,
-    questions,
+    questions: [],
     allForms: raw.allForms.join(' / '),
   };
 }

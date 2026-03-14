@@ -25,6 +25,8 @@
     "import:tocfl": "ts-node scripts/importTocflToDb.ts",
     "import:tocfl-progress": "ts-node scripts/importTocflProgress.ts",
     "import:tu-vung": "ts-node scripts/importTuVungXlsx.ts",
+    "import:all-levels": "ts-node scripts/importAllLevels.ts",
+    "clean:examples": "ts-node scripts/cleanExamples.ts",
     "test": "jest"
   },
   "dependencies": {

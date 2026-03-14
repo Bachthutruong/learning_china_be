@@ -157,6 +157,7 @@ router.put('/vocabularies/:id', cloudinaryUpload_1.cloudinaryUpload.fields([
     next();
 }, vocabularyValidation, adminController_1.updateVocabulary);
 router.delete('/vocabularies/:id', adminController_1.deleteVocabulary);
+router.post('/vocabularies/bulk-delete', adminController_1.bulkDeleteVocabularies);
 // Import vocabularies via Excel (simple memory upload)
 const memoryUpload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
 router.post('/vocabularies/import', memoryUpload.single('file'), adminController_1.importVocabulariesExcel);

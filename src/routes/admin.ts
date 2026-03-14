@@ -7,6 +7,7 @@ import {
   createVocabulary,
   updateVocabulary,
   deleteVocabulary,
+  bulkDeleteVocabularies,
   downloadVocabularyTemplate,
   importVocabulariesExcel,
   createTopic,
@@ -190,6 +191,7 @@ router.put('/vocabularies/:id', cloudinaryUpload.fields([
   next();
 }, vocabularyValidation, updateVocabulary);
 router.delete('/vocabularies/:id', deleteVocabulary);
+router.post('/vocabularies/bulk-delete', bulkDeleteVocabularies);
 
 // Import vocabularies via Excel (simple memory upload)
 const memoryUpload = multer({ storage: multer.memoryStorage() });

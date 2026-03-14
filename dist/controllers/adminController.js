@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCompetition = exports.updateCompetition = exports.createCompetition = exports.getAllCompetitions = exports.activateProficiencyConfig = exports.deleteProficiencyConfig = exports.updateProficiencyConfig = exports.createProficiencyConfig = exports.getProficiencyConfig = exports.getProficiencyConfigs = exports.getAllProficiencyTests = exports.getAllTests = exports.getAllLevels = exports.getAllTopics = exports.getAllVocabularies = exports.getAdminActivities = exports.getAdminStats = exports.deleteProficiencyTest = exports.updateProficiencyTest = exports.createProficiencyTest = exports.deleteTest = exports.updateTest = exports.createTest = exports.deleteLevel = exports.updateLevel = exports.createLevel = exports.deleteTopic = exports.updateTopic = exports.createTopic = exports.deleteVocabulary = exports.updateVocabulary = exports.importVocabulariesExcel = exports.downloadVocabularyTemplate = exports.createVocabulary = void 0;
+exports.deleteCompetition = exports.updateCompetition = exports.createCompetition = exports.getAllCompetitions = exports.activateProficiencyConfig = exports.deleteProficiencyConfig = exports.updateProficiencyConfig = exports.createProficiencyConfig = exports.getProficiencyConfig = exports.getProficiencyConfigs = exports.getAllProficiencyTests = exports.getAllTests = exports.getAllLevels = exports.getAllTopics = exports.getAllVocabularies = exports.getAdminActivities = exports.getAdminStats = exports.deleteProficiencyTest = exports.updateProficiencyTest = exports.createProficiencyTest = exports.deleteTest = exports.updateTest = exports.createTest = exports.deleteLevel = exports.updateLevel = exports.createLevel = exports.deleteTopic = exports.updateTopic = exports.createTopic = exports.bulkDeleteVocabularies = exports.deleteVocabulary = exports.updateVocabulary = exports.importVocabulariesExcel = exports.downloadVocabularyTemplate = exports.createVocabulary = void 0;
 const XLSX = __importStar(require("xlsx"));
 const Vocabulary_1 = __importDefault(require("../models/Vocabulary"));
 // NOTE: XLSX-based template and import helpers are provided below
@@ -423,6 +423,21 @@ const deleteVocabulary = async (req, res) => {
     }
 };
 exports.deleteVocabulary = deleteVocabulary;
+const bulkDeleteVocabularies = async (req, res) => {
+    try {
+        const { ids } = req.body;
+        if (!Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ message: 'Cần truyền mảng ids' });
+        }
+        const result = await Vocabulary_1.default.deleteMany({ _id: { $in: ids } });
+        res.json({ deleted: result.deletedCount });
+    }
+    catch (error) {
+        console.error('Bulk delete error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+exports.bulkDeleteVocabularies = bulkDeleteVocabularies;
 // Topic Management
 const createTopic = async (req, res) => {
     try {

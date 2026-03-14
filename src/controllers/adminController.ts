@@ -423,6 +423,20 @@ export const deleteVocabulary = async (req: any, res: Response) => {
   }
 };
 
+export const bulkDeleteVocabularies = async (req: any, res: Response) => {
+  try {
+    const { ids } = req.body;
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: 'Cần truyền mảng ids' });
+    }
+    const result = await Vocabulary.deleteMany({ _id: { $in: ids } });
+    res.json({ deleted: result.deletedCount });
+  } catch (error) {
+    console.error('Bulk delete error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 // Topic Management
 export const createTopic = async (req: any, res: Response) => {
   try {
