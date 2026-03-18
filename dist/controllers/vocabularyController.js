@@ -328,8 +328,14 @@ const getVocabulariesByCategories = async (req, res) => {
                 { pinyin: { $regex: search, $options: 'i' } }
             ];
         }
-        // Category filter - get vocabularies that match any of the selected categories
-        const categoryArray = categories.split(',').map((c) => c.trim());
+        // Category filter: support JSON array to preserve names containing comma (e.g. "Giải trí, thư giãn")
+        let categoryArray;
+        if (typeof categories === 'string' && categories.trim().startsWith('[')) {
+            categoryArray = JSON.parse(categories);
+        }
+        else {
+            categoryArray = String(categories).split(',').map((c) => c.trim()).filter(Boolean);
+        }
         query.topics = { $in: categoryArray };
         const skipIndex = (Number(page) - 1) * Number(limit);
         const vocabularies = await Vocabulary_1.default.find(query)

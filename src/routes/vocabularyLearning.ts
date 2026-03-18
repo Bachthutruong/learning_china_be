@@ -4,6 +4,7 @@ import {
   getVocabularies,
   getPersonalTopics,
   createPersonalTopic,
+  updatePersonalTopic,
   getUserVocabularies,
   addUserVocabulary,
   getVocabularyQuiz,
@@ -29,6 +30,7 @@ router.get('/vocabularies/:vocabularyId/quiz', getVocabularyQuiz)
 // Protected routes (require authentication)
 router.get('/user/personal-topics', authenticate, getPersonalTopics)
 router.post('/user/personal-topics', authenticate, personalTopicValidation, createPersonalTopic)
+router.put('/user/personal-topics/:id', authenticate, personalTopicValidation, updatePersonalTopic)
 router.post('/personal-topics', authenticate, personalTopicValidation, createPersonalTopic)
 router.get('/user/vocabularies', authenticate, getUserVocabularies)
 router.post('/user/vocabularies', authenticate, userVocabularyValidation, addUserVocabulary)

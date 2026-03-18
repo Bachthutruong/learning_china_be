@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLearnersByVocabularyStats = exports.getMonthlyVocabularyLearners = exports.getVocabulariesByTopic = exports.getLearnedVocabulariesForQuiz = exports.addVocabulariesToTopic = exports.getAvailableVocabularies = exports.completeLearningValidation = exports.userVocabularyValidation = exports.personalTopicValidation = exports.getVocabularySuggestions = exports.completeVocabularyLearning = exports.getVocabularyQuiz = exports.addUserVocabulary = exports.getUserVocabularies = exports.createPersonalTopic = exports.getPersonalTopics = exports.getVocabularies = void 0;
+exports.getLearnersByVocabularyStats = exports.getMonthlyVocabularyLearners = exports.getVocabulariesByTopic = exports.getLearnedVocabulariesForQuiz = exports.addVocabulariesToTopic = exports.getAvailableVocabularies = exports.completeLearningValidation = exports.userVocabularyValidation = exports.personalTopicValidation = exports.getVocabularySuggestions = exports.completeVocabularyLearning = exports.getVocabularyQuiz = exports.addUserVocabulary = exports.getUserVocabularies = exports.updatePersonalTopic = exports.createPersonalTopic = exports.getPersonalTopics = exports.getVocabularies = void 0;
 const express_validator_1 = require("express-validator");
 const Vocabulary_1 = __importDefault(require("../models/Vocabulary"));
 const PersonalTopic_1 = require("../models/PersonalTopic");
@@ -162,6 +162,42 @@ const createPersonalTopic = async (req, res) => {
     }
 };
 exports.createPersonalTopic = createPersonalTopic;
+// Update personal topic (name, description)
+const updatePersonalTopic = async (req, res) => {
+    try {
+        const errors = (0, express_validator_1.validationResult)(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const userId = req.user?._id;
+        const { id } = req.params;
+        const { name, description } = req.body;
+        const topic = await PersonalTopic_1.PersonalTopic.findOne({ _id: id, userId });
+        if (!topic) {
+            return res.status(404).json({ message: 'Không tìm thấy chủ đề' });
+        }
+        if (name !== undefined && name !== topic.name) {
+            const existingTopic = await PersonalTopic_1.PersonalTopic.findOne({ userId, name });
+            if (existingTopic) {
+                return res.status(400).json({ message: 'Chủ đề với tên này đã tồn tại' });
+            }
+            topic.name = name.trim();
+        }
+        if (description !== undefined) {
+            topic.description = description?.trim() ?? '';
+        }
+        await topic.save();
+        res.json({
+            message: 'Cập nhật chủ đề thành công',
+            topic
+        });
+    }
+    catch (error) {
+        console.error('Error updating personal topic:', error);
+        res.status(500).json({ message: 'Không thể cập nhật chủ đề' });
+    }
+};
+exports.updatePersonalTopic = updatePersonalTopic;
 // Get user vocabularies with filters
 const getUserVocabularies = async (req, res) => {
     try {

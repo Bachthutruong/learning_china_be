@@ -361,8 +361,13 @@ export const getVocabulariesByCategories = async (req: Request, res: Response) =
       ]
     }
 
-    // Category filter - get vocabularies that match any of the selected categories
-    const categoryArray = categories.split(',').map((c: string) => c.trim())
+    // Category filter: support JSON array to preserve names containing comma (e.g. "Giải trí, thư giãn")
+    let categoryArray: string[]
+    if (typeof categories === 'string' && categories.trim().startsWith('[')) {
+      categoryArray = JSON.parse(categories) as string[]
+    } else {
+      categoryArray = String(categories).split(',').map((c: string) => c.trim()).filter(Boolean)
+    }
     query.topics = { $in: categoryArray }
 
     const skipIndex = (Number(page) - 1) * Number(limit)

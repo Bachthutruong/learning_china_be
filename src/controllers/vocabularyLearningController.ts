@@ -142,6 +142,46 @@ export const createPersonalTopic = async (req: Request, res: Response) => {
   }
 }
 
+// Update personal topic (name, description)
+export const updatePersonalTopic = async (req: Request, res: Response) => {
+  try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
+
+    const userId = (req as any).user?._id
+    const { id } = req.params
+    const { name, description } = req.body
+
+    const topic = await PersonalTopic.findOne({ _id: id, userId })
+    if (!topic) {
+      return res.status(404).json({ message: 'Không tìm thấy chủ đề' })
+    }
+
+    if (name !== undefined && name !== topic.name) {
+      const existingTopic = await PersonalTopic.findOne({ userId, name })
+      if (existingTopic) {
+        return res.status(400).json({ message: 'Chủ đề với tên này đã tồn tại' })
+      }
+      topic.name = name.trim()
+    }
+    if (description !== undefined) {
+      topic.description = description?.trim() ?? ''
+    }
+
+    await topic.save()
+
+    res.json({
+      message: 'Cập nhật chủ đề thành công',
+      topic
+    })
+  } catch (error) {
+    console.error('Error updating personal topic:', error)
+    res.status(500).json({ message: 'Không thể cập nhật chủ đề' })
+  }
+}
+
 // Get user vocabularies with filters
 export const getUserVocabularies = async (req: Request, res: Response) => {
   try {

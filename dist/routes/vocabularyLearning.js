@@ -13,6 +13,7 @@ router.get('/vocabularies/:vocabularyId/quiz', vocabularyLearningController_1.ge
 // Protected routes (require authentication)
 router.get('/user/personal-topics', auth_1.authenticate, vocabularyLearningController_1.getPersonalTopics);
 router.post('/user/personal-topics', auth_1.authenticate, vocabularyLearningController_1.personalTopicValidation, vocabularyLearningController_1.createPersonalTopic);
+router.put('/user/personal-topics/:id', auth_1.authenticate, vocabularyLearningController_1.personalTopicValidation, vocabularyLearningController_1.updatePersonalTopic);
 router.post('/personal-topics', auth_1.authenticate, vocabularyLearningController_1.personalTopicValidation, vocabularyLearningController_1.createPersonalTopic);
 router.get('/user/vocabularies', auth_1.authenticate, vocabularyLearningController_1.getUserVocabularies);
 router.post('/user/vocabularies', auth_1.authenticate, vocabularyLearningController_1.userVocabularyValidation, vocabularyLearningController_1.addUserVocabulary);

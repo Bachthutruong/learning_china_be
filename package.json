@@ -27,6 +27,7 @@
     "import:tu-vung": "ts-node scripts/importTuVungXlsx.ts",
     "import:all-levels": "ts-node scripts/importAllLevels.ts",
     "clean:examples": "ts-node scripts/cleanExamples.ts",
+    "normalize:examples": "ts-node scripts/normalizeExamples.ts",
     "test": "jest"
   },
   "dependencies": {
