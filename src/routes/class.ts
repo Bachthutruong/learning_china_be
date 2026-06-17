@@ -20,7 +20,12 @@ import {
   requestLeave,
   cancelLeave,
   reviewLeave,
-  submitClassWork
+  submitClassWork,
+  listAvailableClasses,
+  requestJoinClass,
+  cancelJoinRequest,
+  listClassJoinRequests,
+  reviewJoinRequest
 } from '../controllers/classController';
 
 const router = express.Router();
@@ -33,12 +38,18 @@ router.get('/options/content', getClassContentOptions);
 router.get('/admin', listAdminClasses);
 router.get('/teacher', listTeacherClasses);
 router.get('/my', listMyClasses);
+router.get('/available', listAvailableClasses);
 
 router.post('/', createClass);
 
 router.get('/:id', getClassDetail);
 router.put('/:id', updateClass);
 router.delete('/:id', deleteClass);
+
+router.post('/:id/join', requestJoinClass);
+router.delete('/:id/join', cancelJoinRequest);
+router.get('/:id/join-requests', listClassJoinRequests);
+router.patch('/:id/join-requests/:studentId', reviewJoinRequest);
 
 router.get('/:id/sessions', getClassSessions);
 router.post('/:id/sessions', createClassSession);

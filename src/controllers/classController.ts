@@ -5,6 +5,7 @@ import ClassSession from '../models/ClassSession';
 import ClassFeedback from '../models/ClassFeedback';
 import ClassLeaveRequest from '../models/ClassLeaveRequest';
 import ClassSubmission from '../models/ClassSubmission';
+import ClassJoinRequest from '../models/ClassJoinRequest';
 import User from '../models/User';
 import Vocabulary from '../models/Vocabulary';
 import Test from '../models/Test';
@@ -218,11 +219,12 @@ const buildVocabularyQuestions = (session: any) => {
 const enrichClassesWithCounts = async (classes: any[]) => {
   const now = new Date();
   return Promise.all(classes.map(async (klass) => {
-    const [sessionsCount, upcomingCount] = await Promise.all([
+    const [sessionsCount, upcomingCount, pendingJoinRequests] = await Promise.all([
       ClassSession.countDocuments({ classId: klass._id }),
-      ClassSession.countDocuments({ classId: klass._id, startAt: { $gte: now } })
+      ClassSession.countDocuments({ classId: klass._id, startAt: { $gte: now } }),
+      ClassJoinRequest.countDocuments({ classId: klass._id, status: 'pending' })
     ]);
-    return { ...klass.toObject(), sessionsCount, upcomingCount };
+    return { ...klass.toObject(), sessionsCount, upcomingCount, pendingJoinRequests };
   }));
 };
 
@@ -470,11 +472,12 @@ export const getClassDetail = async (req: any, res: Response) => {
 
     const klass = await LearningClass.findById(req.params.id).populate(classPopulate);
     const now = new Date();
-    const [sessionsCount, upcomingCount] = await Promise.all([
+    const [sessionsCount, upcomingCount, pendingJoinRequests] = await Promise.all([
       ClassSession.countDocuments({ classId: req.params.id }),
-      ClassSession.countDocuments({ classId: req.params.id, startAt: { $gte: now } })
+      ClassSession.countDocuments({ classId: req.params.id, startAt: { $gte: now } }),
+      ClassJoinRequest.countDocuments({ classId: req.params.id, status: 'pending' })
     ]);
-    res.json({ class: { ...(klass as any).toObject(), sessionsCount, upcomingCount } });
+    res.json({ class: { ...(klass as any).toObject(), sessionsCount, upcomingCount, pendingJoinRequests } });
   } catch (error) {
     console.error('getClassDetail error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -844,6 +847,148 @@ export const reviewLeave = async (req: any, res: Response) => {
     res.json({ message: 'Leave request reviewed', leaveRequest });
   } catch (error) {
     console.error('reviewLeave error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// ===== Join requests (students ask to join, managers approve) =====
+
+// Student: browse active classes they have not joined, with their request status.
+export const listAvailableClasses = async (req: any, res: Response) => {
+  try {
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Math.min(Math.max(1, Number(req.query.limit) || 6), 100);
+    const search = String(req.query.search || '').trim();
+
+    const query: any = {
+      status: 'active',
+      studentIds: { $ne: req.user._id },
+      teacherIds: { $ne: req.user._id }
+    };
+    if (search) query.name = { $regex: search, $options: 'i' };
+
+    const total = await LearningClass.countDocuments(query);
+    const classes = await LearningClass.find(query)
+      .populate({ path: 'teacherIds', select: 'name email' })
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const requests = await ClassJoinRequest.find({
+      studentId: req.user._id,
+      classId: { $in: classes.map((klass: any) => klass._id) }
+    });
+    const requestMap = new Map(requests.map((item: any) => [String(item.classId), item]));
+
+    const data = await Promise.all(classes.map(async (klass: any) => {
+      const sessionsCount = await ClassSession.countDocuments({ classId: klass._id });
+      const myRequest = requestMap.get(String(klass._id)) as any;
+      return {
+        ...klass.toObject(),
+        studentCount: (klass.studentIds || []).length,
+        sessionsCount,
+        myRequestStatus: myRequest ? myRequest.status : null
+      };
+    }));
+
+    res.json({ classes: data, total, page, totalPages: Math.max(1, Math.ceil(total / limit)) });
+  } catch (error) {
+    console.error('listAvailableClasses error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Student: send (or re-send) a join request.
+export const requestJoinClass = async (req: any, res: Response) => {
+  try {
+    const klass = await LearningClass.findById(req.params.id);
+    if (!klass) return res.status(404).json({ message: 'Class not found' });
+    if (klass.status !== 'active') return res.status(400).json({ message: 'Lớp học không nhận đăng ký' });
+    if ((klass.studentIds || []).some((studentId: any) => isSameId(studentId, req.user._id))) {
+      return res.status(400).json({ message: 'Bạn đã ở trong lớp này' });
+    }
+
+    const joinRequest = await ClassJoinRequest.findOneAndUpdate(
+      { classId: req.params.id, studentId: req.user._id },
+      {
+        $set: {
+          message: req.body.message || '',
+          status: 'pending',
+          reviewedBy: undefined,
+          reviewedAt: undefined
+        }
+      },
+      { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true }
+    );
+
+    res.status(201).json({ message: 'Đã gửi yêu cầu vào lớp', joinRequest });
+  } catch (error) {
+    console.error('requestJoinClass error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Student: cancel their own pending join request.
+export const cancelJoinRequest = async (req: any, res: Response) => {
+  try {
+    const joinRequest = await ClassJoinRequest.findOneAndUpdate(
+      { classId: req.params.id, studentId: req.user._id, status: 'pending' },
+      { $set: { status: 'cancelled' } },
+      { new: true }
+    );
+    if (!joinRequest) return res.status(404).json({ message: 'Không có yêu cầu đang chờ' });
+    res.json({ message: 'Đã hủy yêu cầu', joinRequest });
+  } catch (error) {
+    console.error('cancelJoinRequest error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Manager: list pending join requests for a class.
+export const listClassJoinRequests = async (req: any, res: Response) => {
+  try {
+    const access = await findClassForAccess(req, req.params.id, true);
+    if (access === null) return res.status(404).json({ message: 'Class not found' });
+    if (access === false) return res.status(403).json({ message: 'Not authorized' });
+
+    const requests = await ClassJoinRequest.find({ classId: req.params.id, status: 'pending' })
+      .populate('studentId', 'name email level')
+      .sort({ createdAt: 1 });
+
+    res.json({ requests });
+  } catch (error) {
+    console.error('listClassJoinRequests error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Manager: approve or reject a join request. Approving adds the student to the class.
+export const reviewJoinRequest = async (req: any, res: Response) => {
+  try {
+    const access = await findClassForAccess(req, req.params.id, true);
+    if (access === null) return res.status(404).json({ message: 'Class not found' });
+    if (access === false) return res.status(403).json({ message: 'Not authorized' });
+
+    const { studentId } = req.params;
+    const { status } = req.body;
+    if (!['approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ message: 'Trạng thái không hợp lệ' });
+    }
+
+    const joinRequest = await ClassJoinRequest.findOne({ classId: req.params.id, studentId, status: 'pending' });
+    if (!joinRequest) return res.status(404).json({ message: 'Không tìm thấy yêu cầu đang chờ' });
+
+    if (status === 'approved') {
+      await LearningClass.findByIdAndUpdate(req.params.id, { $addToSet: { studentIds: studentId } });
+    }
+    joinRequest.status = status;
+    joinRequest.reviewedBy = req.user._id;
+    joinRequest.reviewedAt = new Date();
+    await joinRequest.save();
+
+    res.json({ message: status === 'approved' ? 'Đã duyệt vào lớp' : 'Đã từ chối', joinRequest });
+  } catch (error) {
+    console.error('reviewJoinRequest error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

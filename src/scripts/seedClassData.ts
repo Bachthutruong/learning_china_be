@@ -14,6 +14,7 @@ import ClassSession from '../models/ClassSession';
 import ClassFeedback from '../models/ClassFeedback';
 import ClassSubmission from '../models/ClassSubmission';
 import ClassLeaveRequest from '../models/ClassLeaveRequest';
+import ClassJoinRequest from '../models/ClassJoinRequest';
 
 dotenv.config();
 
@@ -73,6 +74,7 @@ async function run() {
     ClassFeedback.deleteMany({ classId: { $in: oldClassIds } }),
     ClassSubmission.deleteMany({ classId: { $in: oldClassIds } }),
     ClassLeaveRequest.deleteMany({ classId: { $in: oldClassIds } }),
+    ClassJoinRequest.deleteMany({ classId: { $in: oldClassIds } }),
     LearningClass.deleteMany({ _id: { $in: oldClassIds } }),
     Test.deleteMany({ title: { $regex: '^\\[Demo\\]' } })
   ]);
@@ -137,7 +139,7 @@ async function run() {
     { name: `${DEMO} Lớp Giao tiếp - Cuối tuần`, fee: 1200000, teacher: teachers[2], studentSlice: [10, 16] }
   ];
 
-  let totalSessions = 0, totalFeedback = 0, totalSubmissions = 0;
+  let totalSessions = 0, totalFeedback = 0, totalSubmissions = 0, totalJoinRequests = 0;
 
   for (let ci = 0; ci < classDefs.length; ci++) {
     const def = classDefs[ci];
@@ -280,11 +282,21 @@ async function run() {
       }
     }
 
-    console.log(`Lớp "${def.name}": ${classStudents.length} HV, ${createdSessions.length + 1} buổi cố định + buổi lặp`);
+    // Pending join requests from a few students who are NOT in this class
+    const outsiders = students.filter((s: any) => !classStudents.some((cs: any) => String(cs._id) === String(s._id))).slice(0, 3);
+    for (const outsider of outsiders) {
+      await ClassJoinRequest.create({
+        classId: klass._id, studentId: outsider._id,
+        message: 'Em muốn xin tham gia lớp học này ạ. Mong thầy/cô duyệt giúp em.', status: 'pending'
+      });
+      totalJoinRequests++;
+    }
+
+    console.log(`Lớp "${def.name}": ${classStudents.length} HV, ${createdSessions.length + 1} buổi cố định + buổi lặp, ${outsiders.length} yêu cầu chờ duyệt`);
   }
 
   console.log('\n========== HOÀN TẤT SEED ==========');
-  console.log(`Lớp: ${classDefs.length} | Buổi học: ${totalSessions} | Feedback: ${totalFeedback} | Bài nộp: ${totalSubmissions}`);
+  console.log(`Lớp: ${classDefs.length} | Buổi học: ${totalSessions} | Feedback: ${totalFeedback} | Bài nộp: ${totalSubmissions} | Yêu cầu vào lớp: ${totalJoinRequests}`);
   console.log('\n--- TÀI KHOẢN ĐĂNG NHẬP (mật khẩu: ' + PASSWORD + ') ---');
   console.log('Admin   : admin@gmail.com');
   TEACHERS.forEach(t => console.log(`Giáo viên: ${t.email}`));
