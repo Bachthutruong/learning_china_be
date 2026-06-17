@@ -35,7 +35,7 @@ const authorize = (...roles) => {
         if (!req.user) {
             return res.status(401).json({ message: 'Not authenticated' });
         }
-        if (roles.includes('admin') && req.user.role !== 'admin') {
+        if (roles.length > 0 && !roles.includes(req.user.role)) {
             return res.status(403).json({ message: 'Not authorized' });
         }
         next();

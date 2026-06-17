@@ -32,87 +32,71 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const UserSchema = new mongoose_1.Schema({
-    email: {
+const ClassSubmissionAnswerSchema = new mongoose_1.Schema({
+    questionId: {
         type: String,
-        required: [true, 'Email is required'],
-        unique: true,
-        lowercase: true,
-        trim: true
+        required: true
     },
-    password: {
+    answer: mongoose_1.Schema.Types.Mixed,
+    correct: {
+        type: Boolean,
+        required: true
+    }
+}, { _id: false });
+const ClassSubmissionSchema = new mongoose_1.Schema({
+    classId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'LearningClass',
+        required: true,
+        index: true
+    },
+    sessionId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'ClassSession',
+        required: true,
+        index: true
+    },
+    studentId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true
+    },
+    type: {
         type: String,
-        required: [true, 'Password is required'],
-        minlength: 6
+        enum: ['vocabulary', 'exercise'],
+        required: true
     },
-    name: {
-        type: String,
-        required: [true, 'Name is required'],
-        trim: true
-    },
-    role: {
-        type: String,
-        enum: ['user', 'admin', 'teacher'],
-        default: 'user'
-    },
-    level: {
+    attemptNo: {
         type: Number,
-        default: 1,
         min: 1,
-        max: 6
+        required: true
     },
-    experience: {
+    totalQuestions: {
         type: Number,
-        default: 0
+        min: 0,
+        required: true
     },
-    coins: {
+    correctCount: {
         type: Number,
-        default: 0
+        min: 0,
+        required: true
     },
-    streak: {
+    scorePercent: {
         type: Number,
-        default: 0
+        min: 0,
+        max: 100,
+        required: true
     },
-    lastCheckIn: {
+    answers: [ClassSubmissionAnswerSchema],
+    submittedAt: {
         type: Date,
         default: Date.now
-    },
-    learnedVocabulary: [{
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: 'Vocabulary'
-        }],
-    needsStudyVocabulary: [{
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: 'Vocabulary'
-        }],
-    isReviewer: {
-        type: Boolean,
-        default: false
     }
 }, {
     timestamps: true
 });
-// Hash password before saving
-UserSchema.pre('save', async function (next) {
-    if (!this.isModified('password'))
-        return next();
-    try {
-        const salt = await bcryptjs_1.default.genSalt(12);
-        this.password = await bcryptjs_1.default.hash(this.password, salt);
-        next();
-    }
-    catch (error) {
-        next(error);
-    }
-});
-// Compare password method
-UserSchema.methods.comparePassword = async function (candidatePassword) {
-    return bcryptjs_1.default.compare(candidatePassword, this.password);
-};
-exports.default = mongoose_1.default.model('User', UserSchema);
+ClassSubmissionSchema.index({ sessionId: 1, studentId: 1, type: 1, attemptNo: -1 });
+exports.default = mongoose_1.default.model('ClassSubmission', ClassSubmissionSchema);

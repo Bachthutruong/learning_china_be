@@ -11,6 +11,7 @@
     "backfill:test-history": "ts-node src/scripts/backfillTestHistory.ts",
     "seed:admin": "ts-node src/scripts/seedAdmin.ts",
     "seed:data": "ts-node src/scripts/seedData.ts",
+    "seed:classes": "ts-node src/scripts/seedClassData.ts",
     "seed:advanced": "ts-node src/scripts/seedAdvanced.ts",
     "seed:complete": "ts-node src/scripts/seedComplete.ts",
     "seed:question-types": "ts-node src/scripts/seedQuestionTypes.ts",

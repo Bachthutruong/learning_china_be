@@ -27,6 +27,7 @@ import userCompetitionRoutes from './routes/userCompetition';
 import competitionRankingRoutes from './routes/competitionRanking';
 import blogPostRoutes from './routes/blogPost';
 import exampleContributionRoutes from './routes/exampleContributionRoutes';
+import classRoutes from './routes/class';
 
 // Load environment variables
 dotenv.config();
@@ -85,6 +86,7 @@ app.use('/api/user-competitions', userCompetitionRoutes);
 app.use('/api/competition-ranking', competitionRankingRoutes);
 app.use('/api/blog-posts', blogPostRoutes);
 app.use('/api/vocabulary-examples', exampleContributionRoutes);
+app.use('/api/classes', classRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

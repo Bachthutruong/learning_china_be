@@ -31,6 +31,7 @@ const userCompetition_1 = __importDefault(require("./routes/userCompetition"));
 const competitionRanking_1 = __importDefault(require("./routes/competitionRanking"));
 const blogPost_1 = __importDefault(require("./routes/blogPost"));
 const exampleContributionRoutes_1 = __importDefault(require("./routes/exampleContributionRoutes"));
+const class_1 = __importDefault(require("./routes/class"));
 // Load environment variables
 dotenv_1.default.config();
 // Debug: Check if JWT_SECRET is loaded
@@ -80,6 +81,7 @@ app.use('/api/user-competitions', userCompetition_1.default);
 app.use('/api/competition-ranking', competitionRanking_1.default);
 app.use('/api/blog-posts', blogPost_1.default);
 app.use('/api/vocabulary-examples', exampleContributionRoutes_1.default);
+app.use('/api/classes', class_1.default);
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ message: 'Server is running' });
